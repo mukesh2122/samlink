@@ -1,0 +1,55 @@
+<form name="setup_form" method="post" action="<?php echo MainHelper::site_url('admin/setup'); ?>">
+    <table cellspacing="0" cellpadding="0" class="table table_bordered table_striped gradient_thead mt10">
+        <thead>
+            <tr>
+                <th class="size_15 centered">ID</th>
+                <th class="size_15 centered">Name</th>
+                <th class="size_15 centered">Title</th>
+                <?php if ($superadmin): ?>
+                    <th class="size_15 centered">isEnabled</th>
+                <?php endif; ?>
+                <th class="size_10 centered"><?php echo $this->__('Action');?></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php foreach($modules as $module):?>
+                <?php if ($module['isEnabled']=="1" || $superadmin): ?>
+                <tr>
+                        <td class="centered" style="width:10%;">
+                            <?php echo($module['ID_MODULE']); ?>
+                        </td>
+                        <td style="width:45%;">
+                            <?php echo($module['ModuleName']); ?>
+                        </td>
+                        <td style="width:45%;">
+                            <?php echo($module['ModuleTitle']); ?>
+                        </td>
+                        <?php if ($superadmin): ?>
+                            <td class="centered" style="width:45%;">
+                                <input name="<?php echo($module['ID_MODULE']); ?>" class="dst" type="checkbox" <?php if ($module['isEnabled']=="1") echo "checked";?> 
+                            </td>
+                        <?php endif; ?>
+                        <td class="centered">
+                            <?php 
+                                $module_role = "module_" . $module['ModuleTag'];
+                                $player = User::getUser();
+                                if ($player->canAccess($module_role)):
+                            ?>
+                                <a href="<?php echo MainHelper::site_url('admin/setup/editmodule/id/'.$module['ID_MODULE']);?>"><?php echo 'Edit';?></a>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endif;?>
+            <?php endforeach;?>
+            <?php if ($superadmin): ?>
+                <tr>
+                    <td colspan="5">
+                        <input class="button button_auto light_blue pull_right" type="submit" value="<?php echo 'Save Settings'; ?>" onclick="document.langform.submit();"/>
+                    </td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</form>
+<script type="text/javascript">loadCheckboxes();</script>

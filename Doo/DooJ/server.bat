@@ -1,0 +1,1 @@
+vertx runmod com.darkredz~dooj~1.0 -conf server.json %1 %2 %3 %4 %5 %6 %7 %8 %9

@@ -1,0 +1,1 @@
+<?php echo $this->__('shared news:'); ?> <a href="<?php echo MainHelper::shareUrl($otype, $oid); ?>"><?php echo MainHelper::shareTitle($otype, $oid, $olang) ?></a>

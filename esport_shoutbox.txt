@@ -1,0 +1,23 @@
+﻿<li><strong>Falaffel: </strong>Hej med dig</li>
+<li><strong>Messias: </strong>Goddag goddag</li>
+<li><strong>Falaffel: </strong>Bum</li>
+<li><strong>Falaffel: </strong>muha</li>
+<li><strong>Messi: </strong>hj</li>
+<li><strong>Falaffel: </strong>Det er den 6.</li>
+<li><strong>Falaffel: </strong>klokkl</li>
+<li><strong>Falaffel: </strong>Goddag</li>
+<<<<<<< HEAD
+<li><strong>Falaffel: </strong>kjsdhfksdjhf</li>
+<li><strong>Falaffel: </strong>dofjglksdjflkjgfds</li>
+<li><strong>Falaffel: </strong>fsg</li>
+<li><strong>Falaffel: </strong>sfg</li>
+<li><strong>Falaffel: </strong></li>
+<li><strong>Falaffel: </strong>gfh</li>
+<li><strong>Falaffel: </strong>gf</li>
+<li><strong>Falaffel: </strong>gfh</li>
+<li><strong>Falaffel: </strong>gh</li>
+<li><strong>Falaffel: </strong>gfh</li>
+<li><strong>Falaffel: </strong>gfhd</li>
+=======
+<li><strong>Zenny: </strong>dwdwadwaawd</li>
+>>>>>>> f184d30fcd229a7c5b6d31cf118806cbc59fd6c5

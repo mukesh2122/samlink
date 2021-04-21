@@ -1,0 +1,604 @@
+/******* EVENTS ***********/
+#comEventsTop {
+	background: url('../img/eventsTopBG.png');
+	width: 600px;
+	height: 50px;
+	position: absolute;
+	z-index: 1;
+}
+
+#comEventsTopMonth {
+	background: url('../img/eventsTopMonthBG.png') no-repeat;
+	width: 607px;
+	height: 28px;
+	margin-left: -4px;
+	margin-top: -2px;
+	padding-top: 5px;
+}
+
+/**** WEEK ****/
+#prevWeek {
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	padding-left: 75px;
+	float: left;
+	width: 25px;
+}
+
+#prevWeek a {
+	color: #fff !important;
+}
+
+#nextWeek {
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	padding-right: 75px;
+	float: left;
+	width: 25px;
+	background: none;
+}
+
+#nextWeek a {
+	color: #fff !important;
+}
+
+#thisWeekMonth {
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 18px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	text-align: center;
+	float: left;
+	width: 250px;
+	margin-left: 75px;
+	margin-right: 75px;
+}
+
+/***** MONTH *******/
+#prevMonth {
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	padding-left: 50px;
+	float: left;
+	width: 50px;
+}
+
+#prevMonth a {
+	color: #fff !important;
+}
+
+#nextMonth {
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	padding-right: 50px;
+	float: left;
+	width: 50px;
+	background: none;
+}
+
+#nextMonth a {
+	color: #fff !important;
+}
+
+#thisMonth {
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 18px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	text-align: center;
+	float: left;
+	width: 200px;
+	margin-left: 100px;
+	margin-right: 100px;
+}
+
+#dayWeek {
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	float: left;
+	width: 30px;
+	text-align: center;
+}
+
+#dayMonday{
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	float: left;
+	width: 80px;
+	text-align: center;
+}
+
+#dayTuesday{
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	float: left;
+	width: 80px;
+	text-align: center;
+}
+
+#dayWednesday{
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	float: left;
+	width: 80px;
+	text-align: center;
+}
+
+#dayThursday{
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	float: left;
+	width: 80px;
+	text-align: center;
+}
+
+#dayFriday{
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	float: left;
+	width: 80px;
+	text-align: center;
+}
+
+#daySaturday{
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	float: left;
+	width: 80px;
+	text-align: center;
+}
+
+#daySunday{
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	float: left;
+	width: 80px;
+	text-align: center;
+}
+
+.weekNumber {
+	margin: 0;
+	padding: 0;
+	width: 17px;
+	height: 41px;
+	border-bottom: 1px solid #3e3e3e;
+	margin-left: 10px;
+	padding-top: 20px;
+	padding-left: 2px;
+	padding-right: 1px;
+	float: left;
+	color: #b4b4b4;
+	font-size: 14px;
+}
+
+.weekNumberWeek {
+	margin: 0;
+	padding: 0;
+	width: 17px;
+	height: 75px;
+	border-bottom: 1px solid #3e3e3e;
+	margin-left: 10px;
+	padding-top: 81px;
+	padding-left: 2px;
+	padding-right: 1px;
+	float: left;
+	color: #b4b4b4;
+	font-size: 14px;
+}
+
+.weekNumberLastWeek {
+	margin: 0;
+	padding: 0;
+	width: 17px;
+	height: 41px;
+	margin-left: 10px;
+	padding-left: 2px;
+	padding-right: 1px;
+	padding-top: 20px;
+	float: left;
+	color: #b4b4b4;
+	font-size: 14px;
+}
+
+.comEventsMonthDaysLastWeek
+{
+	width: 73px;
+	height: 54px;
+	border-left: 1px solid #3e3e3e;
+	float: left;
+	color: #fff;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 14px;
+	text-align: right;
+	padding:4px;
+}
+
+.comEventsWeekDays {
+	width: 73px;
+	height: 148px;
+	border-left: 1px solid #3e3e3e;
+	border-bottom: 1px solid #3e3e3e;
+	float: left;
+	color: #fff;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 14px;
+	text-align: right;
+	padding:4px;
+}
+
+.comEventsMonthDays
+{
+	width: 73px;
+	height: 53px;
+	border-left: 1px solid #3e3e3e;
+	border-bottom: 1px solid #3e3e3e;
+	float: left;
+	color: #fff;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 14px;
+	text-align: right;
+	padding:4px;
+}
+
+.notMonth {
+	color: #b4b4b4;
+}
+
+.comEventsIcon {
+	text-align: center;
+	margin-top: -10px;
+	padding-left: 15px;
+}
+
+#comEventsWeekMonth {
+	width: 76px;
+	height: 30px;
+	float: right;
+	margin-bottom: 10px;
+	margin-top: -5px;
+/*    border-radius: 5px;*/
+	background: url('../img/eventsCalendarSwitchBG.png') no-repeat;
+}
+
+.comEventsSelectedClick {
+	background: url('../img/eventsCalendarSwitch.png') no-repeat;
+	width: 38px;
+	height: 27px;
+	float: left;
+	padding-top: 1px;
+	padding-left: 3px;
+	margin-left: 2px;
+	margin-right: -3px;
+}
+
+/* IN WEEK VIEW MODE */
+#comEventsWeekView1 {
+	background: url('../img/eventsWeekClick.png') no-repeat;
+	width: 26px;
+	height: 20px;
+	float: left;
+	margin: 2px;
+}
+a:hover #comEventsWeekView1 {
+	text-decoration: none;
+}
+
+#comEventsMonthView1 {
+	background: url('../img/eventsMonthClick.png') no-repeat;
+	width: 26px;
+	height: 20px;
+	float: left;
+	margin: 2px;
+	margin-left: 4px;
+	margin-top: 3px;
+}
+a:hover #comEventsMonthView1 {
+	text-decoration: none;
+}
+
+/* IN MONTH VIEW MODE */
+#comEventsWeekView2 {
+	background: url('../img/eventsWeekClick.png') no-repeat;
+	width: 26px;
+	height: 20px;
+	float: left;
+	margin: 2px;
+	margin-left: 4px;
+	margin-top: 3px;
+}
+a:hover #comEventsWeekView2 {
+	text-decoration: none;
+}
+
+#comEventsMonthView2 {
+	background: url('../img/eventsMonthClick.png') no-repeat;
+	width: 26px;
+	height: 20px;
+	float: left;
+	margin: 2px;
+}
+a:hover #comEventsMonthView2 {
+	text-decoration: none;
+}
+
+#comEvents {
+	clear: both;
+	margin-top: -8px;
+	margin-left: -10px;
+	padding-left: 10px;
+}
+
+#comEventsWeek {
+	width: 605px;
+	height: 158px;
+	margin-top: 50px;
+	margin-left: -8px;
+	padding-top: 50px;
+	background: url('../img/eventsWeekBG.png') no-repeat;
+	border-right: 1px solid #3e3e3e;
+	position: relative;
+}
+
+#comEventsMonth {
+	width: 605px;
+	height: 373px;
+	margin-top: -40px;
+	margin-left: -8px;
+	padding-top: 50px;
+	background: url('../img/eventsMonthBG.png') no-repeat;
+	border-right: 1px solid #3e3e3e;
+	position: relative;
+}
+
+/***** EVENTS LIST *******/
+#comEventsListTop {
+	background: url('../img/eventsListFilterBG.png') no-repeat;
+	width: 615px;
+	height: 50px;
+	font-family: 'Ubuntu', sans-serif;
+	margin-top: 10px;
+	padding: 10px;
+	color: #fff;
+	margin-left: -14px;
+}
+
+
+#comEventsListText {
+	width: 100px;
+	height: 22px;
+	float: left;
+	font-size: 14px;
+}
+
+.comEventsListFilter {
+	float: right;
+	width: 234px;
+	height: 22px;
+}
+
+.comEventsListFilterSelector {
+	background: url('../img/eventsListFilterSelector.png') no-repeat;
+	width: 107px;
+	height: 22px;
+	float: left;
+}
+
+.comEventsListFilterSelector a{
+	color: #000 !important;
+}
+
+.comEventsListFilterSelector a:hover{
+	color: #fff !important;
+}
+
+#comEventsListAll {
+	width: 107px;
+	height: 22px;
+	padding-left: 10px;
+	padding-top: 3px;
+	float: left;
+	font-size: 13px;
+	color: #000;
+}
+
+#comEventsListUpcoming {
+	width: 107px;
+	height: 22px;
+	float: left;
+	font-size: 13px;
+	padding-left: 10px;
+	padding-top: 3px;
+	color: #000;
+}
+
+#comEventsAllEventsList {
+	clear: both;
+	border-bottom: #cc0000 solid 1px;
+	height: 220px;
+	width: 580px;
+}
+
+#comEventsListAll a {
+	color: #fff;
+}
+
+#comEventsListAll a:hover {
+	color: #000;
+}
+
+#comEventsListUpcoming a {
+	color: #fff;
+}
+
+#comEventsListUpcoming a:hover {
+	color: #000;
+}
+
+.comEventTitle {
+	width: 572px;
+	height: 30px;
+	background: url('../img/eventTitleBg.png') no-repeat;
+	color: #fff;
+	font-family: 'Ubuntu', sans-serif;
+	padding-left: 20px;
+	padding-top: 1px;
+	position: absolute;
+	z-index: 1;
+}
+
+.eventDate {
+	float: left;
+	width: 150px;
+	height: 12px;
+	font-size: 12px;
+}
+
+.eventName {
+	float: left;
+	width: 200px;
+	margin-left: 90px;
+	margin-top: 7px;
+	height: 27px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.eventLeft {
+	float: left;
+	width: 220px;
+	height: 200px;
+	position: relative;
+	margin-top: 18px;
+	margin-left: 15px;
+	color: #fff;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+.eventImg {
+	width: 230px;
+	height: 140px;
+	float: left;
+	padding-left: 10px;
+	padding-top: 10px;
+	background-color: #000;
+}
+
+.eventParticipate {
+	float: left;
+	background: url('../img/eventsParticipateBTN.png') no-repeat;
+	width: 90px;
+	height: 21px;
+	margin-top: 10px;
+	padding-top: 5px;
+	padding-left: 5px;
+}
+
+a .eventParticipate {
+	color: #fff;
+}
+
+a:hover .eventParticipate {
+	color: #fff;
+	text-decoration: none;
+}
+
+.eventParticipate:hover {
+	background: url('../img/eventsParticipateBTNclicked.png') no-repeat;
+	width: 90px;
+	height: 21px;
+	margin-top: 10px;
+	padding-top: 5px;
+	padding-left: 5px;
+}
+
+.eventAddToCalendar {
+	float: left;
+	background: url('../img/eventsAddToCalendarBTN.png') no-repeat;
+	width: 129px;
+	height: 21px;
+	padding-top: 5px;
+	padding-left: 5px;
+	margin-left: 100px;
+	margin-top: -26px;
+}
+
+a .eventAddToCalendar {
+	color: #fff;
+}
+
+a:hover .eventAddToCalendar {
+	color: #fff;
+	text-decoration: none;
+}
+
+.eventAddToCalendar:hover {
+	background: url('../img/eventsAddToCalendarBTNclicked.png') no-repeat;
+	width: 129px;
+	height: 21px;
+	padding-top: 5px;
+	padding-left: 5px;
+	margin-left: 100px;
+	margin-top: -26px;
+}
+
+.eventDescription {
+	float: left;
+	margin-top: 38px;
+	margin-left: 30px;
+	position: relative;
+	color: #000;
+	height: 130px;
+	width: 270px;
+}

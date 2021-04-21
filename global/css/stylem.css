@@ -1,0 +1,446 @@
+.evSprite,
+.cMo,
+.cTu,
+.cWe,
+.cTh,
+.cFr,
+.cSa,
+.cSu,
+#nextYear,
+#previousMonth,
+#previousYear,
+#nextMonth,
+.eventClose,
+.evNow,
+.eventClose,
+.eventButton,
+.ui-datepicker-prev,
+.ui-datepicker-next,
+.boxBottom,
+.type_personal,
+.type_live,
+.type_birthday,
+.type_esport,
+.eventScheduleToggle,
+.subBoxTop,
+.subBoxBottom,
+.eventEditButton,
+.ui-datepicker-today,
+.setSchedule,
+.subBoxBody label{
+    background:url(img/ev/EvIconSprite.png);
+}
+.cMo{
+    background-position:0 -149px;
+
+}.cTu{
+    background-position:0 -135px;
+
+}.cWe{
+    background-position:0 -121px;
+}.cTh{
+    background-position:0 -107px;
+
+}.cFr{
+    background-position:0 -92px;
+
+}.cSa{
+    background-position:0 -78px;
+
+}.cSu{
+    background-position:0 -64px;
+}
+
+#cMasterWrapper {
+    width:200px;
+    margin: 0 auto;
+}
+#cMasterWrapper hr{
+    background: url(img/horizontal_outline_dark.gif) repeat-x scroll center bottom transparent;
+    display:block;
+    height:1px;
+    width:98%;
+    margin:6px auto 6px auto;
+    border:0;
+}
+#editEventWrapper{
+    clear:both;
+}
+#addEventWrapper {
+    width:200px;
+}
+#eventWrapper{
+    margin-top:-7px;
+    position:absolute;
+    z-index:2;
+}
+.boxTop{
+    width:200px;
+    height:14px;
+}
+.boxBody{
+    background:url(img/ev/boxBody.png);
+    width:190px;
+    padding:5px;
+}
+.boxBottom{
+    width:200px;
+    height:14px;
+    background-position:0 -310px;
+}
+.boxBody hr{
+    height:0;
+    border:0;
+    border-top:1px dotted #666;
+    clear:both;
+    margin:2px 6px;
+}
+.eventWeek {
+    display:inline;
+    color:#6b9f6b;
+    margin:5px;
+}
+.eventAvatar {
+    float:left;
+    width:50px;
+    height:50px;
+    margin:0 5px 5px 5px;
+}
+.eventAvatar img{
+    height:50px;
+    width:50px;
+}
+#eventText{
+    max-width: none;
+    max-height: none;
+    width:174px;
+    display:block;
+    margin-left:5px;
+    margin-right:5px;
+    color:#808080;
+    font-family:Verdana;
+    font-size:85%;
+}
+.eventInput, #eventText {
+    background: #FFF;
+    border: 1px solid #6b9f6b;
+    border-radius: 5px;
+    padding:2px;
+    color:#6b9f6b;
+
+}
+.eventInput {
+    max-width:62px;
+    float:right;
+    max-height:10px;
+    margin-right:8px;
+}
+.eventContent{
+    min-height:50px;
+    word-wrap:break-word;
+}
+.eventClose {
+    display:inline-block;
+    background-position:0 -294px;
+    height:8px;
+    width:9px;
+    float:right;
+    margin:5px;
+    padding:0;
+}
+.eventClose:hover {
+    background-position:0 -302px;
+}
+
+.eventDelete, .eventDeleteFuture {
+    background-position:0 -1013px;
+    display:inline-block;
+    min-width:14px;
+    height:14px;
+    padding-left:21px;
+    font-size:11px;
+}
+.eventDelete:hover, .eventDeleteFuture:hover {
+    text-decoration:underline;
+}
+.eventEdit  {
+    background-position:0 -1394px;
+    display:inline-block;
+    min-width:13px;
+    height:14px;
+    padding-left:21px;
+    font-size:11px;
+}
+.eventBar {
+    width:180px;
+    height:16px;
+    margin: 2px auto 5px auto;
+}
+.eventBar p{
+    float:left;
+    color:#FFF;
+    margin:0 4px;
+}
+.type_personal {
+    background-position:0 -16px;
+}
+.type_live {
+    background-position:0 -32px;
+}
+.type_esport {
+    background-position:0 -48px;
+}
+.type_birthday {
+    background-position:0 0;
+}
+.eventScheduleToggle {
+    float:right;
+    margin:2px;
+    width:12px;
+    height:12px;
+    display:inline-block;
+    background-position:0 -282px;
+}
+.evScheduleSelect{
+    text-decoration:underline;
+}
+.eventSchedule {
+    float:right;
+    display:none;
+    position:absolute;
+    margin:15px 0 0 19px;
+}
+#cMasterWrapper .setSchedule:hover,.evScheduleSelect{
+    text-decoration:underline;
+    color:#1689CB;
+}
+.setSchedule {
+    color:#808080;
+    background-position:0 -325px;
+    padding-left:17px;
+    height:12px;
+    display:inline-block;
+}
+.subBoxBody label {
+    color:#808080;
+    background-position:0 -325px;
+    padding-left:17px;
+    height:10px;
+    padding-bottom:2px;
+    display:inline-block;
+    float:left;
+}
+
+.eventEdit:hover {
+    text-decoration:underline;
+    color:#1689CB;
+}
+.subBoxTop{
+    background-position:0 -247px;
+    width:160px;
+    height:6px;
+}
+.subBoxBody{
+    background:url(img/ev/subBoxBody.png);
+    width:160px;
+    padding:3px;
+}
+
+.subBoxBottom{
+    background-position:0 -324px;
+    width:160px;
+    height:1px;
+}
+
+.eventButton, .eventEditButton{
+    width:180px;
+    height:20px;
+    background-position:0 -207px;
+    border:0;
+    margin: 5px 5px 0 5px;
+    font-weight:bold;
+    color:#FFF; 
+}
+
+.eventButton:hover, .eventEditButton:hover {
+    background-position:0 -227px;
+}
+.lHeader, #eventSymbolCounter {
+    display:block;
+    color:#6b9f6b;
+}
+#eventSymbolCounter {
+    margin:0 0 2px 4px;
+}
+.eventType {
+    font-size:70%;
+}
+
+#cCalendar th, .ui-datepicker-calendar th{
+    font-weight:bold;
+    font-size:70%;
+    color:#808080;
+}
+
+.redTh, .ui-datepicker-week-end span{
+    color:#cc3333;
+}
+#cCalendar a{
+    font-family:verdana;
+}
+#cCalendar .cDay:hover{
+    text-decoration:none;
+    color:#808080;
+}
+#month, #year{
+    font-weight:bold;
+    font-size:100%;
+    display:inline-block;
+    text-align:center;
+}
+#cDays {
+    margin-top:5px;
+    min-width:200px;
+    position:relative;
+}
+#cMonth {
+    float:left;
+}
+#cYear {
+    float:right;
+}
+#cYear, #cMonth, .ui-datepicker-month, .ui-datepicker-year{
+    font-size:120%;
+    font-style:normal;
+}
+
+#previousYear, #previousMonth, .ui-datepicker-prev{
+    width:6px;
+    height:11px;
+    display:inline-block;
+    background-position:0 -185px;
+
+}
+#previousYear:hover, #previousMonth:hover, .ui-datepicker-prev:hover{
+    background:url(img/ev/EvIconSprite.png);
+    background-position:0 -196px;
+}
+#nextYear, #nextMonth, .ui-datepicker-next{
+    width:6px;
+    height:11px;
+    display:inline-block;
+    background-position:0 -163px;
+}
+#nextYear:hover, #nextMonth:hover, .ui-datepicker-next:hover{
+    background:url(img/ev/EvIconSprite.png);
+    background-position:0 -174px;
+}
+
+.cDay, .ui-datepicker-calendar a{
+    color: #FFF;
+    width:27px;
+    height:21px;
+    margin:1px;
+    display:block;
+    text-align:center;
+    padding-top:6px;
+    font-family:Verdana;
+}
+
+.noEv, .ui-datepicker-calendar a {
+    background:#f7f7f7;
+    color:#808080;
+}
+.noEv:hover, .evPaE:hover, .ui-datepicker-calendar a:hover{
+    background:#e7e7e7;
+}
+.emptyDay {
+    background:#FFF;
+    color:#FFF;
+}
+.evPaE{
+    background:#d3d3d3;
+}
+.evNoE{
+    background:#cc3333;
+    color:#FFF;
+}#cCalendar .evNoE:hover{
+    background:#aa1111;
+    color:#FFF;
+}
+.evNoN{
+    background:#f7f7f7;
+    color:#000;
+}
+.evFuE{
+    background:#666;
+    color:#FFF;
+}#cCalendar .evFuE:hover{
+    color:#FFF;
+}
+#cCalendar .evNoN:hover{
+    color:#000;
+    background:#e7e7e7;
+}
+.evFuE:hover{
+    background:#444;
+    color:#FFF;
+}
+
+.ui-datepicker-div, .ui-datepicker-header, .ui-datepicker-calendar{
+    background:#FFF;
+    border:1px solid #999;
+    padding:2px;
+    border-radius: 5px;
+    margin:1px;
+
+}
+.ui-datepicker-prev, .ui-datepicker-next {
+    cursor:pointer;
+    text-indent:-2000px;
+    margin-top:3px;
+
+}
+.ui-datepicker-prev {
+    float:left;
+}
+.ui-datepicker-next{
+    float:right;
+}
+.ui-datepicker-title {
+    text-align:center;
+    font-style:italic;
+}
+
+.ui-icon-circle-triangle-e, .ui-icon-circle-triangle-w{
+    color:#808080;
+}
+.ui-icon-circle-triangle-e:hover, .ui-icon-circle-triangle-w:hover{
+    background:#FFF;
+}
+.ui-datepicker-calendar td{
+    background:#FFF;
+    color:#808080;
+}
+#ui-datepicker-div .ui-state-default{
+    background:#f7f7f7;
+    font-family:Verdana;
+}
+#ui-datepicker-div .ui-state-default:hover{
+    background:#e7e7e7;
+    text-decoration:none;
+}
+.evNow, #ui-datepicker-div .ui-datepicker-today{
+    background:url(img/ev/EvIconSprite.png);
+    background-position:0 -253px;
+}
+.eHead_esport, .eHead_live, .eHead_birhday{
+    color:#1689CB;
+    font-size:120%;
+}
+.eHead_personal{
+    color: #808080;
+}
+#cMsg {
+    display:none;
+}

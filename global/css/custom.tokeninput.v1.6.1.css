@@ -1,0 +1,346 @@
+/* Example tokeninput style #2: gametek style */
+ul.token-input-list-gametek {
+    overflow: hidden; 
+    height: auto !important; 
+    height: 1%;
+    width: 556px;
+    cursor: text;
+    font-size: 12px;
+    font-family: Verdana;
+    min-height: 1px;
+    z-index: 9999;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    list-style-type: none;
+    clear: left;
+}
+
+ul.token-input-list-gametek li input {
+    border: 0;
+    width: 100px;
+    padding: 0px 8px;
+    background-color: white;
+    margin: 0px 0;
+    -webkit-appearance: caret;
+}
+
+li.token-input-token-gametek {
+    overflow: hidden; 
+    height: auto !important; 
+    margin: 0px 6px;
+    color: #000;
+    cursor: default;
+    font-size: 11px;
+    float: left;
+    white-space: nowrap;
+}
+
+li.token-input-token-gametek p {
+    display: inline;
+    padding: 1px 0px 0px;
+    margin: 0;
+    float: left;
+}
+
+li.token-input-token-gametek span {
+    color: #a6b3cf;
+    margin-left: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+li.token-input-selected-token-gametek {
+    background-color: #5670a6;
+    border: 1px solid #3b5998;
+    color: #fff;
+}
+
+li.token-input-input-token-gametek {
+    float: left;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.token-input-delete-token-gametek {
+    background: url(img/message_delete.gif) 0px 0px no-repeat;
+    width: 16px;
+    height: 16px;
+    display: block;
+    float: left;
+}
+
+div.token-input-dropdown-gametek {
+    position: absolute;
+    width: 556px;
+    background-color: #fff;
+    /*overflow: hidden;*/
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    cursor: default;
+    font-size: 11px;
+    font-family: Verdana;
+    z-index: 9999;
+    margin-top: 8px;
+}
+
+div.token-input-dropdown-gametek p {
+    margin: 0;
+    padding: 5px;
+    font-weight: bold;
+    color: #777;
+}
+
+div.token-input-dropdown-gametek ul {
+    margin: 0;
+    padding: 0;
+}
+
+div.token-input-dropdown-gametek ul li {
+    background-color: #fff;
+    padding: 3px;
+    margin: 0;
+    list-style-type: none;
+}
+
+div.token-input-dropdown-gametek ul li.token-input-dropdown-item-gametek {
+    background-color: #fff;
+}
+
+div.token-input-dropdown-gametek ul li.token-input-dropdown-item2-gametek {
+    background-color: #fff;
+}
+
+div.token-input-dropdown-gametek ul li em {
+    font-weight: bold;
+    font-style: normal;
+}
+
+div.token-input-dropdown-gametek ul li.token-input-selected-dropdown-item-gametek {
+    background-color: #3b5998;
+    color: #fff;
+}
+.index_groups div.token-input-dropdown-gametek,
+#group_tags ul.token-input-list-gametek,
+#group_tags div.token-input-dropdown-gametek{
+    width: 480px;
+}
+
+.index_groups_members div.token-input-dropdown-gametek,
+.index_my_groups div.token-input-dropdown-gametek,
+#player_tags_cont ul.token-input-list-gametek,
+#player_tags_cont div.token-input-dropdown-gametek{
+    width: 480px;
+}
+
+#game_tags_cont ul.token-input-list-gametek,
+#game_tags_cont div.token-input-dropdown-gametek{
+    width: 480px;
+}
+
+.index_news_create div.token-input-dropdown-gametek,
+#company_tags_cont ul.token-input-list-gametek,
+#company_tags_cont div.token-input-dropdown-gametek{
+    width: 460px;
+}
+
+/* Tokeninput style #3: global search bar style */
+ul.token-input-list-globalsearch {
+    /*overflow: hidden;*/
+    height: auto !important; 
+    height: 1%;
+    width: 202px;
+    cursor: text;
+    font-size: 12px;
+    font-family: Verdana;
+    min-height: 1px;
+    z-index: 9999;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    list-style-type: none;
+    clear: left;
+}
+
+ul.token-input-list-globalsearch li input {
+    border: 0;
+    width: 175px;
+    padding: 0px 8px;
+    background-color: white;
+    margin: 0px 0;
+    -webkit-appearance: caret;
+}
+
+li.token-input-token-globalsearch {
+    overflow: hidden; 
+    height: auto !important; 
+    margin: 0px 6px;
+    color: #000;
+    cursor: default;
+    font-size: 11px;
+    float: left;
+    white-space: nowrap;
+}
+
+li.token-input-token-globalsearch p {
+    display: inline;
+    padding: 1px 0px 0px;
+    margin: 0;
+    float: left;
+}
+
+li.token-input-token-globalsearch span {
+    color: #a6b3cf;
+    margin-left: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+li.token-input-selected-token-globalsearch {
+    background-color: #5670a6;
+    border: 1px solid #3b5998;
+    color: #fff;
+}
+
+li.token-input-input-token-globalsearch {
+    float: left;
+    width: 202px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.token-input-input-token-globalsearch #token-input-search {
+    right: 0;
+    height: 22px;
+    padding-top: 4px;
+    overflow: hidden;
+    position: relative;
+    width: 167px !important;
+    transition-delay: 0ms;
+    transition-duration: 200ms;
+    transition-property: right, width;
+    transition-timing-function: linear;
+    -o-transition-delay: 0ms;
+    -o-transition-duration: 200ms;
+    -o-transition-property: right, width;
+    -o-transition-timing-function: linear;
+    -ms-transition-delay: 0ms;
+    -ms-transition-duration: 200ms;
+    -ms-transition-property: right, width;
+    -ms-transition-timing-function: linear;
+    -moz-transition-delay: 0ms;
+    -moz-transition-duration: 200ms;
+    -moz-transition-property: right, width;
+    -moz-transition-timing-function: linear;
+    -webkit-transition-delay: 0ms;
+    -webkit-transition-duration: 200ms;
+    -webkit-transition-property: right, width;
+    -webkit-transition-timing-function: linear;
+}
+.token-input-input-token-globalsearch #token-input-search:focus {
+    right: 75px;
+    width: 242px !important;
+    transition-delay: 0ms;
+    transition-duration: 200ms;
+    transition-property: right, width;
+    transition-timing-function: linear;
+    -o-transition-delay: 0ms;
+    -o-transition-duration: 200ms;
+    -o-transition-property: right, width;
+    -o-transition-timing-function: linear;
+    -ms-transition-delay: 0ms;
+    -ms-transition-duration: 200ms;
+    -ms-transition-property: right, width;
+    -ms-transition-timing-function: linear;
+    -moz-transition-delay: 0ms;
+    -moz-transition-duration: 200ms;
+    -moz-transition-property: right, width;
+    -moz-transition-timing-function: linear;
+    -webkit-transition-delay: 0ms;
+    -webkit-transition-duration: 200ms;
+    -webkit-transition-property: right, width;
+    -webkit-transition-timing-function: linear;
+}
+
+.token-input-delete-token-globalsearch {
+    background: url(img/message_delete.gif) 0px 0px no-repeat;
+    width: 16px;
+    height: 16px;
+    display: block;
+    float: left;
+}
+
+div.token-input-dropdown-globalsearch {
+    position: absolute;
+    width: 556px;
+    background-color: #fff;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    cursor: default;
+    font-size: 11px;
+    font-family: Verdana;
+    z-index: 9999 !important;
+    margin-top: 30px;
+}
+
+div.token-input-dropdown-globalsearch p {
+    margin: 0;
+    padding: 5px;
+    font-weight: bold;
+    color: #777;
+}
+
+div.token-input-dropdown-globalsearch ul {
+    margin: 0;
+    padding: 0;
+}
+
+div.token-input-dropdown-globalsearch ul li {
+    background-color: #fff;
+    padding: 3px;
+    margin: 0;
+    list-style-type: none;
+}
+
+div.token-input-dropdown-globalsearch ul li.token-input-dropdown-item-globalsearch {
+    background-color: #fff;
+}
+
+div.token-input-dropdown-globalsearch ul li.token-input-dropdown-item2-globalsearch {
+    background-color: #fff;
+}
+
+div.token-input-dropdown-globalsearch ul li em {
+    font-weight: bold;
+    font-style: normal;
+}
+
+div.token-input-dropdown-globalsearch ul li.token-input-selected-dropdown-item-globalsearch {
+    background-color: #3b5998;
+    color: #fff;
+}
+.index_groups div.token-input-dropdown-globalsearch,
+#group_tags ul.token-input-list-globalsearch,
+#group_tags div.token-input-dropdown-globalsearch{
+    width: 480px;
+}
+
+.index_groups_members div.token-input-dropdown-globalsearch,
+.index_my_groups div.token-input-dropdown-globalsearch,
+#player_tags_cont ul.token-input-list-globalsearch,
+#player_tags_cont div.token-input-dropdown-globalsearch{
+    width: 480px;
+}
+
+#game_tags_cont ul.token-input-list-globalsearch,
+#game_tags_cont div.token-input-dropdown-globalsearch{
+    width: 480px;
+}
+
+.index_news_create div.token-input-dropdown-globalsearch,
+#company_tags_cont ul.token-input-list-globalsearch,
+#company_tags_cont div.token-input-dropdown-globalsearch{
+    width: 460px;
+}

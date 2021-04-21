@@ -1,0 +1,109 @@
+#RSsignupPage {
+    cursor: default;
+    margin-top: 30px;
+    text-align: center;
+}
+
+#RSsignupHeadTitleGame {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+#RSsignupHeadTitleLocation {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+#RSsignupHeadImg {
+    float: left;
+    margin-top: 6px;
+    margin-left: 5px;
+}
+#RSsignupHeadTimebox {
+    float: left;
+    margin-top: 8px;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 20px;
+    line-height: 24px;
+    font-style: italic;
+}
+#RSsignupHeadTimebox span {
+    font-size: 15px;
+    font-style: normal;
+}
+#RSsignupHeadDesc {
+    padding: 5px;
+    float: right;
+    width: 280px;
+    height: 100px;
+    font-size: 17px;
+    text-align: left;
+    font-weight: 500;
+    border-width: 2px;
+    margin-right: 5px;
+    border-radius: 5px;
+    border-style: ridge;
+    border-color: #5696CF;
+    font-variant: small-caps;
+    background-color: #EFEFEF;
+}
+#RSsignupInputBox {
+    width: 330px;
+    padding: 20px;
+    text-align: left;
+    font-weight: 500;
+    margin-top: 30px;
+    line-height: 50px;
+    border-width: 1px;
+    border-radius: 15px;
+    border-style: outset;
+    border-color: #B94A48;
+    display: inline-block;
+    background-color: #D9CFC3;
+}
+
+#RSsignupCharacter {
+    height: 23px;
+    width: 150px;
+    margin-left: 4px;
+    padding-left: 4px;
+}
+#dk_container_RSsignupRole {
+    top: 13px;
+    float: right;
+    height: 23px;
+    margin-right: 40px;
+}
+#dk_container_RSsignupRole a.dk_toggle {
+    top: -13px;
+}
+#RSsignupRole {
+    width: 147px;
+    cursor: pointer;
+    margin-left: 40px;
+}
+#RSsignupStatusBox label {
+    cursor: pointer;
+    margin-left: 10px;
+}
+#RSsignupStatusBox input {
+    cursor: pointer;
+    margin-left: 5px;
+    appearance: checkbox;
+    -o-appearance: checkbox;
+    -ms-appearance: checkbox;
+    -moz-appearance: checkbox;
+    -webkit-appearance: checkbox;
+}
+#RSsignupComment {
+    width: 320px;
+    height: 75px;
+    padding: 5px;
+}
+
+#RSsignupDoneBut {
+    width: 150px;
+    display: block;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}

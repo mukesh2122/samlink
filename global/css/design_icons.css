@@ -1,0 +1,190 @@
+.comment_icon, .like_icon, .dislike_icon, .subscribe_icon, .unsubscribe_icon, .share_icon, .add_friend_icon, .message_icon, .members_icon, .readmore_icon, .groups_tab_icon,
+.players_tab_icon, .recent_tab_icon, .info_tab_icon, .news_tab_icon, .forum_tab_icon, .media_tab_icon, .event_tab_icon, .home_tab_icon, .photo_tab_icon, .linky_tab_icon,
+.video_tab_icon, .wall_tab_icon, .games_tab_icon, .downloads_tab_icon, .games_icon, .news_icon, .media_icon, .company_tab_icon, .thread_icon, .popular_tab_icon,
+.platform_tab_icon, .video_icon, .down_arrow_light_icon, .down_arrow_dark_icon, .google_icon, .facebook_icon, .twitch_icon,
+.twitter_icon, .tags_icon, .clock_icon, .speech_bubble_icon, .stat_image_icon, .stat_film_icon, .stat_link_icon,
+.stat_post_icon, .stat_group_icon, .stat_game_icon, .stat_event_icon, .stat_news_icon, .basket_icon, .basket_icon_dark, .block_icon, .unblock_icon, .edit_icon, .delete_icon {
+	display: inline-block;
+	vertical-align: -5px;
+	background-repeat: no-repeat;
+	background-position: center 0px;
+	background-image: url('img/new_gfx/small_icons.png');
+	width: 20px;
+	height: 20px;
+}
+.edit_icon{
+	background-image: url('img/new_gfx/action_icons.png');
+	background-position: center 1px;
+}
+.delete_icon{
+	background-image: url('img/new_gfx/action_icons.png');
+	background-position: center -20px;
+}
+.comment_icon, .speech_bubble_icon {
+	background-position: center 0px;
+}
+.like_icon {
+	background-position: center -20px;
+}
+.dislike_icon {
+	background-position: center -40px;
+}
+.subscribe_icon {
+	background-position: center -60px;
+}
+.unsubscribe_icon {
+	background-position: center -80px;
+}
+.share_icon {
+	background-position: center -100px;
+}
+.add_friend_icon {
+	background-position: center -120px;
+}
+.message_icon {
+	background-position: center -140px;
+}
+.readmore_icon, .thread_icon {
+	background-position: center -160px;
+}
+.down_arrow_light_icon {
+	background-position: center -180px;
+}
+.down_arrow_dark_icon, .global_nav_action:hover i, .global_nav_action.open i {
+	background-position: center -200px; /*down_arrow_light_icon hover + active */
+}
+.google_icon {
+    background-image: url('../img/Google+/Desktop/1x/20dp/Red signin_Small_20dp/Red-signin_Small_base_20dp.png');
+    background-size: 100%;
+}
+.facebook_icon {
+	background-position: center -220px;
+}
+.twitter_icon {
+	background-position: center -240px;
+}
+.twitch_icon {
+	background-position: center -780px;
+}
+.tags_icon {
+	background-position: center -260px;
+}
+.clock_icon {
+	background-position: center -280px;
+}
+.basket_icon {
+	background-position: center -300px;
+}
+.basket_icon_dark {
+	background-position: center -320px;
+}
+.block_icon {
+	background-position: center -360px;
+	width: 16px;
+}
+.unblock_icon {
+	background-position: center -380px;
+	width: 16px;
+}
+
+/*  == Tab icons =========================================================================================================================================================
+
+	====================================================================================================================================================================== */
+
+.home_tab_icon {
+	background-position: center -440px;
+}
+.photo_tab_icon, .stat_image_icon {
+	background-position: center -460px;
+}
+.linky_tab_icon, .stat_link_icon {
+	background-position: center -480px;
+}
+.video_tab_icon, .video_icon, .stat_film_icon {
+	background-position: center -500px;
+}
+.wall_tab_icon, .stat_post_icon {
+	background-position: center -520px;
+}
+.recent_tab_icon {
+	background-position: center -540px;
+}
+.popular_tab_icon {
+	background-position: center -560px;
+}
+.event_tab_icon, .stat_event_icon {
+	background-position: center -580px;
+}
+.platform_tab_icon {
+	background-position: center -600px;
+}
+.company_tab_icon {
+	background-position: center -620px;
+}
+.games_tab_icon, .stat_game_icon, .games_icon {
+	background-position: center -640px;
+}
+.groups_tab_icon, .players_tab_icon, .stat_group_icon, .members_icon {
+	background-position: center -660px;
+}
+.news_tab_icon, .stat_news_icon, .news_icon	{
+	background-position: center -680px;
+}
+.info_tab_icon {
+	background-position: center -700px;
+}
+.downloads_tab_icon	{
+	background-position: center -720px;
+}
+.forum_tab_icon	{
+	background-position: center -740px;
+}
+.media_tab_icon, .media_icon {
+	background-position: center -760px;
+}
+
+/*  == Left menu icons ===================================================================================================================================================
+
+	====================================================================================================================================================================== */
+	
+.left_nav ul li a {
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	background-image: url('img/new_gfx/left_menu_icons.png');
+}
+
+.left_nav ul li a.nav_wall {
+	background-position: 0px 0px;
+}
+
+.left_nav ul li a.nav_messages {
+	background-position: 0px -30px;
+}
+
+.left_nav ul li a.nav_notifications {
+	background-position: 0px -60px;
+}
+
+.left_nav ul li a.nav_groups {
+	background-position: 0px -90px;
+}
+
+.left_nav ul li a.nav_games {
+	background-position: 0px -120px;
+}
+
+.left_nav ul li a.nav_subscribtions {
+	background-position: 0px -150px;
+}
+
+.left_nav ul li a.nav_friends {
+	background-position: 0px -180px;
+}
+
+.left_nav ul li a.nav_events {
+    background-position: -260px -320px;
+}
+
+.left_nav ul li a.nav_achievements {
+    background-position: -260px -200px;
+}

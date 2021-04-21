@@ -1,0 +1,35 @@
+<?php
+/*
+ * This is the master configuration file, this file is not included in git and will be created automatically, if it doesn't exist
+ * The reason for having this file is to have a single place for configurations, that differ from site to site
+ */
+
+//For framework use. Must be defined. Use full absolute paths and end them with '/'      eg. /var/www/project/
+//for production mode use 'prod'
+if($_SERVER['REMOTE_ADDR'] == '127.0.0.1' || $_SERVER['REMOTE_ADDR'] == '::1') {
+	$config['APP_MODE'] = 'dev'; // should be dev in development environments
+	$config['SITE_PATH'] = realpath('..').'/beta/';
+	$config['BASE_PATH'] = realpath('..').'/beta/dooframework/';
+} else {
+	$config['APP_MODE'] = 'prod'; // must be prod on live server
+	$config['SITE_PATH'] = realpath('..').'/www.playnation.dk/';
+	$config['BASE_PATH'] = realpath('..').'/www.playnation.dk/dooframework/';
+};
+
+$dbconfig['prod'] = array('85.17.176.84', 'gametek', 'playnation', 'WvoYWgR3oS5uUE', 'mysql', false, 'collate'=>'utf8_general_ci', 'charset'=>'utf8');
+$dbconfig['dev'] = array('85.17.176.84', 'playnation2', 'playnation', 'WvoYWgR3oS5uUE', 'mysql', false, 'collate'=>'utf8_general_ci', 'charset'=>'utf8');
+$dbconfig['news'] = array('85.17.176.84', 'news', 'playnation', 'WvoYWgR3oS5uUE', 'mysql', false, 'collate'=>'utf8_general_ci', 'charset'=>'utf8');
+
+/*
+ * Localhost alternatives for the dev database
+ * Just activate the configuration, you wish to use
+ * Feel free to add new alternatives
+ */
+
+//	$dbconfig['dev'] = array('localhost', 'gametek', 'root', '', 'mysql', false, 'collate'=>'utf8_general_ci', 'charset'=>'utf8');
+//	$dbconfig['dev'] = array('localhost', 'gametek', 'root', 'root', 'mysql', false, 'collate'=>'utf8_general_ci', 'charset'=>'utf8');
+//	$dbconfig['dev'] = array('localhost', 'playnation', 'playnation', 'playnation', 'mysql', false, 'collate'=>'utf8_general_ci', 'charset'=>'utf8');
+//	$dbconfig['dev'] = array('localhost', 'playnation', 'root', '', 'mysql', false, 'collate'=>'utf8_general_ci', 'charset'=>'utf8');
+//	$dbconfig['dev'] = array('localhost', 'playnation', 'root', 'root', 'mysql', false, 'collate'=>'utf8_general_ci', 'charset'=>'utf8');
+//	$dbconfig['dev'] = array('localhost', 'playnation2', 'root', '', 'mysql', false, 'collate'=>'utf8_general_ci', 'charset'=>'utf8');
+?>

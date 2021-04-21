@@ -1,0 +1,113 @@
+.border .jqTransformSelectWrapper,
+input.news_border,
+textarea.news_border{
+    border: 1px solid #cdcdc5;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	height: 25px;
+	background: #fff;
+	position: relative;
+}
+
+textarea.news_border{
+	padding: 10px 10px;
+	height: auto;
+	font-size: 12px;
+}
+input.news_border {
+    padding: 0px 10px;
+}
+
+.jqTransformSelectWrapper div span {
+    color: #333333;
+    font-size: 13px;
+    float: none;
+    position: absolute;
+    white-space: nowrap;
+    height: 22px;
+    line-height: 15px;
+    padding: 4px 0 0 7px;
+    overflow: hidden;
+    cursor:pointer;
+}
+.jqTransformSelectWrapper  a.jqTransformSelectOpen {
+    display: block;
+    position: absolute;
+    right: 0px;
+    width: 23px;
+    height: 26px;
+}
+.jqTransformSelectWrapper  a.jqTransformSelectOpen:hover {
+
+}
+.jqTransformSelectWrapper ul {
+    position: absolute;
+    top: 25px;
+    left: 0px;
+    list-style: none;
+    display: none;
+    z-index:10;
+    height: auto;
+    border: solid 1px #a7a7a7;
+    background: #fff;
+}
+.jqTransformSelectWrapper li {
+    margin: 1px 0;
+    padding: 0px 10px 0px;
+    display: block;
+}
+.jqTransformSelectWrapper ul a {
+    display: block;
+    text-decoration: none;
+    color:#333333;
+    font-size: 13px;
+    padding: 5px 3px;
+    margin: 0px 0px 1px;
+    /*background: url(img/horizontal_outline.gif) bottom repeat-x;*/
+}
+.jqTransformSelectWrapper ul a:hover {
+    background-color: #efefef;
+    color: #1689cb;
+}
+.jqTransformSelectWrapper ul a.selected, .jqTransformSelectWrapper ul a.selected,
+.jqTransformSelectWrapper ul a.selected, .jqTransformSelectWrapper ul a.selected:hover {
+    background-color: #efefef;
+    color: #1689cb;
+}
+.jqTransformSelectWrapper ul a:hover {color: #1689cb;}
+.jqTransformSelectWrapper li.first-row, .jqTransformSelectWrapper li.last-row {
+
+}
+.jqTransformSelectWrapper li.first-row {}
+.jqTransformSelectWrapper li.last-row {}
+.jqTransformHidden {display: none!important; }
+
+.noborder {
+    position: relative;
+}
+.noborder .jqTransformSelectWrapper{
+    background: none;
+}
+.noborder .jqTransformSelectWrapper  a.jqTransformSelectOpen,
+.border .jqTransformSelectWrapper  a.jqTransformSelectOpen {
+    background: url(img/sprite.png) right -2208px  no-repeat !important;
+    display: block;
+    position: absolute;
+    right: 3px;
+	top: 7px;
+    width: 23px;
+    height: 18px;
+}
+.noborder .jqTransformSelectWrapper div span {
+    color: #333333;
+    font-size: 13px;
+    float: none;
+    position: absolute;
+    white-space: nowrap;
+    height: 21px;
+    line-height: 14px;
+    padding: 0px 0 0 7px;
+    overflow: hidden;
+    cursor:pointer;
+}

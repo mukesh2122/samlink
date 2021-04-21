@@ -1,0 +1,1293 @@
+/* 
+    Document   : css_recruitment
+    Created on : 13-01-2014, 12:00:05
+    Author     : Mads Pristed
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Ubuntu'), url('../font/Ubuntu_googlefont.woff') format('woff'), url('../font/Ubuntu_googlefont.ttf') format('truetype');
+}
+
+* {
+    font-family: Arial;
+}
+
+root { 
+    display: block;
+}
+
+#welcomeBanner{
+    width: 605px;
+    height: 65px;
+}
+
+#imgBanner {
+    width: 605px;
+    height: 47px;
+    background: url('../img/RecruitmentWelcome/WelcomeBanner.png');
+}
+
+#imgDescription{
+    width: 87px;
+    height: 18px;
+    float: right;
+    background: url('../img/RecruitmentWelcome/descriptionBG.png') no-repeat;
+    margin-right: 20px;
+    margin-top: -3px;
+    margin-bottom: 10px;
+    text-align: center;
+    padding-top: 2px;
+}
+
+#imgDescription a {
+    color: #636363;
+    font-size: 12px;
+    text-decoration: none;
+    border: none;
+}
+
+#imgDescription img {
+    padding-left: 2px;
+    /*background: url('../img/RecruitmentWelcome/descriptionClosed.png') no-repeat;*/
+}
+
+#blockcomments {
+    background: url('../img/RecruitmentWelcome/welcomeTextBG.png');
+    padding: 10px;
+    width: 549px;
+    height: 152px;
+    margin-top: -2px;
+    margin-left: 16px;
+}
+
+#top5 {
+    width: 620px;
+    height: 128px;
+    margin-right: -10px;
+    margin-top: 10px;
+    clear: both;
+}
+
+.top5topic {
+    float: left;
+    width: 300px !important;
+    height: 128px;
+    margin-left: -10px;
+    margin-right: 20px;
+    margin-bottom: 15px;
+}
+
+.top5topicline {
+    background: url('../img/RecruitmentWelcome/Top5topicline.png') no-repeat;
+    width: 309px;
+    height: 29px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 14px;
+    color: #fff;
+    padding-left: 10px;
+    padding-top: 2px;
+    margin-right: 10px;
+	position: relative;
+	z-index: +2;
+}
+
+.top5bg {
+    background: url('../img/RecruitmentWelcome/Top5BG.png');
+    width: 292px;
+    height: 107px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.top5persons {
+    background: url('../img/RecruitmentWelcome/Top5Tags.png');
+    width: 258px;
+    height: 107px;
+    margin-top: -13px;
+    padding-top: 2px;
+}
+
+.top5users{
+    clear: both;
+    width: 258px;
+    height: 14px;
+    margin-top: 6px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 11px;
+}
+
+.top5personIcon{
+    width: 30px;
+    height: 14px;
+    float: left;
+    margin-left: 5px;
+	margin-top: -4px;
+}
+
+.top5personName{
+    width: 200px;
+    height: 14px;
+    float: left;
+    margin-left: 5px;
+    color: #000;
+}
+
+.lineBetween {
+    background: url('../img/RecruitmentWelcome/lineBetween.png');
+    width: 568px;
+    height: 1px;
+    clear: both;
+}
+
+#searchRecruitment {
+    width: 617px;
+    height: 97px;
+    clear: both;
+    margin-top: 15px;
+    margin-left: -10px;
+}
+
+#searchDescription {
+    background: url('../img/RecruitmentWelcome/searchDescriptionBG.png') no-repeat;
+    width: 607px;
+    height: 20px;
+    font-size: 12px;
+    color: #fff;
+    padding: 4px 0 0 10px;
+}
+
+#searchDescription p {
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+#searchBg {
+    background: url('../img/RecruitmentWelcome/SearchBG.png') no-repeat;
+    width: 601px;
+    height: 53px;
+    padding: 10px;
+    margin-top: -5px;
+    margin-left: -2px; 
+    color: #fff;
+}
+
+.radioButton .radioValue {
+    margin-top: -5px;
+    display: inline;
+}
+
+input[type="radio"] {
+    background: url('../img/RecruitmentWelcome/circleBG.png') !important;
+    padding-top: 3px;
+}
+input[type="radio"]:checked{
+    background: url('../img/RecruitmentWelcome/selectingCircle.png') !important;
+    padding-top: 3px;
+}
+
+#textField {
+    height: 31px;
+    width: 570px;
+    padding-top: 2px;
+}
+input[name="typeGame"] {
+    background: url('../img/RecruitmentWelcome/gameSearchBar.png') no-repeat;
+    width: 305px;
+    height: 25px;
+    outline: none;
+    -webkit-appearance: none;
+    margin-top: 6px;
+    padding-left: 5px;
+    float: left;
+    border: none;
+}
+
+input[name="typeKeywords"] {
+    background: url('../img/RecruitmentWelcome/keywordsSearchBar.png') no-repeat;
+    width: 159px;
+    height: 23px;
+    outline: none;
+    -webkit-appearance: none;
+    margin-top: 6px;
+    float: left;
+    border: none;
+    padding-left: 5px;
+}
+
+input[name="searchBTN"] {
+    background: url('../img/RecruitmentWelcome/searchButton.png');
+    width: 95px;
+    height: 31px;
+    outline: none;
+    -webkit-appearance: none;
+    float: left;
+    border: none;
+    margin-top: 3px;
+}
+
+input[name="searchBTN"]:hover {
+    background: url('../img/RecruitmentWelcome/searchButtonOnclick.png');
+    width: 95px;
+    height: 31px;
+    outline: none;
+    -webkit-appearance: none;
+    float: left;
+    border: none;
+    margin-top: 3px;
+}
+
+#advancedSearch {
+    float: right;
+    background: url('../img/RecruitmentWelcome/SearchBG.png') no-repeat;
+    width: 115px;
+    height: 14px;
+    margin-right: 20px;
+    margin-top: -5px;
+    margin-left: 5px;
+    padding: 5px 5px 5px 10px;
+}
+
+#advancedSearch a {
+    color: #fff;
+}
+#filterTop {
+    width: 600px;
+    height: 20px;
+    clear: both;
+    margin-top: 20px;
+}
+#amountsResults{
+    float: left;
+    width: 130px;
+    height: 20px;
+}
+
+/*RESULT-TEXT-FOR-SEARCH*/
+	span.amountsresults {
+		font-family: Arial;
+		font-weight: bold;
+		font-size: 13px;
+	}
+
+/*CREATE-NOTICE_NEW-BACKGROUND-IMAGE_NEW-POSITIONING*/
+#createNotice {
+    background: url('../img/RecruitmentWelcome/CreateNotice2.png') no-repeat;
+    width: 111px;
+    height: 30px;
+    float: right;
+    padding: 5px 5px 0px 10px;
+    margin: 0 -15px -15px 0;
+	position: relative;
+	z-index: 2;
+}
+
+#createNotice a {
+    color: #fff;
+}
+
+#recruitmentFilter {
+    width: 615px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+#filterHeader {
+    background: url('../img/RecruitmentWelcome/filterBG.png') no-repeat;
+    width: 615px;
+    height: 24px;
+    font-size: 13px;
+    margin-left: -10px;
+    margin-top: -2px;
+    padding: 6px 10px 6px 10px;
+/*POSITIONING-AND-CLEARBOTH*/
+	position: relative;
+	z-index: +1;
+	clear: both;
+}
+
+#filterHeader a {
+    color: #fff;
+}
+
+#filterHeader a img {
+    margin-bottom: -10px;
+}
+
+#filterType {
+    width: 170px;
+    height: 20px;
+    float: left;
+    padding-top: 2px;
+}
+
+/*NEW-PADDING-ORDER*/
+#filterSelector {
+    background: url('../img/RecruitmentWelcome/filterSelector.png') no-repeat;
+    width: 83px;
+    height: 30px;
+    padding: 0 15px 0 15px;
+}
+
+#filterSelector a {
+    color: #a50e0e;
+    margin-top: -10px;
+}
+
+#filterOrderby {
+    width: 100px;
+    height: 20px;
+    float: right;
+	color: #fff;
+	padding: 2px 0 0 0;
+}
+
+#filterOrderbynselect {
+    width: 100px;
+    height: 20px;
+    float: right;
+	color: #fff;
+	padding: 2px 0 0 0;
+}
+
+html span.filter_img1 a:hover ,
+html span.filter_img2 a:hover{
+    text-decoration: none !important;
+    text-decoration-line: none !important;
+}
+
+/*FILTER-ARROWS*/
+	span.filter_img1 {
+		width: 5px;
+		height: 5px;
+		margin-bottom: -5px;
+		padding: 0;
+		background-image: url('../img/RecruitmentWelcome/sortingArrowDown.png');
+		background-repeat: no-repeat;
+		position: relative;
+		top: 7px;
+		left: 4px;
+	}
+
+	span.filter_img2 {
+		width: 5px;
+		height: 5px;
+		margin: 0;
+		padding: 0;
+		background-image: url('../img/RecruitmentWelcome/sortingArrowUp.png');
+		background-repeat: no-repeat;
+		position: relative;
+		top: 7px;
+		left: 4px;
+	}
+
+
+/*NEW-MARGIN-TOP*/
+#filterBg {
+    background: url('../img/RecruitmentWelcome/ResultsBG.png') repeat-y;
+    width: 591px;
+/*    height: 398px;*/
+    clear: both;
+    margin-top: -6px;
+    margin-bottom: 10px;
+}
+.filterResult {
+    padding-bottom: -5px;
+}
+
+.leftSideFilter{
+    float: left;
+    width: 400px; 
+    margin-left: -1px;
+    padding: 10px 0 6px 10px;
+}
+
+.rightSideFilter {
+    float: right;
+    width: 130px;
+    
+    padding: 10px 10px 6px 0;
+    text-align: right;
+	line-height: 22px;
+}
+
+.leftsidetitle {
+	font-family: 'Arial';
+	font-size: 20px;
+	line-height: 24px;
+	font-weight: bold;
+	color: #303030;
+}
+
+.readmoreDescription {
+    background: url('../img/RecruitmentWelcome/LineBetweenPOSTS.png') no-repeat;
+    width: 586px;
+    height: 17px;
+    text-align: right;
+    clear: both;
+    padding-right: 5px;
+    margin-left: -1px;
+}
+
+.steps {
+    width: 641px;
+    height: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-family: 'Ubuntu', sans-serif;
+    clear: both;
+}
+
+.step1a {
+    width: 120px;
+    height: 20px;
+    float: left;
+    background: url('../img/RecruitmentWelcome/Step1/Step1.png') no-repeat;
+    text-align: center;
+    color: #fff;
+    padding-top: 2px;
+}
+
+.step2a {
+    width: 134px;
+    height: 20px;
+    float: left;
+    background: url('../img/RecruitmentWelcome/Step1/Step2.png') no-repeat;
+    text-align: center;
+    margin-left: -10px;
+    padding-top: 2px;
+    color: #585858;
+}
+
+.step2b {
+    width: 134px;
+    height: 20px;
+    float: left;
+    background: url('../img/RecruitmentWelcome/Step2/Step2.png') no-repeat;
+    text-align: center;
+    margin-left: -10px;
+    padding-top: 2px;
+    color: #fff;
+}
+
+.step3a {
+    width: 134px;
+    height: 20px;
+    float: left;
+    background: url('../img/RecruitmentWelcome/Step1/Step3.png') no-repeat;
+    text-align: center;
+    margin-left: -10px;
+    padding-top: 2px;
+    color: #585858;
+}
+
+.step3c {
+    width: 134px;
+    height: 20px;
+    float: left;
+    background: url('../img/RecruitmentWelcome/Step3/Step3.png') no-repeat;
+    text-align: center;
+    margin-left: -10px;
+    padding-top: 2px;
+    color: #fff;
+}
+
+.step4a {
+    width: 134px;
+    height: 20px;
+    float: left;
+    background: url('../img/RecruitmentWelcome/Step1/Step4.png') no-repeat;
+    text-align: center;
+    margin-left: -10px;
+    padding-top: 2px;
+    color: #585858;
+}
+
+.step4d {
+    width: 134px;
+    height: 20px;
+    float: left;
+    background: url('../img/RecruitmentWelcome/Step4/Step4.png') no-repeat;
+    text-align: center;
+    margin-left: -10px;
+    padding-top: 2px;
+    color: #fff;
+}
+
+.step5a {
+    width: 119px;
+    height: 20px;
+    float: left;
+    background: url('../img/RecruitmentWelcome/Step1/Step5.png') no-repeat;
+    text-align: center;
+    margin-left: -10px;
+    padding-top: 2px;
+    color: #585858;
+}
+
+.step5e {
+    width: 119px;
+    height: 20px;
+    float: left;
+    background: url('../img/RecruitmentWelcome/Step5/Step5.png') no-repeat;
+    text-align: center;
+    margin-left: -10px;
+    padding-top: 2px;
+    color: #fff;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+/*STEP 1 */
+
+#choosePlayerGroup {
+    width: 600px;
+    height: 465px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.playerGroup {
+    float: left;
+    width: 269px;
+    height: 465px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.playerGroupImg {
+    width: 265px;
+    height: 200px;
+}
+
+.playerGroupImg :hover {
+    background: url('../img/RecruitmentWecome/Step1/PlayerBTNhover.png') !important;
+    width: 265px;
+    height: 169px;
+}
+
+.playerGroupText {
+    background: url('../img/RecruitmentWelcome/Step1/infoTextBack.png') no-repeat;
+    width: 249px;
+    height: 290px;
+    padding: 10px;
+    position: relative;
+}
+
+.playerGroupText p {
+    font-size: 14px;
+}
+
+.playerGroupText h3 {
+    font-family: 'Ubuntu', sans-serif;
+    color: #50b5e9;
+    font-size: 18px;
+    font-weight: lighter;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: -5px;
+}
+
+.playergroupnext {
+    margin-bottom: 0;
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+/*NEXT BUTTON ON STEP 1 FOR STEP 2*/
+.nextBTN1 {
+    background: url('../img/RecruitmentWelcome/Step2/nextBTN.png') no-repeat;
+    width: 74px;
+    height: 31px;
+    float: right;
+}
+
+a:hover .nextBTN1 {
+    background: url('../img/RecruitmentWelcome/Step2/nextBTNhover.png') no-repeat !important;
+    width: 75px;
+    height: 32px;
+    float: right;
+}
+
+/*STEP 2*/
+#chooseGame {
+    width: 591px;
+    height: 286px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.gameChosen {
+    width: 204px;
+    height: 286px;
+    float: left;
+}
+
+#gameSearch {
+    background: url('../img/RecruitmentWelcome/Step2/searchBarBG.png') no-repeat;
+    width: 377px;
+    height: 143px;
+    float: left;
+    padding-left: 10px;
+}
+
+#gameSearchBar {
+    width: 377px;
+    height: 50px;
+    padding-top: 32px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    float: left;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    color: #5e5e5e;
+}
+
+#gameSearchBar input[type="text"] {
+    background: url('../img/RecruitmentWelcome/Step2/searchBar.png');
+    width: 324px;
+    height: 40px;
+    border: none;
+    padding-left: 10px;
+}
+
+a:hover .theGameResults {
+    background: url('../img/RecruitmentWelcome/Step2/hoverBG.png');
+    width: 329px;
+    height: 35px;
+    float: left;
+    padding-top: 20px;
+    color: /*#b3b3b3*/ #000 !important;
+}
+
+#gameResultColumn {
+    width: 329px;
+    float: left;
+}
+
+.theGameResults {
+    background: #eeeeee;
+    width: 329px;
+    height: 35px;
+    padding-top: 20px;
+    float: left;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+/*    color: #5e5e5e;*/
+    text-align: center;
+}
+
+a .theGameResults {
+    color: #5a5a5a;
+}
+
+#selected { 
+    background: url('../img/RecruitmentWelcome/Step2/hoverBG.png');
+    color: #000 !important; /*#b3b3b3*/
+}
+
+a #unselected {
+    color: #5e5e5e !important;
+}
+
+.gameButtons {
+    width: 334px;
+    height: 32px;
+    float: left;
+    padding-left: 10px;
+    /*padding-bottom: 20px;*/
+}
+
+/* NEXT AND PREVIOUS BUTTONS ON STEP 2 FOR STEP 3*/
+a .previousBTN2 {
+    background: url('../img/RecruitmentWelcome/Step2/previousBTN.png') no-repeat;
+    width: 104px;
+    height: 32px;
+    float: left;
+}
+
+a:hover .previousBTN2 {
+    background: url('../img/RecruitmentWelcome/Step2/previousBTNhover.png') no-repeat;
+    width: 104px;
+    height: 34px;
+    float: left;
+    margin-top: -1px;
+}
+
+.nextBTN2 {
+    background: url('../img/RecruitmentWelcome/Step2/nextBTN.png') no-repeat;
+    width: 74px;
+    height: 31px;
+    float: right;
+}
+
+a:hover .nextBTN2 {
+    background: url('../img/RecruitmentWelcome/Step2/nextBTNhover.png') no-repeat !important;
+    width: 75px;
+    height: 31px;
+    float: right;
+    margin-top: -1px;
+}
+
+/* STEP 3 */
+
+#detailsGame {
+    width: 601px;
+    height: 422px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    float: left;
+}
+
+#gameChosen {
+    background: url('../img/RecruitmentWelcome/Step3/gameChosenBox.png');
+    width: 204px;
+    height: 286px;
+}
+
+#gameDetails {
+    width: 377px;
+    height: 402px;
+    float: left;
+    background: url('../img/RecruitmentWelcome/Step3/DetailsBG.png') no-repeat;
+    padding: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    color: #fff;
+}
+
+#gameDetails h3 {
+    font-family: 'Ubuntu', sans-serif;
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+#gameDetailsLeft {
+    width: 163px;
+    height: 302px;
+    float: left;
+    margin-top: 15px;
+    margin-bottom: 16px;
+}
+
+#gameDetailsRight {
+    width: 183px;
+    height: 302px;
+    float: left;
+    margin-top: 15px;
+    margin-bottom: 16px;
+    padding-left: 10px;
+    border-left: 1px solid #7e7e7e;
+}
+
+#gameDetailsRight input[type="text"] {
+    background-image: url('../img/RecruitmentWelcome/Step3/answerBox.png');
+    width: 164px;
+    height: 27px;
+    margin-bottom: 15px;
+    border: none;
+    padding-left: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    color: #626262;
+    font-size: 12px;
+}
+
+html #gameDetailsRight a {
+    color: #fff !important;
+}
+
+/*NEXT BUTTON ON STEP 3 FOR STEP 4*/
+a .previousBTN3 {
+    background: url('../img/RecruitmentWelcome/Step2/previousBTN.png') no-repeat;
+    width: 104px;
+    height: 32px;
+    float: left;
+}
+
+a:hover .previousBTN3 {
+    background: url('../img/RecruitmentWelcome/Step2/previousBTNhover.png') no-repeat;
+    width: 104px;
+    height: 32px;
+    float: left;
+    margin-top: -1px;
+}
+
+.nextBTN3 {
+    background: url('../img/RecruitmentWelcome/Step2/nextBTN.png') no-repeat;
+    width: 74px;
+    height: 31px;
+    float: right;
+}
+
+a:hover .nextBTN3 {
+    background: url('../img/RecruitmentWelcome/Step2/nextBTNhover.png') no-repeat !important;
+    width: 75px;
+    height: 32px;
+    float: right;
+    margin-top: -1px;
+}
+
+/* STEP 4 */
+
+#gameDescription {
+    width: 591px;
+    height: 286px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#gameDescription h3 {
+    font-family: 'Ubuntu', sans-serif;
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+#gameDescriptionBg {
+    width: 377px;
+    height: 260px;
+    float: left;
+    background: url('../img/RecruitmentWelcome/Step4/DescriptionBG.png') no-repeat;
+    padding: 10px 0 0 10px;
+    outline: none;
+    border: none;
+}
+
+#gameDescriptionBg h3 {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold; 
+    font-size: 14px;
+    color: #fff;
+}
+
+#gameDescriptionBg textarea {
+    background: url('../img/RecruitmentWelcome/Step4/descriptionTextBG.png') no-repeat;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 314px;
+    height: 122px;
+    outline: none;
+}
+
+/*NEXT BUTTON ON STEP 4 FOR STEP 5*/
+a .previousBTN4 {
+    background: url('../img/RecruitmentWelcome/Step2/previousBTN.png') no-repeat;
+    width: 104px;
+    height: 32px;
+    float: left;
+}
+
+a:hover .previousBTN4 {
+    background: url('../img/RecruitmentWelcome/Step2/previousBTNhover.png') no-repeat;
+    width: 104px;
+    height: 32px;
+    float: left;
+    margin-top: -1px;
+}
+
+.nextBTN4 {
+    background: url('../img/RecruitmentWelcome/Step2/nextBTN.png') no-repeat;
+    width: 74px;
+    height: 31px;
+    float: right;
+}
+
+a:hover .nextBTN4 {
+    background: url('../img/RecruitmentWelcome/Step2/nextBTNhover.png') no-repeat !important;
+    width: 75px;
+    height: 32px;
+    float: right;
+    margin-top: -1px;
+}
+
+
+/* STEP 5 */
+
+#topicBG {
+    background: url('../img/RecruitmentWelcome/Step5/topicBG.png');
+    width: 595px;
+    height: 34px;
+    margin-top: 10px;
+    margin-left: -10px;
+    color: #fff;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 15px 0 0 20px;
+    clear: both;
+    position: relative;
+    z-index: 1;
+}
+
+#gameFinalize {
+    background: url('../img/RecruitmentWelcome/Step5/OverviewPostBG.png') no-repeat;
+    width: 600px;
+    height: 291px;
+    margin-bottom: 10px;
+    margin-top: -3px;
+    padding: 10px;
+    border: none;
+    position: absolute;
+}
+
+#gameAvatar {
+    width: 158px;
+    height: 178px;
+    float: left;
+    text-align: center;
+}
+
+a #imgAvatar {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    color: #0b71fd !important;
+}
+
+#gameFrames {
+    width: 427px;
+    height: 93px;
+    float: left;
+    background: url('../img/RecruitmentWelcome/Step5/frame.png') no-repeat;
+    margin-left: 10px;
+}
+
+.frameInfo {
+    width: 142px;
+    height: 30px;
+    float: left;
+    padding-top: 1px;
+}
+
+.frameIcon {
+    width: 26px;
+    height: 30px;
+    float: left;
+    padding-top: 1px;
+    padding-bottom: 2px;
+}
+
+.frameIcon img {
+    width: 26px;
+    height: 26px;
+}
+
+.frameText {
+    height: 20px;
+    width: 105px;
+    float: left;
+    color: #000;
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    padding-top: 7px;
+    padding-bottom: 2px;
+}
+
+#gameDescriptionText {
+    height: 120px;
+    width: 397px;
+    float: left;
+    color: #000;
+    margin: 10px 0 30px 20px;
+    border: none;
+    text-decoration: none;
+}
+
+#gameDescriptionText h3 {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    float: left;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    color: #000;
+    display: block;
+    width: 397px;
+    height: 14px;
+} 
+
+#gameDescriptionText p {}
+
+#gameButtonsPost {
+    width: 334px;
+    height: 39px;
+    float: left;
+    margin-left: 80px;
+    margin-top: 7px;
+}
+
+/*PREV and POST BUTTON ON STEP 5 */
+a .previousBTN5 {
+    background: url('../img/RecruitmentWelcome/Step2/previousBTN.png') no-repeat;
+    width: 104px;
+    height: 32px;
+    float: left;
+}
+
+a:hover .previousBTN5 {
+    background: url('../img/RecruitmentWelcome/Step2/previousBTNhover.png') no-repeat;
+    width: 104px;
+    height: 32px;
+    float: left;
+    margin-top: -1px;
+}
+
+#postBTN {
+    background: url('../img/RecruitmentWelcome/Step5/postBTN.png') no-repeat;
+    width: 74px;
+    height: 31px;
+    float: right;
+    border: none;
+}
+
+a:hover #postBTN {
+    background: url('../img/RecruitmentWelcome/Step5/postBTNhover.png') no-repeat !important;
+    width: 75px;
+    height: 32px;
+    float: right;
+    margin-top: -1px;
+}
+.local_nav_actions_p_c {
+    margin-bottom: 6px;
+}
+
+.local_nav_actions_li_c {
+	position: relative;
+	float: right;
+	width: 100px;
+        list-style-type: none;
+}
+
+html #item_region a {
+    color: #000 !important;
+}
+
+html #item_language a {
+    color: #000 !important;
+}
+
+html #item_server a {
+    color: #000 !important;
+}
+
+html #item_faction a {
+    color: #000 !important;
+}
+
+html #item_role a {
+    color: #000 !important;
+}
+
+html #item_gplvl a {
+    color: #000 !important;
+}
+
+html #item_gpmode a {
+    color: #000 !important;
+}
+
+.local_nav_action {
+	display: block;
+	color: #454545;
+	font-weight: bold;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+.frameText2 {
+height: 20px;
+    width: 105px;
+    float: left;
+    color: #000;
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: left;
+    padding-top: 7px;
+	padding-left: 7px;
+    padding-bottom: 2px;
+}
+
+.frameDescription2 {
+    visibility: hidden;
+}
+
+.frameDescription3 {
+    height: 100px;
+    width: 205px;
+    float: left;
+    color: #000;
+    font-family: Arial;
+    font-size: 12px;
+    text-align: left;
+    padding-top: 7px;
+    padding-bottom: 2px;
+}
+
+#details1 {
+    border: 1px solid transparent;
+    border-radius: 5px;
+    -moz-border-radius: 5px; 
+    -webkit-radius: 5px;	
+    background:inherit;
+    color: #000;
+	font-family: Arial;
+	font-size: 12px;
+    width:380px;
+	height: 80px;
+}
+
+#backlink {
+    clear: both;
+}
+
+#recruitmentPost {
+    background: url('../img/RecruitmentWelcome/RecruitmentPost/PostBG.png') no-repeat;
+    width: 600px;
+    height: 242px;
+    margin-bottom: 0px;
+    margin-top: -2px;
+    padding: 10px;
+    border: none;
+}
+
+#commentBox {
+    background: url('../img/RecruitmentWelcome/RecruitmentPost/commentbox.png') no-repeat;
+    background-repeat: repeat;
+	width: 467px;
+    height: 40px;
+    border: none;
+}
+
+#ResponseDetailsLog {
+    color:#000000; 
+    background-color:#858384; 
+    width:320px; 
+    padding-left: 7px; 
+    font-family: Arial; 
+    position: absolute; 
+    right: 10px;
+    height: 5px;
+    font-size: 11px;
+}
+
+#framecomment {
+   width: 437px;
+   height: 20px;
+   margin-top: -17px;
+   float: left;
+   font-family: 'Ubuntu', sans-serif;
+   font-size: 12px;
+   color:#666666;
+   padding-left:30px;
+   position: relative;
+}
+
+#linkshowcomments {
+	float: left;
+	padding-top:15px;
+        padding-left: 5px;
+        margin-left: 278px;
+}
+
+#linkhidecomments {
+	float: left;
+	padding-top:15px;
+        padding-left: 5px;
+        margin-left: 278px;
+}
+
+#linkshowcomments a.btn_add {
+	color: #0674a5 !important;
+	border: none !important;
+}
+
+#linkhidecomments a.close {
+	color: #0674a5 !important;
+	border: none !important;
+}
+
+.headercomments {
+    width: 200px;
+    height: 20px;
+    float: left;
+    color: #fff;
+}
+.headercomments h3 {
+    color: #fff;
+}
+/* commentbox placeholder value */
+::-webkit-input-placeholder { 
+	color:#fff;
+	font-style: italic;
+	font-weight: bold;
+}
+::-moz-placeholder { 
+	color:#fff; 
+	font-style: italic;
+	font-weight: bold;
+} /* firefox 19+ */
+:-ms-input-placeholder { 
+	color:#fff;
+	font-style: italic;
+	font-weight: bold;
+} /* ie */
+input:-moz-placeholder { 
+	color:#fff;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.leftSideFilter img.comment_avatar {
+	float: left;
+	width: 45px;
+	height: 50px;
+	margin: 0 10px 0 0;
+}
+
+#listGroups {
+    height: 200px;
+    
+    overflow: auto;
+} 
+
+.groupResult a {
+    width: 209px;
+    height: 15px;
+    text-align: center;
+    padding: 10px 0 10px 0;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 14px;
+    display: block;
+}
+
+.groupResult :hover {
+    width: 209px;
+    height: 15px;
+    text-align: center;
+    padding: 10px 0 10px 0;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 14px;
+    display: block;
+}

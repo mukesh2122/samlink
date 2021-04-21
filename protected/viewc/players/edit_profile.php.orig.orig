@@ -1,0 +1,1441 @@
+<?php
+$reguserFields = MainHelper::GetModuleFieldsByTag('reguser'); 
+$extrafields = MainHelper::GetExtraFieldsByOwnertype('player',$user->ID_PLAYER);
+$PersonalInformation = MainHelper::GetPersonalInformation($user->ID_PLAYER);
+$suspendLevel = ($user) ? $user->getSuspendLevel() : 0;
+$noProfileFunctionality = MainHelper::GetNoProfileFunctionality($suspendLevel);
+$noSiteFunctionality = MainHelper::GetNoSiteFunctionality($suspendLevel);
+MainHelper::MakeValidation($reguserFields,'#editForm');
+$isEnabledTranslate = MainHelper::IsModuleEnabledByTag('translations');
+    switch ($section)
+	{
+		default:
+		case 'personalinfo':
+		   $EditorData = array(
+				'ID'            => $user->ID_PLAYER,
+				'Post'          => MainHelper::site_url('players/editprofileaction'.(isset($section) ? '/'.$section : '')),
+				'MainOBJ'       => $user,
+				'formid'        => 'editForm', // TODO: test if this actually is needed
+				'Title'         => 'User',
+				'ID_PRE'        => 'user',
+				'NativeFields' 	=> $reguserFields,
+				'PersonalInformation' => $PersonalInformation,
+				'Elements'      => array(
+					array( // all the hidden values
+						'type'      => 'hidden',
+						'values'    => array (
+							array('user', $user->ID_PLAYER)
+						)
+					),
+					array(
+						'type'      => 'titleex',
+						'text'      => $this->__('Account Settings'),
+						'info'      => $this->__('Registered').': '.date(DATE_SHORT, $user->RegistrationTime).' -'
+					),
+					array(
+						'type'      => 'info',
+						'value'     => $this->__('Personal information'),
+						'info'      => $this->__('Change your personal information.')
+					),
+					array(
+						'title'     => $this->__('First name'),
+						'id'        => 'firstName',
+						'value'     => $user->FirstName,
+						'fieldName'	=> 'FirstName',
+						'CbVisibile'=> '1'
+					),
+					array(
+						'title'     => $this->__('Last name'),
+						'id'        => 'lastName',
+						'value'     => $user->LastName,
+						'fieldName'	=> 'LastName',
+						'CbVisibile'=> '1'
+					),
+					array(
+						'title'     => $this->__('Nickname'),
+						'id'        => 'nickname',
+						'value'     => $user->NickName,
+						'fieldName'	=> 'NickName',
+						'CbVisibile'=> '1'
+					),
+					array(
+						'title'     => $this->__('Display name'),
+						'tooltip'   => $this->__('Your display name is the name you choose to display on your profile. It can be your first name, full name, nickname or any combination. It can also be something completely different.').' '.$this->__('If you do not choose a display name, your nickname will be displayed by default.'),
+						'id'        => 'displayName',
+						'value'     => $user->DisplayName,
+						'fieldName'	=> 'DisplayName'
+					),
+					array(
+						'type'      => 'date',
+						'id'        => 'dob',
+						'prefix'    => '',
+						'title'     => $this->__('Date of birth'),
+						'value'     => $user->DateOfBirth,
+						'fieldName'	=> 'DateOfBirth',
+						'CbVisibile'=> '1'
+					),
+					array(
+						'title'     => $this->__('City'),
+						'id'        => 'city',
+						'value'     => $user->City,
+						'fieldName'	=> 'City',
+						'CbVisibile'=> '1'
+					),
+					array(
+						'type'      => 'select',
+						'title'     => $this->__('Country'),
+						'id'        => 'country',
+						'fieldName'	=> 'Country',
+						'options'   => ContentHelper::ObjArrayToOptions(MainHelper::getCountryList(), 'A2', 'Country', 'A2', array($user->Country)),
+						'CbVisibile'=> '1'
+					),
+		/*
+					array(
+						'title'     => $this->__('Address'),
+						'id'        => 'address',
+						'value'     => $user->Address
+					),
+					array(
+						'title'     => $this->__('Zip'),
+						'id'        => 'zip',
+						'value'     => $user->Zip
+					),
+					array(
+						'title'     => $this->__('Phone'),
+						'id'        => 'phone',
+						'value'     => $user->Phone
+					),
+		*/  
+				)
+		   );
+
+			//Add extrafields to EditorData
+			if (isset($extrafields))
+				$EditorData = ContentHelper::AddEditorDataExtrafields($extrafields,$EditorData,$this);
+
+			$categories = MainHelper::GetPlayerCategories('player');
+			if ($categories)
+				$EditorData = ContentHelper::AddEditorDataCategories($categories,$EditorData,$this,$user->ID_PLAYER,false);
+
+			ContentHelper::ParseEditorData($EditorData);
+			break;
+		case 'timezonelanguage':
+			$TimeZoneOptions = array();
+			$zones = MainHelper::getTimeZoneList();
+			foreach ($zones as $zone) {
+				$TimeZoneOptions[] = array(
+					'value'     => $zone->ID_TIMEZONE,
+					'selected'  => ($user->ID_TIMEZONE == $zone->ID_TIMEZONE),
+					'text'      => $zone->TimeZoneText . ' ' . $zone->HelpText
+				);
+			}
+			
+			$LanguageOptions = array();
+			$addLangs = explode(',', $user->OtherLanguages);
+			foreach (Lang::getLanguages() as $lang) {
+				$LanguageOptions[] = array(
+					'class'     => 'updatePlayerLang',
+					'id'        => 'alang_'.$lang->ID_LANGUAGE,
+					'name'      => 'addLangs[]',
+					'value'     => $lang->ID_LANGUAGE,
+					'selected'   => in_array($lang->ID_LANGUAGE, $addLangs),
+					'text'      => $lang->NativeName
+				);
+			}    
+
+		   $EditorData = array(
+				'ID'            => $user->ID_PLAYER,
+				'Post'          => MainHelper::site_url('players/editprofileaction'.(isset($section) ? '/'.$section : '')),
+				'MainOBJ'       => $user,
+				'formid'        => 'editForm', // TODO: test if this actually is needed
+				'Title'         => 'User',
+				'ID_PRE'        => 'user',
+				'NativeFields' 	=> $reguserFields,
+				'PersonalInformation' => $PersonalInformation,
+				'Elements'      => array(
+					array( // all the hidden values
+						'type'      => 'hidden',
+						'values'    => array (
+							array('user', $user->ID_PLAYER)
+						)
+					),
+					array(
+						'type'      => 'titleex',
+						'text'      => $this->__('Account Settings'),
+						'info'      => $this->__('Registered').': '.date(DATE_SHORT, $user->RegistrationTime).' -'
+					),
+				)
+			);
+			$EditorData['Elements'] = array_merge($EditorData['Elements'], 
+				array
+				(
+					array(
+						'type'      => 'info',
+						'value'     => $this->__('Timezone settings'),
+						'info'      => $this->__('Change timezone and daylight saving time settings.')
+					),
+					array(
+						'type'      => 'select',
+						'id'        => 'ID_TIMEZONE',
+						'title'     => $this->__('Timezone'),
+						'options'   => $TimeZoneOptions
+					),
+					array(
+						'type'      => 'checkbox',
+						'title'     => $this->__('Daylight saving time'),
+						'label'     => $this->__('Yes'),
+						'id'        => 'dst',
+						'checked'   => ($user->DSTOffset) == 3600
+					)
+				)
+			);
+
+			if ($isEnabledTranslate==1)
+			{
+				$EditorData['Elements'] = array_merge($EditorData['Elements'], 
+					array
+					(
+						array(
+							'type'      => 'info',
+							'value'     => $this->__('Language settings'),
+							'info'      => $this->__('Change language settings.')
+						),
+						array(
+							'type'      => 'select',
+							'id'        => 'mainLanguage', // fixed bug
+							'title'     => $this->__('Site language'),
+							'tooltip'   => $this->__('Your site language is the language in which you want to view the site. The default is English. If any content has not been translated into your site language, the English version will be displayed.'),
+							'options'   => ContentHelper::ObjArrayToOptions(Lang::getLanguages(), 'ID_LANGUAGE', 'NativeName', 'ID_LANGUAGE', array($user->ID_LANGUAGE))
+						),
+						array(
+							'type'      => 'customboxes',
+							'title'     => $this->__('Additional languages'),
+							'tooltip'   => $this->__('You have the option to select a number of additional content languages. If our content has not been translated into your site language, it may be available in other languages that you prefer.').' '.$this->__('You will get the option to choose between the available languages that you have selected.'),
+							'options'   => $LanguageOptions
+						)
+					)
+				);
+			}
+			ContentHelper::ParseEditorData($EditorData);
+			break;
+		case 'userphoto':
+		   $EditorData = array(
+				'ID'            => $user->ID_PLAYER,
+				'Post'          => MainHelper::site_url('players/editprofileaction'.(isset($section) ? '/'.$section : '')),
+				'MainOBJ'       => $user,
+				'formid'        => 'editForm', // TODO: test if this actually is needed
+				'Title'         => 'User',
+				'ID_PRE'        => 'user',
+				'NativeFields' 	=> $reguserFields,
+				'PersonalInformation' => $PersonalInformation,
+				'Elements'      => array(
+					array( // all the hidden values
+						'type'      => 'hidden',
+						'values'    => array (
+							array('user', $user->ID_PLAYER)
+						)
+					),
+					array(
+						'type'      => 'titleex',
+						'text'      => $this->__('Account Settings'),
+						'info'      => $this->__('Registered').': '.date(DATE_SHORT, $user->RegistrationTime).' -'
+					),
+				)
+			);
+
+			$EditorData['Elements'] = array_merge($EditorData['Elements'], 
+				array
+				(
+					array(
+						'type'      => 'picture'
+					)
+				)
+			);
+			ContentHelper::ParseEditorData($EditorData);
+			break;
+		case 'privatesettings':
+		   $EditorData = array(
+				'ID'            => $user->ID_PLAYER,
+				'Post'          => MainHelper::site_url('players/editprofileaction'.(isset($section) ? '/'.$section : '')),
+				'MainOBJ'       => $user,
+				'formid'        => 'editForm', // TODO: test if this actually is needed
+				'Title'         => 'User',
+				'ID_PRE'        => 'user',
+				'NativeFields' 	=> $reguserFields,
+				'PersonalInformation' => $PersonalInformation,
+				'Elements'      => array(
+					array( // all the hidden values
+						'type'      => 'hidden',
+						'values'    => array (
+							array('user', $user->ID_PLAYER)
+						)
+					),
+					array(
+						'type'      => 'titleex',
+						'text'      => $this->__('Account Settings'),
+						'info'      => $this->__('Registered').': '.date(DATE_SHORT, $user->RegistrationTime).' -'
+					),
+				)
+			);
+
+			//Privacy settings
+			$EditorData['Elements'] = array_merge($EditorData['Elements'], 
+				array
+				(
+					array(
+						'type'      => 'info',
+						'value'     => $this->__('Privacy settings'),
+						'info'      => $this->__('Who can see your settings.')
+					)
+				)
+			);
+
+			$privacyBoxes[] =
+				array(
+					'class'     => '',
+					'id'        => 'privacyFriend_all',
+					'name'      => 'privacyFriend_all',
+					'value'     => 0,
+					'selected'   => "",
+					'text'      => $this->__('All'),
+					'action'	=>	'onclick="$(' . "'.privacyFriend').checkBox('changeCheckStatus', this.checked);" . '"'
+				);
+			$privacyBoxes[] =
+				array(
+					'class'     => '',
+					'id'        => 'privacyOthers_all',
+					'name'      => 'privacyOthers_all',
+					'value'     => 0,
+					'selected'   => "",
+					'text'      => $this->__('All'),
+					'action'	=>	'onclick="$(' . "'.privacyOthers').checkBox('changeCheckStatus', this.checked);" . '"'
+				);
+			$privacyBoxes[] =
+				array(
+					'class'     => '',
+					'id'        => 'privacyCategory_all',
+					'name'      => 'privacyCategory_all',
+					'value'     => 0,
+					'selected'   => "",
+					'text'      => $this->__('All'),
+					'action'	=>	'onclick="$(' . "'.privacyCategory').checkBox('changeCheckStatus', this.checked);" . '"'
+				);
+
+			$EditorData['Elements'] = array_merge($EditorData['Elements'], 
+				array
+				(
+					array(
+						'type'      => 'customboxes',
+						'title'     => '',
+						'options'   => $privacyBoxes
+					)
+				)
+			);
+
+			$SnPrivacy = new SnPrivacy;
+
+			$privacyrows = $SnPrivacy->GetAllPrivacies();
+			foreach($privacyrows as $row)
+			{
+				//Privacy setting entry
+				$ID_PRIVSET = $row['ID_PRIVSET'];
+				$Title = $row['Title'];
+				
+				$privacyBoxes = array();
+
+				$selectedF = "";
+				$selectedO = "";
+
+				$userTarget = $SnPrivacy->GetUserTargets($user->ID_PLAYER,$ID_PRIVSET);
+				foreach($userTarget as $ut)
+				{
+					$TargetType = $ut['TargetType'];
+					if ($TargetType=='friends')
+						$selectedF = "selected";
+					if ($TargetType=='others')
+						$selectedO = "selected";
+				}
+
+				//Privacy against friends
+				$privacyBoxes[] =
+					array(
+						'class'     => 'privacyFriend',
+						'id'        => 'PRIVACY_FRIENDS_'.$ID_PRIVSET,
+						'name'      => 'PRIVACY_FRIENDS_'.$ID_PRIVSET,
+						'value'     => $ID_PRIVSET,
+						'selected'   => $selectedF,
+						'text'      => $this->__('Friends')
+					);
+				//Privacy against others
+				$privacyBoxes[] =
+					array(
+						'class'     => 'privacyOthers',
+						'id'        => 'PRIVACY_OTHERS_'.$ID_PRIVSET,
+						'name'      => 'PRIVACY_OTHERS_'.$ID_PRIVSET,
+						'value'     => $ID_PRIVSET,
+						'selected'   => $selectedO,
+						'text'      => $this->__('Other users')
+					);
+
+				//Privacy against categories
+				$categories = $SnPrivacy->GetAllCategories();
+				foreach($categories as $category)
+				{
+					$ID_CATEGORY = $category['ID_CATEGORY'];
+
+					$selected = "";
+					foreach($userTarget as $ut)
+						if ($ut['TargetType']=='category')
+							if ($ut['ID_TARGET']==$ID_CATEGORY)
+								$selected = "selected";
+
+					$privacyBoxes[] =
+						array(
+							'class'     => 'privacyCategory',
+							'id'        => 'PRIVACYCATEGORY_' . $ID_PRIVSET,
+							'name'      => 'PRIVACYCATEGORY_' . $ID_PRIVSET . '[]',
+							'value'     => $ID_CATEGORY,
+							'selected'   => $selected,
+							'text'      => $category['CategoryName']
+						);
+
+				}
+				$EditorData['Elements'] = array_merge($EditorData['Elements'], 
+					array
+					(
+						array(
+							'type'      => 'customboxes',
+							'title'     => $Title,
+							'options'   => $privacyBoxes
+						)
+					)
+				);
+
+				if (!empty($ca))
+				{
+					$EditorData['Elements'] = array_merge($EditorData['Elements'], 
+						array
+						(
+							array(
+								'type'      => 'customboxes',
+								'title'     => '',
+								'options'   => $ca
+							)
+						)
+					);
+				}
+			}
+			ContentHelper::ParseEditorData($EditorData);
+			break;
+		case 'membersettings':
+			?>
+				<!-- Membership settings start -->
+				<form class="standard_form mt30" method="post" id="editForm" action="<?php echo MainHelper::site_url('players/editprofileaction'); ?>">
+
+					<div class="standard_form_header">
+						<h1><?php echo $this->__('Membership Settings'); ?></h1>
+					</div>
+
+					<div class="standard_form_elements clearfix">
+
+						<?php if(isset($currentMembership) and $currentMembership): ?>
+							<?php 
+								$currentMembershipType = $this->__('Basic');
+								if($currentMembership->PackageType == PACKAGE_SILVER) {
+									$currentMembershipType = $this->__('Silver');
+								} else if($currentMembership->PackageType == PACKAGE_GOLD) {
+									$currentMembershipType = $this->__('Gold');
+								} else if($currentMembership->PackageType == PACKAGE_PLATINUM) {
+									$currentMembershipType = $this->__('Platinum');
+								}
+							?>
+
+							<div class="standard_form_info_header">
+								<h2><?php echo $this->__('Current membership') ?></h2>
+								<p><?php echo $this->__('Change or upgrade your current membership.'); ?></p>
+							</div>
+
+							<div class="clearfix">
+								<span class="act_as_label"><?php echo $this->__('Membership type'); ?></span>
+								<div class="act_as_input">
+									<?php echo $currentMembershipType;?> <a href="<?php echo MainHelper::site_url('shop/membership');?>">(<?php echo $this->__('Change');?>)</a>
+								</div>
+							</div>
+
+							<div class="clearfix">
+								<span class="act_as_label"><?php echo $this->__('Start date'); ?></span>
+								<div class="act_as_input">
+									<?php echo date(DATE_SHORT, $currentMembership->ActivationTime);?>
+								</div>
+							</div>
+
+							<div class="clearfix">
+								<span class="act_as_label"><?php echo $this->__('End date'); ?></span>
+								<div class="act_as_input">
+									<?php echo date(DATE_SHORT, $currentMembership->ExpirationTime);?>
+								</div>
+							</div>
+
+								<?php if(isset($nextMembership) and $nextMembership):?>
+									<?php 
+										$nextMembershipType = $this->__('Basic');
+										if($nextMembership->PackageType == PACKAGE_SILVER) {
+											$nextMembershipType = $this->__('Silver');
+										} else if($nextMembership->PackageType == PACKAGE_GOLD) {
+											$nextMembershipType = $this->__('Gold');
+										} else if($nextMembership->PackageType == PACKAGE_PLATINUM) {
+											$nextMembershipType = $this->__('Platinum');
+										}
+									?>
+
+									<div class="standard_form_info_header no_sep">
+										<h2><?php echo $this->__('Next update') ?></h2>
+										<p><?php echo $this->__("Your next membership update will happen [_1].", array('<em>' . date(DATE_SHORT, $nextMembership->ActivationTime) . '</em>')); ?></p>
+									</div>
+
+									<div class="clearfix">
+										<span class="act_as_label"><?php echo $this->__('Update type'); ?></span>
+										<div class="act_as_input">
+											<?php echo $nextMembershipType;?>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<span class="act_as_label"><?php echo $this->__('Start date'); ?></span>
+										<div class="act_as_input">
+											<?php echo date(DATE_SHORT, $nextMembership->ActivationTime);?>
+										</div>
+									</div>
+
+									<div class="standalone_elm">
+										<a href="javascript:void(0)" class="button button_medium red F_cancelNextMembership"><?php echo $this->__('Cancel');?></a>
+									</div>
+								<?php endif;?>
+
+						<?php else: ?>
+
+							<div class="standard_form_info_header">
+								<h2><?php echo $this->__('Current membership') ?></h2>
+							</div>
+
+							<p class="standalone_elm">
+								<?php echo $this->__("You currently have a basic membership. For more features you can buy a silver, gold or platinum membership in our shop right [_1]here[_2].", array('<a href="' . MainHelper::site_url('shop/membership') . '">', '</a>')); ?>
+							</p>
+
+						<?php endif;?>
+
+						<?php if(isset($currentFeatures) and $currentFeatures):?>
+
+							<div class="standard_form_info_header">
+								<h2><?php echo $this->__('Additional site features') ?></h2>
+								<p><?php echo $this->__('This is an overview of the additional site features you have purchased.'); ?></p>
+							</div>
+
+							<?php $amount = count($currentFeatures); ?>
+							<?php $x = 1; ?>
+							<?php foreach($currentFeatures as $package):?>
+								<div class="clearfix">
+									<span class="act_as_label"><?php echo $this->__('Feature type'); ?></span>
+									<div class="act_as_input">
+										<?php echo $package->NameTranslated;?>
+									</div>
+								</div>
+								<div class="clearfix">
+									<span class="act_as_label"><?php echo $this->__('Start date'); ?></span>
+									<div class="act_as_input">
+										<?php echo date(DATE_SHORT, $package->FiPlayerFeatureRel[0]->ActivationTime);?>
+									</div>
+								</div>
+								<div class="clearfix">
+									<span class="act_as_label"><?php echo $this->__('End date'); ?></span>
+									<div class="act_as_input">
+										<?php echo date(DATE_SHORT, $package->FiPlayerFeatureRel[0]->ExpirationTime);?>
+									</div>
+								</div>
+								<?php echo ($x != $amount) ? '<div class="standard_form_seperator"></div>' : ''; ?>
+								<?php $x++; ?>
+							<?php endforeach; ?>
+							</div>
+							<div class="standard_form_footer clearfix">
+								<p class="stand_form_footer_link pull_left"><?php echo $this->__('You can buy more additional site features in our shop right [_1]here[_2].', array('<a href="' . MainHelper::site_url('shop/membership') . '">', '</a>')); ?></p>
+							</div>
+						<?php else: ?>
+							<div class="standard_form_info_header">
+								<h2><?php echo $this->__('Additional site features') ?></h2>
+							</div>
+							<p class="standalone_elm">
+								<?php echo $this->__("You don't have any additional site features at the moment. You can buy them in our shop right [_1]here[_2]. Additional site features lets you create extra groups, upload extra photos and much more.", array('<a href="' . MainHelper::site_url('shop/membership') . '">', '</a>')); ?>
+							</p>
+							</div>
+						<?php endif; ?>
+				</form>
+			<?php
+			break;
+		case 'widgets':
+			$widgetsList = MainHelper::getWidgetsList($user->ID_PLAYER);
+
+			foreach ($widgetsList as $widgetItem) {
+				$widget[] = array(
+<<<<<<< HEAD
+					'name'      => $widgetItem['Name'],
+					'value'     => $widgetItem['ID_WIDGET'],
+					'order'     => $widgetItem['WidgetOrder']
+=======
+					'class'     => 'widget_' . $widgetItem['ID_WIDGET'],
+					'id'        => 'widget_' . $widgetItem['ID_WIDGET'],
+					'name'      => $widgetItem['Title'],
+					'value'     => $widgetItem['ID_WIDGET'],
+					'text'      => 'Visible',
+					'selected'  => ($widgetItem['isVisible'] == 1) ? true : false,
+					'action'    => ''
+>>>>>>> f184d30fcd229a7c5b6d31cf118806cbc59fd6c5
+				);
+			}
+
+			$EditorData = array(
+				'ID'            => $user->ID_PLAYER,
+				'Post'          => MainHelper::site_url('players/editprofileaction'.(isset($section) ? '/'.$section : '')),
+				'MainOBJ'       => $user,
+				'formid'        => 'editForm', // TODO: test if this actually is needed
+				'Title'         => 'User',
+				'class'         => 'widgets',
+				'ID_PRE'        => 'user',
+				'NativeFields' 	=> $reguserFields,
+				'PersonalInformation' => $PersonalInformation,
+				'Elements'      => array(
+					array( // all the hidden values
+						'type'      => 'hidden',
+						'values'    => array(
+							array('user', $user->ID_PLAYER)
+						)
+					),
+					array(
+						'type'      => 'titleex',
+						'text'      => $this->__('Account Settings'),
+						'info'      => $this->__('Registered').': '.date(DATE_SHORT, $user->RegistrationTime).' -'
+					),
+					array(
+						'type'      => 'info',
+						'value'     => $this->__('Widgets'),
+						'info'      => $this->__('Organize your widgets.')
+					),
+					array(
+						'type'      => 'columnlabel',
+						'id'        => '',
+						'title'     => '',
+						'options'   => array(
+							array(
+								'text'  => 'Assign order', 
+								'tooltip' => 'Use this to reorder the widgets.',
+								'width' => '40%'
+							),
+							array(
+								'text'  => 'Visibility', 
+								'tooltip' => 'From here you can show/hide individual widgets.',
+								'width' => '60%'
+							)
+						)
+					)
+				)
+			);
+
+			foreach ($widgetsList as $item) {
+				if($item['isVisible'] == 1) {
+					$EditorData['PersonalInformation'] = array_merge($EditorData['PersonalInformation'],
+						array(
+							'vcb_' . $item['Name']
+						)
+					);
+				}
+			}
+
+			foreach ($widget as $key => $value) {
+				$select = array();
+				for ($i = 1; $i <= count($widget); $i++) {
+					$selected = ($i == $widget[$key]['order']) ? 'selected' : '';
+					$num = $i - 1;
+					$select[] = array(
+							'value' => $widget[$num]['value'], 
+							'text' => $widget[$num]['value'], 
+							'selected' => $selected
+					);
+				}
+
+				$EditorData['Elements'] = array_merge($EditorData['Elements'], 
+					array(
+						array(
+							'type'      => 'selectNarrow',
+							'title'     => $widget[$key]['name'],
+							'id'        => '',
+							'name'      => $widget[$key]['name'],
+							'class'     => 'widgets_layout select-' . $widget[$key]['name'],
+							'options'   => $select,
+							'CbVisibile'=> '1',
+							'CbVisibileLeft' => '60%'
+						)
+					)
+				);
+			}
+			ContentHelper::ParseEditorData($EditorData);
+			break;
+		case 'emailpassword':
+			$EditorData = array(
+				'ID'            => $user->ID_PLAYER,
+				'Post'          => MainHelper::site_url('players/editprofileaction'.(isset($section) ? '/'.$section : '')),
+				'MainOBJ'       => $user,
+				'formid'        => 'editForm', // TODO: test if this actually is needed
+				'Title'         => 'User',
+				'ID_PRE'        => 'user',
+				'NativeFields' 	=> $reguserFields,
+				'PersonalInformation' => $PersonalInformation,
+				'Elements'      => array(
+					array( // all the hidden values
+						'type'      => 'hidden',
+						'values'    => array (
+							array('user', $user->ID_PLAYER)
+						)
+					),
+					array(
+						'type'      => 'titleex',
+						'text'      => $this->__('Account Settings'),
+						'info'      => $this->__('Registered').': '.date(DATE_SHORT, $user->RegistrationTime).' -'
+					),
+					array(
+						'type'      => 'info',
+						'value'     => $this->__('Personal information'),
+						'info'      => $this->__('Email and password.')
+					),
+					array(
+						'type'      => 'linklabel',
+						'title'		=> $this->__('Email address'),
+						'class'		=> 'messageOpt mr2 fl db changeemail',
+						'rel'		=> '',
+						'link'		=> 'players/ajaxchangeemail',
+						'value'		=> $user->EMail
+					),
+					array(
+						'type'      => 'password',
+						'title'     => $this->__('Password'),
+						'id'        => 'password',
+						'name'      => 'pass',
+						'value'     => ''
+					),
+					array(
+						'type'      => 'password',
+						'title'     => $this->__('Confirm password'),
+						'id'        => 'confirmpassword',
+						'value'     => ''
+					)
+				)
+		   );
+			ContentHelper::ParseEditorData($EditorData);
+			if (!$noProfileFunctionality)
+			{
+				$linkTitle = $this->__('Disable profile');
+				$linkHref = MainHelper::site_url('players/edit/disableprofile');
+				?>
+				<div class="standard_form mt30">
+					<div class="standard_form_header">
+						<h2><?php echo $this->__('Disable your profile on the link below.') ?></h2>
+					</div>
+					<div class="standard_form_elements clearfix">
+						<div class="clearfix">
+							<a onclick="return confirm('<?php echo $this->__('Are you sure?'); ?>');" class="" href="<?php echo $linkHref; ?>"><?php echo $linkTitle ?></a>
+						</div>
+					</div>
+				</div>
+			<?php 
+			}
+
+			break;
+	}
+?>
+	<?php /* NOT DONE */ ?>
+	<?php /*
+	<div class="usage_statistics_wrapper">
+		<a href="#" class="usage_statistics_ribbon"></a>
+
+		<div class="usage_statistics">
+			<a href="#" class="usage_statistics_close">&times;</a>
+
+			<ul class="statistics_list">
+				<li>
+					<span class="icon_span"><i class="stat_image_icon"></i><?php echo $user->WallPhotoCount . '/'. $user->ImageLimit; ?></span>
+					<?php echo $this->__('Images'); ?>
+				</li>
+				<li>
+					<span class="icon_span"><i class="stat_group_icon"></i><?php echo $user->GroupsOwnedCount .'/'. $user->GroupLimit; ?></span>
+					<?php echo $this->__('Groups'); ?>
+				</li>
+				<li>
+					<span class="icon_span"><i class="stat_film_icon"></i><?php echo $user->WallVideoCount; ?></span>
+					<?php echo $this->__('Videos'); ?>
+				</li>
+				<li>
+					<span class="icon_span"><i class="stat_link_icon"></i><?php echo $user->WallLinkCount; ?></span>
+					<?php echo $this->__('Links'); ?>
+				</li>
+			</ul>
+
+			<ul class="statistics_list">
+				<li>
+					<span class="icon_span"><i class="stat_post_icon"></i><?php echo $user->WallPostCount; ?></span>
+					<?php echo $this->__('Posts'); ?>
+				</li>
+				<li>
+					<span class="icon_span"><i class="stat_group_icon"></i><?php echo $user->FriendCount; ?></span>
+					<?php echo $this->__('Friends'); ?>
+				</li>
+				<li>
+					<span class="icon_span"><i class="stat_game_icon"></i><?php echo $user->GameCount; ?></span>
+					<?php echo $this->__('Games'); ?>
+				</li>
+				<li>
+					<span class="icon_span"><i class="stat_event_icon"></i><?php echo $user->EventCount; ?></span>
+					<?php echo $this->__('Events'); ?>
+				</li>
+			</ul>
+			
+		</div>
+	</div>
+<<<<<<< HEAD
+
+	<div class="standard_form_elements clearfix">
+
+		<div class="standard_form_info_header">
+			<h2><?php echo $this->__('Personal information') ?></h2>
+			<p><?php echo $this->__('Change your personal information.'); ?></p>
+		</div>
+
+		<div class="clearfix">
+			<label for="firstName"><?php echo $this->__('First name'); ?></label>
+			<span>
+				<input tabindex="1" id="firstName" name="firstName" type="text" value="<?php echo $user->FirstName; ?>" class="text_input" />
+			</span>
+		</div>
+		
+		<div class="clearfix">
+			<label for="lastName"><?php echo $this->__('Last name'); ?></label>
+			<span>
+				<input tabindex="2" id="lastName" name="lastName" type="text" value="<?php echo $user->LastName; ?>" class="text_input" />
+			</span>
+		</div>
+		
+		<div class="clearfix">
+			<label for="nickname"><?php echo $this->__('Nickname'); ?></label>
+			<span>
+				<input tabindex="3" id="nickname" name="nickname" type="text" value="<?php echo $user->NickName; ?>" class="text_input" />
+			</span>
+		</div>
+		
+		<div class="clearfix">
+			<label for="displayName"><?php echo $this->__('Display name'); ?>
+				<a href="#" class="tooltipHelper">(?)</a>
+				<div class="tooltipHelperBox"><span class="tooltipHelperBoxTop"></span><?php echo $this->__('Your display name is the name you choose to display on your profile. It can be your first name, full name, nickname or any combination. It can also be something completely different. If you do not choose a display name, your nickname will be displayed by default.'); ?></div>
+			</label>
+			<span>
+				<input tabindex="4" id="displayName" name="displayName" type="text" value="<?php echo $user->DisplayName; ?>" class="text_input" />
+			</span>
+		</div>
+
+		<div class="clearfix">
+			<label for="password"><?php echo $this->__('Password'); ?></label>
+			<span>
+				<input tabindex="5" id="password" name="pass" type="password" value="" class="text_input" />
+			</span>
+		</div>
+
+		<div class="clearfix">
+			<label for="comfirmPassword"><?php echo $this->__('Confirm password'); ?></label>
+			<span>
+				<input tabindex="6" id="comfirmPassword" name="confirmPassword" type="password" value="" class="text_input" />
+			</span>
+		</div>
+
+		<div class="standard_form_dob clearfix">
+			<label for="dob"><?php echo $this->__('Date of birth'); ?></label>
+			<span>
+				<select id="dobYear" class="dropkick_lightNarrow" name="year" tabindex="9">
+					<?php $years = MainHelper::getYears(); ?>
+					<?php foreach ($years as $c => $v): ?>
+						<option value="<?php echo $c; ?>" <?php echo (MainHelper::isYearSelected($user->DateOfBirth, $v)) ? 'selected="selected"' : ''; ?>>
+							<?php echo $v; ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+			</span>	
+			
+			<span>
+				<select id="dobMonth" class="dropkick_lightNarrow" name="month" tabindex="8">
+					<?php $months = MainHelper::getMonthList(); ?>
+					<?php foreach ($months as $c => $v): ?>
+						<option value="<?php echo $c; ?>" <?php echo (MainHelper::isMonthSelected($user->DateOfBirth, $c)) ? 'selected="selected"' : ''; ?>>
+							<?php echo $v; ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+			</span>
+
+			<span>
+				<select id="dobDay" class="dropkick_lightNarrow" name="day" tabindex="7">
+					<?php $days = MainHelper::getDays(); ?>
+					<?php foreach ($days as $c => $v): ?>
+						<option value="<?php echo $c; ?>" <?php echo (MainHelper::isDaySelected($user->DateOfBirth, $v)) ? 'selected="selected"' : ''; ?>>
+							<?php echo $v; ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+			</span>
+		</div>
+
+		<div class="clearfix">
+			<label for="city"><?php echo $this->__('City'); ?></label>
+			<span>
+				<input tabindex="10" id="city" type="text" name="city" value="<?php echo $user->City; ?>" class="text_input" />
+			</span>
+		</div>
+
+		<div class="clearfix">
+			<label for="country"><?php echo $this->__('Country'); ?></label>
+			<span>
+				<select id="country" class="dropkick_lightWide" name="country" tabindex="11">
+					<?php $countries = MainHelper::getCountryList(); ?>
+					<?php foreach ($countries as $country): ?>
+						<option value="<?php echo $country->A2; ?>" <?php echo ($user->Country == $country->A2) ? 'selected="selected"' : ''; ?>>
+							<?php echo $country->Country; ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+			</span>
+		</div>
+
+		<div class="standard_form_info_header">
+			<h2><?php echo $this->__('Timezone settings') ?></h2>
+			<p><?php echo $this->__('Change your timezone and daylight saving time settings.'); ?></p>
+		</div>
+
+		<div class="clearfix">
+			<label for="ID_TIMEZONE"><?php echo $this->__('Timezone'); ?></label>
+			<span>
+				<select id="ID_TIMEZONE" class="dropkick_lightWide" name="ID_TIMEZONE" tabindex="12">
+					<?php $zones = MainHelper::getTimeZoneList(); ?>
+					<?php foreach ($zones as $zone): ?>
+						<option value="<?php echo $zone->ID_TIMEZONE; ?>" <?php echo ($user->ID_TIMEZONE == $zone->ID_TIMEZONE) ? 'selected="selected"' : ''; ?>>
+							<?php echo $zone->TimeZoneText . ' ' . $zone->HelpText; ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+			</span>
+		</div>
+
+		<div class="standard_form_checks clearfix">
+			<label><?php echo $this->__('Daylight saving time'); ?></label>
+			<span>
+				<div class="standard_form_checks_wrapper no-margin clearfix">
+					<input type="hidden" name="daylight" value="1" />
+					<input tabindex="13" class="dst" type="checkbox" id="dst" name="dst" value="1" <?php echo ($user->DSTOffset) == 3600 ? 'checked="checked"' : ''; ?> /> 
+					<label for="dst"><?php echo $this->__('Yes'); ?></label>
+				</div>
+			</span>
+		</div>
+
+		<div class="standard_form_info_header">
+			<h2><?php echo $this->__('Language settings') ?></h2>
+			<p><?php echo $this->__('Change your language settings.'); ?></p>
+		</div>
+
+		<div class="clearfix">
+			<label for="language"><?php echo $this->__('Site language'); ?> 
+				<a href="#" class="tooltipHelper">(?)</a>
+				<div class="tooltipHelperBox"><span class="tooltipHelperBoxTop"></span><?php echo $this->__('Your site language is the language in which you want to view the site. The default is English. If any content has not been translated into your site language, the English version will be displayed.'); ?></div>
+			</label>
+			<span>
+				<select id="language" class="dropkick_lightWide" name="mainLanguage" tabindex="14">
+					<?php $langs = Lang::getLanguages(); ?>
+					<?php foreach ($langs as $lang): ?>
+						<option value="<?php echo $lang->ID_LANGUAGE; ?>" <?php echo ($user->ID_LANGUAGE == $lang->ID_LANGUAGE) ? 'selected="selected"' : ''; ?>>
+							<?php echo $lang->NativeName; ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+			</span>
+		</div>
+
+		<div class="standard_form_checks clearfix">
+			<label><?php echo $this->__('Additional languages'); ?>
+				<a href="#" class="tooltipHelper">(?)</a>
+				<div class="tooltipHelperBox"><span class="tooltipHelperBoxTop"></span><?php echo $this->__('You have the option to select a number of additional content languages. If our content has not been translated into your site language, it may be available in other languages that you prefer. You will get the option to choose between the available languages that you have selected.'); ?></div>
+			</label>
+			<?php $addLangs = explode(',', $user->OtherLanguages); ?>
+			<?php foreach ($langs as $lang): ?>
+				<div class="standard_form_checks_wrapper no-margin clearfix">
+					<input class="updatePlayerLang" type="checkbox" id="alang_<?php echo $lang->ID_LANGUAGE; ?>" name="addLanguage" value="<?php echo $lang->ID_LANGUAGE; ?>" <?php echo in_array($lang->ID_LANGUAGE, $addLangs) ? 'checked="checked"' : ''; ?> /> 
+					<label for="alang_<?php echo $lang->ID_LANGUAGE; ?>"><?php echo $lang->NativeName; ?></label>
+				</div>
+			<?php endforeach; ?>
+		</div>
+
+		<div class="standard_form_info_header">
+			<h2><?php echo $this->__('Profile photo') ?></h2>
+			<p><?php echo $this->__('Change your profile photo. Use PNG, GIF or JPG with a max. window size at 200x300px.'); ?></p>
+		</div>
+
+		<div class="profile_foto_edit clearfix">
+			<label><?php echo $this->__('Profile photo'); ?></label>
+			<div class="standard_form_photo clearfix">
+				<div class="standard_form_photo_wrapper">
+					<?php echo MainHelper::showImage($user, THUMB_LIST_100x100, false, array('width', 'no_img' => 'noimage/no_player_100x100.png'));?>
+				</div>
+				<div class="standard_form_photo_action">
+					<a id="uploadProfilePhoto" class="button button_medium light_grey" href="javascript:void(0)"><?php echo $this->__('Upload Photo'); ?></a>
+					<p><?php echo $this->__('Use PNG, GIF or JPG.') ?>
+					<br /><?php echo $this->__('Max. window size at 200x300px.') ?></p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="standard_form_footer clearfix">
+		<input class="button button_auto light_blue pull_right" type="submit" value="<?php echo $this->__('Save Settings'); ?>" />
+	</div>
+
+</form>
+
+<form class="standard_form mt30" method="post" id="editForm" action="<?php echo MainHelper::site_url('players/editprofileaction'); ?>">
+
+	<div class="standard_form_header">
+		<h1><?php echo $this->__('Membership Settings'); ?></h1>
+	</div>
+
+	<div class="standard_form_elements clearfix">
+
+		<?php if(isset($currentMembership) and $currentMembership): ?>
+			<?php 
+				$currentMembershipType = $this->__('Basic');
+				if($currentMembership->PackageType == PACKAGE_SILVER) {
+					$currentMembershipType = $this->__('Silver');
+				} else if($currentMembership->PackageType == PACKAGE_GOLD) {
+					$currentMembershipType = $this->__('Gold');
+				} else if($currentMembership->PackageType == PACKAGE_PLATINUM) {
+					$currentMembershipType = $this->__('Platinum');
+				}
+			?>
+
+			<div class="standard_form_info_header">
+				<h2><?php echo $this->__('Current membership') ?></h2>
+				<p><?php echo $this->__('Change or upgrade your current membership.'); ?></p>
+			</div>
+
+			<div class="clearfix">
+				<span class="act_as_label"><?php echo $this->__('Membership type'); ?></span>
+				<div class="act_as_input">
+					<?php echo $currentMembershipType;?> <a href="<?php echo MainHelper::site_url('shop/membership');?>">(<?php echo $this->__('Change');?>)</a>
+				</div>
+
+			</div>
+
+			<div class="clearfix">
+				<span class="act_as_label"><?php echo $this->__('Start date'); ?></span>
+				<div class="act_as_input">
+					<?php echo date(DATE_SHORT, $currentMembership->ActivationTime);?>
+				</div>
+			</div>
+
+			<div class="clearfix">
+				<span class="act_as_label"><?php echo $this->__('End date'); ?></span>
+				<div class="act_as_input">
+					<?php echo date(DATE_SHORT, $currentMembership->ExpirationTime);?>
+				</div>
+			</div>
+
+				<?php if(isset($nextMembership) and $nextMembership):?>
+					<?php 
+						$nextMembershipType = $this->__('Basic');
+						if($nextMembership->PackageType == PACKAGE_SILVER) {
+							$nextMembershipType = $this->__('Silver');
+						} else if($nextMembership->PackageType == PACKAGE_GOLD) {
+							$nextMembershipType = $this->__('Gold');
+						} else if($nextMembership->PackageType == PACKAGE_PLATINUM) {
+							$nextMembershipType = $this->__('Platinum');
+						}
+					?>
+
+					<div class="standard_form_info_header no_sep">
+						<h2><?php echo $this->__('Next update') ?></h2>
+						<p><?php echo $this->__("Your next membership update will happen [_1].", array('<em>' . date(DATE_SHORT, $nextMembership->ActivationTime) . '</em>')); ?></p>
+					</div>
+
+					<div class="clearfix">
+						<span class="act_as_label"><?php echo $this->__('Update type'); ?></span>
+						<div class="act_as_input">
+							<?php echo $nextMembershipType;?>
+						</div>
+					</div>
+
+					<div class="clearfix">
+						<span class="act_as_label"><?php echo $this->__('Start date'); ?></span>
+						<div class="act_as_input">
+							<?php echo date(DATE_SHORT, $nextMembership->ActivationTime);?>
+						</div>
+					</div>
+
+					<div class="standalone_elm">
+						<a href="javascript:void(0)" class="button button_medium red F_cancelNextMembership"><?php echo $this->__('Cancel');?></a>
+					</div>
+				<?php endif;?>
+
+		<?php else: ?>
+
+			<div class="standard_form_info_header">
+				<h2><?php echo $this->__('Current membership') ?></h2>
+			</div>
+
+			<p class="standalone_elm">
+				<?php echo $this->__("You currently have a basic membership. For more features you can buy a silver, gold or platinum membership in our shop right [_1]here[_2].", array('<a href="' . MainHelper::site_url('shop/membership') . '">', '</a>')); ?>
+			</p>
+
+		<?php endif;?>
+
+		<?php if(isset($currentFeatures) and $currentFeatures):?>
+
+			<div class="standard_form_info_header">
+				<h2><?php echo $this->__('Additional site features') ?></h2>
+				<p><?php echo $this->__('This is an overview of the additional site features you have purchased.'); ?></p>
+			</div>
+
+			<?php $amount = count($currentFeatures); ?>
+			<?php $x = 1; ?>
+			<?php foreach($currentFeatures as $package):?>
+				<div class="clearfix">
+					<span class="act_as_label"><?php echo $this->__('Feature type'); ?></span>
+					<div class="act_as_input">
+						<?php echo $package->NameTranslated;?>
+					</div>
+				</div>
+
+				<div class="clearfix">
+					<span class="act_as_label"><?php echo $this->__('Start date'); ?></span>
+					<div class="act_as_input">
+						<?php echo date(DATE_SHORT, $package->FiPlayerFeatureRel[0]->ActivationTime);?>
+					</div>
+				</div>
+
+				<div class="clearfix">
+					<span class="act_as_label"><?php echo $this->__('End date'); ?></span>
+					<div class="act_as_input">
+						<?php echo date(DATE_SHORT, $package->FiPlayerFeatureRel[0]->ExpirationTime);?>
+
+
+				<form method="post" id="editForm" action="<?php echo MainHelper::site_url('players/editprofileaction'); ?>">
+					<div class="mt5">
+						<label for="firstName" class="db"><?php echo $this->__('First Name'); ?></label>
+						<input id="firstName" name="firstName" type="text" value="<?php echo $user->FirstName; ?>" class="text_input" />
+					</div>
+
+					<div class="mt5">
+						<label for="lastName" class="db"><?php echo $this->__('Last Name'); ?></label>
+						<input id="lastName" name="lastName" type="text" value="<?php echo $user->LastName; ?>" class="text_input" />
+					</div>
+
+					<div class="mt5">
+						<label for="nickname" class="db"><?php echo $this->__('Nickname'); ?></label>
+						<input id="nickname" name="nickname" type="text" value="<?php echo $user->NickName; ?>" class="text_input" />
+					</div>
+
+					<div class="mt5">
+						<label for="displayName" class="db"><?php echo $this->__('Display Name'); ?></label>
+						<input id="displayName" name="displayName" type="text" value="<?php echo $user->DisplayName; ?>" class="text_input" />
+					</div>
+
+					<div class="mt5">
+						<label for="password" class="db"><?php echo $this->__('Password'); ?></label>
+						<input id="password" name="pass" type="password" value="" class="text_input" />
+					</div>
+
+					<div class="mt5">
+						<label for="comfirmPassword" class="db"><?php echo $this->__('Confirm password'); ?></label>
+						<input id="comfirmPassword" name="confirmPassword" type="password" value="" class="text_input" />
+					</div>
+
+					<div class="mt5">
+						<label for="city"><?php echo $this->__('City'); ?></label>
+						<input id="city" type="text" name="city" value="<?php echo $user->City; ?>" class="text_input" />
+					</div>
+
+					<div class="clearfix mt5">
+						<label for="country"><?php echo $this->__('Country'); ?></label>
+						<select id="country" class="dropkick_lightWide" name="country" tabindex="1">
+							<?php $countries = MainHelper::getCountryList(); ?>
+							<?php foreach ($countries as $country): ?>
+								<option value="<?php echo $country->A2; ?>" <?php echo $user->Country == $country->A2 ? 'selected' : ''; ?>>
+									<?php echo $country->Country; ?>
+								</option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+
+					<div class="clearfix mt5">
+						<label for="timezone"><?php echo $this->__('Timezone'); ?></label>
+						<select id="timezone" class="dropkick_lightWide" name="timezone" tabindex="1">
+							<?php $zones = MainHelper::getTimeZoneList(); ?>
+							<?php foreach ($zones as $zone): ?>
+								<option value="<?php echo $zone->Offset; ?>" <?php echo $user->TimeOffset == $zone->Offset ? 'selected' : ''; ?>>
+									<?php echo $zone->TimeZoneText . ' ' . $zone->HelpText; ?>
+								</option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+
+					<div class="clearfix add_langs">
+						<input type="hidden" name="daylight" value="1" />
+						<input class="dst" type="checkbox" id="dst" name="dst" value="1" <?php echo $user->DSTOffset == 3600 ? 'checked="checked"' : ''; ?> />
+						<label for="dst"><?php echo $this->__('Daylight saving time'); ?></label>
+					</div>
+
+					<div class="date_of_birth clearfix mt5">
+						<label for="dob" class="db"><?php echo $this->__('Date of birth'); ?></label>
+						<select id="dobDay" class="dropkick_lightNarrow" name="day" tabindex="2">
+							<?php $days = MainHelper::getDays(); ?>
+							<?php foreach ($days as $c => $v): ?>
+								<option value="<?php echo $c; ?>" <?php echo MainHelper::isDaySelected($user->DateOfBirth, $v) ? 'selected' : ''; ?>>
+									<?php echo $v; ?>
+								</option>
+							<?php endforeach; ?>
+						</select>
+
+						<select id="dobMonth" class="dropkick_lightNarrow" name="month" tabindex="3">
+							<?php $months = MainHelper::getMonthList(); ?>
+							<?php foreach ($months as $c => $v): ?>
+								<option value="<?php echo $c; ?>" <?php echo MainHelper::isMonthSelected($user->DateOfBirth, $c) ? 'selected' : ''; ?>>
+									<?php echo $v; ?>
+								</option>
+							<?php endforeach; ?>
+						</select>
+
+						<select id="dobYear" class="dropkick_lightNarrow" name="year" tabindex="4">
+							<?php $years = MainHelper::getYears(); ?>
+							<?php foreach ($years as $c => $v): ?>
+								<option value="<?php echo $c; ?>" <?php echo MainHelper::isYearSelected($user->DateOfBirth, $v) ? 'selected' : ''; ?>>
+									<?php echo $v; ?>
+								</option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+
+					<div class="clearfix mt5">
+						<label for="language" class="db"><?php echo $this->__('Site Language'); ?> <a href="javascript:void(0)" class="F_helpBubble" rel="<?php echo $this->__('Your site language is the language in which you want to view the site. The default is English. If any content has not been translated into your site language, the English version will be displayed.'); ?>">?</a></label>
+						<select id="language" class="dropkick_lightWide" name="mainLanguage" tabindex="5">
+							<?php $langs = Lang::getLanguages(); ?>
+							<?php foreach ($langs as $lang): ?>
+								<option value="<?php echo $lang->ID_LANGUAGE; ?>" <?php echo $user->ID_LANGUAGE == $lang->ID_LANGUAGE ? 'selected' : ''; ?>>
+									<?php echo $lang->NativeName; ?>
+								</option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+
+					<div class="clearfix mt5">
+						<label class="db"><?php echo $this->__('Additional Content Languages'); ?> <a href="javascript:void(0)" class="F_helpBubble" rel="<?php echo $this->__('You have the option to select a number of additional content languages. If our content has not been translated into your site language, it may be available in other languages that you prefer. You will get the option to choose between the available languages that you have selected.'); ?>">?</a></label>
+						<div class="add_langs">
+							<div class="clearfix">
+								<?php $x = 1; ?>
+								<?php $addLangs = explode(',', $user->OtherLanguages); ?>
+								<?php foreach ($langs as $lang): ?>
+									<input class="updatePlayerLang" type="checkbox" id="alang_<?php echo $lang->ID_LANGUAGE; ?>" name="addLanguage" value="<?php echo $lang->ID_LANGUAGE; ?>" <?php echo in_array($lang->ID_LANGUAGE, $addLangs) ? 'checked="checked"' : ''; ?> />
+									<label for="alang_<?php echo $lang->ID_LANGUAGE; ?>"><?php echo $lang->NativeName; ?></label>
+									<?php
+									if ($x % 4 == 0) {
+										echo '</div><div class="clear"></div><div class="clearfix">';
+									};
+									?>
+										<?php $x++; ?>
+									<?php endforeach; ?>
+							</div>
+						</div>
+					</div>
+
+					<div class="ftu_form_footer clearfix">
+						<input class="button button_medium light_blue fr" type="submit" value="<?php echo $this->__('Save'); ?>" />
+
+					</div>
+				</div>
+
+				<?php echo ($x != $amount) ? '<div class="standard_form_seperator"></div>' : ''; ?>
+				<?php $x++; ?>
+			<?php endforeach; ?>
+
+			</div>
+
+
+			<div class="standard_form_footer clearfix">
+				<p class="stand_form_footer_link pull_left"><?php echo $this->__('You can buy more additional site features in our shop right [_1]here[_2].', array('<a href="' . MainHelper::site_url('shop/membership') . '">', '</a>')); ?></p>
+			</div>
+
+		<?php else: ?>
+
+			<div class="standard_form_info_header">
+				<h2><?php echo $this->__('Additional site features') ?></h2>
+			</div>
+
+			<p class="standalone_elm">
+				<?php echo $this->__("You don't have any additional site features at the moment. You can buy them in our shop right [_1]here[_2]. Additional site features lets you create extra groups, upload extra photos and much more.", array('<a href="' . MainHelper::site_url('shop/membership') . '">', '</a>')); ?>
+			</p>
+
+			</div>
+
+		<?php endif; ?>
+
+</form>
+
+
+			<?php if(isset($currentMembership) and $currentMembership):?>
+				<?php
+					$currentMembershipType = $this->__('Basic');
+					if($currentMembership->PackageType == PACKAGE_SILVER) {
+						$currentMembershipType = $this->__('Silver');
+					} else if($currentMembership->PackageType == PACKAGE_GOLD) {
+						$currentMembershipType = $this->__('Gold');
+					} else if($currentMembership->PackageType == PACKAGE_PLATINUM) {
+						$currentMembershipType = $this->__('Platinum');
+					}
+				?>
+				<div class="mt20">
+					<h3 class="fcbl3 fs14"><?php echo $this->__('Membership Information'); ?></h3>
+					<table cellpadding="0" cellspacing="0" border="0" class="mt5">
+						<tr>
+							<td width="120"><?php echo $this->__('Membership Type');?>:</td>
+							<td><?php echo $currentMembershipType;?> <a href="<?php echo MainHelper::site_url('shop/membership');?>"><?php echo $this->__('Change');?></a></td>
+						</tr>
+						<tr>
+							<td><?php echo $this->__('Start Date');?>:</td>
+							<td><?php echo date(DATE_SHORT, $currentMembership->ActivationTime);?></td>
+						</tr>
+						<tr>
+							<td><?php echo $this->__('End Date');?>:</td>
+							<td><?php echo date(DATE_SHORT, $currentMembership->ExpirationTime);?></td>
+						</tr>
+					</table>
+
+					<?php if(isset($nextMembership) and $nextMembership):?>
+						<?php
+							$nextMembershipType = $this->__('Basic');
+							if($nextMembership->PackageType == PACKAGE_SILVER) {
+								$nextMembershipType = $this->__('Silver');
+							} else if($nextMembership->PackageType == PACKAGE_GOLD) {
+								$nextMembershipType = $this->__('Gold');
+							} else if($nextMembership->PackageType == PACKAGE_PLATINUM) {
+								$nextMembershipType = $this->__('Platinum');
+							}
+						?>
+						<h3 class="fclg fs13 mt10"><?php echo $this->__('Next Update'); ?></h3>
+						<table cellpadding="0" cellspacing="0" border="0" class="mt5">
+							<tr>
+								<td width="120"><?php echo $this->__('Update Type');?>:</td>
+								<td><?php echo $nextMembershipType;?></td>
+							</tr>
+							<tr>
+								<td><?php echo $this->__('Start Date');?>:</td>
+								<td><?php echo date(DATE_SHORT, $nextMembership->ActivationTime);?></td>
+							</tr>
+						</table>
+						<a href="javascript:void(0)" class="button button_small red F_cancelNextMembership"><?php echo $this->__('Cancel');?></a>
+					<?php endif;?>
+				</div>
+			<?php endif;?>
+			<?php if(isset($currentFeatures) and $currentFeatures):?>
+			<div class="mt20">
+				<h3 class="fcbl3 fs14"><?php echo $this->__('Additional Site Features'); ?></h3>
+				<table cellpadding="0" cellspacing="0" border="0" class="mt5">
+					<tr>
+						<th><span class="fclg fs11 fl"><?php echo $this->__('Name');?></span></th>
+						<th><span class="fclg fs11 fl"><?php echo $this->__('Start Date');?></span></th>
+						<th><span class="fclg fs11 fl"><?php echo $this->__('End Date');?></span></th>
+					</tr>
+					<?php foreach($currentFeatures as $package):?>
+					<tr>
+						<td width="180"><?php echo $package->NameTranslated;?></td>
+						<td width="70"><?php echo date(DATE_SHORT, $package->FiPlayerFeatureRel[0]->ActivationTime);?></td>
+						<td><?php echo date(DATE_SHORT, $package->FiPlayerFeatureRel[0]->ExpirationTime);?></td>
+					</tr>
+					<?php endforeach;?>
+				</table>
+			</div>
+			<?php endif;?>
+		</div>
+		<div class="profileEditRoundedBottom"></div>
+	</div>
+	<div class="fl pl6 w200">
+		<div class="profile_foto_edit pr ">
+			<?php echo MainHelper::showImage($user, THUMB_LIST_200x300, false, array('width', 'no_img' => 'noimage/no_player_200x300.png'));?>
+		</div>
+		<div class="mt5 clearfix">
+			<a id="uploadProfilePhoto" class="buttonRRound uploadImage" href="javascript:void(0)">
+				<span class="lrc"></span>
+				<span class="mrc tac"><span class="iconr_photoshare fl mt1 mr2"></span><?php echo $this->__('Upload Image'); ?></span>
+				<span class="rrc"></span>
+			</a>
+		</div>
+		<div class="mt10">
+			<?php echo $this->__('Use PNG, GIF or JPG format'); ?><br />
+			<?php echo $this->__('Max. window size: 200x300px'); ?>
+		</div>
+		<div class="mt10">
+			<table class="usageStatistics">
+				<tr>
+					<th colspan="2"><?php echo $this->__('Usage information'); ?></th>
+					<th class="iconUsage"><span class="fr mr8 iconr_usageInfo"></span></th>
+				</tr>
+				<tr>
+					<td class="iconUsage"><span class="iconr_imageUsage"></span></td>
+					<td><?php echo $this->__('Images'); ?></td>
+					<td class="tar"><?php echo $user->WallPhotoCount . '/'. $user->ImageLimit; ?></td>
+				</tr>
+				<tr>
+					<td class="iconUsage"><span class="iconr_imageUsage"></span></td>
+					<td><?php echo $this->__('Groups'); ?></td>
+					<td class="tar"><?php echo $user->GroupsOwnedCount .'/'. $user->GroupLimit; ?></td>
+				</tr>
+				<tr>
+					<td class="iconUsage"><span class="iconr_videoUsage"></span></td>
+					<td><?php echo $this->__('Videos'); ?></td>
+					<td class="tar"><?php echo $user->WallVideoCount; ?></td>
+				</tr>
+				<tr>
+					<td class="iconUsage"><span class="iconr_linkUsage"></span></td>
+					<td><?php echo $this->__('Links'); ?></td>
+					<td class="tar"><?php echo $user->WallLinkCount; ?></td>
+				</tr>
+				<tr>
+					<td class="iconUsage"><span class="iconr_postUsage"></span></td>
+					<td><?php echo $this->__('Posts'); ?></td>
+					<td class="tar"><?php echo $user->WallPostCount; ?></td>
+				</tr>
+				<tr>
+					<td class="iconUsage"><span class="iconr_friendUsage"></span></td>
+					<td><?php echo $this->__('Friends'); ?></td>
+					<td class="tar"><?php echo $user->FriendCount; ?></td>
+				</tr>
+				<tr>
+					<td class="iconUsage"><span class="iconr_gameUsage"></span></td>
+					<td><?php echo $this->__('Games'); ?></td>
+					<td class="tar"><?php echo $user->GameCount; ?></td>
+				</tr>
+				<tr>
+					<td class="iconUsage"><span class="iconr_eventUsage"></span></td>
+					<td><?php echo $this->__('Events'); ?></td>
+					<td class="tar"><?php echo $user->EventCount; ?></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+</div>
+>>>>>>> f6627a83550b2e3568d3a2e2c979e18370318b3b
+<script type="text/javascript">loadCheckboxes();</script>
+=======
+	*/ ?>
+<!-- Profile settings end -->
+<!-- Membership settings end -->
+<script type="text/javascript">loadCheckboxes();</script>
+>>>>>>> 47836827886ef402cccb13db743c8834723281ee

@@ -1,0 +1,40 @@
+<div class="eventWrapper">
+	<div class="boxTop"></div>
+	
+			<p class="eventWeek">Week 36</p>
+			<a href="" class="eventClose"></a>
+			<hr>
+			<div class="eventBar type_personal">
+				<p>Personal</p>
+				<a href="#eventId" class="toggle eventScheduleToggle"> </a>
+				<div id="eventId" class="eventSchedule">
+					<div class="subBoxTop"></div>
+					<div class="subBoxBody">
+						<form action="" method="">
+							<input type="hidden" name="ID_EVENT" value="" />
+							<input type="hidden" name="recurringEvent" value="" />
+							<input type="hidden" name="recurrenceCount" value="" />
+							<input type="hidden" name="recurrenceInterval" value="" />
+							<a class="setSchedule" href=".setSchedule" rel="">Off</a><br />
+							<a class="setSchedule" href=".setSchedule" rel="yearly">Set yearly</a><br />
+							<a class="setSchedule" href=".setSchedule" rel="monthly">Set monthly</a><br />
+							<a class="setSchedule" href=".setSchedule" rel="weekly">Set weekly</a>
+							<hr />
+							<label for="recurrenceCount">Fixed times:</label><input type="number" name="recurrenceCount" value="0" />
+	 						<label for="recurrenceEndDate">End date</label><input class="datepicker" type="text" name="recurrenceEndDate" value="0" />
+	 					</form>
+					</div>
+					<div class="subBoxBottom"></div>
+				</div>
+			</div>
+			<a href="deleteEvent" class="eventDelete">Delete</a>
+			<a href="editEvent" class="eventEdit">Edit</a>
+			<hr />
+			<label class="" for="eventText">Symbols left: 140</label>
+			<form action="" method="">
+				<textarea name="eventText"></textarea>
+				<input class="button" type="submit" name="submitEvent" value="Add note" />
+			</form>
+	</div>
+	<div class="boxBottom"></div>
+</div>

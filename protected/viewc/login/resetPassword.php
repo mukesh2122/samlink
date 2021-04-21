@@ -1,0 +1,1 @@
+<?php echo $this->__('Your new password');?>: <b><?php echo $pass;?></b>

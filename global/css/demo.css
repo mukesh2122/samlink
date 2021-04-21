@@ -1,0 +1,125 @@
+body {
+    color: #5F3A4B;
+    font-family: Verdana;
+    font-size: 12px;
+    height: 100%;
+    margin: 0;
+    min-width: 1040px;
+    padding: 0;
+    position: relative;
+}
+/* Modal overlay css */
+#ModalOverlay  
+{
+    position:fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    height:100%;
+    width:100%;
+    margin:0;
+    padding:0;
+    background:#000;
+    opacity:.8;
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.8;
+    display: none;
+    z-index: 10;
+}
+                         
+/* Dialog css */
+#ContentDialog 
+{
+    display: none;
+    position: absolute;
+    width: 550px;
+    height: 400px;
+    top: 40px;
+    left: 50%;
+    margin-left: -300px;
+    z-index: 100;
+    padding: 30px;
+    background: #fff;
+}
+ 
+#ContentDialog h2
+{
+    margin: 0 0 20px 0;
+    padding: 0;
+}
+ 
+#ContentDialog #ContentDialogContent 
+{
+    margin: 0 0 20px 0;
+    padding: 0;
+    height: 320px;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.menufootercontainer ul{
+	float:left;
+	width: 23%;
+	list-style-type:none;
+	margin: 5px 5px 10px 5px;
+    padding: 5px 5px 10px 5px;
+	}
+.menufootercontainer{
+	color: #ffffff;
+	background-color: #808080;
+	width: 1000px;
+	height: 205px;
+	
+	}
+.menufootercontainer h3{
+	color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 15px;
+    margin: 2px 2px 4px 2px;
+    padding: 2px 2px 4px 2px;
+	}
+.menufootercontainer ul li{
+    margin: 0px 0px 4px 0px;
+    padding: 0px 0px 4px 0px;
+	}
+.menufootercontainer ul li a{
+	font-size: 12px;
+	text-decoration: none;
+	color: #ffffff;
+	margin: 2px 2px 4px 2px;
+    padding: 2px 2px 4px 2px;
+	
+	}
+.menufootercontainer ul li a:hover{
+	font-size: 12px;
+	text-decoration: Underline;
+	font-weight: Bold;
+	color: #ffffff;
+	margin: 2px 2px 2px 2px;
+    padding: 2px 2px 2px 2px;
+	
+	}
+#compagnyinfo{
+	float:right;
+	width: 60%;
+	height: 15px;
+	}
+#compagnyinfo a{
+	text-decoration: none;
+	color: #C0C0C0;
+	}
+#copyrightinfo{
+	margin: 2px 2px 2px 2px;
+    padding: 2px 2px 2px 2px;
+	width: 1000px;
+	height: 20px;
+	float:left;
+	text-decoration: none;
+	color: #C0C0C0;
+	}
+#compagnyinfo a:hover{
+	text-decoration: Underline;
+	color: #C0C0C0;
+	}

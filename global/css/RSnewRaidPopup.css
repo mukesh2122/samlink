@@ -1,0 +1,375 @@
+#RSnewRaidPopupWindow {
+	width: 582px;
+    height: 527px;
+    padding: 10px;
+    text-align: left;
+    margin-top: -271px;
+    margin-left: -302px;
+}
+
+#RSnewRaidPopupWindow a.dk_toggle {
+    height: 16px;
+}
+#RSnewRaidPopupWindow select, input[type=date], input[type=time] {
+    cursor: pointer;
+}
+
+#RSnewRaidPopupWindow input[type=tel],input[type=text],textarea {
+    cursor: text;
+}
+
+#RSnewRaidWinClose {
+    top: -5px;
+    right: -5px;
+}
+
+#RSnewRaidLeftHead {
+    float: left;
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+#RSnewRaidStartDateLabel {
+    display: block;
+    margin-bottom: 15px;
+}
+
+#RSnewRaidStartDate {
+    height: 22px;
+    width: 124px;
+    padding-left: 5px;
+    margin-left: 10px;
+}
+
+#RSnewRaidRecurringLabel {
+    float: left;
+    margin-top: 3px;
+    margin-right: 10px;
+}
+#RSnewRaidRecurring {
+    width: 95px;
+}
+
+#RSnewRaidRightHead {
+    top: -80px;
+    float: right;
+    height: 50px;
+    position: relative;
+    margin-left: 250px;
+}
+#RSnewRaidPresetLabel {
+    float: left;
+    margin-top: 2px;
+    margin-bottom: 0;
+    margin-right: 10px;
+    margin-left: 110px;
+}
+#dk_container_RSnewRaidLoadPreset {
+    top: -2px;
+    margin-bottom: 0;
+}
+
+#RSnewRaidLoadPreset {
+    width: 90px;
+    display: block;
+}
+
+#RSnewRaidGameLabel {
+    float: left;
+    margin-top: 14px;
+    margin-left: 60px;
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+
+#dk_container_RSnewRaidGame {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+#RSnewRaidGame {
+    width: 180px;
+}
+
+#RSnewRaidPopupBox {
+    top: -45px;
+	width: 560px;
+    padding: 10px;
+    height: 365px;
+    border-width: 1px;
+    border-radius: 5px;
+    position: relative;
+    border-style: solid;
+    margin-bottom: -35px;
+    border-color: #DEDEDE;
+    -moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#RSnewRaidLocation {
+    height: 21px;
+    width: 200px;
+    margin-left: 5px;
+    margin-top: 10px;
+    padding-left: 5px;
+    margin-right: 30px;
+    padding-right: 5px;
+}
+
+#RSnewRaidServerLabel {
+    margin-right: 10px;
+}
+
+#dk_container_RSnewRaidServer {
+    float: right;
+    margin-top: 10px;
+    margin-right: 25px;
+}
+#RSnewRaidServer {
+    width: 170px;
+}
+
+#RSnewRaidRoles {
+    display: block;
+    margin-top: 30px;
+}
+
+#RSnewRaidRoles label {
+    margin-left: 10px;
+}
+
+#RSnewRaidRoles .Tank {
+    top: -5px;
+    width: 38px;
+    height: 38px;
+    padding-top: 30px;
+    background-size: 50%;
+    display: inline-block;
+    vertical-align: bottom;
+	background-repeat: no-repeat;
+    background-clip: padding-box;
+	background-position: left top;
+    background-image: url('img/raidscheduler/tank_color.png');
+}
+
+#RSnewRaidRoles .Healer {
+    top: -5px;
+    width: 38px;
+    height: 38px;
+    padding-top: 30px;
+    background-size: 50%;
+    display: inline-block;
+    vertical-align: bottom;
+	background-repeat: no-repeat;
+    background-clip: padding-box;
+	background-position: left top;
+    background-image: url('img/raidscheduler/healer_color.png');
+}
+
+#RSnewRaidRoles .DPS {
+    top: -5px;
+    width: 38px;
+    height: 38px;
+    padding-top: 30px;
+    background-size: 40%;
+    display: inline-block;
+    vertical-align: bottom;
+	background-repeat: no-repeat;
+    background-clip: padding-box;
+	background-position: left top;
+    background-image: url('img/raidscheduler/dps_color.png');
+}
+
+#RSnewRaidRoles img {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    top: -12px;
+    width: 38px;
+    height: 38px;
+    position: relative;
+    vertical-align: top;
+    display: inline-block;
+}
+
+#RSnewRaidRoles input {
+    top: -5px;
+    width: 30px;
+    height: 22px;
+    margin-left: 5px;
+    padding-left: 3px;
+    position: relative;
+    vertical-align: top;
+}
+
+#RSnewRaidRoleSum {
+    cursor: default;
+}
+
+#RSnewRaidTimesBox {
+    margin-top: 20px;
+    padding-left: 40px;
+    margin-bottom: 5px;
+}
+
+#RSnewRaidStartTimeLabel {
+    float: left;
+    margin-right: 118px;
+}
+#RSnewRaidStartTime {
+    width: 65px;
+    height: 22px;
+    padding-left: 5px;
+    margin-left: 10px;
+    padding-right: 5px;
+}
+
+#RSnewRaidFinalizeLabel {
+    top: 3px;
+}
+#dk_container_RSnewRaidFinalize {
+    top: -3px;
+    float: right;
+    margin-right: 70px;
+    margin-bottom: 7px;
+}
+#RSnewRaidFinalize{
+    width: 120px;
+}
+
+#RSnewRaidEndTimeLabel {
+    float: left;
+    margin-right: 105px;
+}
+#RSnewRaidEndTime {
+    width: 65px;
+    height: 22px;
+    margin-top: 10px;
+    padding-left: 5px;
+    margin-left: 13px;
+    padding-right: 5px;
+    margin-bottom: 0;
+}
+
+#RSnewRaidRemindLabel {
+    float: left;
+    margin-top: 10px;
+}
+#dk_container_RSnewRaidRemind {
+    float: right;
+    margin-right: 70px;
+    margin-bottom: 0;
+}
+#RSnewRaidRemind {
+    width: 120px;
+}
+
+#RSnewRaidDescriptionLabel {
+    float: left;
+    margin-top: 20px;
+}
+#RSnewRaidDescription {
+    padding: 5px;
+	width: 547px;
+	height: 75px;
+    margin-bottom: 15px;
+}
+#RSnewRaidInvitationsLabel {
+    float: left;
+    position: relative;
+}
+#RSnewRaidPopupBox input[type=radio] {
+    display: none;
+}
+
+#RSnewRaidPopupBox input[type=radio] + label {
+    top: 18px;
+    right: 60px;
+    float: left;
+    width: 35px;
+    cursor: pointer;
+    padding: 5px 9px;
+    text-align: center;
+    position: relative;
+    margin-right: 15px;
+    display: inline-block;
+}
+
+#RSnewRaidPopupBox input[type=radio]:checked + label {
+	color: #EEEEEE;
+    text-shadow: none;
+	background: #BD706B; /* Old browsers */
+    background: linear-gradient(bottom, #A54A48 100%, #BD706B 1%); /* W3C */
+    background: -o-linear-gradient(top, #A54A48 100%, #BD706B 1%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #A54A48 100%, #BD706B 1%); /* IE10+ */
+    background: -moz-linear-gradient(top, #A54A48 100%, #BD706B 1%); /* FF3.6+ */
+    background: -webkit-linear-gradient(top, #A54A48 100%, #BD706B 1%); /* Chrome10+,Safari5.1+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #A54A48), color-stop(100%, #BD706B)); /* Chrome,Safari4+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#A54A48', endColorstr='#BD706B', GradientType=0); /* IE6-9 */
+}
+
+#RSnewRaidInviteListWin {
+    width: 300px;
+    height: 500px;
+    padding: 10px;
+    position: relative;
+    margin-top: -261px;
+    margin-left: -161px;
+}
+
+#RSnewRaidInviteListWinClose {
+    top: -5px;
+    right: -5px;
+}
+
+#RSnewRaidInviteListWin h2 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+#RSnewRaidInviteListCont {
+    height: 300px;
+    overflow: auto;
+    margin-top: 5px;
+}
+
+#RSnewRaidInviteList li.RSinviteListTitle {
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+#RSnewRaidInviteList li.RSinviteListTitle input {
+    margin-right: 8px;
+    vertical-align: -0.1em
+}
+
+#RSnewRaidInviteList li.RSinviteListItem {
+    margin-left: 20px;
+    margin-bottom: 1px;
+}
+
+#RSnewRaidInviteList li.RSinviteListItem input {
+    margin-right: 8px;
+    vertical-align: -0.2em
+}
+
+#RSnewRaidInviteList li:hover {
+    color: #000000;
+    font-weight: 500;
+}
+
+#RSnewRaidInviteListWinDoneBut {
+    top: 482px;
+    left: 240px;
+    width: 70px;
+    position: absolute;
+}
+
+#RSnewRaidCreateRaidBut {
+	width: 80px;
+    float: right;
+    position: relative;
+}
+#RSnewRaidSavePresetBut {
+    float: left;
+}

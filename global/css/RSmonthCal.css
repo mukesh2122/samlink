@@ -1,0 +1,144 @@
+#RSmonCal {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    display: none;
+}
+
+#RSprevMonth {
+	width: 0;
+	height: 0;
+    cursor: pointer;
+    margin-right: 4px;
+    display: inline-block;
+	border-top-width: 6px;
+	border-right-width: 6px;
+    border-top-style: solid;
+	border-bottom-width: 6px;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-right-color: #999999;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+}
+#RSprevMonth:hover {
+    border-right-color: #666666;
+}
+
+#RSnextMonth {
+	width: 0;
+	height: 0;
+    cursor: pointer;
+    margin-left: 4px;
+    display: inline-block;
+	border-top-width: 6px;
+	border-left-width: 6px;
+    border-top-style: solid;
+    border-left-style: solid;
+	border-bottom-width: 6px;
+    border-bottom-style: solid;
+    border-left-color: #999999;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+}
+#RSnextMonth:hover {
+    border-left-color: #666666;
+}
+
+#RSmonNewRaidBut {
+    float: right;
+    position: relative;
+    margin-right: 10px;
+}
+
+#RSmonCalSection {
+    display: inline-block;
+}
+
+#RSmonDays li {
+	float: left;
+	width: 76px;
+	padding: 3px;
+	font-size: 15px;
+	list-style: none;
+	overflow: hidden;
+	border-width: 1px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+	text-align: center;
+    border-style: solid;
+    border-color: #CCCCCC;
+	background-color: #F2F2F2; 
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    -moz-border-top-left-radius: 5px;
+    -moz-border-top-right-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+}
+
+#RSmoncalendar .TodayMon {
+    color: #FFFFFF;
+    border-color: #666666;
+    background-color: #707070;
+}
+
+#RSmoncalendar li {
+	width: 72px;
+	float: left; 
+	height: 72px;
+	padding: 5px;
+    overflow: auto;
+	list-style: none;
+    text-align: left;
+	font-weight: bold;
+	border-width: 1px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    border-style: solid;
+    border-color: #DEDEDE;
+	background-color: #FFFFFF; 
+}
+
+#RSmoncalendar li:last-child {
+    border-bottom-right-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+}
+
+#RSmoncalendar li:nth-last-child(7) {
+    border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+}
+
+#RSmoncalendar li.SelectMon {
+    color: #000000;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #000000;
+}
+
+#RSmoncalendar li.inactive {
+	color: #999999;
+    cursor: default;
+	background-color: #F8F8F8;
+}
+
+#RSmoncalendar li div.RSmonEvent {
+    float: right;
+    color: #333333;
+    cursor: pointer;
+    padding: 3px 6px;
+    line-height: 14px;
+    margin-bottom: 4px;
+    border-radius: 4px;
+    display: inline-block;
+	-moz-border-radius: 4px;
+    background-color: #CCCCCC;
+	-webkit-border-radius: 4px;
+}
+#RSmoncalendar li div.RSmonEvent:hover{
+	color: #FFFFFF;
+    background-color: #707070;
+}

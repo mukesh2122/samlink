@@ -1,0 +1,316 @@
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Ubuntu'), url('../font/Ubuntu_googlefont.woff') format('woff'), url('../font/Ubuntu_googlefont.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Ubuntu Bold Italic'), local('Ubuntu-BoldItalic'), url('../font/Ubuntu-BoldItalic_googlefont.woff') format('woff'), url('../font/Ubuntu-BoldItalic_googlefont.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Ubuntu Bold'), local('Ubuntu-Bold'), url('../font/Ubuntu-Bold_googlefont.woff') format('woff'), url('../font/Ubuntu-Bold_googlefont.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Ubuntu Light'), local('Ubuntu-Light'), url('../font/Ubuntu-Light_googlefont.woff') format('woff'), url('../font/Ubuntu-Light_googlefont.ttf') format('truetype');
+}
+
+/************ LEFT COLUMN *****************/
+
+.profile_gamename {
+    text-align: center;
+    background-color: #515452;
+    width: 200px;
+    font-family: Verdana;
+    font-size: 18px;
+    color: #fff;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    text-shadow: 
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+}
+
+ul#leftMenuUl{
+    margin: 10px;
+}
+
+.leftMenuLink :hover {
+    height: 35px;
+    width: 200px;
+    text-align: center;
+    color: #fff;
+    background: url('../img/buttonHover.png') repeat-x;
+    text-decoration: none;
+}
+
+a :hover .leftMenuLink {
+    text-decoration: none !important;
+}
+
+.leftMenuList {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 16px;
+    padding-top: 10px;
+    margin: -5px;
+    margin-left: -10px;
+    height: 35px;
+    width: 200px;
+    text-align: center;
+    color: #fff;
+    background: url('../img/buttonNormal.png') repeat-x;
+}
+
+.leftMenuLink .active {
+    background: url('../img/buttonHover.png') repeat-x;
+}
+
+ul#subLikeUl{
+    margin: 10px;
+}
+
+.subLikeLink :hover {
+/*    height: 28px;
+    width: 192px;*/
+    padding-top: 5px;
+    padding-left: 5px;
+    color: #fff;
+    background: url('../img/buttonSubHover.png') no-repeat;
+    text-decoration: none;
+}
+
+.subLikeList {
+    font-size: 14px;
+    font-family: Arial;
+    padding-top: 5px;
+    padding-left: 5px;
+    margin-right: 1px;
+    margin-left: -5px;
+    height: 28px;
+    width: 192px;
+    color: #fff;
+    background: url('../img/buttonSubNormal.png') no-repeat;
+}
+
+#iconLike {
+    background: url('../img/iconLike.png') no-repeat;
+    margin-left: 163px;
+    margin-top: -13px;
+}
+
+#iconSubscribe {
+    background: url('../img/iconSubscribe.png') no-repeat;
+    margin-left: 162px;
+    margin-top: -11px;
+}
+
+.ratingBox {
+    background: none;
+    height: 30px;
+    margin-top: -3px;
+    padding: 0;
+    border-bottom: 1px #000 solid;
+    margin-bottom: 5px;
+    padding-bottom: 3px;
+}
+
+.ratingBox select #ratingDropdown {
+    border: #7c0b0b 1px solid;
+    color: #7c0b0b;
+}
+
+.yourrating .ratingKey {
+    color: #000;
+    padding: 0;
+    margin: 0;
+    height: 20px;
+    width: 80px;
+    float: left;
+    margin-top: 5px;
+    padding-top: 5px;
+}
+
+.yourrating .ratingValue {
+    margin-left: 55px;
+    margin-top: 10px;
+    margin-bottom: 2px;
+    color: #000;
+}
+
+.yourrating {
+    border-bottom: 1px solid #000;
+    padding-bottom: 2px;
+}
+
+.overall {
+    border-bottom: 1px solid #000;
+    padding-top: 10px;
+    padding-bottom: 2px;
+}
+
+.overall .ratingKey {
+    color: #000;
+    padding: 0;
+    margin: 0;
+    height: 20px;
+    width: 80px;
+    float: left;
+}
+
+.overall .ratingValue {
+    margin-left: 40px;
+    margin-top: 10px;
+    margin-bottom: 2px;
+    color: #000;
+}
+
+#ratingSelect {
+    width:170px;
+    border-radius: 15px;
+}
+
+#ratingSelect select {
+    margin-top: 5px;
+    width: 170px;
+    height: 25px;
+    background: url('../img/dropdown_arrow.png') no-repeat right center #cccccc;
+    border: 1px solid #cc0000;
+	color:#000;
+    padding: 0 2px;    
+    border-radius: 5px;
+    -webkit-appearance: none;  /*Removes default chrome and safari style*/
+    -moz-appearance: none;  /*Removes default style Firefox*/
+}
+
+/****** RIGHT COLUMN **********/
+
+#profileImage {
+    float: left;
+    width: 42px;
+    height: 42px;
+    padding-top: 5px;
+    background: url('../img/noimage/no_player_40x40.png') no-repeat;
+}
+
+#profileText a:link #gotoprofile {
+    color: #C0C0C0 !important;
+    font-style: italic;
+}
+
+#profileText {
+    float: left;
+    height: 42px;
+    width: 120px;
+    padding-left: 5px;
+}
+
+.clearBoth {
+    clear: both;
+}
+
+.profile_menuList {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    margin: 5px;
+    background-color: #efefef;
+    border-radius: 7px;    
+    float: left;
+    width: 180px;
+}
+
+#numbersOfNotifications {
+    border-radius: 10px;
+    height: 15px;
+    width: 18px;
+    padding-right: 2px;
+    padding-left: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    text-align: center;
+    background-color: #ba4848;
+    color: #fff;
+    float: left;
+    margin-right: 5px;
+}
+
+#CalendarVideoRanking {
+    margin-left: -5px;
+    margin-right: 5px;
+}
+
+.CVR {
+    width: 206px;
+    height: 21px;
+    padding-top: 5px;
+    padding-left: 5px;
+    background: url('../img/widgetBG.png') repeat-x;
+    color: #fff;
+    font-size: 14px;
+    clear: both;
+}
+
+.listItem {
+    float: left;
+    width: 60px;
+}
+
+.buttonWidget {
+    width: 35px;
+    height: 10px;
+    float: left;
+    background-color: #cecece;
+    margin-left: 111px;
+    margin-top: -4px;
+    margin-right: -4px;
+}
+
+.buttonWidget a :hover {
+    text-decoration: none;
+}
+
+.buttonMax {
+    background: url('../img/buttonMax.png') no-repeat;
+    float: left;
+    width: 18px;
+    height: 11px;
+}
+
+.buttonMin {
+    background: url('../img/buttonMin.png') no-repeat;
+    float: left;
+    width: 18px;
+    height: 11px;
+}
+
+.buttonClose {
+    background: url('../img/buttonClose.png') no-repeat;
+    margin-left: 1px;
+    width: 16px;
+    height: 11px;
+    float: left;
+}
+
+.bgList {
+    margin: 0;
+    padding: 0;
+    width: 211px;
+    height: 123px;
+    background: url('../img/videoBG.png') repeat;
+    margin-bottom: 10px;
+}

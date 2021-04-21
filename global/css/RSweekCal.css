@@ -1,0 +1,173 @@
+#RSweekCal {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    text-align: center;
+}
+
+#RSprevWeek {
+	width: 0;
+	height: 0;
+    cursor: pointer;
+    margin-right: 4px;
+    display: inline-block;
+	border-top-width: 6px;
+	border-right-width: 6px;
+    border-top-style: solid;
+	border-bottom-width: 6px;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-right-color: #999999;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+}
+#RSprevWeek:hover {
+    border-right-color: #666666;
+}
+
+#RSnextWeek {
+	width: 0;
+	height: 0;
+    cursor: pointer;
+    margin-left: 4px;
+    display: inline-block;
+	border-top-width: 6px;
+	border-left-width: 6px;
+    border-top-style: solid;
+    border-left-style: solid;
+	border-bottom-width: 6px;
+    border-bottom-style: solid;
+    border-left-color: #999999;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+}
+#RSnextWeek:hover {
+    border-left-color: #666666;
+}
+
+#RSweekNewRaidBut {
+    float: right;
+    position: relative;
+    margin-right: 10px;
+}
+
+#RSweekCalDays {
+    margin-top: -12px;
+    display: inline-block;
+}
+#RSweekCalDays span {
+    width: 0;
+    height: 0;
+    content: "";
+    left: -110px;
+    display: none;
+    position: absolute;
+    border-style: solid;
+    border-left-width: 180px;
+    border-right-width: 180px;
+    transform: scale(0.25, 0.25);
+    border-left-color: transparent;
+    border-right-color: transparent;
+    -o-transform: scale(0.25, 0.25);
+    -ms-transform: scale(0.25, 0.25);
+    -moz-transform: scale(0.25, 0.25);
+    -webkit-transform: scale(0.25, 0.25);
+}
+#RSweekCalDays section {
+    width: 139px;
+	height: 218px;
+    cursor: pointer;
+    overflow: hidden;
+    margin-top: 12px;
+    margin-left: -1px;
+    border-width: 1px;
+    margin-right: 10px;
+    position: relative;
+    text-align: center;
+    border-radius: 5px;
+    border-style: solid;
+	vertical-align: top;
+    border-color: #DEDEDE;
+    display: inline-block;
+    -moz-border-radius: 5px;
+	background-color: #F8F8F8;
+    -webkit-border-radius: 5px;
+}
+#RSweekCalDays .scrolldownraids {
+    top: 202px;
+    display: block;
+    border-top-width: 24px;
+    border-top-color: #000000;
+}
+#RSweekCalDays .scrolldownraids:hover {
+    cursor: n-resize;
+    border-top-color: #777700;
+}
+#RSweekCalDays .scrollupraids {
+    top: -8px;
+    display: block;
+    border-bottom-width: 24px;
+    border-bottom-color: #000000;
+}
+#RSweekCalDays .scrollupraids:hover {
+    cursor: n-resize;
+    border-bottom-color: #777700;
+}
+
+#RSweekCalDays .SelectWeek {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #CCCCCC;
+    background-color: #FFFFFF;
+	box-shadow: 0px 1px 1px 0px rgba(51, 51, 51, 0.1);
+	-moz-box-shadow: 0px 1px 1px 0px rgba(51, 51, 51, 0.1);
+	-webkit-box-shadow: 0px 1px 1px 0px rgba(51, 51, 51, 0.1);
+}
+
+#RSweekCalDays section h3 {
+	color: #565656;
+	margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#RSweekCalDays div.RSweekEvent {
+    padding: 6px;
+	width: 113px;
+    height: 47px;
+    color: #333333;
+	cursor: pointer;
+	margin-top: 6px;
+	margin-left: 7px;
+    padding-top: 5px;
+    overflow: hidden;
+	margin-right: 7px;
+	margin-bottom: 4px;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+	background-color: #CCCCCC;
+    -webkit-border-radius: 4px;
+}
+#RSweekCalDays div.RSweekEvent:hover {
+	color: #FFFFFF;
+	background-color: #707070;
+}
+
+#RSweekCalDays div.RSweekEvent h6 {
+	color: inherit;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+#RSweekCalDays div.RSweekEvent p {
+	font-size: 12px;
+	font-weight: normal;
+}
+
+#RSweekCalDays span.RSweekEventConfig {
+    width: 16px;
+	float: right;
+    height: 16px;
+	background-position: center;
+	background-repeat: no-repeat;
+    background-image: url('img/raidscheduler/config.png');
+}

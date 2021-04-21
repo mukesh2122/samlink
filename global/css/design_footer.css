@@ -1,0 +1,63 @@
+/*  == Footer ============================================================================================================================================================
+
+	====================================================================================================================================================================== */
+	
+#footer {
+	position: relative;
+	margin-top: -88px; /* heigt + border + size of #bottomBar from chat.css (not #bottombar below) */
+	clear: both;
+	
+	height: 61px;
+	width: 100%;
+}
+
+#bottombar {
+	width: 1064px;
+	margin: 0 auto;	
+	border-top: 1px solid #ccc;
+	background-color: #eee;
+	padding: 0px 14px 15px 14px;
+}
+
+#footer .logo {
+ float: left;
+}
+
+#footer .logo img {
+	margin-top: 14px;
+}
+
+.footer_nav {
+	float: left;
+}
+
+.footer_social_nav {
+	float: right;
+}
+
+.footer_social_nav li {
+	display: inline;
+}
+
+.footer_nav,
+.footer_social_nav {
+	list-style: none;
+	margin-top: 23px;
+	margin-left: 15px;
+}
+
+.footer_nav li {
+	display: inline;
+	border-right: 1px solid #999;
+}
+
+.footer_nav a,
+.footer_social_nav a {
+	color: #666;
+	font-size: 13px;
+	padding: 0 8px;
+}
+
+.footer_social_nav i {
+	margin-bottom: 1px;
+}

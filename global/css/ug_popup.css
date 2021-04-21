@@ -1,0 +1,96 @@
+/* User galleries, show images in pop-up window
+ * Elements under class wall_item_comment_container_narrow
+ * are narrowed by 200px compared to the original class 
+ * wall_item_comment_container
+ */
+.ug_wall_item_comment_container_narrow {
+	width: 330px;
+}
+
+.ug_wall_item_comment_container_narrow .wall_item_comment_input textarea {
+	width: 304px;
+}
+
+.ug_wall_item_comment_container_narrow .wall_item_comment_meta {
+	width: 268px;
+}
+
+.ug_wall_item_comment_container_narrow .wall_item_comment_text {
+	width: 242px;
+}
+
+#ug_image_container {
+	position: relative; 
+	width: 100%; /* for IE 6 */
+}
+
+.ug_full, .ug_preview {
+	position: absolute;
+	z-index:  1000;
+	top:      10px; 
+	right:    10px;
+	width:    47px;
+	height:   37px;
+}
+
+.ug_full {
+   background: url('img/zoom-in.png');
+}
+
+.ug_preview {
+   background: url('img/zoom-out.png');
+}
+
+.ug_next, .ug_prev {
+	position: absolute; 
+	z-index:  1000;
+	bottom:   10px; 
+	width:    40px;
+	height:   34px;
+}
+
+.ug_next {
+	right:      10px;
+	background: url('img/next.png');
+}
+
+.ug_prev {
+	left:       10px;
+	background: url('img/prev.png');
+}
+
+#ug_ajaxLoader {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    display: inline;
+    height: 26px;
+    width: 26px;
+}
+
+#friendList ul {
+    width: 250px;
+}
+
+#tagList{
+    clear: both;
+}
+
+#tagList a, #friendList label {
+    font-weight: normal;
+}
+
+#friendList input[type=checkbox]:checked + span {
+    font-weight: bold !important;
+}
+
+#tagList a:hover, #friendList label:hover, #friendList input:hover {
+    font-weight: bold !important;
+    cursor: pointer !important;
+    text-decoration: underline;
+    color: #0F7CB9;
+}
+
+#tags:hover {
+    cursor: default !important;
+}

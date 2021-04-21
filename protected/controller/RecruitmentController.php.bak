@@ -1,0 +1,529 @@
+<?php
+
+class RecruitmentController extends SnController {
+
+	public function moduleOff()
+	{
+		$notAvailable = MainHelper::TrySetModuleNotAvailableByTag('recruitment');
+		if ($notAvailable)
+		{
+			$data['title'] = $this->__('Recruitment');
+			$data['body_class'] = 'index_recruitment';
+			$data['selected_menu'] = 'recruitment';
+			$data['left'] = PlayerHelper::playerLeftSide();
+			$data['right'] = PlayerHelper::playerRightSide();
+			$data['content'] = $notAvailable;
+			$data['footer'] = MainHelper::bottomMenu();
+			$data['header'] = MainHelper::topMenu();
+			$this->render3Cols($data);
+			exit;
+		}
+	}//catia
+
+	/**
+	 * Main website
+	 *
+	 */
+	public function index() {
+		$this->moduleOff();
+		
+		$recruitments = new Recruitment();
+		$languages = new Lang();
+		$list = array();
+		$noticesTotal = $recruitments->getNoticesTotal();
+		$pager = $this->appendPagination($list, $recruitments, $noticesTotal, MainHelper::site_url(RECRUITMENT_NOTICES.'/page'), Doo::conf()->noticesLimit);
+		$limit = $pager->limit;
+		$player = User::getUser();
+
+		if (isset($this->params['ownertype'])) {
+			$ownertype = $this->params['ownertype'];
+			if ($ownertype != '') {
+				$ok = $recruitments->setOwnerType($ownertype);
+			}
+		} else {
+			$ownertype = $recruitments->getOwnerType();
+			if ($ownertype == '') {
+				$ownertype = 'player';
+				$ok = $recruitments->setOwnerType($ownertype);
+			}
+		}
+		if (isset($this->params['region'])) {
+			$region = $this->params['region'];
+			if ($region != '') {
+				$ok = $recruitments->setRegion($region);
+			}
+		} else {
+			$region = $recruitments->getSetRegion();
+		}
+		if (isset($this->params['faction'])) {
+			$faction = $this->params['faction'];
+			if ($faction != '') {
+				$ok = $recruitments->setFaction($faction);
+			}
+		} else {
+			$faction = $recruitments->getSetFaction();
+		}
+		if (isset($this->params['role'])) {
+			$role = $this->params['role'];
+			if ($role != '') {
+				$ok = $recruitments->setRole($role);
+			}
+		} else {
+			$role = $recruitments->getSetRole();
+		}
+		if (isset($this->params['mode'])) {
+			$mode = $this->params['mode'];
+			if ($mode != '') {
+				$ok = $recruitments->setMode($mode);
+			}
+		} else {
+			$mode = $recruitments->getSetMode();
+		}
+		if (isset($this->params['level'])) {
+			$level = $this->params['level'];
+			if ($level != '') {
+				$ok = $recruitments->setLevel($level);
+			}
+		} else {
+			$level = $recruitments->getSetLevel();
+		}
+		if (isset($this->params['server'])) {
+			$server = $this->params['server'];
+			if ($server != '') {
+				$ok = $recruitments->setServer($server);
+			}
+		} else {
+			$server = $recruitments->getSetServer();
+		}
+		if (isset($this->params['lang'])) {
+			$lang = $this->params['lang'];
+			if ($lang != '') {
+				$ok = $recruitments->setLang($lang);
+			}
+		} else {
+			$lang = $recruitments->getSetLang();
+		}
+		if (isset($this->params['game'])) {
+			$game_id = $this->params['game'];
+			if ($game_id!='') {
+				$ok = $recruitments->setGame($game_id);
+			}
+		} else {
+			$game_id = $recruitments->getSetGames();
+		}
+
+		$list['gameList'] = $recruitments->getGames();
+		$list['regionList'] = $recruitments->getRegions();
+		$list['langList'] = $languages->getLanguages();
+		$list['serverList'] = $recruitments->getServer();
+		$list['factionList'] = $recruitments->getFaction($game_id);
+		$list['roleList'] = $recruitments->getRoles($game_id);
+		$list['levelList'] = $recruitments->getLevel($game_id);
+		$list['modeList'] = $recruitments->getMode($game_id);
+		$list['serverList'] = $recruitments->getServer($game_id);
+
+		$list['noticesList'] = $recruitments->getNotices($ownertype,$game_id,$level,$mode,$role,$faction,$region,$server,$lang,$limit);
+
+		$list['game_id'] = $game_id;
+		$list['ownertype'] = $ownertype;
+		$list['region'] = $region;
+		$list['faction'] = $faction;
+		$list['role'] = $role;
+		$list['mode'] = $mode;
+		$list['level'] = $level;
+		$list['server'] = $server;
+		$list['lang'] = $lang;
+		$list['ownerid'] = ($player ? $player->ID_PLAYER : '');
+		$list['headerName'] = $this->__('List Notices');
+
+		$data['title'] = $this->__('recruitment');
+		$data['body_class'] = 'index_groups';
+		$data['selected_menu'] = 'recruitment';
+		$data['left'] = PlayerHelper::playerLeftSide();
+		$data['right'] = PlayerHelper::playerRightSide();
+		$data['content'] = $this->renderBlock('recruitment/listNotices', $list);
+		$data['footer'] = MainHelper::bottomMenu();
+		$data['header'] = MainHelper::topMenu();
+		$this->render3Cols($data);
+	}
+
+	public function my_notices() {
+		$this->moduleOff();
+		
+		$recruitments = new Recruitment();
+		$lang = new Lang();
+		$list = array();
+		$player = User::getUser();
+
+		if (isset($this->params['ownertype'])) {
+			$ownertype = $this->params['ownertype'];
+			if ($ownertype != '') {
+				$ok = $recruitments->setOwnerType($ownertype);
+			}
+		} else {
+			$ownertype = $recruitments->getOwnerType();
+			if ($ownertype == '') {
+				$ownertype = 'player';
+				$ok = $recruitments->setOwnerType($ownertype);
+			}
+		}
+		if (isset($this->params['ownertype'])) {
+			$ownertype = $this->params['ownertype'];
+			if ($ownertype != '') {
+				$ok = $recruitments->setOwnerType($ownertype);
+			}
+		} else {
+			$ownertype = $recruitments->getOwnerType();
+			if ($ownertype == '') {
+				$ownertype = 'player';
+				$ok = $recruitments->setOwnerType($ownertype);
+			}
+		}
+		if (isset($this->params['region'])) {
+			$region = $this->params['region'];
+			if ($region != '') {
+				$ok = $recruitments->setRegion($region);
+			}
+		} else {
+			$region = $recruitments->getSetRegion();
+		}
+		if (isset($this->params['faction'])) {
+			$faction = $this->params['faction'];
+			if ($faction != '') {
+				$ok = $recruitments->setFaction($faction);
+			}
+		} else {
+			$faction = $recruitments->getSetFaction();
+		}
+		if (isset($this->params['role'])) {
+			$role = $this->params['role'];
+			if ($role != '') {
+				$ok = $recruitments->setRole($role);
+			}
+		} else {
+			$role = $recruitments->getSetRole();
+		}
+		if (isset($this->params['mode'])) {
+			$mode = $this->params['mode'];
+			if ($mode != '') {
+				$ok = $recruitments->setMode($mode);
+			}
+		} else {
+			$mode = $recruitments->getSetMode();
+		}
+		if (isset($this->params['level'])) {
+			$level = $this->params['level'];
+			if ($level != '') {
+				$ok = $recruitments->setLevel($level);
+			}
+		} else {
+			$level = $recruitments->getSetLevel();
+		}
+		if (isset($this->params['type'])) {
+			$type = $this->params['type'];
+			if ($type!='') {
+				$ok = $recruitments->setType($type);
+			}
+		} else {
+			$type = $recruitments->getSetType();
+			if ($type == '') {
+				$type = 'notices';
+				$ok = $recruitments->setType($type);
+			}
+		}
+		if (isset($this->params['game'])) {
+			$game_id = $this->params['game'];
+			if ($game_id!='') {
+				$ok = $recruitments->setGame($game_id);
+			}
+		} else {
+			$game_id = $recruitments->getSetGames();
+		}
+
+		$list['gameList'] = $recruitments->getGames();
+		$list['regionList'] = $recruitments->getRegions();
+		$list['langList'] = $lang->getLanguages();
+		$list['serverList'] = $recruitments->getServer();
+		$list['factionList'] = $recruitments->getFaction($game_id);
+		$list['roleList'] = $recruitments->getRoles($game_id);
+		$list['levelList'] = $recruitments->getLevel($game_id);
+		$list['modeList'] = $recruitments->getMode($game_id);
+
+		$list['type'] = $type;
+		$list['game_id'] = $game_id;
+		$list['ownertype'] = $ownertype;
+		$list['region'] = $region;
+		$list['faction'] = $faction;
+		$list['role'] = $role;
+		$list['mode'] = $mode;
+		$list['level'] = $level;
+		$list['ownerid'] = ($player ? $player->ID_PLAYER : '');
+
+		//$noticesTotal = $recruitments->getMyNoticesTotal($ownertype,($player ? $player->ID_PLAYER : ''));
+//		$pager = $this->appendPagination($list, $recruitments, $noticesTotal, MainHelper::site_url(RECRUITMENT_NOTICES.'/'.RECRUITMENT_MY_NOTICES.'/page'), Doo::conf()->mynoticesLimit);
+//		$limit = $pager->limit;
+		$limit = '';
+		$list['noticesList'] = $recruitments->getMyNotices($ownertype,($player ? $player->ID_PLAYER : ''),$type,$limit);
+
+
+		$list['headerName'] = $this->__('List Notices');
+
+		$data['title'] = $this->__('recruitment');
+		$data['body_class'] = 'index_groups';
+		$data['selected_menu'] = 'recruitment';
+		$data['left'] = PlayerHelper::playerLeftSide();
+		$data['right'] = PlayerHelper::playerRightSide();
+		$data['content'] = $this->renderBlock('recruitment/myNoticesResponses', $list);
+		$data['footer'] = MainHelper::bottomMenu();
+		$data['header'] = MainHelper::topMenu();
+		$this->render3Cols($data);
+
+	}
+
+	 public function create_notices() {
+	 	$this->moduleOff();
+		
+		$recruitments = new Recruitment();
+		$languages = new Lang();
+		$list = array();
+		$player = User::getUser();
+
+		if (isset($this->params['ownertype'])) {
+			$ownertype = $this->params['ownertype'];
+			if ($ownertype != '') {
+				$ok = $recruitments->setOwnerType($ownertype);
+			}
+		} else {
+			$ownertype = $recruitments->getOwnerType();
+			if ($ownertype == '') {
+				$ownertype = 'player';
+				$ok = $recruitments->setOwnerType($ownertype);
+			}
+		}
+		if (isset($this->params['region'])) {
+			$region = $this->params['region'];
+			if ($region != '') {
+				$ok = $recruitments->setRegion($region);
+			}
+		} else {
+			$region = $recruitments->getSetRegion();
+		}
+		if (isset($this->params['faction'])) {
+			$faction = $this->params['faction'];
+			if ($faction != '') {
+				$ok = $recruitments->setFaction($faction);
+			}
+		} else {
+			$faction = $recruitments->getSetFaction();
+		}
+		if (isset($this->params['role'])) {
+			$role = $this->params['role'];
+			if ($role != '') {
+				$ok = $recruitments->setRole($role);
+			}
+		} else {
+			$role = $recruitments->getSetRole();
+		}
+		if (isset($this->params['mode'])) {
+			$mode = $this->params['mode'];
+			if ($mode != '') {
+				$ok = $recruitments->setMode($mode);
+			}
+		} else {
+			$mode = $recruitments->getSetMode();
+		}
+		if (isset($this->params['level'])) {
+			$level = $this->params['level'];
+			if ($level != '') {
+				$ok = $recruitments->setLevel($level);
+			}
+		} else {
+			$level = $recruitments->getSetLevel();
+		}
+		if (isset($this->params['server'])) {
+			$server = $this->params['server'];
+			if ($server != '') {
+				$ok = $recruitments->setServer($server);
+			}
+		} else {
+			$server = $recruitments->getSetServer();
+		}
+		if (isset($this->params['lang'])) {
+			$lang = $this->params['lang'];
+			if ($lang != '') {
+				$ok = $recruitments->setLang($lang);
+			}
+		} else {
+			$lang = $recruitments->getSetLang();
+		}
+		if (isset($this->params['game'])) {
+			$game_id = $this->params['game'];
+			if ($game_id!='') {
+				$ok = $recruitments->setGame($game_id);
+			}
+		} else {
+			$game_id = $recruitments->getSetGames();
+		}
+
+		$list['gameList'] = $recruitments->getGames();
+		$list['regionList'] = $recruitments->getRegions();
+		$list['langList'] = $languages->getLanguages();
+		$list['serverList'] = $recruitments->getServer();
+		$list['factionList'] = $recruitments->getFaction($game_id);
+		$list['roleList'] = $recruitments->getRoles($game_id);
+		$list['levelList'] = $recruitments->getLevel($game_id);
+		$list['modeList'] = $recruitments->getMode($game_id);
+		$list['serverList'] = $recruitments->getServer($game_id);
+		$list['ownerid'] = ($player ? $player->ID_PLAYER : '');
+
+		$list['game_id'] = $game_id;
+		$list['ownertype'] = $ownertype;
+		$list['region'] = $region;
+		$list['faction'] = $faction;
+		$list['role'] = $role;
+		$list['mode'] = $mode;
+		$list['level'] = $level;
+		$list['server'] = $server;
+		$list['lang'] = $lang;
+		$list['headerName'] = $this->__('List Notices');
+
+
+		$data['title'] = $this->__('recruitment');
+		$data['body_class'] = 'index_groups';
+		$data['selected_menu'] = 'recruitment';
+		$data['left'] = PlayerHelper::playerLeftSide();
+		$data['right'] = PlayerHelper::playerRightSide();
+		$data['content'] = $this->renderBlock('recruitment/createNotices', $list);
+		$data['footer'] = MainHelper::bottomMenu();
+		$data['header'] = MainHelper::topMenu();
+		$this->render3Cols($data);
+
+	}
+
+	public function save_notices() {
+		$this->moduleOff();
+		
+		$recruit = new Recruitment();
+		$noticeID = $recruit->saveNotice($_POST);
+		if($noticeID > 0){
+			$result['result'] = true;
+			$result['newUrl'] =  MainHelper::site_url(RECRUITMENT_NOTICES);
+
+			setcookie('game', '', (time() + (3600 * 24 * 365)), "/");
+			setcookie('mode', '', (time() + (3600 * 24 * 365)), "/");
+			setcookie('level', '', (time() + (3600 * 24 * 365)), "/");
+			setcookie('role', '', (time() + (3600 * 24 * 365)), "/");
+			setcookie('faction', '', (time() + (3600 * 24 * 365)), "/");
+			setcookie('server', '', (time() + (3600 * 24 * 365)), "/");
+			$link=MainHelper::site_url(RECRUITMENT_NOTICES);
+			DooUriRouter::redirect($link);
+		}
+		else{
+			$result['result'] = false;
+		}
+	}
+
+	public function save_response() {
+		$this->moduleOff();
+		
+		$recruit = new Recruitment();
+
+		$responseID = $recruit->saveResponse($_POST);
+		if($responseID > 0){
+			$result['result'] = true;
+			$result['newUrl'] =  MainHelper::site_url(RECRUITMENT_NOTICES);
+
+			setcookie('game', '', (time() + (3600 * 24 * 365)), "/");
+			setcookie('mode', '', (time() + (3600 * 24 * 365)), "/");
+			setcookie('level', '', (time() + (3600 * 24 * 365)), "/");
+			setcookie('role', '', (time() + (3600 * 24 * 365)), "/");
+			setcookie('faction', '', (time() + (3600 * 24 * 365)), "/");
+			setcookie('server', '', (time() + (3600 * 24 * 365)), "/");
+
+			$link=MainHelper::site_url(RECRUITMENT_NOTICES);
+
+			DooUriRouter::redirect($link);
+
+		}
+		else{
+			$result['result'] = false;
+		}
+	}
+
+	public function update_response() {
+		$this->moduleOff();
+		
+		$recruit = new Recruitment();
+		if (isset($this->params['rid'])) {
+			$responseid = $this->params['rid'];
+		}
+		if (isset($this->params['status'])) {
+			$statusid = $this->params['status'];
+		}
+		if (isset($this->params['owner'])) {
+			$owner = $this->params['owner'];
+		}
+		if (isset($this->params['notice'])) {
+			$notice = $this->params['notice'];
+		}
+		$responseID = $recruit->updateResponse($responseid,$statusid,$owner,$notice);
+
+		if($responseID > 0){
+
+			$result['result'] = true;
+			$result['newUrl'] =  MainHelper::site_url(RECRUITMENT_NOTICES.'/'.RECRUITMENT_MY_NOTICES);
+
+			setcookie('game', '', (time() + (3600 * 24 * 365)), "/");
+			setcookie('mode', '', (time() + (3600 * 24 * 365)), "/");
+			setcookie('level', '', (time() + (3600 * 24 * 365)), "/");
+			setcookie('role', '', (time() + (3600 * 24 * 365)), "/");
+			setcookie('faction', '', (time() + (3600 * 24 * 365)), "/");
+			setcookie('server', '', (time() + (3600 * 24 * 365)), "/");
+
+			$this->index();
+		}
+		else{
+			$result['result'] = false;
+		}
+	}
+
+	public function respond_notices() {
+		$this->moduleOff();
+		
+		$recruitments = new Recruitment();
+		$list = array();
+		$player = User::getUser();
+
+		if (isset($this->params['ownertype'])) {
+			$ownertype = $this->params['ownertype'];
+
+		} else {
+			$ownertype = '';
+		}
+		if (isset($this->params['nid'])) {
+			$nid = $this->params['nid'];
+		} else {
+			$nid = '';
+		}
+		$list['noticeList'] = $recruitments->getNoticeById($nid,$ownertype);
+		$list['ownertype'] = $ownertype;
+		$list['nid'] = $nid;
+		$list['ownerid'] = ($player ? $player->ID_PLAYER : '');
+		$oid=($player ? $player->ID_PLAYER : '');
+		$list['committer'] = $recruitments->getownerinfo($oid,$ownertype);
+
+		$list['headerName'] = $this->__('Create Response');
+
+		$data['title'] = $this->__('recruitment');
+		$data['body_class'] = 'index_groups';
+		$data['selected_menu'] = 'recruitment';
+		$data['left'] = PlayerHelper::playerLeftSide();
+		$data['right'] = PlayerHelper::playerRightSide();
+		$data['content'] = $this->renderBlock('recruitment/createResponse', $list);
+		$data['footer'] = MainHelper::bottomMenu();
+		$data['header'] = MainHelper::topMenu();
+		$this->render3Cols($data);
+	}
+}
+
+?>

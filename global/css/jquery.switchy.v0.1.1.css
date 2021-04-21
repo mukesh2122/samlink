@@ -1,0 +1,36 @@
+.switchy-container {
+    margin: 6px;
+    width: 100px;
+    height: 18px;
+    border-width: 1px;
+    position: relative;
+    margin-bottom: 0px;
+    border-radius: 16px;
+    border-style: solid;
+    border-color: #DEDEDE;
+    background-color: #FFFFFF;
+    -moz-border-radius: 16px;
+	-webkit-border-radius: 16px;
+}
+
+.switchy-bar {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    position: relative;
+    border-radius: 16px;
+    -moz-border-radius: 16px;
+	-webkit-border-radius: 16px;
+}
+
+.switchy-slider {
+    left: 0;
+    margin: 1px;
+    width: 14px;
+    height: 14px;
+    padding: 1px;
+    cursor: pointer;
+    position: absolute;
+    border-radius: 9px;
+    background-color: #CCCCCC;
+}

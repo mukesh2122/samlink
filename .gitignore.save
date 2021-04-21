@@ -1,0 +1,9 @@
+nbproject/private/
+app/global/pub_img/
+app/global/min/
+app/_captcha/
+app/protected/cache/
+app/protected/cache
+*.jpg
+*.gif
+*.jpeg

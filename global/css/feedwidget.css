@@ -1,0 +1,109 @@
+#container {
+    margin: 0px;
+    padding: 0px;
+    outline: 0px;
+    width: 198px !important;
+    height: 356px !important;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+}
+
+#header {
+    width: 198px;
+    height: 30px;
+    margin: 0px;
+    border: 0px;
+    outline: 0px;
+    padding: 5px 10px 5px 10px;
+    background-color: #4875B9;
+    /*background-color: #0044CC;*/
+}
+#header .feed_title {
+    font-weight: bold;
+    color: #EEEEEE;
+}
+#header .feed_title a:link {
+    color: #EEEEEE;
+    text-decoration: none;
+}
+#header .feed_title a:visited {
+    color: #EEEEEE;
+    text-decoration: none;
+}
+#header .feed_title a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+#header .feed_title a:active {
+    color: #EEEEEE;
+    text-decoration: none;
+}
+
+#content {
+    margin: 0px;
+    padding: 0px;
+    outline: 0px;
+}
+#content .feed_item {
+    margin: 0px;
+    outline: 0px;
+    padding: 4px 0 4px 0;
+    border-bottom: 1px dashed #CCCCCC;
+}
+#content .feed_item_title {
+    margin: 1px 20px 1px 3px;
+    padding: 1px 0 1px 3px;
+    color: #888888;
+    font-weight: bold;
+}
+#content .feed_item_title a:link {
+    color: #888888;
+    text-decoration: none;
+}
+#content .feed_item_title:link {}
+#content .feed_item_title a:visited {
+    color: #888888;
+    text-decoration: none;
+}
+#content .feed_item_title:visited {}
+#content .feed_item_title a:hover {
+    color: #888888;
+    text-decoration: underline;
+}
+#content .feed_item_title:hover {}
+#content .feed_item_title a:active {
+    color: #888888;
+    text-decoration: none;
+}
+#content .feed_item_title:active {}
+#content .feed_item_description {
+    margin: 0 0 0 3px;
+    padding: 0 0 0 3px;
+    color: #888888;
+    line-height: 135%;
+}
+#content .feed_item_description:active {}
+
+#content_vscrollerbase.vscrollerbase {
+    left: 190px;
+    width: 8px;
+    background-color: #EEEEEE;
+}
+
+#content_scrollwrapper .scrollgeneric {
+    line-height: 1px;
+    font-size: 1px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#content_vscrollerbar {
+    visibility: visible;
+}
+#content_scrollwrapper .vscrollerbar {
+    width: 8px;
+    background-color: #CCCCCC;
+}

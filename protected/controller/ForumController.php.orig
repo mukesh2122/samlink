@@ -1,0 +1,2767 @@
+<?php
+class ForumController extends SnController {
+
+	private $data;
+	private $forum;
+
+	public function beforeRun($resource, $action) {
+
+		parent::beforeRun($resource, $action);
+		$this->data['type'] = !empty($this->params['type']) ? $this->params['type'] : 'game'; /* IF the type is not empty it selects the type, else it set it to be game*/ 
+		$this->forum = new Forum;
+
+		$this->addCrumb($this->__('Forum'), MainHelper::site_url('forum'));
+		$this->data['user'] = User::getUser();
+	}
+
+	public function moduleOff()
+	{
+		$notAvailable = MainHelper::TrySetModuleNotAvailableByTag('forum');
+		if ($notAvailable)
+		{
+			$list['infoBox'] = MainHelper::loadInfoBox('Forum', 'index', true);
+
+			$data['title'] = $this->__('Forum');
+			$data['body_class'] = 'index_forum_index forums';
+			$data['selected_menu'] = 'forum';
+			$data['left'] = PlayerHelper::playerLeftSide();
+			$data['footer'] = MainHelper::bottomMenu();
+			$data['header'] = MainHelper::topMenu();
+			$data['right'] = PlayerHelper::playerRightSide();
+
+			$data['content'] = $notAvailable;
+			$this->render3Cols($data);
+			exit;
+		}
+	}
+	
+	// overview total list of game/companies
+	public function index() {
+		$this->moduleOff();
+
+		$list['type'] = $this->data['type'];
+		$search = isset($this->params['search']) ? urldecode($this->params['search']) : null;
+
+		if ($search == '') {
+			$url =  MainHelper::site_url('forum/'.$this->data['type'].'/page');
+		} else {
+			$url =  MainHelper::site_url('forum/'.$this->data['type'].'/search/'.urlencode($search).'/page');
+		}
+		$forumCount = $this->forum->getTotalType($this->data['type'], $search);
+		$list['searchText'] = $search;
+		$list['searchTotal'] = $forumCount;
+
+		$pager = $this->appendPagination($list, null, $forumCount, $url, Doo::conf()->forumIndexLimit);
+		$results = $this->forum->getIndex($this->data['type'], $search, $pager->limit);
+
+		$list['fields'] = $results['fields'];
+		$list['model'] = $results['results'];
+		$list['infoBox'] = MainHelper::loadInfoBox('Forum', 'index', true);
+
+		$data['title'] = $this->__('Forum');
+		$data['body_class'] = 'index_forum_index forums';
+		$data['selected_menu'] = 'forum';
+		$data['left'] = PlayerHelper::playerLeftSide();
+		$data['footer'] = MainHelper::bottomMenu();
+		$data['header'] = MainHelper::topMenu();
+		$data['right'] = PlayerHelper::playerRightSide();
+
+		$data['content'] = $this->renderBlock('forum/forum_index', $list); // builds view forum_index
+		$this->render3Cols($data);
+	}
+
+	public function forum() {
+
+		switch ($this->data['type']) {
+			case WALL_COMPANIES:
+				$this->forumCompanies();
+				break;
+			case WALL_GAMES:
+				$this->forumGames();
+				break;
+			case WALL_GROUPS:
+				$this->forumGroups();
+				break;
+		}
+	}
+
+	private function forumCompanies() {
+		$this->moduleOff();
+
+		$list['page'] = 'forum_forum';
+		$data['body_class'] = 'index_forum_forum forums';
+
+		$company = Forum::getModelByUrl('company', $this->params['id']);
+		$name = $company->CompanyName;
+		$data['title'] = $name;
+		$this->addCrumb($name);
+
+		$list['model'] = $company;
+		
+
+		$user = $this->data['user'];
+		$list['user'] = $user;
+		if(isset($user) && $user == true){
+				$list['isForumAdmin'] =  $company->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin 
+				$list['isMember'] = $company->isMember();
+				$list['isForumMod'] = $company-> isForumMod();
+				
+		}else{
+			$list['isForumAdmin'] = FALSE; //just for the forum parts can be: isAdmin isForumAdmin 
+			$list['isMember'] =  FALSE;
+			$list['isForumMod'] = FALSE;
+		
+		}
+		$list['url'] = $this->params['id'];
+		$list['categories'] = $this->forum->getForum($this->data['type'], $company->ID_COMPANY);
+		$list['type'] = $this->data['type'];
+		$list['ownerId'] = $company->ID_COMPANY;
+		$list['crumb'] = $this->getCrumb();
+
+		if($this->data['user']) {
+			$this->forum->logVisitForum('company', $company->ID_COMPANY, $this->data['user']);
+		};
+
+		$list['bans'] = $this->forum->CheckBans($this->data['type'],  $company->ID_COMPANY);
+
+		$allOnlineUsers = $this->forum->allOnlineUsers();
+		$list['allOnlineUsers'] = $allOnlineUsers;
+		$list['OnlineUsers'] = count($allOnlineUsers);
+
+		$onlineMembers = 0;
+		$onlineGuests = 0;
+		foreach ($allOnlineUsers as $user) {
+			$playerID = $user->ID_PLAYER;
+			if($company->isMember($playerID) === true ){
+				$onlineMembers ++; 
+
+			}else{
+				$onlineGuests ++; 
+			}
+
+		}
+
+		$list['onlineGuests'] =$onlineGuests;
+		$list['onlineMembers'] = $onlineMembers;
+//		$data['selected_menu'] = 'companies';
+		$data['left'] = MainHelper::companiesLeftSide($company, 'forum');
+		$data['right'] = PlayerHelper::playerRightSide();
+		$data['footer'] = MainHelper::bottomMenu();
+		$data['header'] = MainHelper::topMenu();
+
+		$data['content'] = $this->renderBlock('forum/' . $list['page'], $list); // builds view - file: forum_forum
+		$this->render3Cols($data);
+	}
+
+	private function forumGames() {
+		$this->moduleOff();
+
+		$list['page'] = 'forum_forum';
+		$data['body_class'] = 'index_forum_forum forums';
+
+		$game = Forum::getModelByUrl('game', $this->params['id']);
+		$name = $game->GameName;
+
+		$data['title'] = $name;
+		$this->addCrumb($name);
+
+		$list['model'] = $game;
+		
+		$user = $this->data['user'];
+		$list['user'] = $user;
+		if(isset($user) && $user == true){
+				$list['isForumAdmin'] =  $game->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin 
+				$list['isMember'] = $game->isMember();
+				$list['isForumMod'] = $game-> isForumMod();
+				
+		}else{
+			$list['isForumAdmin'] = FALSE; //just for the forum parts can be: isAdmin isForumAdmin
+			$list['isMember'] =  FALSE;
+			$list['isForumMod'] = FALSE;
+		}
+		$list['url'] = $this->params['id'];
+		$list['categories'] = $this->forum->getForum($this->data['type'], $game->ID_GAME);
+		$list['type'] = $this->data['type'];
+		$list['ownerId'] = $game->ID_GAME;
+		$list['crumb'] = $this->getCrumb();
+
+		if($this->data['user']) {
+			$this->forum->logVisitForum('game', $game->ID_GAME, $this->data['user']);
+		}
+
+		$list['bans'] = $this->forum->CheckBans($this->data['type'], $game->ID_GAME);
+
+		$allOnlineUsers = $this->forum->allOnlineUsers();
+		$list['allOnlineUsers'] = $allOnlineUsers;
+		$list['OnlineUsers'] = count($allOnlineUsers);
+
+		$onlineMembers = 0;
+		$onlineGuests = 0;
+		foreach ($allOnlineUsers as $user) {
+			$playerID = $user->ID_PLAYER;
+			if($game->isMember($playerID) === true ){
+				$onlineMembers ++; 
+
+			}else{
+				$onlineGuests ++; 
+			}
+
+		}
+		
+		$list['onlineGuests'] =$onlineGuests;
+		$list['onlineMembers'] = $onlineMembers;
+//		$data['selected_menu'] = 'games';
+		$data['left'] = MainHelper::gamesLeftSide($game, 'forum');
+		$data['right'] = PlayerHelper::playerRightSide();
+		$data['footer'] = MainHelper::bottomMenu();
+		$data['header'] = MainHelper::topMenu();
+
+		$data['content'] = $this->renderBlock('forum/' . $list['page'], $list);
+		$this->render3Cols($data);
+	}
+
+	private function forumGroups() {
+		$list['page'] = 'forum_forum';
+		$data['body_class'] = 'index_forum_forum forums';
+
+		$group = Forum::getModelByUrl('group', $this->params['id']);
+		$name = $group->GroupName;
+		$list['model'] = $group;
+
+		$data['title'] = $name;
+		$this->addCrumb($name);
+
+		$user = $this->data['user'];
+		$list['user'] = $user;
+		if(isset($user) && $user == true){
+				$list['isForumAdmin'] =  $group->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+				$list['isMember'] = $group->isMember();
+				$list['isForumMod'] = $group-> isForumMod();
+				
+		}else{
+			$list['isForumAdmin'] = FALSE; //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+			$list['isMember'] =  FALSE;
+			$list['isForumMod'] = FALSE;
+			
+		}
+		$list['url'] = $this->params['id'];
+
+		$list['categories'] = $this->forum->getForum($this->data['type'], $group->ID_GROUP);
+		$list['type'] = $this->data['type'];
+		$list['ownerId'] = $group->ID_GROUP;
+		$list['crumb'] = $this->getCrumb();
+
+		if($this->data['user']){
+			$this->forum->logVisitForum('group', $group->ID_GROUP, $this->data['user']);
+		}
+
+		$list['bans'] = $this->forum->CheckBans($this->data['type'],  $grouop->ID_GROUP);
+		$allOnlineUsers = $this->forum->allOnlineUsers();
+		$list['allOnlineUsers'] = $allOnlineUsers;
+		$list['OnlineUsers'] = count($allOnlineUsers);
+
+		$onlineMembers = 0;
+		$onlineGuests = 0;
+		foreach ($allOnlineUsers as $user) {
+			$playerID = $user->ID_PLAYER;
+			if ($group->isMember($playerID) === true) {
+				$onlineMembers ++; 
+			} else {
+				$onlineGuests ++; 
+			}
+		}
+		$list['onlineGuests'] = $onlineGuests;
+		$list['onlineMembers'] = $onlineMembers;
+//		$data['selected_menu'] = 'groups';
+		$data['left'] = MainHelper::groupsLeftSide($group, 'forum');
+		$data['right'] = PlayerHelper::playerRightSide();
+		$data['footer'] = MainHelper::bottomMenu();
+		$data['header'] = MainHelper::topMenu();
+
+		$data['content'] = $this->renderBlock('forum/' . $list['page'], $list);
+		$this->render3Cols($data);
+	}
+
+	public function board() {
+		switch ($this->data['type']) {
+			case WALL_COMPANIES:
+				$this->boardCompanies();
+				break;
+			case WALL_GAMES:
+				$this->boardGames();
+				break;
+			case WALL_GROUPS:
+				$this->boardGroups();
+				break;
+		}
+	}
+
+	private function boardCompanies() {
+		$this->moduleOff();
+
+		$company = Forum::getModelByUrl('company', $this->params['id']);
+		$name = $company->CompanyName;
+		$list['model'] = $company;
+		$list['url'] = $this->params['id'];
+
+		$list['page'] = 'forum_board';
+		$data['body_class'] = 'index_forum_board forums';
+
+		$user = $this->data['user'];
+		$list['user'] = $user;
+		if (isset($user) && $user == true) {
+				$list['isForumAdmin'] =  $company->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+				$list['isMember'] = $company->isMember();
+				$list['isForumMod'] = $company->isForumMod();
+				//$list['isBoardMod'] = $company->isBoardMod($this->data['type'], $model->UNID, $this->params['board'], $user->ID_PLAYER);
+		} else {
+			$list['isForumAdmin'] = FALSE; //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+			$list['isMember'] =  FALSE;
+			$list['isForumMod'] = FALSE;
+			//$list['isBoardMod'] = FALSE;
+		}
+
+		$this->addCrumb($name, $company->FORUM_URL);
+
+		$topicCount = $this->forum->getTotalTopics($this->data['type'], $company->ID_COMPANY, $this->params['board']);
+		$list['total'] = $topicCount;
+
+		if ($topicCount > 0) {
+			$pagerUrl = $company->FORUM_URL. '/' . $this->params['board'] . '/page';
+			$pager = $this->appendPagination($list, null, $topicCount, $pagerUrl, Doo::conf()->forumTopicsLimit);
+			$list['pager'] = $pager;
+		}
+
+		$list['sort'] = isset($this->params['sortType']) ? $this->params['sortType'] : 'recently-updated';
+
+		if (isset($pager)) {
+			$list['topics'] = $this->forum->getBoard($this->data['type'], $company->ID_COMPANY, $this->params['board'], $list['sort'], $pager->limit);
+		} else {
+			$list['topics'] = $this->forum->getBoard($this->data['type'], $company->ID_COMPANY, $this->params['board'], $list['sort']);
+		}
+
+		$list['board'] = $this->forum->getBoardInfo($this->data['type'], $company->ID_COMPANY, $this->params['board']);
+		if ($list['board']) {
+			if ($list['board']->ChildLevel > 0) {
+				$parents = $list['board']->getParentBoards();
+
+				if (count($parents) > 0) {
+					for ($i = 0; $i < count($parents); $i++) {
+						$this->addCrumb($parents[$i]->BoardName, $company->FORUM_URL.'/'.$parents[$i]->ID_BOARD);
+					}
+				}
+			}
+			$catId = $list['board']->ID_CAT;
+			$list['category'] = $this->forum->getCategory($this->data['type'], $company->UNID, $catId); 
+			$catname = $list['category']->CategoryName;
+
+			$this->addCrumb($list['category']->CategoryName, $company->FORUM_URL . '/' . $this->params['board']);
+			$this->addCrumb($list['board']->BoardName);
+		
+			$data['title'] = $list['board']->BoardName;
+
+			if($this->data['user']){
+				$this->forum->logVisitBoard('company', $company->ID_COMPANY, $this->params['board'], $this->data['user']);
+			}
+		} else {
+			$data['title'] = '';
+		}
+
+		$allOnlineUsers = $this->forum->allOnlineUsers();
+		$list['allOnlineUsers'] = $allOnlineUsers;
+		$list['OnlineUsers'] = count($allOnlineUsers);
+
+		$onlineMembers = 0;
+		$onlineGuests = 0;
+		foreach ($allOnlineUsers as $user) {
+			$playerID = $user->ID_PLAYER;
+			if($company->isMember($playerID) === true ){
+				$onlineMembers ++; 
+
+			}else{
+				$onlineGuests ++; 
+			}
+
+		}
+
+		$list['onlineGuests'] =$onlineGuests;
+		$list['onlineMembers'] = $onlineMembers;
+
+		$list['crumb'] = $this->getCrumb();
+		$list['boardId'] = $this->params['board'];
+		$list['ownerId'] = $company->ID_COMPANY;
+		$list['type'] = $this->data['type'];
+
+		//$data['selected_menu'] = 'companies';
+		$data['left'] = MainHelper::companiesLeftSide($company, 'forum');
+		$data['right'] = PlayerHelper::playerRightSide();
+		$data['footer'] = MainHelper::bottomMenu();
+		$data['header'] = MainHelper::topMenu();
+
+		$data['content'] = $this->renderBlock('forum/' . $list['page'], $list);
+		$this->render3Cols($data);
+	}
+
+	private function boardGames() {
+		$this->moduleOff();
+
+		$game = Forum::getModelByUrl('game', $this->params['id']);
+		$name = $game->GameName;
+		$list['model'] = $game;
+		$list['url'] = $this->params['id'];
+
+		$list['page'] = 'forum_board';
+		$data['body_class'] = 'index_forum_board forums';
+
+		$user = $this->data['user'];
+		$list['user'] = $user;
+<<<<<<< HEAD
+		if (isset($user) && $user == true) {
+=======
+		if(isset($user) && $user == TRUE){
+>>>>>>> 0114a495a41b1cebc3e52e26cede5641fd02cf46
+				$list['isForumAdmin'] =  $game->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+				$list['isMember'] = $game->isMember();
+				$list['isForumMod'] = $game->isForumMod();
+				
+		} else {
+			$list['isForumAdmin'] = FALSE; //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+			$list['isMember'] =  FALSE;
+			$list['isForumMod'] = FALSE;
+			
+		}
+
+		$this->addCrumb($name, $game->FORUM_URL);
+
+		$topicCount = $this->forum->getTotalTopics($this->data['type'], $game->ID_GAME, $this->params['board']);
+		$list['total'] = $topicCount;
+
+		if ($topicCount > 0) {
+<<<<<<< HEAD
+			$pagerUrl = $game->FORUM_URL. '/' . $this->params['board'] . '/page';
+			$pager = $this->appendPagination($list, null, $topicCount, $pagerUrl, Doo::conf()->forumTopicsLimit);
+			$list['pager'] = $pager;
+		}
+
+		$list['sort'] = isset($this->params['sortType']) ? $this->params['sortType'] : 'recently-updated';
+
+		if (isset($pager)) {
+			$list['topics'] = $this->forum->getBoard($this->data['type'], $game->ID_GAME, $this->params['board'], $list['sort'], $pager->limit);
+		} else {
+			$list['topics'] = $this->forum->getBoard($this->data['type'], $game->ID_GAME, $this->params['board'], $list['sort']);
+=======
+			$pagerUrl = $game->FORUM_URL . '/' . $this->params['board'] . '/page';
+			$pager = $this->appendPagination($list, NULL, $topicCount, $pagerUrl, Doo::conf()->forumTopicsLimit);
+			$list['pager'] = $pager;
+		}
+
+		if(isset($pager)){
+			$list['topics'] = $this->forum->getBoard($this->data['type'], $game->ID_GAME, $this->params['board'], 'recently-updated', $pager->limit);
+		}
+		else{
+			$list['topics'] = $this->forum->getBoard($this->data['type'], $game->ID_GAME, $this->params['board']);
+>>>>>>> 0114a495a41b1cebc3e52e26cede5641fd02cf46
+		}
+
+		$list['board'] = $this->forum->getBoardInfo($this->data['type'], $game->ID_GAME, $this->params['board']);
+		if ($list['board']) {
+			if ($list['board']->ChildLevel > 0) {
+				$parents = $list['board']->getParentBoards();
+
+				if (count($parents) > 0) {
+					for ($i = 0; $i < count($parents); $i++) {
+						$this->addCrumb($parents[$i]->BoardName, $game->FORUM_URL.'/'.$parents[$i]->ID_BOARD);
+					}
+				}
+			}
+			$catId = $list['board']->ID_CAT;
+<<<<<<< HEAD
+			$list['category'] = $this->forum->getCategory($this->data['type'], $game->ID_GAME, $catId); 
+=======
+			$list['category'] = $this->forum->getCategory($this->data['type'], $game->UNID, $catId); 
+>>>>>>> 0114a495a41b1cebc3e52e26cede5641fd02cf46
+			$catname = $list['category']->CategoryName;
+
+			$this->addCrumb($list['category']->CategoryName, $game->FORUM_URL . '/' . $this->params['board']);
+			$this->addCrumb($list['board']->BoardName);
+		
+			$data['title'] = $list['board']->BoardName;
+
+			if($this->data['user']){
+				$this->forum->logVisitBoard('game', $game->ID_GAMW, $this->params['board'], $this->data['user']);
+			}
+		} else {
+			$data['title'] = '';
+		}
+
+		$allOnlineUsers = $this->forum->allOnlineUsers();
+		$list['allOnlineUsers'] = $allOnlineUsers;
+		$list['OnlineUsers'] = count($allOnlineUsers);
+
+		$onlineMembers = 0;
+		$onlineGuests = 0;
+		foreach ($allOnlineUsers as $user) {
+			$playerID = $user->ID_PLAYER;
+			if($game->isMember($playerID) === TRUE ){
+				$onlineMembers ++; 
+
+			}else{
+				$onlineGuests ++; 
+			}
+
+		}
+
+		$list['onlineGuests'] =$onlineGuests;
+		$list['onlineMembers'] = $onlineMembers;
+
+		$list['crumb'] = $this->getCrumb();
+		$list['boardId'] = $this->params['board'];
+		$list['ownerId'] = $game->IS_GAME;
+		$list['type'] = $this->data['type'];
+
+		//$data['selected_menu'] = 'companies';
+		$data['left'] = MainHelper::gamesLeftSide($game, 'forum');
+		$data['right'] = PlayerHelper::playerRightSide();
+		$data['footer'] = MainHelper::bottomMenu();
+		$data['header'] = MainHelper::topMenu();
+
+		$data['content'] = $this->renderBlock('forum/' . $list['page'], $list);
+		$this->render3Cols($data);
+	}
+
+	private function boardGroups() {
+		$this->moduleOff();
+
+		$GROUP = Forum::getModelByUrl('GROUP', $this->params['id']);
+		$name = $GROUP->GroupName;
+		$list['model'] = $GROUP;
+		$list['url'] = $this->params['id'];
+
+		$list['page'] = 'forum_board';
+		$data['body_class'] = 'index_forum_board forums';
+
+		$user = $this->data['user'];
+		$list['user'] = $user;
+		if (isset($user) && $user == true) {
+				$list['isForumAdmin'] =  $company->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+				$list['isMember'] = $company->isMember();
+				$list['isForumMod'] = $company->isForumMod();
+				
+		} else {
+			$list['isForumAdmin'] = FALSE; //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+			$list['isMember'] =  FALSE;
+			$list['isForumMod'] = FALSE;
+			
+		}
+
+		$this->addCrumb($name, $GROUP->FORUM_URL);
+
+		$topicCount = $this->forum->getTotalTopics($this->data['type'], $GROUP->ID_GROUP, $this->params['board']);
+		$list['total'] = $topicCount;
+
+		if ($topicCount > 0) {
+			$pagerUrl = $GROUP->FORUM_URL. '/' . $this->params['board'] . '/page';
+			$pager = $this->appendPagination($list, null, $topicCount, $pagerUrl, Doo::conf()->forumTopicsLimit);
+			$list['pager'] = $pager;
+		}
+
+		$list['sort'] = isset($this->params['sortType']) ? $this->params['sortType'] : 'recently-updated';
+
+		if (isset($pager)) {
+			$list['topics'] = $this->forum->getBoard($this->data['type'], $GROUP->ID_GROUP, $this->params['board'], $list['sort'], $pager->limit);
+		} else {
+			$list['topics'] = $this->forum->getBoard($this->data['type'], $GROUP->ID_GROUP, $this->params['board'], $list['sort']);
+		}
+
+		$list['board'] = $this->forum->getBoardInfo($this->data['type'], $GROUP->ID_GROUP, $this->params['board']);
+		if ($list['board']) {
+			if ($list['board']->ChildLevel > 0) {
+				$parents = $list['board']->getParentBoards();
+
+				if (count($parents) > 0) {
+					for ($i = 0; $i < count($parents); $i++) {
+						$this->addCrumb($parents[$i]->BoardName, $GROUP->FORUM_URL.'/'.$parents[$i]->ID_BOARD);
+					}
+				}
+			}
+			$catId = $list['board']->ID_CAT;
+			$list['category'] = $this->forum->getCategory($this->data['type'], $GROUP->ID_GROUP, $catId); 
+			$catname = $list['category']->CategoryName;
+
+			$this->addCrumb($list['category']->CategoryName, $GROUP->FORUM_URL . '/' . $this->params['board']);
+			$this->addCrumb($list['board']->BoardName);
+		
+			$data['title'] = $list['board']->BoardName;
+
+			if($this->data['user']){
+				$this->forum->logVisitBoard('GROUP', $GROUP->ID_GROUP, $this->params['board'], $this->data['user']);
+			}
+		} else {
+			$data['title'] = '';
+		}
+
+		$allOnlineUsers = $this->forum->allOnlineUsers();
+		$list['allOnlineUsers'] = $allOnlineUsers;
+		$list['OnlineUsers'] = count($allOnlineUsers);
+
+		$onlineMembers = 0;
+		$onlineGuests = 0;
+		foreach ($allOnlineUsers as $user) {
+			$playerID = $user->ID_PLAYER;
+			if($company->isMember($playerID) === true ){
+				$onlineMembers ++; 
+
+			}else{
+				$onlineGuests ++; 
+			}
+
+		}
+
+		$list['onlineGuests'] =$onlineGuests;
+		$list['onlineMembers'] = $onlineMembers;
+
+		$list['crumb'] = $this->getCrumb();
+		$list['boardId'] = $this->params['board'];
+		$list['ownerId'] = $GROUP->ID_GROUP;
+		$list['type'] = $this->data['type'];
+
+		//$data['selected_menu'] = 'companies';
+		$data['left'] = MainHelper::gropusLeftSide($GROUP, 'forum');
+		$data['right'] = PlayerHelper::playerRightSide();
+		$data['footer'] = MainHelper::bottomMenu();
+		$data['header'] = MainHelper::topMenu();
+
+		$data['content'] = $this->renderBlock('forum/' . $list['page'], $list);
+		$this->render3Cols($data);
+	}
+
+
+	// ok
+	public function selectCreateForm(){
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		$name = $model->UNNAME;
+
+		if ($model->isMember()) {
+			//$forum = new Forum();
+			$list['type'] = $this->data['type'];
+			$list['url'] = $this->params['id'];
+			$list['id'] = $model->UNID;
+			$list['board'] = $this->params['board'];
+
+			echo $this->renderBlock('forum/common/selectCreateFormType', $list);
+		} else {
+			DooUriRouter::redirect($model->FORUM_URL);
+		}
+	}
+	//ok
+	public function CreateForm(){
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		$user = $this->data['user'];
+			
+			if($model->isMember() ) {
+				
+				$data['body_class'] = 'index_forum_create_topic forums';
+
+				$list['user'] = $user;
+				$list['isAdmin'] = $model->isForumAdmin();
+				
+				$list['board'] = $this->forum->getBoardInfo($this->data['type'], $model->UNID, $this->params['board']);
+				
+				$selected = $_POST['threadtype'];
+				
+				if( $selected == "thread"){
+					$list['page'] = 'showCreateThread';
+					$data['title'] = $this->__('Create Thread');
+				}else{
+					$list['page'] = 'showCreatePoll';
+					$data['title'] = $this->__('Create Poll');
+				}
+				
+				$this->addCrumb($model->UNNAME, $model->FORUM_URL);
+
+				$this->addCrumb($list['board']->BoardName, $model->FORUM_URL . '/' . $this->params['board']);
+
+				$this->addCrumb($data['title']);
+
+				if($this->data['type'] =='company'){
+					$data['left'] = MainHelper::companiesLeftSide($model, 'forum');
+				}elseif ($this->data['type'] =='game') {				
+					$data['left'] = MainHelper::gamesLeftSide($model, 'forum');
+				}elseif ($this->data['type'] == 'group') {				
+					$data['left'] = MainHelper::groupsLeftSide($model, 'forum');
+				}
+
+				$list['player'] = $this->data['user'];
+				$list['crumb'] = $this->getCrumb();
+				$list['type'] = $this->data['type'];
+				$list['url'] = $this->params['id'];
+
+			//	$data['selected_menu'] = 'forum';
+				$data['right'] = PlayerHelper::playerRightSide();
+				$data['footer'] = MainHelper::bottomMenu();
+				$data['header'] = MainHelper::topMenu();
+
+				$data['content'] = $this->renderBlock('forum/common/' . $list['page'], $list);
+				$this->render3Cols($data);
+			} else {
+				DooUriRouter::redirect($model->FORUM_URL . '/' . $this->params['board']);
+			}
+	}
+
+	
+
+	public function topic() {
+		switch ($this->data['type']) {
+			case WALL_COMPANIES:
+				$this->topicCompanies();
+				break;
+			case WALL_GAMES:
+				$this->topicGames();
+				break;
+			case WALL_GROUPS:
+				$this->topicGroups();
+				break;
+		}
+	}
+
+	private function topicCompanies() {
+		$this->moduleOff();
+
+		$company = Forum::getModelByUrl('company', $this->params['id']);
+		$name = $company->CompanyName;
+
+		$list['model'] = $company;
+		$list['page'] = 'forum_topic';
+		$data['body_class'] = 'index_forum_topic forums';
+
+
+		$user = $this->data['user'];
+		$list['user'] = $user;
+		if(isset($user) && $user == true){
+				$list['isForumAdmin'] =  $company->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin 
+				$list['isMember'] = $company->isMember();
+				$list['isForumMod'] = $company-> isForumMod();
+				$list['isBoardMod'] = $company->isBoardMod($this->data['type'], $company->UNID, $this->params['board'], $user->ID_PLAYER);
+				
+		}else{
+			$list['isForumAdmin'] = FALSE; //just for the forum parts can be: isAdmin isForumAdmin 
+			$list['isMember'] =  FALSE;
+			$list['isForumMod'] = FALSE;
+			$list['isBoardMod'] = FALSE;
+			
+		}
+
+		$list['url'] = $this->params['id'];
+		//$list['id'] = $company->ID_COMPANY;
+
+		$this->forum->addViewCount($this->data['type'], $company->ID_COMPANY, $this->params['topic']);
+
+		$messagesCount = $this->forum->getTotalMessages($this->data['type'], $company->ID_COMPANY, $this->params['topic']);
+		$pagerUrl = $company->FORUM_URL . '/' . $this->params['board'] . '/' . $this->params['topic'] . '/page';
+		$pager = $this->appendPagination($list, null, $messagesCount, $pagerUrl, Doo::conf()->forumMessagesLimit);
+		
+		$list['pager'] = $pager;
+		$list['total'] = $messagesCount;
+		$list['boardInfo'] = $this->forum->getBoardInfo($this->data['type'], $company->ID_COMPANY, $this->params['board']);
+
+		$list['messages'] = $this->forum->getTopic($this->data['type'], $company->ID_COMPANY, $this->params['topic'], $pager->limit);
+		$list['topicId'] = $this->params['topic'];
+		$list['topic'] = $this->forum->getTopicById($this->data['type'], $company->ID_COMPANY, $this->params['topic']);
+		
+		// get poll info
+		$topic = $list['topic'];
+		$poll_id = $topic->ID_POLL;
+
+		$current_date = getdate();
+		$day = $current_date['mday'];
+		$month = $current_date['mon'];
+		$year = $current_date['year'];
+
+		$hour = $current_date['hours'];
+		$min = $current_date['minutes'];
+		$sec = $current_date['seconds']; 
+		
+		$timestamp =  mktime($hour,$min,$sec,$month,$day,$year);
+
+		$list['servertime'] = $timestamp;
+
+		if($poll_id >  0){
+			if(isset($this->params['poll'])){
+				$list['pollid'] = $this->params['poll'];
+				
+				if($this->data['user'] == true){
+					$list['Poll_choices'] = $this->forum->getPollChoices($this->data['type'], $company->ID_COMPANY, $poll_id);
+					$Poll_choices = $list['Poll_choices'];
+					$pollbase = $this->forum->getPollbase($this->data['type'], $company->ID_COMPANY, $poll_id );
+					$list['ExpireTime'] = $pollbase->ExpireTime;
+					$list['playerVoted'] = $this->forum->checkIfVoted($this->data['type'], $company->ID_COMPANY, $poll_id, $this->data['user']->ID_PLAYER);
+					$list['getplayervote'] = $this->forum-> getPlayersVotes($this->data['type'], $company->ID_COMPANY, $poll_id, $this->data['user']->ID_PLAYER );
+					$list['totalvotes'] = $this->countTotalVotes($Poll_choices);
+				}else{
+					$list['Poll_choices'] = "";
+					$list['ExpireTime'] = "";
+					$list['playerVoted'] = "";
+					$list['getplayervote'] =  "";
+					$list['totalvotes'] = "";
+				}
+
+			}else{
+				$list['Poll_choices'] = "";
+				$list['ExpireTime'] = "";
+				$list['pollid'] = "";
+				$list['playerVoted'] = "";
+				$list['getplayervote'] =  "";
+				$list['totalvotes'] = "";
+			}
+
+		}else{
+			$list['Poll_choices'] = "";
+			$list['ExpireTime'] = "";
+			$list['pollid'] = "";
+			$list['playerVoted'] =  "";
+			$list['getplayervote'] =  "";
+			$list['totalvotes'] = "";
+		}
+
+		$catId = $list['boardInfo']->ID_CAT;
+		$list['category'] = $this->forum->getCategory($this->data['type'], $company->ID_COMPANY, $catId); 
+
+		$this->addCrumb($name, $company->FORUM_URL);
+		$this->addCrumb($list['category']->CategoryName, $company->FORUM_URL . '/' . $this->params['board']);
+		$this->addCrumb($list['boardInfo']->BoardName, $company->FORUM_URL . '/' . $this->params['board']);
+
+		if (!empty($list['messages'])) {
+			$this->addCrumb($list['messages'][0]->Subject);
+		}
+
+		$list['type'] = $this->data['type'];
+		$list['ownerId'] = $company->ID_COMPANY;
+		$list['crumb'] = $this->getCrumb();
+
+		if (!empty($list['messages'])) {
+			$data['title'] = $list['messages'][0]->Subject;
+		} else {
+			$data['title'] = 'Topic';
+		}
+
+		if($this->data['user']) {
+			$this->forum->logVisitTopic('company', $company->ID_COMPANY, $this->params['topic'], $this->data['user']);
+		}
+
+		$allOnlineUsers = $this->forum->allOnlineUsers();
+		$list['allOnlineUsers'] = $allOnlineUsers;
+		$list['OnlineUsers'] = count($allOnlineUsers);
+
+		$onlineMembers = 0;
+		$onlineGuests = 0;
+		foreach ($allOnlineUsers as $user) {
+			$playerID = $user->ID_PLAYER;
+			if($company->isMember($playerID) === true ){
+				$onlineMembers ++; 
+
+			}else{
+				$onlineGuests ++; 
+			}
+
+		}
+
+		$list['onlineGuests'] = $onlineGuests;
+		$list['onlineMembers'] = $onlineMembers;
+//		$data['selected_menu'] = 'companies';
+		$data['left'] = MainHelper::companiesLeftSide($company, 'forum');
+		$data['right'] = PlayerHelper::playerRightSide();
+		$data['footer'] = MainHelper::bottomMenu();
+		$data['header'] = MainHelper::topMenu();
+
+		$data['content'] = $this->renderBlock('forum/' . $list['page'], $list);
+		$this->render3Cols($data);
+	}
+
+	
+	private function topicGames() {
+		$this->moduleOff();
+
+		$game = Forum::getModelByUrl('game', $this->params['id']);
+		$name = $game->GameName;
+
+		$list['model'] = $game;
+		$list['page'] = 'forum_topic';
+		$data['body_class'] = 'index_forum_topic forums';
+
+		$user = $this->data['user'];
+		$list['user'] = $user;
+		if(isset($user) && $user == true){
+				$list['isForumAdmin'] =  $game->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+				$list['isMember'] = $game->isMember();
+				$list['isForumMod'] = $game-> isForumMod();
+				$list['isBoardMod'] = $game->isBoardMod($this->data['type'], $model->UNID, $this->params['board'], $user->ID_PLAYER);
+		}else{
+			$list['isForumAdmin'] = FALSE; //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+			$list['isMember']  = FALSE;
+			$list['isForumMod'] = FALSE;
+			$list['isBoardMod'] = FALSE;	
+		}
+
+		$list['url'] = $this->params['id'];
+
+		$this->forum->addViewCount($this->data['type'], $game->ID_GAME, $this->params['topic']);
+
+		$messagesCount = $this->forum->getTotalMessages($this->data['type'], $game->ID_GAME, $this->params['topic']);
+		$pagerUrl = $game->FORUM_URL . '/' . $this->params['board'] . '/' . $this->params['topic'] . '/page';
+
+		$pager = $this->appendPagination($list, null, $messagesCount, $pagerUrl, Doo::conf()->forumMessagesLimit);
+
+		$list['total'] = $messagesCount;
+		$list['boardInfo'] = $this->forum->getBoardInfo($this->data['type'], $game->ID_GAME, $this->params['board']);
+		$list['messages'] = $this->forum->getTopic($this->data['type'], $game->ID_GAME, $this->params['topic'], $pager->limit);
+		$list['topicId'] = $this->params['topic'];
+		$list['topic'] = $this->forum->getTopicById($this->data['type'], $game->ID_GAME, $this->params['topic']);
+
+		
+		// get poll info
+		$topic = $list['topic'];
+		$poll_id = $topic->ID_POLL;
+
+		$current_date = getdate();
+		$day = $current_date['mday'];
+		$month = $current_date['mon'];
+		$year = $current_date['year'];
+
+		$hour = $current_date['hours'];
+		$min = $current_date['minutes'];
+		$sec = $current_date['seconds']; 
+		
+		$timestamp =  mktime($hour,$min,$sec,$month,$day,$year);
+
+		$list['servertime'] = $timestamp;
+
+		if($poll_id >  0){
+			if(isset($this->params['poll'])){
+				$list['pollid'] = $this->params['poll'];
+				
+				if($this->data['user'] == true){
+					$list['Poll_choices'] = $this->forum->getPollChoices($this->data['type'], $company->ID_COMPANY, $poll_id);
+					$Poll_choices = $list['Poll_choices'];
+					$pollbase = $this->forum->getPollbase($this->data['type'], $company->ID_COMPANY, $poll_id );
+					$list['ExpireTime'] = $pollbase->ExpireTime;
+					$list['playerVoted'] = $this->forum->checkIfVoted($this->data['type'], $company->ID_COMPANY, $poll_id, $this->data['user']->ID_PLAYER);
+					$list['getplayervote'] = $this->forum-> getPlayersVotes($this->data['type'], $company->ID_COMPANY, $poll_id, $this->data['user']->ID_PLAYER );
+					$list['totalvotes'] = $this->countTotalVotes($Poll_choices);
+				}else{
+					$list['Poll_choices'] = "";
+					$list['ExpireTime'] = "";
+					$list['playerVoted'] = "";
+					$list['getplayervote'] =  "";
+					$list['totalvotes'] = "";
+				}
+
+			}else{
+				$list['Poll_choices'] = "";
+				$list['ExpireTime'] = "";
+				$list['pollid'] = "";
+				$list['playerVoted'] = "";
+				$list['getplayervote'] =  "";
+				$list['totalvotes'] = "";
+			}
+
+		}else{
+			$list['Poll_choices'] = "";
+			$list['ExpireTime'] = "";
+			$list['pollid'] = "";
+			$list['playerVoted'] =  "";
+			$list['getplayervote'] =  "";
+			$list['totalvotes'] = "";
+		}
+		
+
+		$this->addCrumb($name, $game->FORUM_URL);
+		//$this->addCrumb($list['boardInfo']->BoardName, $game->FORUM_URL . '/' . $this->params['board']);
+
+		if (!empty($list['messages'])) {
+			$this->addCrumb($list['messages'][0]->Subject);
+		}
+
+
+		$list['type'] = $this->data['type'];
+		$list['ownerId'] = $game->ID_GAME;
+		$list['crumb'] = $this->getCrumb();
+
+		if (!empty($list['messages'])) {
+			$data['title'] = $list['messages'][0]->Subject;
+		} else {
+			$data['title'] = 'Topic';
+		}
+
+		if($this->data['user']){
+			$this->forum->logVisitTopic('game', $game->ID_GAME, $this->params['topic'], $this->data['user']);
+		}
+
+		$allOnlineUsers = $this->forum->allOnlineUsers();
+		$list['allOnlineUsers'] = $allOnlineUsers;
+		$list['OnlineUsers'] = count($allOnlineUsers);
+
+		$onlineMembers = 0;
+		$onlineGuests = 0;
+		foreach ($allOnlineUsers as $user) {
+			$playerID = $user->ID_PLAYER;
+			if($company->isMember($playerID) === true ){
+				$onlineMembers ++; 
+
+			}else{
+				$onlineGuests ++; 
+			}
+
+		}
+
+		$list['onlineGuests'] =$onlineGuests;
+		$list['onlineMembers'] = $onlineMembers;
+//		$data['selected_menu'] = 'games';
+		$data['left'] = MainHelper::gamesLeftSide($game, 'forum');
+		$data['right'] = PlayerHelper::playerRightSide();
+		$data['footer'] = MainHelper::bottomMenu();
+		$data['header'] = MainHelper::topMenu();
+
+		$data['content'] = $this->renderBlock('forum/' . $list['page'], $list);
+		$this->render3Cols($data);
+	}
+
+	private function topicGroups() {
+		$this->moduleOff();
+
+		$group = Forum::getModelByUrl('group', $this->params['id']);
+		$name = $group->GroupName;
+
+		$list['model'] = $group;
+		if(!Auth::isUserLogged() or (!$group->isMember() and ($this->data['user'] and $this->data['user']->canAccess('Super Admin Interface') !== TRUE))){
+			DooUriRouter::redirect($group->GROUP_URL);
+			return;
+		}
+
+		$list['page'] = 'forum_topic';
+		$data['body_class'] = 'index_forum_topic forums';
+
+		$user = $this->data['user'];
+		$list['user'] = $user;
+		if(isset($user) && $user == true){
+				$list['isForumAdmin'] =  $group->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+				$list['isMember'] = $group->isMember();
+				$list['isForumMod'] = $group-> isForumMod();
+				$list['isBoardMod'] = $group->isBoardMod($this->data['type'], $model->UNID, $this->params['board'], $user->ID_PLAYER);
+				
+		}else{
+			$list['isForumAdmin'] = FALSE; //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+			$list['isMember'] =  FALSE;
+			$list['isForumMod'] = FALSE;
+			$list['isBoardMod'] = FALSE;
+			
+		}
+		$list['url'] = $this->params['id'];
+
+		$this->forum->addViewCount($this->data['type'], $group->ID_GROUP, $this->params['topic']);
+
+		$messagesCount = $this->forum->getTotalMessages($this->data['type'], $group->ID_GROUP, $this->params['topic']);
+		$pagerUrl = $group->FORUM_URL . '/' . $this->params['board'] . '/' . $this->params['topic'] . '/page';
+
+		$pager = $this->appendPagination($list, null, $messagesCount, $pagerUrl, Doo::conf()->forumMessagesLimit);
+
+		$list['total'] = $messagesCount;
+		$list['boardInfo'] = $this->forum->getBoardInfo($this->data['type'], $group->ID_GROUP, $this->params['board']);
+		$list['messages'] = $this->forum->getTopic($this->data['type'], $group->ID_GROUP, $this->params['topic'], $pager->limit);
+		$list['topicId'] = $this->params['topic'];
+		$list['topic'] = $this->forum->getTopicById($this->data['type'], $group->ID_GROUP, $this->params['topic']);
+
+		
+		// get poll info
+		$topic = $list['topic'];
+		$poll_id = $topic->ID_POLL;
+
+		$current_date = getdate();
+		$day = $current_date['mday'];
+		$month = $current_date['mon'];
+		$year = $current_date['year'];
+
+		$hour = $current_date['hours'];
+		$min = $current_date['minutes'];
+		$sec = $current_date['seconds']; 
+		
+		$timestamp =  mktime($hour,$min,$sec,$month,$day,$year);
+
+		$list['servertime'] = $timestamp;
+
+		if($poll_id >  0){
+			if(isset($this->params['poll'])){
+				$list['pollid'] = $this->params['poll'];
+				
+				if($this->data['user'] == true){
+					$list['Poll_choices'] = $this->forum->getPollChoices($this->data['type'], $company->ID_COMPANY, $poll_id);
+					$Poll_choices = $list['Poll_choices'];
+					$pollbase = $this->forum->getPollbase($this->data['type'], $company->ID_COMPANY, $poll_id );
+					$list['ExpireTime'] = $pollbase->ExpireTime;
+					$list['playerVoted'] = $this->forum->checkIfVoted($this->data['type'], $company->ID_COMPANY, $poll_id, $this->data['user']->ID_PLAYER);
+					$list['getplayervote'] = $this->forum-> getPlayersVotes($this->data['type'], $company->ID_COMPANY, $poll_id, $this->data['user']->ID_PLAYER );
+					$list['totalvotes'] = $this->countTotalVotes($Poll_choices);
+				}else{
+					$list['Poll_choices'] = "";
+					$list['ExpireTime'] = "";
+					$list['playerVoted'] = "";
+					$list['getplayervote'] =  "";
+					$list['totalvotes'] = "";
+				}
+
+			}else{
+				$list['Poll_choices'] = "";
+				$list['ExpireTime'] = "";
+				$list['pollid'] = "";
+				$list['playerVoted'] = "";
+				$list['getplayervote'] =  "";
+				$list['totalvotes'] = "";
+			}
+
+		}else{
+			$list['Poll_choices'] = "";
+			$list['ExpireTime'] = "";
+			$list['pollid'] = "";
+			$list['playerVoted'] =  "";
+			$list['getplayervote'] =  "";
+			$list['totalvotes'] = "";
+		}
+		
+
+		$this->addCrumb($name, $group->FORUM_URL);
+
+	 //	$this->addCrumb($list['boardInfo']->BoardName, $group->FORUM_URL . '/' . $this->params['board']);
+
+		if (!empty($list['messages'])) {
+			$this->addCrumb($list['messages'][0]->Subject);
+		}
+
+
+		$list['type'] = $this->data['type'];
+		$list['ownerId'] = $group->ID_GROUP;
+		$list['crumb'] = $this->getCrumb();
+
+		if (!empty($list['messages'])) {
+			$data['title'] = $list['messages'][0]->Subject;
+		} else {
+			$data['title'] = 'Topic';
+		}
+
+		if($this->data['user']){
+			$this->forum->logVisitTopic('group', $group->ID_GROUP, $this->params['topic'], $this->data['user']);
+		}
+
+		$allOnlineUsers = $this->forum->allOnlineUsers();
+		$list['allOnlineUsers'] = $allOnlineUsers;
+		$list['OnlineUsers'] = count($allOnlineUsers);
+
+		$onlineMembers = 0;
+		$onlineGuests = 0;
+		foreach ($allOnlineUsers as $user) {
+			$playerID = $user->ID_PLAYER;
+			if($company->isMember($playerID) === true ){
+				$onlineMembers ++; 
+
+			}else{
+				$onlineGuests ++; 
+			}
+
+		}
+
+		$list['onlineGuests'] =$onlineGuests;
+		$list['onlineMembers'] = $onlineMembers;
+//		$data['selected_menu'] = 'groups';
+		$data['left'] = MainHelper::groupsLeftSide($group, 'forum');
+		$data['right'] = PlayerHelper::playerRightSide();
+		$data['footer'] = MainHelper::bottomMenu();
+		$data['header'] = MainHelper::topMenu();
+
+		$data['content'] = $this->renderBlock('forum/' . $list['page'], $list);
+		$this->render3Cols($data);
+	}
+		
+	// FROM HERE AND DOWN  -- BE SURE, where ROLLS THATS NEEDED, IS CHECKED!!!
+	//ok
+	public function createCategory() {
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		$name = $model->UNNAME;
+
+		if ($model->isForumAdmin()) {
+			$list['type'] = $this->data['type'];
+
+			$list['user'] = $this->data['user'];
+			$list['isForumAdmin'] = $model->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin 
+			$list['id'] = $model->UNID;
+
+			echo $this->renderBlock('forum/admin/addCategory', $list);
+		} else {
+			DooUriRouter::redirect($model->FORUM_URL);
+		}
+	}
+
+	//ok
+	public function editCategory() {
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		$name = $model->UNNAME;
+
+		if ($model->isForumAdmin()) {
+			$forum = new Forum();
+			$list['type'] = $this->data['type'];
+
+			$list['user'] = $this->data['user'];
+			$list['isAdmin'] = $model->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+			$list['id'] = $model->UNID;
+			$list['category'] = $forum->getCategory($this->data['type'], $model->UNID, $this->params['cat_id']);
+
+			echo $this->renderBlock('forum/admin/editCategory', $list);
+		} else {
+			DooUriRouter::redirect($model->FORUM_URL);
+		}
+	}
+	//ok
+	public function saveCategory(){
+		if ($this->isAjax()) {
+			if(MainHelper::validatePostFields(array('type', 'id'))){
+				$model = Forum::getModelByID($_POST['type'], $_POST['id']);
+				if (isset($model) and $model->isForumAdmin() === TRUE) {
+					$result['result'] = $this->forum->saveCategory($model, $_POST);
+					$this->toJSON($result, true);
+				}
+			}
+			else{
+				$this->toJSON(array('result' => false), true);
+			}
+		}
+	}
+
+	//ok
+	public function createBoard() {
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		if ($model->isForumAdmin() ) {
+			$list['type'] = $this->data['type'];
+
+			$list['user'] = $this->data['user'];
+			$list['isAdmin'] = $model->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin 
+			$list['id'] = $model->UNID;
+			$list['cat_id'] = $this->params['cat_id'];
+
+			echo $this->renderBlock('forum/admin/addBoard', $list);
+		} else {
+			DooUriRouter::redirect($model->FORUM_URL);
+		}
+	}
+	//ok
+	public function saveBoard(){
+		if ($this->isAjax()) {
+			if(MainHelper::validatePostFields(array('type', 'id'))){
+				$model = Forum::getModelByID($_POST['type'], $_POST['id']);
+				if (isset($model) and $model->isForumAdmin() === TRUE) {
+					$result['result'] = $this->forum->saveBoard($model, $_POST);
+					$this->toJSON($result, true);
+				}
+			}
+			else{
+				$this->toJSON(array('result'=>false), true);
+			}
+				}
+	}
+	//ok
+	public function editBoard() {
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		$name = $model->UNNAME;
+
+		if ($model->isForumAdmin()) {
+			$forum = new Forum();
+			$list['type'] = $this->data['type'];
+
+			$list['user'] = $this->data['user'];
+			$list['isAdmin'] = $model->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+			$list['id'] = $model->UNID;
+			$list['cat_id'] = $this->params['cat_id'];
+			$list['board'] = $forum->getBoardByID($this->data['type'], $model->UNID, $this->params['board_id']);
+
+			echo $this->renderBlock('forum/admin/editBoard', $list);
+		} else {
+			DooUriRouter::redirect($model->FORUM_URL);
+		}
+	}
+ 
+	//ok
+	public function editBoardOrder(){
+			$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+			$name = $model->UNNAME; // fx playnation
+		 
+			if ($model->isForumAdmin()) {
+					$forum = new Forum();
+					$list['type'] = $this->data['type']; // ex company
+
+					$list['user'] = $this->data['user'];
+					$list['isAdmin'] = $model->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin 
+					$list['id'] = $model->UNID;  // 1
+ 
+
+					$list['cat_id'] = $this->params['cat_id'];
+					$list['board_id'] = $this->params['board_id'];
+					$list['board'] = $forum->getBoardByID($this->data['type'], $model->UNID, $this->params['board_id']);
+				 
+					echo $this->renderBlock('forum/admin/editBoardOrder', $list);
+
+								
+			}else{
+					DooUriRouter::redirect($model->FORUM_URL);
+			}
+		
+	}
+	//ok
+	public function deleteBoard() {
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		//$name = $model->UNNAME;
+
+		if ($model->isForumAdmin()) {
+			$forum = new Forum();
+			$list['type'] = $this->data['type']; // ex company
+			$list['name'] =  $this->params['id'];
+			$list['user'] = $this->data['user'];
+			$list['isAdmin'] = $model->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+			$list['id'] = $model->UNID;  // ex. 1
+			$list['cat_id'] = $this->params['cat_id'];
+			$list['category'] = $forum->getCategory($this->data['type'], $model->UNID, $this->params['cat_id']);
+			$list['board_id'] = $this->params['board_id'];
+						$list['board'] = $forum->getBoardByID($this->data['type'], $model->UNID, $this->params['board_id']);
+						
+						echo $this->renderBlock('forum/admin/deleteBoard', $list);
+		} else {
+			DooUriRouter::redirect($model->FORUM_URL);
+		}
+	}
+
+	// used where ??
+	public function ajaxMoveBoard(){
+		
+		if ($this->isAjax()) {		 
+			if(MainHelper::validatePostFields(array('type', 'id'))){
+				$model = Forum::getModelByID($_POST['type'], $_POST['id']);
+				if (isset($model) and $model->isForumAdmin() === TRUE) {
+					$result['result'] = $this->forum->moveBoardOrder($model, $_POST);
+					$this->toJSON($result, true);
+				}
+			}
+			else{
+				$this->toJSON(array('result' => false), true);
+			}
+				}
+	}
+	//ok
+	public function ajaxCollapseCategory(){
+		if ($this->isAjax()) {
+			$success = false;
+			if(MainHelper::validatePostFields(array('type', 'id', 'cid'))){
+				if($this->data['user'] != false){
+					$success = $this->forum->collapseCategory($_POST['type'], $_POST['id'], $_POST['cid'], $this->data['user']);
+				}
+				else{
+					$cookie = isset($_COOKIE['forum_collapse']) ? unserialize($_COOKIE['forum_collapse']) : array();
+
+					$cookie[$_POST['type'].'-'.$_POST['id'].'-'.$_POST['cid']] = true;
+
+					$success = setcookie('forum_collapse', serialize($cookie), time() + 60*60*24*100);
+				}
+			}
+
+			if($success == true){
+				$this->toJSON(array('result' => TRUE), true);
+			} else{
+				$this->toJSON(array('result' => FALSE), true);
+			}
+		}
+	}
+	//ok
+	public function ajaxExpandCategory(){
+		if ($this->isAjax()) {
+			$success = false;
+			$boards = false;
+			if(MainHelper::validatePostFields(array('type', 'id', 'cid'))){
+				$isAdmin = $this->forum->checkIfAdmin($this->data['user'], 'forum', array(
+						'type' => $_POST['type'],
+						'id' => $_POST['id']
+							));
+				if($this->data['user'] != false){
+					$boards = $this->forum->expandCategory($_POST['type'], $_POST['id'], $_POST['cid'], $this->data['user']);
+				}
+				else{
+					$cookie = isset($_COOKIE['forum_collapse']) ? unserialize($_COOKIE['forum_collapse']) : array();
+
+					if(!empty($cookie)){
+						$cookie[$_POST['type'].'-'.$_POST['id'].'-'.$_POST['cid']] = false;
+
+						setcookie('forum_collapse', serialize($cookie), time() + 60*60*24*100);
+					}
+
+					$boards = $this->forum->getCategoryBoards($_POST['type'], $_POST['id'], $_POST['cid']);
+				}
+
+
+				if ($boards != false) {
+					$data = '';
+					$model = Forum::getModelByID($_POST['type'], $_POST['id']);
+
+					if($model instanceof SnCompanies)
+						$url = Url::getUrlById($model->ID_COMPANY, URL_COMPANY);
+					elseif($model instanceof SnGames)
+						$url = Url::getUrlById($model->ID_GAME, URL_GAME);
+					elseif($model instanceof SnGroups)
+						$url = Url::getUrlById($model->ID_GROUP, URL_GROUP);
+
+					if(count($boards) > 0){
+						
+						$n = 0;
+						foreach($boards as $b){
+							$data .= $this->renderBlock('forum/common/boardItem',
+								array('board' => $b,
+									'model' => $model,
+									'n' => $n,
+									'ownerType' => $b->OwnerType, 'ownerID' => $model->UNID, 'isAdmin' => $isAdmin, 'url' => $url->URL
+									));
+							$n++;
+						}
+						
+					}
+
+					$success = true;
+					$this->toJSON(array('result' => TRUE, 'data' => $data), true);
+				}
+			}
+
+			if(!$success){
+				$this->toJSON(array('result' => FALSE), true);
+			}
+		}
+	}
+	//ok
+	public function editOrder() {
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		$name = $model->UNNAME;
+
+
+		if ($model->isForumAdmin()) {
+			$forum = new Forum();
+			$list['type'] = $this->data['type']; // ex company
+
+			$user = $this->data['user'];
+			$list['user'] = $user;
+			if(isset($user) && $user == true){
+				$list['isForumAdmin'] =  $model->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+				$list['isMember'] = $model->isMember();
+			//	$list['isBoardMod'] = $isBoardMod($this->data['type'], $model->UNID, $this->params['board'], $user->ID_PLAYER);
+			}else{
+				$list['isForumAdmin'] = FALSE; //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+				$list['isMember'] =  FALSE;;
+				//$list['isBoardMod'] = FALSE;
+			}
+			$list['id'] = $model->UNID;  // ex. playnation
+			$list['cat_id'] = $this->params['cat_id'];
+			$list['category'] = $forum->getCategory($this->data['type'], $model->UNID, $this->params['cat_id']);
+		
+			echo $this->renderBlock('forum/admin/editCategoryOrder', $list);
+		} else {
+			DooUriRouter::redirect($model->FORUM_URL);
+		}
+	}
+	//ok
+	public function ajaxMoveCategory(){
+		if ($this->isAjax()) {
+			if(MainHelper::validatePostFields(array('type', 'id'))){
+				$model = Forum::getModelByID($_POST['type'], $_POST['id']);
+				if (isset($model) and $model->isForumAdmin() === TRUE) {
+					$result['result'] = $this->forum->moveCat($model, $_POST);
+					$this->toJSON($result, true);
+				}
+			}
+			else{
+				$this->toJSON(array('result' => false), true);
+			}
+				}
+	}
+	//used where ??
+	public function ajaxMoveCategoryUp(){
+		if ($this->isAjax()) {
+			if(MainHelper::validatePostFields(array('type', 'id', 'cid'))){
+				if($this->data['user'] != false and $this->forum->checkIfAdmin($this->data['user'], 'forum', array(
+						'type' => $_POST['type'],
+						'id' => $_POST['id']
+							))){
+					if ($this->forum->moveCatUp($_POST['type'], $_POST['id'], $_POST['cid'])) {
+						$this->toJSON(array('result' => TRUE), true);
+					} else {
+						$this->toJSON(array('result' => FALSE), true);
+					}
+				}
+			}
+			else{
+				$this->toJSON(array('result' => FALSE), true);
+			}
+		}
+	}
+	//used where???
+	public function ajaxMoveCategoryDown(){
+		if ($this->isAjax()) {
+			if(MainHelper::validatePostFields(array('type', 'id', 'cid'))){
+				if($this->data['user'] != false and $this->forum->checkIfAdmin($this->data['user'], 'forum', array(
+						'type' => $_POST['type'],
+						'id' => $_POST['id']
+							))){
+					if ($this->forum->moveCatDown($_POST['type'], $_POST['id'], $_POST['cid'])) {
+						$this->toJSON(array('result' => TRUE), true);
+					} else {
+						$this->toJSON(array('result' => FALSE), true);
+					}
+				}
+			}
+			else{
+				$this->toJSON(array('result' => FALSE), true);
+			}
+		}
+	}
+
+	// ok - is used where??
+	public function editCategoryAction() {
+		if ($this->data['isForumAdmin']) {
+			if(MainHelper::validatePostFields(array('categoryName', 'categoryId')))
+				$category = $this->forum->editCategory($this->data['type'], $this->params['id'], $_POST['categoryName'], $this->params['categoryId']);
+		}
+
+		DooUriRouter::redirect(MainHelper::site_url('forum/' . $this->data['type'] . '/' . $this->params['id']));
+	}
+
+	public function ajaxdeletecategory() {
+		if ($this->isAjax()) {
+			if(MainHelper::validatePostFields(array('type', 'id', 'cid'))){
+				if($this->data['user'] != false and $this->forum->checkIfAdmin($this->data['user'], 'forum', array(
+						'type' => $_POST['type'],
+						'id' => $_POST['id']
+							))){
+					if ($this->forum->deleteCategory($_POST['type'], $_POST['id'], $_POST['cid'])) {
+						$this->toJSON(array('result' => TRUE), true);
+						
+					} else {
+						$this->toJSON(array('result' => FALSE), true);
+					}
+				}
+			}
+			else{
+				$this->toJSON(array('result' => FALSE), true);
+			}
+		}
+	}
+
+	public function editBoardAction() {
+		if ($this->data['isForumAdmin']) {
+			if(MainHelper::validatePostFields(array('type', 'id', 'categoryName', 'categoryId'))){
+				$category = $_POST['categoryId'];
+				if ($category == 0) {
+					$category = $this->forum->createCategory($this->data['type'], $this->params['id'], $_POST['categoryName']);
+				}
+			}
+			if(MainHelper::validatePostFields(array('type', 'id', 'boardName', 'boardId', 'categoryId'))){
+				$category = $_POST['categoryId'];
+				if ($category != 0) {
+					$board = $this->forum->editBoard($this->data['type'], $this->params['id'], $_POST['boardName'], $category, $this->params['boardId']);
+				}
+			}
+		}
+		DooUriRouter::redirect(MainHelper::site_url('forum/' . $this->data['type'] . '/' . $this->params['id']));
+	}
+
+	public function ajaxdeleteboard() {
+		if ($this->isAjax()) {
+			if(MainHelper::validatePostFields(array('type', 'id', 'board_id'))){
+				if($this->data['user'] != false and $this->forum->checkIfAdmin($this->data['user'], 'forum', array(
+						'type' => $_POST['type'],
+						'id' => $_POST['id']
+							))){
+					if ($this->forum->deleteBoard($_POST['type'], $_POST['id'], $_POST['board_id'])) {
+						$this->toJSON(array('result' => TRUE), true);
+					} else {
+						$this->toJSON(array('result' => FALSE), true);
+					}
+				}
+			}
+			else{
+				$this->toJSON(array('result' => FALSE), true);
+			}
+		}
+	}
+	//ok
+	public function deleteThread (){
+		$this->moduleOff();
+		$list['page'] = 'deleteThread';
+		$data['body_class'] = 'index_forum_forum forums';
+
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		$user = $this->data['user'];
+		$list['user'] = $user;
+		
+		if(isset($user) && $user == true){
+				$list['isForumAdmin'] =  $model->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+				$list['isMember'] = $model->isMember();
+				$list['isForumMod'] = $company-> isForumMod();
+				//$list['isBoardMod'] = $isBoardMod($this->data['type'], $model->UNID, $this->params['board'], $user->ID_PLAYER);
+				$list['BoardBanned'] = $this->forum->ifBannedBoard( $this->data['type'], $company->ID_COMPANY, $this->data['user']->ID_PLAYER );
+		}else{
+			$list['isForumAdmin'] = FALSE; //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+			$list['isMember'] =  FALSE;
+			$list['isForumMod'] = FALSE;
+			//$list['isBoardMod'] = FALSE;
+			$list['BoardBanned'] = FALSE;
+		}
+		$createdBy = $this->forum->getPlayerIDfromMsgID($model->UNID, $this->data['type'] , $this->params['board'], $this->params['topic'], $this->params['msgid']);
+
+		if ($model->isForumAdmin() OR  $user and ($user->ID_PLAYER == $createdBy)){
+			
+			if($this->data['type'] =='company'){
+				$data['left'] = MainHelper::companiesLeftSide($model, 'forum');
+			}elseif ($this->data['type'] =='game') {
+				
+				$data['left'] = MainHelper::gamesLeftSide($model, 'forum');
+			}elseif ($this->data['type'] == 'group') {
+				
+				$data['left'] = MainHelper::groupsLeftSide($model, 'forum');
+			}
+
+			$list['name'] = $model->UNNAME;  // fx playnation
+			$list['type'] 	= $this->data['type'];
+			$list['id'] 	= $model->UNID;
+			$list['board_id'] = $this->params['board'];
+			$list['topic_id']= $this->params['topic'];
+			$list['msg_id']	= $this->params['msgid'];
+					
+			$list['user'] = $this->data['user'];
+			
+			$name = $model->UNNAME;
+			$data['title'] = $name;		
+
+			$data['right'] = PlayerHelper::playerRightSide();
+			$data['footer'] = MainHelper::bottomMenu();
+			$data['header'] = MainHelper::topMenu();
+
+			$data['content'] = $this->renderBlock('forum/admin/' . $list['page'], $list);
+			$this->render3Cols($data);	
+
+			
+			if(isset($_POST['deleteMessage_yes'])){
+				$type = $_POST['type'];
+				$id = $_POST['id'];
+				$board = $_POST['board_id'];
+				$mid = $_POST['msg_id'];
+
+				$this->forum->deleteMessage($type, $id, $board, $mid);
+				DooUriRouter::redirect(MainHelper::site_url('forum/' . $type . '/' . $this->params['id'].'/'.$board ));
+			}
+
+			
+		}else{
+			DooUriRouter::redirect($model->FORUM_URL);
+		}
+	}
+	//ok
+	public function deleteReply (){
+		$this->moduleOff();
+		$list['page'] = 'deletePost';
+		$data['body_class'] = 'index_forum_forum forums';
+
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		$user = $this->data['user'];
+		$list['user'] = $user;
+
+		if(isset($user) && $user == true){
+			$list['isForumAdmin'] =  $model->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+			$list['isMember'] = $model->isMember();
+			//$list['isBoardMod'] = $model->isBoardMod($this->data['type'], $model->UNID, $this->params['board'], $user->ID_PLAYER);
+		}else{
+			$list['isForumAdmin'] = FALSE; //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+			$list['isMember']  = FALSE;;
+			//$list['isBoardMod'] = FALSE;
+		}
+	
+		$createdBy = $this->forum->getPlayerIDfromMsgID($model->UNID, $this->data['type'] , $this->params['board'], $this->params['topic'], $this->params['msgid']);
+					
+		if ($model->isForumAdmin() OR  $user and ($user->ID_PLAYER == $createdBy)){
+			
+			if($this->data['type'] =='company'){
+				$data['left'] = MainHelper::companiesLeftSide($model, 'forum');
+			}elseif ($this->data['type'] =='game') {
+				$data['left'] = MainHelper::gamesLeftSide($model, 'forum');
+			}elseif ($this->data['type'] == 'group') {
+				$data['left'] = MainHelper::groupsLeftSide($model, 'forum');
+			}
+			
+			$list['name'] = $model->UNNAME;  // fx playnation
+			$list['type'] 	= $this->data['type'];
+			$list['id'] 	= $model->UNID;
+			$list['board_id'] = $this->params['board'];
+			$list['topic_id']= $this->params['topic'];
+			$list['msg_id']	= $this->params['msgid'];
+					
+			$name = $model->UNNAME;
+			$data['title'] = $name;			
+
+
+			$data['right'] = PlayerHelper::playerRightSide();
+			$data['footer'] = MainHelper::bottomMenu();
+			$data['header'] = MainHelper::topMenu();
+
+			$data['content'] = $this->renderBlock('forum/admin/' . $list['page'], $list);
+			$this->render3Cols($data);	
+			
+			if(isset($_POST['deleteMessage_yes'])){
+				$type = $_POST['type'];
+				$id = $_POST['id'];
+				$board = $_POST['board_id'];
+				$mid = $_POST['msg_id'];
+
+				if($user and ($user->ID_PLAYER == $createdBy)){
+					$playerID = $createdBy;
+				}
+
+				$this->forum->deleteMessage($type, $id, $board, $mid);
+				DooUriRouter::redirect(MainHelper::site_url('forum/' . $type . '/' . $this->params['id'].'/'.$board.'/'.$this->params['topic']));
+			}
+		
+		}else{
+			DooUriRouter::redirect($model->FORUM_URL);
+		}
+	}
+		// is used where??
+	public function ajaxdeletemessage() {
+		if ($this->isAjax()) {
+			if($this->data['user'] != false){
+				if(MainHelper::validatePostFields(array('type', 'id', 'board', 'mid'))){
+					if ($this->forum->checkIfAdmin($this->data['user'], 'forum', array(
+						'type' => $_POST['type'],
+						'id' => $_POST['id']
+							))) {
+						if ($this->forum->deleteMessage($_POST['type'], $_POST['id'], $_POST['board'], $_POST['mid'])) {
+							$this->toJSON(array('result' => TRUE), true);
+							// DooUriRouter::redirect($model->FORUM_URL . '/' . $this->params['board']);
+						} else {
+							$this->toJSON(array('result' => FALSE), true);
+						}
+					} else {
+						if ($this->forum->deleteMessage($_POST['type'], $_POST['id'], $_POST['board'], $_POST['mid'], $this->data['user']->ID_PLAYER)) {
+							$this->toJSON(array('result' => TRUE), true);
+							// DooUriRouter::redirect($model->FORUM_URL . '/' . $this->params['board']);
+						} else {
+							$this->toJSON(array('result' => FALSE), true);
+						}
+						
+					}
+				
+				}
+				else{
+					$this->toJSON(array('result' => FALSE), true);
+
+				}
+
+			}
+		}
+	}
+	// need some check on if a poll in the redirect's
+	public function editMessage (){
+		$this->moduleOff();
+		$list['page'] = 'editMessage';
+		$data['body_class'] = 'index_forum_forum forums';
+
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		$user = User::getUser();
+		
+		$topicInfo= $this->forum->getTopicById($this->data['type'], $model->UNID, $this->params['topic']);
+		$threadStarter = $topicInfo->ID_PLAYER_STARTED;
+
+		$createdBy = $this->forum->getPlayerIDfromMsgID($model->UNID, $this->data['type'] , $this->params['board'], $this->params['topic'], $this->params['msgid']);
+
+		if ($model->isForumAdmin() OR  $user and ($user->ID_PLAYER == $createdBy) OR ($user->ID_PLAYER == $threadStarter) ){
+			
+			$list['type'] = $this->data['type'];
+
+			if($this->data['type'] =='company'){
+				$data['left'] = MainHelper::companiesLeftSide($model, 'forum');
+			}elseif ($this->data['type'] =='game') {
+				
+				$data['left'] = MainHelper::gamesLeftSide($model, 'forum');
+			}elseif ($this->data['type'] == 'group') {
+				
+				$data['left'] = MainHelper::groupsLeftSide($model, 'forum');
+			}
+			$name = $model->UNNAME;
+			$list['name'] = $model->UNNAME;  // fx playnation
+			$list['id'] 	= $model->UNID;
+			$list['board_id'] = $this->params['board'];
+			$list['topic_id']= $this->params['topic'];
+			$list['msg_id']	= $this->params['msgid'];
+
+			$firstMsgID = $topicInfo->ID_FIRST_MSG;
+			$list['firstMsgID'] = $firstMsgID;
+			$list['threadStarter']  = $threadStarter; 
+
+			$firstmessage = $this->forum->getMessage ($model->UNID, $this->data['type'],  $this->params['board'], $this->params['topic'],  $firstMsgID);
+			$list['subject']  = $firstmessage->Subject;
+			
+			$messageInfo  = $this->forum->getMessage ($model->UNID, $this->data['type'],  $this->params['board'], $this->params['topic'],  $this->params['msgid']);
+			$list['body'] = $messageInfo->Body;
+		
+			$data['title'] = $name;
+			$this->addCrumb($name);
+
+			$list['model'] = $model;
+			$user = $this->data['user'];
+			$list['user'] =  $user;
+			if(isset($user) && $user == true){
+				$list['isForumAdmin'] =  $model->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+				$list['isMember'] = $model->isMember();
+			//	$list['isBoardMod'] = $model->isBoardMod($this->data['type'], $model->UNID, $this->params['board'], $user->ID_PLAYER);
+			}else{
+				$list['isForumAdmin'] = FALSE; //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+				$list['isMember'] =  FALSE;;
+			//	$list['isBoardMod'] = FALSE;
+			}
+			
+			$list['url'] = $this->params['id']; // playnation
+				
+			$list['crumb'] = $this->getCrumb();
+			$list['createdBy'] = $createdBy;
+			
+			//		$data['selected_menu'] = 'games';
+			$data['right'] = PlayerHelper::playerRightSide();
+			$data['footer'] = MainHelper::bottomMenu();
+			$data['header'] = MainHelper::topMenu();
+
+			$data['content'] = $this->renderBlock('forum/admin/' . $list['page'], $list);
+			$this->render3Cols($data);	
+		
+			
+			if(isset($_POST['updateMessage_yes'])){
+				$type = $_POST['type'];
+				$id = $_POST['id'];
+				$board = $_POST['board_id'];
+				$topic = $_POST['topic_id'];
+				$mid = $_POST['msg_id'];
+				$body = $_POST['body'];
+
+				$playerID = $user->ID_PLAYER;
+				$modifiedName  = $user->DisplayName;
+
+				if ($topicInfo->ID_FIRST_MSG == $mid  and $model->isForumAdmin()){
+					$subject = $_POST['topicSubject'];
+					$this->forum->editSubject ($type, $id,$board, $topic, $mid, $subject, $modifiedName, $playerID);
+					$this->forum->editMessage ($type, $id,$board, $topic, $mid, $body, $modifiedName, $playerID);
+					// update fm topic
+					//$this->forum->editTopicSubject ($type, $id, $board, $topic, $subject);
+					DooUriRouter::redirect(MainHelper::site_url('forum/' . $type . '/' . $this->params['id'].'/'.$board.'/'.$this->params['topic']));
+				}elseif ($topicInfo->ID_FIRST_MSG == $mid  and ($user->ID_PLAYER == $threadStarter )){
+					$subject = $_POST['topicSubject'];
+					$this->forum->editSubject ($type, $id,$board, $topic, $mid, $subject, $modifiedName, $playerID);
+					$this->forum->editMessage ($type, $id,$board, $topic, $mid, $body, $modifiedName, $playerID);
+					// update fm topic
+					//$this->forum->editTopicSubject ($type, $id, $board, $topic, $subject);
+					DooUriRouter::redirect(MainHelper::site_url('forum/' . $type . '/' . $this->params['id'].'/'.$board.'/'.$this->params['topic']));
+				}else{
+					$this->forum->editMessage ($type, $id,$board, $topic, $mid, $body, $modifiedName, $playerID);
+					DooUriRouter::redirect(MainHelper::site_url('forum/' . $type . '/' . $this->params['id'].'/'.$board.'/'.$this->params['topic']));
+				}
+			}
+		
+		}else{
+			DooUriRouter::redirect($model->FORUM_URL);
+		}
+	}
+	// used where ??
+	public function ajaxeditmessage() {
+		if ($this->isAjax()) {
+			if($this->data['user'] != false){
+				if(MainHelper::validatePostFields(array('type', 'id', 'mid', 'body'))){
+					if ($this->forum->checkIfAdmin($this->data['user'], 'forum', array(
+						'type' => $_POST['type'],
+						'id' => $_POST['id']
+							))) {
+						if ($this->forum->editMessage($_POST['type'], $_POST['id'], $_POST['mid'], $_POST['body'], PlayerHelper::showName($this->data['user']))) {
+							$this->toJSON(array('result' => TRUE), true);
+						} else {
+							$this->toJSON(array('result' => FALSE), true);
+						}
+					} else {
+						if ($this->forum->editMessage($_POST['type'], $_POST['id'], $_POST['mid'], $_POST['body'], PlayerHelper::showName($this->data['user']), $this->data['user']->ID_PLAYER)) {
+							$this->toJSON(array('result' => TRUE), true);
+						} else {
+							$this->toJSON(array('result' => FALSE), true);
+						}
+					}
+				}
+				else{
+					$this->toJSON(array('result' => FALSE), true);
+				}
+			}
+		}
+	}
+
+	// ok 
+	public function createTopic() {
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		$user = $this->data['user'];
+		if ( $user != false) {
+			$list['page'] = 'forum_create_topic';
+			$data['title'] = $this->__('Create Thread');
+			$data['body_class'] = 'index_forum_create_topic forums';
+
+			$list['user'] = $this->data['user'];
+			if(isset($user) && $user == true){
+				$list['isForumAdmin'] =  $model->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+				$list['isMember'] = $model->isMember();
+			}else{
+				$list['isForumAdmin'] = FALSE; //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+				$list['isMember']  = FALSE;;
+			}
+			
+			$list['boardInfo'] = $this->forum->getBoardInfo($this->data['type'], $model->UNID, $this->params['boardId']);
+
+			if($list['boardInfo'] and $list['boardInfo']->isClosed == 1 ){
+				DooUriRouter::redirect($model->FORUM_URL . '/' . $this->params['boardId']);
+				return;
+			}
+
+			$this->addCrumb($model->UNNAME, $model->FORUM_URL);
+
+			$this->addCrumb($list['boardInfo']->BoardName, $model->FORUM_URL . '/' . $this->params['boardId']);
+
+			$this->addCrumb($data['title']);
+
+			$list['player'] = $this->data['user'];
+			$list['crumb'] = $this->getCrumb();
+			$list['type'] = $this->data['type'];
+
+			$data['selected_menu'] = 'forum';
+			$data['left'] = PlayerHelper::playerLeftSide();
+			$data['right'] = PlayerHelper::playerRightSide();
+			$data['footer'] = MainHelper::bottomMenu();
+			$data['header'] = MainHelper::topMenu();
+
+			$data['content'] = $this->renderBlock('forum/' . $list['page'], $list);
+			$this->render3Cols($data);
+		} else {
+			DooUriRouter::redirect($model->FORUM_URL . '/' . $this->params['boardId']);
+		}
+	}
+	// ok
+	public function createTopicAction() {
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		
+		if ($this->data['user'] != false) {			
+			if(MainHelper::validatePostFields(array('topicName', 'messageText'))){
+				$board = $this->forum->getBoardInfo($this->data['type'], $this->params['id'], $this->params['boardId']);
+				if($board and $board->isClosed == 1 and !$model->isForumAdmin()){
+					DooUriRouter::redirect($model->FORUM_URL . '/' . $this->params['boardId']);
+					return;
+				}
+
+				$list['topic'] = $this->forum->createTopic($this->data['type'], $model->UNID, $this->params['boardId'], $_POST['topicName'], $this->data['user']->ID_PLAYER, $_POST['messageText']);
+			}
+		}
+		DooUriRouter::redirect($model->FORUM_URL . '/' . $this->params['boardId']);
+	}
+	// ok
+	public function createPoll() {
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		
+		$user = $this->data['user'];
+		if ( $user != false) {
+			$list['page'] = 'forum_create_poll';
+			$data['title'] = $this->__('Create Poll');
+			$data['body_class'] = 'index_forum_create_topic forums';
+
+			$list['user'] = $this->data['user'];
+			if(isset($user) && $user == true){
+				$list['isForumAdmin'] =  $model->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin  
+				$list['isMember'] = $model->isMember();
+			}else{
+				$list['isForumAdmin'] = FALSE; //just for the forum parts can be: isAdmin isForumAdmin 
+				$list['isMember'] =  FALSE;;
+			}
+			
+			$list['boardInfo'] = $this->forum->getBoardInfo($this->data['type'], $model->UNID, $this->params['boardId']);
+
+			$this->addCrumb($model->UNNAME, $model->FORUM_URL);
+
+			$this->addCrumb($list['boardInfo']->BoardName, $model->FORUM_URL . '/' . $this->params['boardId']);
+
+			$this->addCrumb($data['title']);
+
+			$list['player'] = $this->data['user'];
+			$list['crumb'] = $this->getCrumb();
+			$list['type'] = $this->data['type'];
+
+			$data['selected_menu'] = 'forum';
+			$data['left'] = PlayerHelper::playerLeftSide();
+			$data['right'] = PlayerHelper::playerRightSide();
+			$data['footer'] = MainHelper::bottomMenu();
+			$data['header'] = MainHelper::topMenu();
+
+			$data['content'] = $this->renderBlock('forum/' . $list['page'], $list);
+			$this->render3Cols($data);
+		} else {
+			DooUriRouter::redirect($model->FORUM_URL . '/' . $this->params['boardId']);
+		}
+	}
+	// ok
+	public function createPollAction() {
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		$id = $model->UNID;
+
+		$user = $this->data['user'];
+		if ($user) {
+			if(MainHelper::validatePostFields(array('topicName', 'messageText'))){
+				$board = $this->forum->getBoardInfo($this->data['type'], $this->params['id'], $this->params['boardId']);
+				if($board and $board->isClosed == 1 and !$model->isForumAdmin()){
+					DooUriRouter::redirect($model->FORUM_URL . '/' . $this->params['boardId']);
+					return;
+				}
+								
+				// getting the counters - ok
+				$counters = $this->forum->GetCounters($this->data['type'], $id);
+				$topic_id = $counters->NextTopic; 
+				$poll_id  = $counters->NextPoll;
+
+				// create record in FM_messages and FM_topics  OK
+				$list['Polltopic'] = $this->forum->createTopic($this->data['type'], $id , $this->params['boardId'], $_POST['topicName'], $this->data['user']->ID_PLAYER, $_POST['messageText']);
+				
+				// create record in FM_POLLS ok
+				$list['Poll'] = $this->forum->createPoll($this->data['type'], $id, $poll_id, $this->data['user']->ID_PLAYER, $this->data['user']->DisplayName, $_POST ['enddate'], $_POST['hour'], $_POST['topicName']);
+				
+				// update NextPoll (id) in FM_Counters ok
+				$this->forum->updateCounter($this->data['type'], $id, $poll_id);
+								
+				// update ID_POLL in Fm_topics ok
+				$this->forum->updateTopicsPollid($this->data['type'], $id,  $topic_id, $poll_id);
+				
+			
+				// create record in FM_Poll_choices, one foreach option - ok
+				$choice_id = 1;
+				foreach( $_POST['options'] as $choice){
+					 if (! empty($choice )){
+						$this->forum->createChoices($this->data['type'], $id, $poll_id, $choice_id, $choice);
+						$choice_id++;
+					 }
+				}
+			DooUriRouter::redirect($model->FORUM_URL . '/' . $this->params['boardId']);	
+			}
+		}else{
+			DooUriRouter::redirect($model->FORUM_URL . '/' . $this->params['boardId']);
+		}
+		
+	}
+
+
+	public function ajaxCastVote(){
+		if ($this->isAjax()) {
+			if(MainHelper::validatePostFields(array('pollchoice','poll_id'))){
+				$model = Forum::getModelByID($_POST['type'], $_POST['id']);
+				if (isset($model) and $model->isMember() === TRUE) {
+					$user = $this->data['user'];
+					// add the vote to fm_poll_votes
+					$this->forum->castVote($_POST['type'],$_POST['id'], $_POST['poll_id'], $user->ID_PLAYER, $_POST['pollchoice'] );
+					
+					// get current numbers of votes from fmpollchoices
+					$curVotes = $this->forum->getCurrentVotes($_POST['type'],$_POST['id'], $_POST['poll_id'], $_POST['pollchoice'] );
+				
+					// add vote to counter in fmpollchoices
+					$result['result'] = $this->forum->addVote($_POST['type'],$_POST['id'], $_POST['poll_id'], $_POST['pollchoice'], $curVotes);
+					$this->toJSON($result, true);
+				}
+			
+			}else{
+				$this->toJSON(array('result' => false), true);
+			}
+
+		}else{
+				$this->toJSON(array('result' => false), true);
+		}
+	}
+
+	//Add board moderator Ajax call.
+	public function ajaxAddBoardMod(){
+		if ($this->isAjax()) {
+			if(MainHelper::validatePostFields(array('id_player'))){
+				$model = Forum::getModelByID($_POST['type'], $_POST['id']);
+				if (isset($model) and $model->isMember() === TRUE) {
+					$result['result'] = $this->forum->addBoardModerator($_POST['type'], $_POST['id'], $_POST['board'], $_POST['id_player']);
+					$this->toJSON($result, true);
+				}
+			}
+			else{
+				$this->toJSON(array('result' => false), true);
+			}
+				}
+	}
+
+		// ok 
+	public function deleteOldVote(){
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		$id = $model->UNID;
+		if($model->isMember() ){
+			// get the players vote
+			$choice_id = $this->forum-> getPlayersVotes($this->data['type'], $id, $this->params['poll'], $this->data['user']->ID_PLAYER );
+					
+				// get current numbers of votes from fmpollchoices
+				$curVotes = $this->forum->getCurrentVotes($this->data['type'], $id, $this->params['poll'], $choice_id);
+			
+			// remove a votes from Votes in fmpollchoices
+			$this->forum->removeVote($this->data['type'], $id, $this->params['poll'], $choice_id, $curVotes);
+
+			// DELETE the players votes from fmpollvotes
+			$this->forum->deleteVote($this->data['type'] ,$id, $this->params['poll'], $this->data['user']->ID_PLAYER );
+			
+			DooUriRouter::redirect($model->FORUM_URL . '/' . $this->params['board'].'/'.$this->params['topic'].'/'.$this->params['poll']);
+		}else{
+			DooUriRouter::redirect($model->FORUM_URL . '/' . $this->params['board'].'/'.$this->params['topic'].'/'.$this->params['poll']);
+		}
+	
+	}
+
+	public function editPoll(){
+		$this->moduleOff();
+		$list['page'] = 'editPoll';
+		$data['body_class'] = 'index_forum_forum forums';
+
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		$user = User::getUser();
+		
+		$topicInfo= $this->forum->getTopicById($this->data['type'], $model->UNID, $this->params['topic']);
+		$threadStarter = $topicInfo->ID_PLAYER_STARTED;
+		
+		if ($model->isForumAdmin() OR  $user and ($user->ID_PLAYER == $threadStarter) ){
+			
+			$list['type'] = $this->data['type'];
+
+			if($this->data['type'] =='company'){
+				$data['left'] = MainHelper::companiesLeftSide($model, 'forum');
+			}elseif ($this->data['type'] =='game') {
+			
+				$data['left'] = MainHelper::gamesLeftSide($model, 'forum');
+			}elseif ($this->data['type'] == 'group') {
+				
+				$data['left'] = MainHelper::groupsLeftSide($model, 'forum');
+			}
+			
+			if(isset($user) && $user == true){
+				$list['isForumAdmin'] =  $model->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+				$list['isMember'] = $model->isMember();
+				//$list['isBoardMod'] = $model->isBoardMod($this->data['type'], $model->UNID, $this->params['board'], $user->ID_PLAYER);
+			}else{
+				$list['isForumAdmin'] = FALSE; //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+				$list['isMember']  = FALSE;;
+				//$list['isBoardMod'] = FALSE;
+			}
+			
+			
+			$name = $model->UNNAME;
+			$list['name'] = $model->UNNAME;  // fx playnation
+			$list['id'] 	= $model->UNID;
+			$list['board_id'] = $this->params['board'];
+			$list['topic_id']= $this->params['topic'];
+			$list['poll_id'] = $this->params['poll'];
+
+			$firstMsgID = $topicInfo->ID_FIRST_MSG;
+			$list['firstMsgID'] = $firstMsgID;
+			$list['threadStarter']  = $threadStarter; 
+
+			$firstmessage = $this->forum->getMessage ($model->UNID, $this->data['type'],  $this->params['board'], $this->params['topic'],  $firstMsgID);
+			$list['subject']  = $firstmessage->Subject;
+			$list['body'] = $firstmessage->Body;
+		
+			$pollbase = $this->forum->getPollbase($this->data['type'], $model->UNID, $this->params['poll'] );
+			
+			$selected_date =  date('d/m/Y', $pollbase->ExpireTime);;
+			$selected_time =  date('H:i:s', $pollbase->ExpireTime);;
+			$list['selected_date'] = $selected_date;
+			$list['selected_time'] = $selected_time;
+
+			$list['Poll_choices']  = $this->forum->getPollChoices($this->data['type'], $model->UNID, $this->params['poll']);
+						
+			$data['title'] = $name;
+			$this->addCrumb($name);
+
+			$list['model'] = $model;
+			$list['user'] = $this->data['user']; 
+			$list['url'] = $this->params['id']; // playnation
+				
+			$list['crumb'] = $this->getCrumb();
+			
+			
+			//		$data['selected_menu'] = 'games';
+			$data['right'] = PlayerHelper::playerRightSide();
+			$data['footer'] = MainHelper::bottomMenu();
+			$data['header'] = MainHelper::topMenu();
+
+			$data['content'] = $this->renderBlock('forum/admin/' . $list['page'], $list);
+			$this->render3Cols($data);	
+				
+		}else{
+			DooUriRouter::redirect($model->FORUM_URL);
+		}
+	}
+
+	public function editPollAction(){
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		$id = $model->UNID;
+
+		if ($this->data['user'] != false) {
+			if(MainHelper::validatePostFields(array('topicSubjectpoll', 'body'))){
+				$type = $_POST['type'];
+				$id = $_POST['id'];
+				$board_id = $_POST['board_id'];
+				$topic_id = $_POST['topic_id'];
+				$poll_id = $_POST['poll_id'];
+				$msg_id = $_POST['msg_id'];
+
+				$subject = $_POST['topicSubjectpoll'];
+				$body = $_POST['body'];
+
+				$date = $_POST['enddate'];
+				$time = $_POST['hour'];
+				
+				$enddate = ContentHelper:: handleContentInput($date); 
+				$hour = ContentHelper:: handleContentInput($time);
+				
+				$user =$this->data['user'];
+				$playerID = $user->ID_PLAYER;
+				$modifiedName  = $user->DisplayName;
+
+				// update fm message - ok 
+				$this->forum->editSubject ($type, $id, $board_id, $topic_id, $msg_id, $subject, $modifiedName, $playerID);
+				$this->forum->editMessage ($type, $id, $board_id, $topic_id, $msg_id, $body, $modifiedName, $playerID);
+				// update fm topic har en bug
+				//$this->forum->editTopicSubject ($type, $id, $board_id, $topic_id, $subject);
+
+				// update fm_polls - ok
+				$this->forum->updateQuestion( $type, $id, $poll_id, $subject);
+
+				$pollbase = $this->forum->getPollbase($this->data['type'], $model->UNID, $this->params['poll'] );
+				$selected_date =  date('d/m/Y', $pollbase->ExpireTime);;
+				$selected_time =  date('H:i:s', $pollbase->ExpireTime);;
+					
+				// date is never empty - ok
+				if(!empty($enddate) && empty($hour)){
+					$hour = $selected_time;
+					$this->forum->updateExpiretime( $type, $id, $poll_id, $enddate, $hour);
+				}elseif(!empty($enddate) && !empty($hour)){
+					$this->forum->updateExpiretime( $type, $id, $poll_id, $enddate, $hour);
+				}
+
+				// update fm_poll_choices ok
+				$options = $_POST['options'] ;
+				$count_OldChoices= count($options);
+				$original_choiceIds = array_slice(array_keys($options), 0, $count_OldChoices); 
+
+				if(isset($_POST['new_options'])){
+					$new_options = $_POST['new_options'];
+					$count_NewChoices =  count($new_options);
+					$added_choices = array_slice(array_keys($new_options),0, $count_NewChoices );
+				}else{
+					$new_options = "";
+					$count_NewChoices = "";
+					$added_choices = "";
+				}
+				
+				foreach ($original_choiceIds as $OC) {
+					$choice_id = $OC;
+					$choice =  $options[$choice_id];
+					$this->forum->updatePollChoices($type, $id, $poll_id, $choice_id, $choice);	
+					
+				}
+				
+				if(isset($new_options) && $new_options != ""){
+					foreach( $new_options as $choice){
+					$choice_id += 1;
+						if (! empty($choice )){
+							$this->forum->createChoices($this->data['type'], $id, $poll_id, $choice_id, $choice);
+						}
+					}
+				}				 
+
+				DooUriRouter::redirect(MainHelper::site_url('forum/' . $type . '/' . $this->params['id'].'/'.$board_id.'/'.$topic_id.'/'.$poll_id));
+			}
+		}
+	}
+
+	public function deletePollChoice(){
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		$type = $this->data['type'];
+		$id = $model->UNID;
+		$poll_id = $this->params['poll'];
+		$choice_id = $this->params['choice'];
+
+		$votes = $this->forum->getCurrentVotes($type, $id, $poll_id, $choice_id);
+
+		if($votes > 0){
+			$this->forum->deleteChoiceVotes($type ,$id, $poll_id, $choice_id );
+			$this->forum->deletePollChoice($type, $id, $poll_id, $choice_id);
+		}else{
+			$this->forum->deletePollChoice($type, $id, $poll_id, $choice_id);
+		}
+
+		DooUriRouter::redirect(MainHelper::site_url('forum/'.$type .'/'.$this->params['id'].'/'.$this->params['board'].'/'.$this->params['topic'].'/'.$poll_id.'/editpoll'));
+
+	}
+
+	public function deletePoll(){
+		$this->moduleOff();
+		$list['page'] = 'deletePoll';
+		$data['body_class'] = 'index_forum_forum forums';
+
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		$user = User::getUser();
+
+		$topicInfo= $this->forum->getTopicById($this->data['type'], $model->UNID, $this->params['topic']);
+		$threadStarter = $topicInfo->ID_PLAYER_STARTED;
+					
+		if ($model->isForumAdmin() OR  $user and ($user->ID_PLAYER == $threadStarter)){
+			
+			if($this->data['type'] =='company'){
+				$data['left'] = MainHelper::companiesLeftSide($model, 'forum');
+			}elseif ($this->data['type'] =='game') {
+				$data['left'] = MainHelper::gamesLeftSide($model, 'forum');
+			}elseif ($this->data['type'] == 'group') {
+				$data['left'] = MainHelper::groupsLeftSide($model, 'forum');
+			}
+			
+			
+			$list['isAdmin'] = $model->isForumAdmin(); //just for the forum parts can be: isAdmin isForumAdmin isForumModerator 
+			
+
+			$name = $model->UNNAME;
+			$list['name'] = $model->UNNAME;  // fx playnation
+			$list['type'] = $this->data['type'];
+			$list['id'] 	= $model->UNID;
+			$list['board_id'] = $this->params['board'];
+			$list['topic_id']= $this->params['topic'];
+			$list['poll_id'] = $this->params['poll'];
+
+			$firstMsgID = $topicInfo->ID_FIRST_MSG;
+			$list['firstMsgID'] = $firstMsgID;
+			$list['threadStarter']  = $threadStarter; 
+
+			
+			$data['title'] = $name;			
+			$data['right'] = PlayerHelper::playerRightSide();
+			$data['footer'] = MainHelper::bottomMenu();
+			$data['header'] = MainHelper::topMenu();
+
+			$data['content'] = $this->renderBlock('forum/admin/' . $list['page'], $list);
+			$this->render3Cols($data);	
+			
+			if(isset($_POST['deletePoll_yes'])){
+				
+				$type = $_POST['type'];
+				$id = $_POST['id'];
+				$board_id = $_POST['board_id'];
+				$topic_id = $_POST['topic_id'];
+				$poll_id = $_POST['poll_id'];
+				$msg_id = $_POST['msg_id'];
+				
+				$choices = $this->forum->getPollChoices($type, $id, $poll_id);
+
+				foreach ($choices as $choice) {
+					$choice_id = $choice->ID_CHOICE;
+					$this->forum->deletePollChoice($type, $id, $poll_id, $choice_id);
+				}
+
+				$this->forum->deletePollbase($type, $id, $poll_id);
+				$this->forum->deleteMessage($type, $id, $board_id, $msg_id);
+
+				DooUriRouter::redirect(MainHelper::site_url('forum/' . $type . '/' . $this->params['id'].'/'.$board_id));
+			}
+			
+		}else{
+			DooUriRouter::redirect($model->FORUM_URL);
+		}
+	}
+	
+	// ok
+	public function reply() {
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		if ($this->data['user'] != false) {
+			if (MainHelper::validatePostFields(array('subject', 'messageText'))) {
+				$this->forum->reply($this->data['type'], $model->UNID, $this->params['board'], $this->params['topic'], $_POST['subject'], $this->data['user']->ID_PLAYER, $_POST['messageText']);
+			}
+		}
+
+		$topic = $this->forum->getTopicById($this->data['type'], $model->UNID, $this->params['topic']);
+
+		if ($topic->ID_POLL == 0) {
+			DooUriRouter::redirect($model->FORUM_URL .'/'. $this->params['board'] .'/'. $this->params['topic']);
+		} else {
+			DooUriRouter::redirect($model->FORUM_URL .'/'. $this->params['board'] .'/'. $this->params['topic'] .'/'. $topic->ID_POLL);
+		}
+	}
+
+	public function search() {
+		$this->moduleOff();
+
+		if(MainHelper::validatePostFields(array('search')) and strlen($_POST['search']) > Doo::conf()->forumSearchMinLength){
+			$data['body_class'] = 'index_forum_search forums';
+			if (isset($this->data['type']) and isset($this->params['id'])) {
+				$list['page'] = 'forum_search';
+
+				$list['topics'] = $this->forum->search($this->data['type'], $this->params['id'], $_POST['search']);
+
+				$this->addCrumb($this->__($this->forum->getItemName($this->data['type'], $this->params['id'])), MainHelper::site_url('forum/' . $this->data['type'] . '/' . $this->params['id']));
+
+				$this->addCrumb($_POST['search']);
+				$list['ownerId'] = $this->params['id'];
+				$list['type'] = $this->data['type'];
+			} elseif (isset($this->data['type'])) {
+				$results = $this->forum->searchIndex($this->data['type'], $_POST['search']);
+
+				$this->addCrumb($_POST['search']);
+
+				$list['page'] = 'forum_search_index';
+				$list['fields'] = $results['fields'];
+				$list['model'] = $results['results'];
+			}
+
+			$list['type'] = $this->data['type'];
+
+			$list['crumb'] = $this->getCrumb();
+
+			$data['title'] = $this->__('Search results');
+
+			$data['selected_menu'] = 'forum';
+			$data['left'] = PlayerHelper::playerLeftSide('wall');
+			$data['right'] = PlayerHelper::playerRightSide();
+			$data['footer'] = MainHelper::bottomMenu();
+			$data['header'] = MainHelper::topMenu();
+
+			$data['content'] = $this->renderBlock('forum/' . $list['page'], $list);
+			$this->render3Cols($data);
+		} else {
+			$redirect = 'forum';
+
+			if (isset($this->data['type']) and !empty($this->data['type'])) {
+				$redirect .= '/' . $this->data['type'];
+				if (isset($this->params['id']) and !empty($this->params['id'])) {
+					$redirect .= '/' . $this->params['id'];
+
+					if (isset($this->params['board']) and !empty($this->params['board'])) {
+						$redirect .= '/' . $this->params['board'];
+
+						if (isset($this->params['topic']) and !empty($this->params['topic'])) {
+							$redirect .= '/' . $this->params['topic'];
+						}
+					}
+				}
+			}
+			DooUriRouter::redirect(MainHelper::site_url($redirect));
+		}
+	}
+
+
+	public function adminforum(){
+		$this->moduleOff();
+
+		$list['page'] = 'forum_adminpage';
+		$data['body_class'] = 'index_forum_forum forums';
+
+		switch ($this->data['type']) {
+			case WALL_COMPANIES:
+				$this->adminCompanies();
+				break;
+			case WALL_GAMES:
+				$this->adminGames();
+				break;
+			case WALL_GROUPS:
+				$this->adminGroups();
+				break;
+		}
+
+	}
+
+
+	public function adminCompanies(){
+		$this->moduleOff();
+		$company = Forum::getModelByUrl('company', $this->params['id']);
+		
+		
+			$list['page'] = 'forum_adminpage';
+			$data['body_class'] = 'index_forum_forum forums';
+
+			//$company = Forum::getModelByUrl('company', $this->params['id']);
+			$name = $company->CompanyName;
+			$data['title'] = $name;
+			$this->addCrumb($name, $company->FORUM_URL);
+			$this->addCrumb('Admin panel');
+
+			$list['model'] = $company;
+
+			$list['user'] = $this->data['user'];
+
+			$list['url'] = $this->params['id'];
+
+			$isOnAdminPage = (isset($this->params['admin'])) ? TRUE : FALSE;
+			$list['categories'] = $this->forum->getForum($this->data['type'], $company->ID_COMPANY, $isOnAdminPage); /* get the cat list */
+			$list['type'] = $this->data['type'];
+			$list['ownerId'] = $company->ID_COMPANY;
+			$list['crumb'] = $this->getCrumb();
+
+			//		$data['selected_menu'] = 'companies';
+			$data['left'] = MainHelper::companiesLeftSide($company, 'forum');
+			$data['right'] = PlayerHelper::playerRightSide();
+			$data['footer'] = MainHelper::bottomMenu();
+			$data['header'] = MainHelper::topMenu();
+
+			$data['content'] = $this->renderBlock('forum/' . $list['page'], $list); // builds view - file: forum_adminpage
+			$this->render3Cols($data);
+		
+	}
+
+
+	public function adminGames(){
+		$this->moduleOff();
+		$game = Forum::getModelByUrl('game', $this->params['id']);
+		
+		
+		
+			$list['page'] = 'forum_adminpage';
+			$data['body_class'] = 'index_forum_forum forums';
+
+			$name = $game->GameName;
+
+			$data['title'] = $name;
+			$this->addCrumb($name);
+
+			$list['model'] = $game;
+			$list['user'] = $this->data['user'];
+			$list['isAdmin'] = $game->isForumAdmin();
+			$list['url'] = $this->params['id'];
+
+			$list['categories'] = $this->forum->getForum($this->data['type'], $game->ID_GAME);
+			$list['type'] = $this->data['type'];
+			$list['ownerId'] = $game->ID_GAME;
+			$list['crumb'] = $this->getCrumb();
+
+
+			//		$data['selected_menu'] = 'games';
+			$data['left'] = MainHelper::gamesLeftSide($game, 'forum');
+			$data['right'] = PlayerHelper::playerRightSide();
+			$data['footer'] = MainHelper::bottomMenu();
+			$data['header'] = MainHelper::topMenu();
+
+			$data['content'] = $this->renderBlock('forum/' . $list['page'], $list);
+			$this->render3Cols($data);
+		
+	}
+
+	public function adminGroups(){
+		$this->moduleOff();
+		$group = Forum::getModelByUrl('group', $this->params['id']);
+		
+		
+			$list['page'] = 'forum_adminpage';
+			$data['body_class'] = 'index_forum_forum forums';
+			$name = $group->GroupName;
+			$list['model'] = $group;
+
+			$data['title'] = $name;
+			$this->addCrumb($name);
+
+			$list['user'] = $this->data['user'];
+			$list['isAdmin'] = $group->isForumAdmin();
+			$list['url'] = $this->params['id'];
+
+			$list['categories'] = $this->forum->getForum($this->data['type'], $group->ID_GROUP);
+			$list['type'] = $this->data['type'];
+			$list['ownerId'] = $group->ID_GROUP;
+			$list['crumb'] = $this->getCrumb();
+
+			//		$data['selected_menu'] = 'groups';
+			$data['left'] = MainHelper::groupsLeftSide($group, 'forum');
+			$data['right'] = PlayerHelper::playerRightSide();
+			$data['footer'] = MainHelper::bottomMenu();
+			$data['header'] = MainHelper::topMenu();
+
+			$data['content'] = $this->renderBlock('forum/' . $list['page'], $list);
+			$this->render3Cols($data);
+		
+	}
+
+	public function countTotalVotes($Poll_choices){
+		$i=0;
+		foreach ($Poll_choices as $poll) {
+			$votes  = $poll->Votes;
+			$i+= $votes;
+		}
+		return $i;
+	}
+
+	public function pinLockThread() {
+		$company = Forum::getModelByUrl($this->params['type'], $this->params['id']);
+		$thread = $this->forum->pinLockThread($this->params['pl_type'], $company->ID_COMPANY, $this->params['type'], $this->params['board'], $this->params['topic']);
+
+		DooUriRouter::redirect(MainHelper::site_url('forum/' . $this->data['type'] . '/' . $this->params['id'] . '/' . $this->params['board']));
+	}
+
+	public function markBoardAsRead() {
+		$user = $this->data['user'];
+		$company = Forum::getModelByUrl($this->params['type'], $this->params['id']);
+
+		$boardVar = $this->forum->markTopicAsRead($user->ID_PLAYER, $company->ID_COMPANY, $this->params['type'], $this->params['board']);
+
+		DooUriRouter::redirect(MainHelper::site_url('forum/' . $this->data['type'] . '/' . $this->params['id'] . '/' . $this->params['board']));
+	}
+
+	public function setBanUser(){
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+		$name = $model->UNNAME;
+
+		if ($model->isForumAdmin() OR $model->isForumMod() OR $model->isBoardMod() ) {
+			$forum = new Forum();
+
+			$user = $this->data['user'];
+			$list['user'] = $user;
+
+			$list['type'] = $this->data['type']; 
+			$list['id'] = $model->UNID;  
+			$list['url'] = $model->UNNAME;
+			$list['board_id'] = $this->params['board'];
+			$list['topic_id'] = $this->params['topic'];
+			$list['msgid'] = $this->params['msgid'];
+			 
+			$messageInfo  = $this->forum->getMessage ($model->UNID, $this->data['type'],  $this->params['board'], $this->params['topic'],  $this->params['msgid']);
+			$list['id_player'] = $messageInfo->ID_PLAYER;
+			$list['playersIP'] = $messageInfo->PosterIP;
+			$list['playername'] = $messageInfo->PosterName;
+
+			echo $this->renderBlock('forum/admin/addBanUser', $list);
+		} else {
+				DooUriRouter::redirect($model->FORUM_URL);
+		}
+	}
+
+		// ok
+	public function ajaxBanUser() {
+		if($this->isAjax()) {
+			//if(MainHelper::validatePostFields(array('type','id','id_player','PosterIP','bantime','banfrom'))) {
+				$model = Forum::getModelByID($_POST['type'], $_POST['id']);
+				if(isset($model) && $model->isMember() === true) {
+					$startDate = date('Y-m-d');
+
+					if($_POST['bantime'] > -1) {
+						// find current dato.
+						$current_date = getdate();
+						$day = $current_date['mday'];
+						$month = $current_date['mon'];
+						$year = $current_date['year'];
+
+						$banTime = $_POST['bantime'];
+
+						$banYear = floor($banTime / 365);
+						$yearRemaining = ($banYear > 0) ? floor((($banTime / 365) - $banYear) * $banTime) : 0;
+						$banMonth = ($yearRemaining >= 30) ? floor($yearRemaining / 30) : 0;
+						$monthRemaining = ($yearRemaining >= 30) ? floor((($yearRemaining / 30) - $banMonth) * $banTime) : 0;
+
+						if($monthRemaining > 0) {
+							$banDay = $monthRemaining;
+						}	elseif ($yearRemaining > 0) {
+							$banDay = $yearRemaining;
+						} else {
+								$banDay = $banTime;
+						}
+
+						// DateTime object.
+						$endDateObj = new DateTime();
+						$endDateObj->setDate($year + $banYear, $month + $banMonth, $day + $banDay);
+									 
+						//banning ends date(sting)
+						$endDate = $endDateObj->format("Y-m-d");
+						$unlimited = 0;
+
+						$result['result'] = $this->forum->forumBan($_POST['type'], $_POST['id'],  $_POST['id_player'],$_POST['banfrom'], $_POST['PosterIP'], $startDate, $endDate, $unlimited);
+						$this->toJSON($result, true);
+					} else {
+						$endDate = 0000-00-00;
+						$unlimited = 1;  
+
+						$result['result'] = $this->forum->forumBan($_POST['type'], $_POST['id'],  $_POST['id_player'], $_POST['banfrom'], $_POST['PosterIP'], $startDate, $endDate, $unlimited);
+						$this->toJSON($result, true);
+					}
+				}
+			/*} else {
+				$this->toJSON(array('result' => false), true);
+			}*/
+		} else {
+			// if not ajax
+			$this->toJSON(array('result' => false), true);
+		}
+	}
+
+	// bannedmembers page
+
+	public function bannedmembers(){
+		$model = Forum::getModelByUrl($this->data['type'], $this->params['id']);
+
+		if($model->isForumAdmin() or $model->isForumMod() ){
+			$list['type'] = $this->data['type']; 
+			$list['id'] = $model->UNID;
+			$list['url'] = $this->params['id'];
+			$list['model'] = $model;
+
+
+			// get all ACTIVE BANS
+			$list['activeBans'] = $this->forum->allActiveBans($this->data['type'], $model->UNID);
+			// get all NON ACTIVE BANS
+			$list['banHistory'] = $this->forum->banHistory($this->data['type'],$model->UNID);
+
+			$this->addCrumb($model->UNNAME, $model->FORUM_URL);
+			$this->addCrumb('Banned members');
+			$list['crumb'] = $this->getCrumb();
+			// page data
+			$list['page'] = 'forum_bannedmembers';
+			$data['body_class'] = 'index_forum_forum forums';
+			$data['title']= 'Banned members';
+			if($this->data['type'] =='company'){
+				$data['left'] = MainHelper::companiesLeftSide($model, 'forum');
+			}elseif ($this->data['type'] =='game') {				
+				$data['left'] = MainHelper::gamesLeftSide($model, 'forum');
+			}elseif ($this->data['type'] == 'group') {				
+				$data['left'] = MainHelper::groupsLeftSide($model, 'forum');
+			}
+			$data['right'] = PlayerHelper::playerRightSide();
+			$data['footer'] = MainHelper::bottomMenu();
+			$data['header'] = MainHelper::topMenu();
+
+			$data['content'] = $this->renderBlock('forum/' . $list['page'], $list);
+			$this->render3Cols($data);
+
+
+		}else{
+			DooUriRouter::redirect($model->FORUM_URL);
+		}
+	}
+
+	public function ajaxDeactivateBan(){
+		if($this->isAjax()) {
+			$result['result'] = $this->forum->deactivateBan($_POST['ID_SUSPEND'] );
+			$this->toJSON($result, true);;
+		}else{
+			$this->toJSON(array('result' => false), true);
+		}
+	}
+
+	public function ajaxMoveToHistory(){
+		if($this->isAjax()) {
+			$result['result'] = $this->forum->moveBanToHistory($_POST['ID_SUSPEND'] );
+			$this->toJSON($result, true);;
+		}else{
+			$this->toJSON(array('result' => false), true);
+		}
+	}
+
+
+} // ends the forumcontroller 
+?>

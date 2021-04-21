@@ -1,0 +1,61 @@
+/*  == Left menu =========================================================================================================================================================
+
+  ====================================================================================================================================================================== */
+
+.left_nav ul {
+	margin-top: 10px;
+}
+
+.left_nav li {
+	border-bottom: 1px solid;
+}
+
+.left_nav ul li.last {
+	border-bottom: 0px;
+}
+
+.left_nav ul li a {
+	display: block;
+	position: relative;
+	font: 14px/14px Tahoma, Verdana, sans-serif;
+	padding: 8px 0px 9px 34px;
+}
+
+.left_nav ul li a span {
+	position: absolute;
+	right: 0px;
+}
+
+.left_nav ul li a:hover {
+	text-decoration: none;
+}
+
+.left_nav ul li ul{
+    width: 170px;
+    display: block;
+    float: right;
+}
+
+.left_nav ul li ul.sub_subscribtions li {
+    background: url("img/horizontal_outline.gif") repeat-x center top;
+}
+
+.left_nav ul li ul.sub_subscribtions li a {
+    background: none;
+    font-size: 12px;
+    color: #999999;
+    padding: 5px 0px 6px 0px;
+}
+
+.left_nav ul li ul.sub_subscribtions li a:hover,
+.left_nav ul li ul.sub_subscribtions li.active a {
+    background: none;
+    color: #1689cb;
+    text-decoration: underline;
+}
+
+.left_nav ul li ul.sub_subscribtions li a:hover span,
+.left_nav ul li ul.sub_subscribtions li.active a span {
+    color: #1689cb;
+    text-decoration: none;
+}

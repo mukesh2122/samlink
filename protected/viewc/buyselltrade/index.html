@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>JQ AJ PHP JSON</title>
+<style type="text/css">
+div
+{
+text-align:center;
+padding:10px;
+}
+
+#msg {
+width: 500px;
+margin: 0px auto;
+}
+.members {
+width: 200px ;
+background-color: beige;
+}
+</style>
+</head>
+<body>
+<div id="msg"> </div>
+<button type="button" onclick="refreshJSON()" >forceRefresh</button> <br />
+<button type="button" onclick="newrole()" >create new</button> 
+<input id="newname" type="text" name="newname">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+</script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	refreshJSON();
+});
+
+ function refreshJSON() {
+	$("#msg").empty();
+	var url="roles.php?action=list";
+	$.getJSON(url, function(json){
+		// loop through the roles here
+		$.each(json.roles,function(i,dat){
+			$("#msg").append(
+			'<div class="members">'+
+			'<h1>'+dat.ID_ROLE+'</h1>'+
+			'<p>name : <em>'+dat.name+'</em>'+
+			'<hr>'+
+			'<button type="button" onclick="remrole('+dat.ID_ROLE+')" >Remove </button><br/>'+
+			'<button type="button" onclick="updrole('+dat.ID_ROLE+')">Change </button> '+
+			'</div>'
+			);
+		});
+	}); 
+ }
+ 
+ //canned redrawn results only, not working
+ function redraw(json) {
+	$("#msg").empty();
+	$.each(json.roles,function(i,dat){
+			$("#msg").append(
+			'<div class="members">'+
+			'<h1>'+dat.ID_ROLE+'</h1>'+
+			'<p>name : <em>'+dat.name+'</em>'+
+			'<hr>'+
+			'<button type="button" onclick="remrole('+dat.ID_ROLE+')" >Remove </button><br/>'+
+			'<button type="button" onclick="updrole('+dat.ID_ROLE+')">Change </button> '+
+			'</div>'
+			);
+		});
+ }
+ 
+ function remrole(id) {
+	var url="roles.php?action=remove&id="+ id;
+	var jqxhr = $.getJSON(url, function(json) {
+		//immediate callback, before results
+	})
+	.error(function() { $("#msg").append("error"); })
+	.complete(function(json) { refreshJSON(); /* redraw(json);*/ });
+}
+
+ function updrole(id) {
+	var name = $("#newname").val();
+	if (name != "") {
+	var url="roles.php?action=update&id="+ id + "&name=" + name;
+	var jqxhr = $.getJSON(url, function(json) {
+		//immediate callback, before results
+	})
+	.error(function() { $("#msg").append("error"); })
+	.complete(function() { refreshJSON();  });
+	}
+	else {  alert("need something to rename it boss"); }
+ } 
+  function newrole() {
+	var name = $("#newname").val();
+	if (name != "") {
+	var url="roles.php?action=create&name=" + name;
+	var jqxhr = $.getJSON(url, function(json) {
+		//immediate callback, before results
+	})
+	.error(function() { $("#msg").append("error"); })
+	.complete(function() { refreshJSON();  });
+	}
+		else {  alert("need something to call it boss"); }
+ } 
+ 
+</script>
+</body>
+</html>

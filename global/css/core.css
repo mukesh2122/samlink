@@ -1,0 +1,1002 @@
+/*  == Global CSS Core ================================================================
+
+	The global CSS core contains all the global classes, UI elements, sprites etc.
+	Basically anything that isn't coded for a specific place. 
+
+	=================================================================================== */
+
+/*  == Sprite =========================================================================
+
+	Sprites:
+		bg_sprite.png
+		n_sprite.png
+		n_icon_sprite.png
+		social_icon_sprite.png
+
+	=================================================================================== */
+
+/*
+ * Icons
+ */
+.comment_icon,
+.like_icon,
+.dislike_icon,
+.subscribe_icon,
+.unsubscribe_icon,
+.share_icon {
+	background: url("img/n_icon_sprite.png") no-repeat;
+}
+
+.comment_icon { background-position: left 2px; padding-left: 21px; }
+.like_icon { background-position: left -15px; padding-left: 19px; }
+.dislike_icon { background-position: left -32px; padding-left: 18px; }
+.subscribe_icon { background-position: left -51px; padding-left: 24px; }
+.unsubscribe_icon { background-position: left -68px; padding-left: 24px; }
+.share_icon { background-position: left -84px; padding-left: 19px; }
+
+/*
+ * Social Icons
+ */
+.share_wall,
+.share_group,
+.share_message,
+.share_mail,
+.share_facebook,
+.share_twitter,
+.share_googleplus,
+.share_tumblr,
+.share_reddit,
+.share_digg,
+.share_stumbleupon,
+.share_linkedin,
+.share_myspace {
+	background: url("img/social_icon_sprite.png") no-repeat;
+}
+
+.share_wall { background-position: left 0px; }
+.share_wall:hover { background-position: left -18px; }
+
+.share_group { background-position: left -36px; }
+.share_group:hover { background-position: left -54px; }
+
+.share_message { background-position: left -72px; }
+.share_message:hover { background-position: left -90px; }
+
+.share_mail { background-position: left -108px; }
+.share_mail:hover { background-position: left -126px; }
+
+.share_facebook { background-position: left -144px; }
+.share_facebook:hover { background-position: left -162px; }
+
+.share_twitter { background-position: left -180px; }
+.share_twitter:hover { background-position: left -198px; }
+
+.share_googleplus { background-position: left -216px; }
+.share_googleplus:hover { background-position: left -234px; }
+
+.share_tumblr { background-position: left -252px; }
+.share_tumblr:hover { background-position: left -270px; }
+
+.share_reddit { background-position: left -288px; }
+.share_reddit:hover { background-position: left -306px; }
+
+.share_digg { background-position: left -324px; }
+.share_digg:hover { background-position: left -342px; }
+
+.share_stumbleupon { background-position: left -360px; }
+.share_stumbleupon:hover { background-position: left -378px; }
+
+.share_myspace { background-position: left -396px; }
+.share_myspace:hover { background-position: left -414px; }
+
+.share_linkedin { background-position: left -396px; }
+.share_linkedin:hover { background-position: left -414px; }
+
+/*  == Global Classes =================================================================
+
+	Elements:
+		icon_link
+		n_icon_sprite.png
+
+	=================================================================================== */
+/*
+ * Icon link
+ */
+.icon_link {
+	font: 11px/14px Verdana, Arial, sans-serif;
+	color: #0F7CB9;
+	display: inline-block;
+	zoom: 1;
+}
+
+/*  == UI elements ====================================================================
+
+	Includes: 
+		grey_box, 
+		yellow_box, 
+		box_header, 
+		box_header_plus
+
+	=================================================================================== */
+
+.grey_box {
+	border: solid 1px #CCCCCC;
+	padding: 10px;
+	background-color: #F5F5F5;
+}
+
+.yellow_box {
+	border: solid 1px #CCCCCC;
+	padding: 10px;
+	background-color: #FFFFF1;
+}
+
+.box_header,
+.box_header_plus {
+	border-bottom: dashed 1px #CCCCCC;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
+
+/*
+ * If you need more than one box_header, you shall make use of this class from
+ * box header two and up. 
+ */
+.box_header_plus {
+	margin-top: 20px;
+}
+
+.box_header h3,
+.box_header_plus h3 {
+	font: 16px/16px Verdana, Arial, sans-serif;
+	font-weight: normal;
+	color: #333333;
+}
+
+
+/*  == Form elements ====================================================================
+
+	Includes: 
+		.text_input: Our default text inputs
+
+	=================================================================================== */
+
+/*
+ * Text input (default)
+ */
+.text_input {
+	font: 11px/18px Verdana, Arial, sans-serif;
+	border: 1px solid #CCCCCC;
+	width: 364px;
+	height: 28px;
+	padding: 0 6px 0 6px;
+	color: #333333;
+
+	-webkit-box-shadow:
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.1);
+	-moz-box-shadow: 
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.1);
+	box-shadow: 
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.1);
+
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.text_input:hover {
+	border: 1px solid #B5B5B5;
+}
+
+.text_input:focus {
+	border: 1px solid #AAAAAA;
+
+	-webkit-box-shadow:
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.2);
+	-moz-box-shadow: 
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.2);
+	box-shadow: 
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.2);
+}
+
+
+/*  == Buttons ========================================================================
+
+	Sizes available:
+		button_small (70px wide),
+		button_medium (120px wide),
+		button_large (200px wide,
+		button_fluid (Fits container)
+
+	Special sizes available:
+		button_178 (For 200px containers width 8px padding (left column))
+
+	Colors available:
+		orange, 
+		light_orange, 
+		green, 
+		light_green, 
+		grey,
+		light_grey,
+		light_blue,
+		baby_blue, 
+		mint
+
+	Specail button presets available:
+		button_icon
+		button_no_shadow
+
+	=================================================================================== */
+
+/*
+ * Button presets
+ */
+.button {
+	display: block;
+	font: 12px Verdana, Arial, sans-serif;
+	line-height: 1;
+	text-decoration: none;
+	text-align: center;
+	cursor: pointer;
+
+	-webkit-box-shadow: 
+		0px 1px 1px 0px rgba(0, 0, 0, 0.2),
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2);
+	-moz-box-shadow: 
+		0px 1px 1px 0px rgba(0, 0, 0, 0.2),
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2);
+	box-shadow: 
+		0px 1px 1px 0px rgba(0, 0, 0, 0.2),
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2);
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.button:hover {
+	text-decoration: none;
+}
+
+.button:active {
+	text-decoration: none;
+}
+
+/*
+ * Button sizes, ordered by size
+ */ 
+.button_fluid {
+	width: 100%;
+	padding: 7px 0 8px 0;
+}
+
+.button_small {
+	width: 48px;
+	padding: 4px 10px 5px 10px;
+}
+
+.button_medium {
+	width: 98px;
+	padding: 7px 10px 8px 10px;
+}
+
+.button_large {
+	width: 178px;
+	padding: 7px 10px 8px 10px;
+}
+
+/*
+ * Special sizes, ordered by size
+ */
+.button_182 {
+	width: 160px;
+	padding: 6px 10px 6px 10px;
+}
+
+/*
+ * Special button presets
+ */
+.button_icon {
+	padding: 3px 6px 2px 5px;
+}
+
+.button_icon .text {
+	display: block;
+	float: left;
+}
+
+.button_icon .icon {
+	display: block;
+	float: right;
+}
+
+.button_no_shadow {
+	-webkit-box-shadow:
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2);
+	-moz-box-shadow:
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2);
+	box-shadow:
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2);
+}
+
+/*
+ * Button: orange
+ */
+.orange {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #b24a19;
+	border: 1px solid #cd5015;
+	border-top-color: #f06423;
+
+	background: rgb(247,146,30);
+	background: -moz-linear-gradient(top,  rgb(247,146,30) 0%, rgb(242,101,34) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(247,146,30)), color-stop(100%,rgb(242,101,34)));
+	background: -webkit-linear-gradient(top,  rgb(247,146,30) 0%,rgb(242,101,34) 100%);
+	background: -o-linear-gradient(top,  rgb(247,146,30) 0%,rgb(242,101,34) 100%);
+	background: -ms-linear-gradient(top,  rgb(247,146,30) 0%,rgb(242,101,34) 100%);
+	background: linear-gradient(top,  rgb(247,146,30) 0%,rgb(242,101,34) 100%);
+}
+
+.no-cssgradients .orange {
+	background-color: #f26522;
+	border: solid 1px #b24a19;
+}
+
+.orange:hover {
+	color: #FFFFFF;
+	border: 1px solid #e45d1e;
+	border-top-color: #ff7737;
+
+	background: rgb(248,160,59);
+	background: -moz-linear-gradient(top,  rgb(248,160,59) 0%, rgb(239,115,56) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(248,160,59)), color-stop(100%,rgb(239,115,56)));
+	background: -webkit-linear-gradient(top,  rgb(248,160,59) 0%,rgb(239,115,56) 100%);
+	background: -o-linear-gradient(top,  rgb(248,160,59) 0%,rgb(239,115,56) 100%);
+	background: -ms-linear-gradient(top,  rgb(248,160,59) 0%,rgb(239,115,56) 100%);
+	background: linear-gradient(top,  rgb(248,160,59) 0%,rgb(239,115,56) 100%);
+}
+
+.no-cssgradients .orange:hover {
+	background-color: #ef7338;
+	border: 1px solid #e45d1e;
+}
+
+.orange:active {
+	color: #FFFFFF;
+	border: 1px solid #EF7338;
+	border-top-color: #9e3a0b;
+
+	background: #EF7338;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .orange:active {
+	background-color: #f26522;
+	border: 1px solid #9e3a0b;
+}
+
+/*
+ * Button: light orange
+ */
+.light_orange {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #c65723;
+	border: 1px solid #c07915;
+	border-top-color: #e29221;
+
+	background: rgb(254,198,6);
+	background: -moz-linear-gradient(top,  rgb(254,198,6) 0%, rgb(242,153,29) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(254,198,6)), color-stop(100%,rgb(242,153,29)));
+	background: -webkit-linear-gradient(top,  rgb(254,198,6) 0%,rgb(242,153,29) 100%);
+	background: -o-linear-gradient(top,  rgb(254,198,6) 0%,rgb(242,153,29) 100%);
+	background: -ms-linear-gradient(top,  rgb(254,198,6) 0%,rgb(242,153,29) 100%);
+	background: linear-gradient(top,  rgb(254,198,6) 0%,rgb(242,153,29) 100%);
+}
+
+.no-cssgradients .light_orange {
+	background-color: #f2991d;
+	border: 1px solid #c07915;
+}
+
+.light_orange:hover {
+	color: #FFFFFF;
+	border: 1px solid #d2871e;
+	border-top-color: #ea9a28;
+
+	background: rgb(249,205,54);
+	background: -moz-linear-gradient(top,  rgb(249,205,54) 0%, rgb(254,165,42) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(249,205,54)), color-stop(100%,rgb(254,165,42)));
+	background: -webkit-linear-gradient(top,  rgb(249,205,54) 0%,rgb(254,165,42) 100%);
+	background: -o-linear-gradient(top,  rgb(249,205,54) 0%,rgb(254,165,42) 100%);
+	background: -ms-linear-gradient(top,  rgb(249,205,54) 0%,rgb(254,165,42) 100%);
+	background: linear-gradient(top,  rgb(249,205,54) 0%,rgb(254,165,42) 100%);
+}
+
+.no-cssgradients .light_orange:hover {
+	background-color: #fea52a;
+	border: 1px solid #d2871e;
+}
+
+.light_orange:active {
+	color: #FFFFFF;
+	border: 1px solid #fea52a;
+	border-top-color: #7f4f0c;
+
+	background: #fea52a;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .light_orange:active {
+	background-color: #f2991d;
+	border: 1px solid #7f4f0c;
+}
+
+/*
+ * Button: green_flat
+ */
+.green_flat {
+	color: #FFFFFF;
+	border: 1px solid #06B852;
+
+	background-color: #06B852;
+
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.green_flat:hover {
+	color: #FFFFFF;
+	border: 1px solid #07C95A;
+
+	background-color: #07C95A;	
+}
+
+.green_flat:active {
+	color: #FFFFFF;
+	border: 1px solid #06a449;
+
+	background-color: #06a449;
+}
+
+/*
+ * Button: green
+ */
+.green {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #366235;
+	border: 1px solid #487a3c;
+	border-top-color: #679566;
+
+	background: rgb(127,176,126);
+	background: -moz-linear-gradient(top,  rgb(127,176,126) 0%, rgb(97,146,96) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(127,176,126)), color-stop(100%,rgb(97,146,96)));
+	background: -webkit-linear-gradient(top,  rgb(127,176,126) 0%,rgb(97,146,96) 100%);
+	background: -o-linear-gradient(top,  rgb(127,176,126) 0%,rgb(97,146,96) 100%);
+	background: -ms-linear-gradient(top,  rgb(127,176,126) 0%,rgb(97,146,96) 100%);
+	background: linear-gradient(top,  rgb(127,176,126) 0%,rgb(97,146,96) 100%);
+}
+
+.no-cssgradients .green {
+	background-color: #619260;
+	border: 1px solid #487a3c;
+}
+
+.green:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+	border: 1px solid #477848;
+	border-top-color: #699c64;
+
+	background: rgb(139,186,135);
+	background: -moz-linear-gradient(top,  rgb(139,186,135) 0%, rgb(102,153,104) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(139,186,135)), color-stop(100%,rgb(102,153,104)));
+	background: -webkit-linear-gradient(top,  rgb(139,186,135) 0%,rgb(102,153,104) 100%);
+	background: -o-linear-gradient(top,  rgb(139,186,135) 0%,rgb(102,153,104) 100%);
+	background: -ms-linear-gradient(top,  rgb(139,186,135) 0%,rgb(102,153,104) 100%);
+	background: linear-gradient(top,  rgb(139,186,135) 0%,rgb(102,153,104) 100%);
+}
+
+.no-cssgradients .green:hover {
+	background-color: #669968;
+	border: 1px solid #477848;
+}
+
+.green:active {
+	color: #FFFFFF;
+	text-decoration: none;
+	border: solid 1px #619260;
+	border-top-color: #1c421b;
+
+	background: #619260;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .green:active {
+	background-color: #619260;
+	border: 1px solid #1c421b;
+}
+
+/*
+ * Button: light green
+ */
+.light_green {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #287624;
+	border: 1px solid #32822e;
+	border-top-color: #429f3d;
+
+	background: rgb(91,201,86);
+	background: -moz-linear-gradient(top,  rgb(91,201,86) 0%, rgb(66,168,61) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(91,201,86)), color-stop(100%,rgb(66,168,61)));
+	background: -webkit-linear-gradient(top,  rgb(91,201,86) 0%,rgb(66,168,61) 100%);
+	background: -o-linear-gradient(top,  rgb(91,201,86) 0%,rgb(66,168,61) 100%);
+	background: -ms-linear-gradient(top,  rgb(91,201,86) 0%,rgb(66,168,61) 100%);
+	background: linear-gradient(top,  rgb(91,201,86) 0%,rgb(66,168,61) 100%);
+}
+
+.no-cssgradients .light_green {
+	background-color: #42a83d;
+	border: 1px solid #32822e;
+}
+
+.light_green:hover {
+	color: #FFFFFF;
+	border: solid 1px #3e973a;
+	border-top-color: #5baf48;
+
+	background: rgb(116,211,95);
+	background: -moz-linear-gradient(top,  rgb(116,211,95) 0%, rgb(86,178,67) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(116,211,95)), color-stop(100%,rgb(86,178,67)));
+	background: -webkit-linear-gradient(top,  rgb(116,211,95) 0%,rgb(86,178,67) 100%);
+	background: -o-linear-gradient(top,  rgb(116,211,95) 0%,rgb(86,178,67) 100%);
+	background: -ms-linear-gradient(top,  rgb(116,211,95) 0%,rgb(86,178,67) 100%);
+	background: linear-gradient(top,  rgb(116,211,95) 0%,rgb(86,178,67) 100%);
+}
+
+.no-cssgradients .light_green:hover {
+	background-color: #56b243;
+	border: solid 1px #3e973a;
+}
+
+.light_green:active {
+	color: #FFFFFF;
+	border: solid 1px #56b243;
+	border-top-color: #21601e;
+
+	background: #56b243;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .light_green:active {
+	background-color: #42a83d;
+	border: 1px solid #21601e;
+}
+
+/*
+ * Button: grey
+ */
+.grey {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #000000;
+	border: 1px solid #333333;
+	border-top-color: #505050;
+
+	background: rgb(111,111,111);
+	background: -moz-linear-gradient(top,  rgb(111,111,111) 0%, rgb(81,81,81) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(111,111,111)), color-stop(100%,rgb(81,81,81)));
+	background: -webkit-linear-gradient(top,  rgb(111,111,111) 0%,rgb(81,81,81) 100%);
+	background: -o-linear-gradient(top,  rgb(111,111,111) 0%,rgb(81,81,81) 100%);
+	background: -ms-linear-gradient(top,  rgb(111,111,111) 0%,rgb(81,81,81) 100%);
+	background: linear-gradient(top,  rgb(111,111,111) 0%,rgb(81,81,81) 100%);
+}
+
+.no-cssgradients .grey {
+	background-color: #515151;
+	border: 1px solid #333333;
+}
+
+.grey:hover {
+	color: #FFFFFF;
+	border: 1px solid #404040;
+	border-top-color: #555555;
+
+	background: rgb(119,119,119);
+	background: -moz-linear-gradient(top,  rgb(119,119,119) 0%, rgb(91,91,91) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(119,119,119)), color-stop(100%,rgb(91,91,91)));
+	background: -webkit-linear-gradient(top,  rgb(119,119,119) 0%,rgb(91,91,91) 100%);
+	background: -o-linear-gradient(top,  rgb(119,119,119) 0%,rgb(91,91,91) 100%);
+	background: -ms-linear-gradient(top,  rgb(119,119,119) 0%,rgb(91,91,91) 100%);
+	background: linear-gradient(top,  rgb(119,119,119) 0%,rgb(91,91,91) 100%);
+}
+
+.no-boxshadow .grey:hover {
+	background-color: #5b5b5b;
+	border: 1px solid #404040;
+}
+
+.grey:active {
+	color: #FFFFFF;
+	border: 1px solid #5b5b5b;
+	border-top-color: #151515;
+
+	background: #5b5b5b;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .grey:active {
+	background-color: #515151;
+	border: 1px solid #151515;
+}
+
+/*
+ * Button: light grey
+ */
+.light_grey {
+	color: #757575;
+	text-shadow: 0px 1px 0px #FFFFFF;
+	border: 1px solid #AAAAAA;
+	border-top-color: #C1C1C1;
+
+	background: rgb(252,252,252);
+	background: -moz-linear-gradient(top,  rgb(252,252,252) 0%, rgb(223,223,223) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(252,252,252)), color-stop(100%,rgb(223,223,223)));
+	background: -webkit-linear-gradient(top,  rgb(252,252,252) 0%,rgb(223,223,223) 100%);
+	background: -o-linear-gradient(top,  rgb(252,252,252) 0%,rgb(223,223,223) 100%);
+	background: -ms-linear-gradient(top,  rgb(252,252,252) 0%,rgb(223,223,223) 100%);
+	background: linear-gradient(top,  rgb(252,252,252) 0%,rgb(223,223,223) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#dfdfdf',GradientType=0 );
+}
+
+.no-cssgradients .light_grey {
+	background-color: #DFDFDF;
+	border: 1px solid #AAAAAA;
+}
+
+.light_grey:hover {
+	color: #757575;
+	border: 1px solid #BABABA;
+	border-top-color: #CCCCCC;
+
+	background: rgb(255,255,255);
+	background: -moz-linear-gradient(top,  rgb(255,255,255) 0%, rgb(235,235,235) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(255,255,255)), color-stop(100%,rgb(235,235,235)));
+	background: -webkit-linear-gradient(top,  rgb(255,255,255) 0%,rgb(235,235,235) 100%);
+	background: -o-linear-gradient(top,  rgb(255,255,255) 0%,rgb(235,235,235) 100%);
+	background: -ms-linear-gradient(top,  rgb(255,255,255) 0%,rgb(235,235,235) 100%);
+	background: linear-gradient(top,  rgb(255,255,255) 0%,rgb(235,235,235) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ebebeb',GradientType=0 );
+}
+
+.no-boxshadow .light_grey:hover {
+	background-color: #EBEBEB;
+	border: 1px solid #BABABA;
+}
+
+.light_grey:active {
+	color: #757575;
+	border: 1px solid #EBEBEB;
+	border-top-color: #757575;
+
+	background: #DFDFDF;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .light_grey:active {
+	background-color: #DFDFDF;
+	border: 1px solid #333333;
+}
+
+/*
+ * Button: light blue
+ */
+.light_blue {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #2b6191;
+	border: 1px solid #27669d;
+	border-top-color: #2f77b6;
+
+	background: rgb(90,158,218);
+	background: -moz-linear-gradient(top,  rgb(90,158,218) 0%, rgb(56,123,182) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(90,158,218)), color-stop(100%,rgb(56,123,182)));
+	background: -webkit-linear-gradient(top,  rgb(90,158,218) 0%,rgb(56,123,182) 100%);
+	background: -o-linear-gradient(top,  rgb(90,158,218) 0%,rgb(56,123,182) 100%);
+	background: -ms-linear-gradient(top,  rgb(90,158,218) 0%,rgb(56,123,182) 100%);
+	background: linear-gradient(top,  rgb(90,158,218) 0%,rgb(56,123,182) 100%);
+}
+
+.no-cssgradients .light_blue {
+	background-color: #387bb6;
+	border: 1px solid #27669d;
+}
+
+.light_blue:hover {
+	color: #FFFFFF;
+	border: 1px solid #2f699c;
+	border-top-color: #4e8cc2;
+
+	background: rgb(98,169,232);
+	background: -moz-linear-gradient(top,  rgb(98,169,232) 0%, rgb(63,134,197) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(98,169,232)), color-stop(100%,rgb(63,134,197)));
+	background: -webkit-linear-gradient(top,  rgb(98,169,232) 0%,rgb(63,134,197) 100%);
+	background: -o-linear-gradient(top,  rgb(98,169,232) 0%,rgb(63,134,197) 100%);
+	background: -ms-linear-gradient(top,  rgb(98,169,232) 0%,rgb(63,134,197) 100%);
+	background: linear-gradient(top,  rgb(98,169,232) 0%,rgb(63,134,197) 100%);
+}
+
+.no-cssgradients .light_blue:hover {
+	background-color: #3f86c5;
+	border: 1px solid #2f699c;
+}
+
+.light_blue:active {
+	color: #FFFFFF;
+	border: 1px solid #3f86c5;
+	border-top-color: #0e2c47;
+
+	background: #3f86c5;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .light_blue:active {
+	background-color: #387bb6;
+	border: 1px solid #0e2c47;
+}
+
+/*
+ * Button: baby blue
+ */
+.baby_blue {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #3d7e92;
+	border: 1px solid #3e8298;
+	border-top-color: #339fc3;
+
+	background: rgb(114,201,229);
+	background: -moz-linear-gradient(top,  rgb(114,201,229) 0%, rgb(83,166,194) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(114,201,229)), color-stop(100%,rgb(83,166,194)));
+	background: -webkit-linear-gradient(top,  rgb(114,201,229) 0%,rgb(83,166,194) 100%);
+	background: -o-linear-gradient(top,  rgb(114,201,229) 0%,rgb(83,166,194) 100%);
+	background: -ms-linear-gradient(top,  rgb(114,201,229) 0%,rgb(83,166,194) 100%);
+	background: linear-gradient(top,  rgb(114,201,229) 0%,rgb(83,166,194) 100%);
+}
+
+.no-cssgradients .baby_blue {
+	background-color: #53a6c2;
+	border: 1px solid #38aad0;
+}
+
+.baby_blue:hover {
+	color: #FFFFFF;
+	border: 1px solid #468ca3;
+	border-top-color: #39a8cd;
+
+	background: rgb(127,209,236);
+	background: -moz-linear-gradient(top,  rgb(127,209,236) 0%, rgb(96,180,209) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(127,209,236)), color-stop(100%,rgb(96,180,209)));
+	background: -webkit-linear-gradient(top,  rgb(127,209,236) 0%,rgb(96,180,209) 100%);
+	background: -o-linear-gradient(top,  rgb(127,209,236) 0%,rgb(96,180,209) 100%);
+	background: -ms-linear-gradient(top,  rgb(127,209,236) 0%,rgb(96,180,209) 100%);
+	background: linear-gradient(top,  rgb(127,209,236) 0%,rgb(96,180,209) 100%);
+}
+
+.no-cssgradients .baby_blue:hover {
+	background-color: #60b4d1;
+	border: 1px solid #3db1d8;
+}
+
+.baby_blue:active {
+	color: #FFFFFF;
+	border: 1px solid #60b4d1;
+	border-top-color: #165064;
+
+	background: #60b4d1;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .baby_blue:active {
+	background-color: #60b4d1;
+	border: 1px solid #165064;
+}
+
+/*
+ * Button: mint;
+ */
+.mint {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #116160;
+	border: 1px solid #146f6e;
+	border-top-color: #198483;
+
+	background: rgb(41,170,169);
+	background: -moz-linear-gradient(top,  rgb(41,170,169) 0%, rgb(30,144,143) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(41,170,169)), color-stop(100%,rgb(30,144,143)));
+	background: -webkit-linear-gradient(top,  rgb(41,170,169) 0%,rgb(30,144,143) 100%);
+	background: -o-linear-gradient(top,  rgb(41,170,169) 0%,rgb(30,144,143) 100%);
+	background: -ms-linear-gradient(top,  rgb(41,170,169) 0%,rgb(30,144,143) 100%);
+	background: linear-gradient(top,  rgb(41,170,169) 0%,rgb(30,144,143) 100%);
+}
+
+.no-cssgradients .mint {
+	background-color: #1e908f;
+	border: 1px solid #146f6e;
+}
+
+.mint:hover {
+	color: #FFFFFF;
+	border: solid 1px #177f7e;
+	border-top-color: #1c908f;
+
+	background: rgb(42,177,176);
+	background: -moz-linear-gradient(top,  rgb(42,177,176) 0%, rgb(33,154,153) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(42,177,176)), color-stop(100%,rgb(33,154,153)));
+	background: -webkit-linear-gradient(top,  rgb(42,177,176) 0%,rgb(33,154,153) 100%);
+	background: -o-linear-gradient(top,  rgb(42,177,176) 0%,rgb(33,154,153) 100%);
+	background: -ms-linear-gradient(top,  rgb(42,177,176) 0%,rgb(33,154,153) 100%);
+	background: linear-gradient(top,  rgb(42,177,176) 0%,rgb(33,154,153) 100%);
+}
+
+.no-cssgradients .mint:hover {
+	background-color: #219a99;
+	border: 1px solid #177f7e;
+}
+
+.mint:active {
+	color: #FFFFFF;
+	text-decoration: none;
+	border: 1px solid #249f9e;
+	border-top-color: #115554;
+
+	background: #249f9e;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .mint:active {
+	background-color: #1e908f;
+	border: 1px solid #115554;
+}
+
+/*  == Rounded Corners ================================================================
+
+	Sizes available: 
+	3px, 
+	4px, 
+	5px(top and bottom only included), 
+
+	=================================================================================== */
+
+.rounded_3 {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.rounded_5 {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.rounded_5_top {
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-radius: 5px 5px 0px 0px;
+	border-radius: 5px 5px 0px 0px;
+}
+
+.rounded_5_btm {
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-webkit-border-radius: 0px 0px 5px 5px;
+	border-radius: 0px 0px 5px 5px;
+}
+
+/*  == Gradients ======================================================================
+
+	Shades available:
+	subtle_grey,
+	subtle_purple
+
+	=================================================================================== */
+
+/*
+ * Subtle grey: #FFFFFF -> EAE9E9
+ * Fallback color: #EAE9E9
+ */
+.subtle_grey {
+	background: rgb(255,255,255);
+	background: -moz-linear-gradient(top,  rgb(255,255,255) 0%, rgb(234,233,233) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(255,255,255)), color-stop(100%,rgb(234,233,233)));
+	background: -webkit-linear-gradient(top,  rgb(255,255,255) 0%,rgb(234,233,233) 100%);
+	background: -o-linear-gradient(top,  rgb(255,255,255) 0%,rgb(234,233,233) 100%);
+	background: -ms-linear-gradient(top,  rgb(255,255,255) 0%,rgb(234,233,233) 100%);
+	background: linear-gradient(top,  rgb(255,255,255) 0%,rgb(234,233,233) 100%);
+}
+
+.no-cssgradients .subtle_grey {
+	background-color: #eae9e9;
+}
+
+/*
+ * Subtle grey: #77b5eb -> 5696cf
+ * Fallback color: #5696cf
+ */
+.subtle_purple {
+	background: rgb(119,181,235);
+	background: -moz-linear-gradient(top,  rgb(119,181,235) 0%, rgb(86,150,207) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(119,181,235)), color-stop(100%,rgb(86,150,207)));
+	background: -webkit-linear-gradient(top,  rgb(119,181,235) 0%,rgb(86,150,207) 100%);
+	background: -o-linear-gradient(top,  rgb(119,181,235) 0%,rgb(86,150,207) 100%);
+	background: -ms-linear-gradient(top,  rgb(119,181,235) 0%,rgb(86,150,207) 100%);
+	background: linear-gradient(top,  rgb(119,181,235) 0%,rgb(86,150,207) 100%);
+}
+
+.no-cssgradients .subtle_purple {
+	background-color: #5696cf;
+}
+
+
+
+/*  == Box-shadows ====================================================================
+
+	Versions available:
+
+	=================================================================================== */

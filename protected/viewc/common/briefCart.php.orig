@@ -1,0 +1,36 @@
+<?php
+if(Auth::isUserLogged()):
+	if($cart = Cart::getBriefCart()):?>
+	<!-- Shopping cart start -->
+	<div id="brief_cart_left">
+		<div id="brief_cart_header" class="subtle_grey"><?php echo $this->__('Shopping Cart');?></div>
+		<?php if(isset($cart->FiCartProductRel) and !empty($cart->FiCartProductRel)):?>
+			<div id="brief_cart_items">
+				<ul>
+					<?php foreach($cart->FiCartProductRel as $cartItem):?>
+						<li class="clearfix">
+							<a data-opt='{"ID":"<?php echo $cartItem->ID_PRODUCT;?>"}' href="javascript:void(0)" class="delete_list_item F_removeFromCart">X</a>
+
+							<span><?php echo $cartItem->ProductName;?></span>
+							<span class="shop_cart_item_pts"><?php echo MainHelper::creditsOutput($cartItem->TotalPrice);?></span>
+
+							<span class="brief_cart_item"><?php echo $cartItem->ProductName;?></span><span class="brief_cart_item_pts"><?php echo MainHelper::creditsOutput($cartItem->TotalPrice);?></span>
+
+						</li>
+					<?php endforeach;?>
+				</ul>
+				<div id="brief_cart_items_ttl">
+				<?php echo $this->__('Total');?><span><?php echo MainHelper::creditsOutput($cart->TotalPrice);?></span>
+				</div>
+				<div class="clear"></div>
+			</div>
+		<?php endif;?>
+	</div>
+
+	<a href="<?php echo MainHelper::site_url('shop/cart');?>" id="shop_cart_cmplt"><?php echo $this->__('Continue Order');?></a>
+
+	<a class="button orange"><?php echo $this->__('Continue Order');?></a>
+
+	<!-- Shopping cart end -->
+<?php endif;
+endif;?>

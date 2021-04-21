@@ -1,0 +1,24 @@
+# protect against DOS attacks by limiting file upload size
+LimitRequestBody 10240000
+
+<IfModule mod_speling.c>
+ CheckSpelling On
+</IfModule>
+
+RewriteEngine On
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# otherwise forward it to index.php
+RewriteRule .* index.php
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+
+Options All -Indexes
+
+AddType image/x-icon .ico
+AddType application/octet-stream .avi
+AddType application/octet-stream .mpg
+AddType application/octet-stream .wmv
+AddType application/octet-stream .mp3
+AddType application/octet-stream .swf

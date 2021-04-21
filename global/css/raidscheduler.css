@@ -1,0 +1,184 @@
+@import url("RSmonthCal.css");
+@import url("RSweekCal.css");
+@import url("RSpopups.css");
+@import url("RShoverPopup.css");
+@import url("RSnewRaidPopup.css");
+@import url("RSinfoRaidPopup.css");
+@import url("RSsignupPage.css");
+/*@import url("RSfinalizeRaidPopup.css");*/
+
+#NoLoginHeader {
+	color: #0D5586;
+    cursor: default;
+	font-size: 30px;
+    margin-top: 60px;
+	padding-top: 60px;
+    font-weight: bold;
+    text-align: center;
+	font-family: Verdana;
+    text-decoration: underline;
+	text-shadow: 3px 3px 5px #6374AB;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+#RaidScheduler {
+    margin: 0;
+    border: 0;
+    padding: 0;
+	width: 610px;
+    cursor: default;
+	text-align: center;
+	font-family: small Arial,sans-serif;
+}
+
+#RaidScheduler *:not(input):not(textarea) {
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: moz-none;
+    -webkit-touch-callout: none;
+}
+
+#RStitle {
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#RaidScheduler .RSheader {
+    display: block;
+    text-align: left;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#RaidScheduler .RSheaderTxt {
+    margin: 0;
+    border: 0;
+    padding: 0;
+	color: #565656;
+    font-size: 20px;
+    text-align: left;
+}
+
+.RSbuttons {
+	color: #757575;
+	font-size: 11px;
+	padding: 6px 8px;
+    border-width: 1px;
+	border-radius: 4px;
+	border-style: solid;
+    border-color: #DDDDDD;
+	-moz-border-radius: 4px;
+	background-color: #FFFFFF;
+	-webkit-border-radius: 4px;
+	text-shadow: 0 1px 0 #FFFFFF;
+	filter: dropshadow(color=#FFFFFF, offx=0, offy=1);
+}
+
+.RSbuttons:hover {
+    cursor: pointer;
+	color: #757575;
+	border-width: 1px;
+    border-style: solid;
+    border-color: #CCCCCC;
+	text-decoration: none;
+	background-color: #FFFFFF;
+	border-top-color: #D5D5D5;
+    box-shadow: 0px 1px 1px 0px rgba(51, 51, 51, 0.1);
+	-moz-box-shadow: 0px 1px 1px 0px rgba(51, 51, 51, 0.1);
+	-webkit-box-shadow: 0px 1px 1px 0px rgba(51, 51, 51, 0.1);
+	background: linear-gradient(top, #FFFFFF 0%, #F9F9F9 100%);
+	background: -o-linear-gradient(top, #FFFFFF 0%, #F9F9F9 100%);
+	background: -ms-linear-gradient(top, #FFFFFF 0%, #F9F9F9 100%);
+	background: -moz-linear-gradient(top, #FFFFFF 0%, #F9F9F9 100%);
+	background: -webkit-linear-gradient(top, #FFFFFF 0%, #F9F9F9 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#F9F9F9', GradientType=0);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFFFFF), color-stop(100%, #F9F9F9));
+}
+
+#RSviewbutmon {
+    margin: 0;
+    top: 24px;
+    padding: 0;
+    cursor: pointer;
+    font-style: italic;
+    position: relative;
+    display: inline-block;
+}
+
+#RSviewbut {
+    padding-top: 20px;
+    display: inline-block;
+}
+
+#RSweekmonbutlabel {
+    font-weight: bold;
+}
+
+#RSviewbutweek {
+    top: 24px;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    font-style: italic;
+    position: relative;
+    display: inline-block;
+    text-decoration: underline;
+}
+
+/*
+ *  Dropkick theme
+ */
+.dropkick_Raidscheduler {
+    /*height: 24px;*/
+}
+
+.dk_theme_Raidscheduler {
+	background-color: #FFFFFF;
+	background: linear-gradient(top, #FFFFFF 0%, #F9F9F9 100%);
+	background: -o-linear-gradient(top, #FFFFFF 0%, #F9F9F9 100%);
+	background: -ms-linear-gradient(top, #FFFFFF 0%, #F9F9F9 100%);
+	background: -moz-linear-gradient(top, #FFFFFF 0%, #F9F9F9 100%);
+	background: -webkit-linear-gradient(top, #FFFFFF 0%, #F9F9F9 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFFFFF), color-stop(100%, #F9F9F9));
+}
+
+.dk_theme_Raidscheduler .dk_container {
+    float: none;
+}
+
+.dk_theme_Raidscheduler .dk_toggle {
+    padding-top: 3px;
+    padding-left: 5px;
+    padding-right: 0;
+    padding-bottom: 3px;
+	color: #333333;
+	border: 1px solid #CCCCCC;
+	background-repeat: no-repeat;
+	background-position: -5px right;
+	/*background-image: url('img/dk_arrows.png');*/
+	font: 12px Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.dk_theme_Raidscheduler.dk_open .dk_toggle {
+	color: #999999;
+	border-color: #AAAAAA;
+	background-color: #ECECEC;
+}
+
+.dk_theme_Raidscheduler .dk_options a {
+	color: #333333;
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #AAAAAA;
+	font: 12px Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.dk_theme_Raidscheduler .dk_options a:hover,
+.dk_theme_Raidscheduler .dk_option_current a {
+	color: #FFFFFF;
+	background-color: #0084C7;
+	border-bottom-color: #004C72;
+}

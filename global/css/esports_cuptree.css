@@ -1,0 +1,108 @@
+#cuptree{
+    width:1035px;
+    height:100%;
+    overflow:hidden;
+    padding-left:25px;
+}
+.cuptree_teamcontainer span{
+    display:block;
+}
+.cuptree_teamcontainer{
+    width:170px;
+    height:15px;
+    background-color: grey;
+    padding:10px;
+    margin-top:10px;
+    position:relative;
+    overflow:hidden;
+    border:2px solid black;
+    background:rgb(149, 149, 149);
+    background: -moz-linear-gradient(center top , rgb(149, 149, 149) 20%, rgb(123, 123, 123) 80%) repeat scroll 0% 0% transparent; 
+    background: -webkit-gradient(linear, center top, center bottom, from(rgb(149, 149, 149)),to(rgb(123, 123, 123)));
+    background: -o-linear-gradient(center top, rgb(149, 149, 149) 20%,rgb(123, 123, 123) 80%);
+    background: -ms-linear-gradient(center top, rgb(149, 149, 149) 20%,rgb(123, 123, 123) 80%);
+    background: linear-gradient(center top, rgb(149, 149, 149) 20%,rgb(123, 123, 123) 80%);
+}
+.leftside .seeds{
+    left:0px;  
+    border-right:1px solid black;
+     box-shadow: 1px 0px 0px rgba(255, 255, 255, 0.30) ;
+}
+.rightside .seeds{
+    right:0px;
+    border-left:1px solid black;
+    box-shadow: -1px 0px 0px rgba(255, 255, 255, 0.30);
+}
+.cuptree_teamcontainer .seeds{
+    height:25px;
+    padding-top:10px; 
+    width:20px;
+    top:0px;
+    color:black;
+    padding-left:11px;
+    position:absolute;
+    text-shadow: 0 1px 0 #777, 0 -1px 0 #000;  
+    background: #c14d48;
+    background: -moz-linear-gradient(top, #c14d48 50%, #ba3933 60%);
+}
+.rightside .teamname{
+    right:40px;
+}
+.leftside .teamname{
+    left:40px;
+}
+.cuptree_teamcontainer .teamname{
+    position:absolute;
+    text-shadow: 0 1px 0 #777, 0 -1px 0 #000;
+    color:white;
+    top:10px;
+}
+.leftside .result{
+    right:5px; 
+}
+.rightside .result{
+    left:5px;
+}
+.cuptree_teamcontainer .result{
+    position:absolute;
+    top:10px;
+    text-shadow: 0 1px 0 #777, 0 -1px 0 #000;
+    color:white;
+    font-size:24px; 
+}
+.cuptree_matchcontainer{
+    
+}
+.none_display{
+    opacity: 0;
+}
+.cuptree_roundcontainer{
+    float:left;
+    margin-right:10px;
+}
+
+.cuptree_mt5{
+    margin-top:5%;
+}
+.winner{
+    width:170px;
+}
+.cuptree_winner{
+    height:60px;
+    overflow:hidden;
+    background-color: grey;
+    padding:10px;
+    text-shadow: 0 1px 0 #777, 0 -1px 0 #000;
+    color:white;
+    font-size:24px; 
+    margin-top:10px;
+    position:relative;
+    overflow:hidden;
+    border:2px solid black;
+    background:rgb(149, 149, 149);
+    background: -moz-linear-gradient(center top , rgb(149, 149, 149) 20%, rgb(123, 123, 123) 80%) repeat scroll 0% 0% transparent; 
+    background: -webkit-gradient(linear, center top, center bottom, from(rgb(149, 149, 149)),to(rgb(123, 123, 123)));
+    background: -o-linear-gradient(center top, rgb(149, 149, 149) 20%,rgb(123, 123, 123) 80%);
+    background: -ms-linear-gradient(center top, rgb(149, 149, 149) 20%,rgb(123, 123, 123) 80%);
+    background: linear-gradient(center top, rgb(149, 149, 149) 20%,rgb(123, 123, 123) 80%);
+}

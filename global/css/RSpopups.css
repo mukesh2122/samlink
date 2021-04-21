@@ -1,0 +1,116 @@
+#RaidScheduler .RSpopupBackgrounds {
+	top: 0;
+	left: 0;
+    border: 0;
+    margin: 0;
+    padding: 0;
+	width: 100%;
+    height: 100%;
+	display: none;
+	z-index: 9001;
+	position: fixed;
+	background-color: rgba(68, 68, 68, 0.65);
+}
+
+#RaidScheduler .RSpopupWindows {
+	top: 50%;
+	left: 50%;
+	z-index: 9006;
+	position: fixed;
+	border-radius: 4px;
+    -moz-border-radius: 4px;
+	background-color: #FFFFFF;
+	-webkit-border-radius: 4px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+#RaidScheduler .RSpopupCloseButtons {
+    width: 18px;
+	float: right;
+    height: 18px;
+    border-width: 0;
+	position: relative;
+    border-radius: 7px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-image: url('img/raidscheduler/close.png');
+}
+
+.RSselectControls {
+    padding: .2em;
+    font-size: 12px;
+    appearance: none;
+    border-width: 1px;
+    border-radius: 5px;
+    border-style: solid;
+    -o-appearance: none;
+    border-color: #CCCCCC;
+    -moz-appearance: none;
+    -moz-border-radius: 5px;
+    vertical-align: central;
+    -webkit-appearance: none;
+    background-color: #FFFFFF;
+	-webkit-border-radius: 5px;
+}
+
+#RaidScheduler input::outer-spin-button,
+#RaidScheduler input::inner-spin-button {
+    margin: 0;
+    display: none;
+    appearance: none;
+}
+#RaidScheduler input::-o-outer-spin-button,
+#RaidScheduler input::-o-inner-spin-button {
+    margin: 0;
+    display: none;
+    appearance: none;
+    -o-appearance: none;
+}
+#RaidScheduler input::-ms-outer-spin-button,
+#RaidScheduler input::-ms-inner-spin-button {
+    margin: 0;
+    display: none;
+    appearance: none;
+    -ms-appearance: none;
+}
+#RaidScheduler input::-moz-outer-spin-button,
+#RaidScheduler input::-moz-inner-spin-button {
+    margin: 0;
+    display: none;
+    appearance: none;
+    -moz-appearance: none;
+}
+#RaidScheduler input::-webkit-outer-spin-button,
+#RaidScheduler input::-webkit-inner-spin-button {
+    margin: 0;
+    display: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.RSinputControls {
+    color: #666666;
+    border-width: 1px;
+    border-radius: 4px;
+    border-style: solid;
+    border-color: #CCCCCC;
+	-moz-border-radius: 4px;
+    background-color: #FFFFFF;
+	-webkit-border-radius: 4px;
+	box-shadow: inset 0px 1px 2px 0px rgba(116, 116, 116, 0.1);
+	-moz-box-shadow: inset 0px 1px 2px 0px rgba(116, 116, 116, 0.1);
+	-webkit-box-shadow: inset 0px 1px 2px 0px rgba(116, 116, 116, 0.1);
+}
+
+.RStextAreaControls {
+    resize: none;
+    border-width: 1px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #DEDEDE;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}

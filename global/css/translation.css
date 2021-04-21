@@ -1,0 +1,42 @@
+#T_translationPage {
+    text-align: center;
+}
+
+#T_translationPage section {
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+#T_translationPage header {
+    display: inline;
+    text-decoration: underline;
+}
+
+#T_translationPage div {
+    margin-bottom: 10px;
+}
+
+#T_translationPage label {
+    display: block;
+    margin-top: 20px;
+}
+
+#T_translationPage input {
+    width: 250px;
+    padding: 3px;
+    font-size: 15px;
+}
+
+#T_translationPage textarea {
+    padding: 8px;
+    width: 500px;
+    height: 250px;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+#dk_container_T_language {
+    float: none;
+    display: inline;
+    margin-left: 10px;
+}

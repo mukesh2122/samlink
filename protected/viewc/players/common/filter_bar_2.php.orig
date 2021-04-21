@@ -1,0 +1,108 @@
+<?php
+	$catPath = ($selectedCategory!=0) ? "category/" . $selectedCategory . "/" : "";
+    $url = MainHelper::site_url('players/top-list/' . $catPath . 'tab');
+    $transVisits = $this->__('Visits');
+    $transRating = $this->__('Rating');
+ ?>
+
+<div class="filter_bar clearfix">
+	<div class="filter_bar_label"><?php echo $this->__('Sort by') ?>:</div>
+	<div class="filter_bar_options">
+<<<<<<< HEAD
+		<?php if($tab === 1):
+			if($order === 'DESC'): ?>
+				<a href="<?php echo $url . '/visits/asc'; ?>" class="filter_bar_option_selected filter_dsc"><span><?php echo $transVisits; ?></span></a>
+			<?php else: ?>
+				<a href="<?php echo $url . '/visits/desc'; ?>" class="filter_bar_option_selected filter_asc"><span><?php echo $transVisits; ?></span></a>
+			<?php endif;
+		elseif(($tab !== 1) && (($tab === 3) || ($tab === 4))): ?>
+            <a href="<?php echo $url . '/visits/desc'; ?>" class="filter_bar_option_selected filter_dsc"><span><?php echo $transVisits; ?></span></a>
+        <?php else: ?>
+			<a href="<?php echo $url . '/visits/desc'; ?>"><span><?php echo $transVisits; ?></span></a>
+		<?php endif;
+				
+		if(MainHelper::IsModuleEnabledByTag('contentchild') === 1 && MainHelper::IsModuleNotAvailableByTag('contentchild') === 0): ?>
+            <?php if($tab === 2):
+                if($order === 'DESC'): ?>
+                    <a href="<?php echo $url . '/rating/asc'; ?>" class="filter_bar_option_selected filter_dsc"><span><?php echo $transRating; ?></span></a>
+                <?php else: ?>
+                    <a href="<?php echo $url . '/rating/desc'; ?>" class="filter_bar_option_selected filter_asc"><span><?php echo $transRating; ?></span></a>
+                <?php endif;
+            else: ?>
+                <a href="<?php echo $url . '/rating/desc'; ?>"><span><?php echo $transRating; ?></span></a>
+            <?php endif;
+        endif;
+
+                // if (($tab == 1) || ($tab == 3) || ($tab == 4)):
+        if(MainHelper::IsModuleEnabledByTag('groups') === 1 && MainHelper::IsModuleNotAvailableByTag('groups') === 0): ?>
+            <?php if($tab === 3):
+                if($order === 'DESC'): ?>
+                    <a href="<?php echo $url . '/this-week/asc'; ?>"><input type="radio" checked><span><?php echo $this->__('&nbsp; This Week'); ?></span></a>
+                <?php endif;
+            elseif(($tab === 2) && ($tab !== 3)): ?>
+                <span><?php echo $this->__('&nbsp; This Weeks &nbsp;'); ?></span>
+            <?php else: ?>
+                <a href="<?php echo $url . '/visits/desc'; ?>"><span><?php echo $transVisits; ?></span></a>
+            <?php endif;
+        else: ?>
+			<a href="<?php echo $url . '/this-week/desc'; ?>"><span><?php echo $this->__('This Week'); ?></span></a>
+        <?php endif;
+
+        if(($tab === 4) || ($tab === 1)):
+            if($order === 'DESC' || $order === 'ASC'): ?>
+                <a href="<?php echo $url . '/all-time/asc'; ?>"><input type="radio" checked><span><?php echo $this->__('&nbsp; All Time'); ?></span></a>
+            <?php endif;
+        elseif(($tab === 2) && ($tab !== 4)): ?>
+            <span color=""><?php echo $this->__('&nbsp; All TIme &nbsp;'); ?></span>
+        <?php else: ?>
+            <a href="<?php echo $url . '/all-time/desc'; ?>"><span><?php echo $this->__('All Time'); ?></span></a>
+        <?php endif; ?>
+=======
+		<?php if($tab == 1):?>
+                    <?php if($order == 'desc' or $order=''):?>
+			<a href="<?php echo MainHelper::site_url('players/top-list/'.$catPath.'tab/visits/asc');?>" class="filter_bar_option_selected filter_dsc"><span><?php echo $this->__('Visits');?></span></a>
+                    <?php else:?>
+			<a href="<?php echo MainHelper::site_url('players/top-list/'.$catPath.'tab/visits/desc');?>" class="filter_bar_option_selected filter_asc"><span><?php echo $this->__('Visits');?></span></a>
+                    <?php endif;?>
+		<?php elseif (($tab != 1) && ($tab == 3) || ($tab == 4)):?>
+                    <a href="<?php echo MainHelper::site_url('players/top-list/'.$catPath.'tab/visits/desc');?>" class="filter_bar_option_selected filter_dsc"><span><?php echo $this->__('Visits');?></span></a>
+                <?php else: ?>
+                    <a href="<?php echo MainHelper::site_url('players/top-list/'.$catPath.'tab/visits/desc');?>"><span><?php echo $this->__('Visits');?></span></a>
+		<?php endif;?>
+				
+		<?php if (MainHelper::IsModuleEnabledByTag('contentchild') == 1 && MainHelper::IsModuleNotAvailableByTag('contentchild')==0): ?>
+		<?php if($tab == 2):?>
+                    <?php if($order == 'desc' or $order=''):?>
+                        <a href="<?php echo MainHelper::site_url('players/top-list/'.$catPath.'tab/rating/asc');?>" class="filter_bar_option_selected filter_dsc"><span><?php echo $this->__('Rating');?></span></a>
+			<?php else:?>
+                            <a href="<?php echo MainHelper::site_url('players/top-list/'.$catPath.'tab/rating/desc');?>" class="filter_bar_option_selected filter_asc"><span><?php echo $this->__('Rating');?></span></a>
+			<?php endif;?>
+		<?php else:?>
+                    <a href="<?php echo MainHelper::site_url('players/top-list/'.$catPath.'tab/rating/desc');?>"><span><?php echo $this->__('Rating');?></span></a>
+		<?php endif;?>
+		<?php endif;?>
+                
+                <?php if (MainHelper::IsModuleEnabledByTag('groups') == 1 && MainHelper::IsModuleNotAvailableByTag('groups')==0): ?>
+                <?php if($tab == 3):?>
+                    <?php if($order == 'desc' or $order=''):?>
+                        <a href="<?php echo MainHelper::site_url('players/top-list/'.$catPath.'tab/this-week/asc');?>" ><input type="radio" checked><span><?php echo $this->__('&nbsp; This Week');?></span></input></a>
+                    <?php endif;?>
+                <?php elseif (($tab == 2) && ($tab != 3)):?>
+                    <span><?php echo $this->__('&nbsp; This Weeks &nbsp;');?></span>
+                <?php else: ?>
+                    <a href="<?php echo MainHelper::site_url('players/top-list/'.$catPath.'tab/this-week/desc');?>"><span><?php echo $this->__('This Week');?></span></a>
+                <?php endif;?>
+                <?php endif;?>
+                    			
+                <?php if(($tab == 4) || ($tab == 1)):?>
+                    <?php if($order == 'desc' or $order='asc'):?>
+                        <a href="<?php echo MainHelper::site_url('players/top-list/'.$catPath.'tab/all-time/asc');?>" ><input type="radio" checked><span><?php echo $this->__('&nbsp; All Time');?></span></input></a>
+                    <?php endif;?>
+                <?php elseif (($tab == 2) && ($tab != 4)):?>
+                    <span color=""><?php echo $this->__('&nbsp; All TIme &nbsp;');?></span>
+                <?php else:?>
+                    <a href="<?php echo MainHelper::site_url('players/top-list/'.$catPath.'tab/all-time/desc');?>"><span><?php echo $this->__('All Time');?></span></a>
+                <?php endif;?>
+>>>>>>> bf1dc6dc2af0a5ef2bef4b5c4573dd321f9321c6
+	</div>
+</div>

@@ -1,0 +1,67 @@
+<div class="message_container">
+    <!-- header -->
+    <div class="clearfix">
+        <span class="fs22 fft fclg2 fl mr10"><?php echo $this->__('Edit Group Info'); ?></span>
+    </div>
+    <!-- end header -->
+    <form action="#" method="post" id="edit_group_form">
+        <input type="hidden" name="group_id" value="<?php echo $group->ID_GROUP; ?>" />
+
+		<div class="mt5">
+			<label for="groupName" class="cp"><?php echo $this->__('Group Name');?></label>
+			<div class="border mt2">
+				<input name="group_name" class="w576 news_border group_name" id="groupName"  value="<?php echo $group->GroupName; ?>" />
+			</div>
+		</div>
+		
+		<div class="mt5 pr zi100">
+			<label for="groupLeader" class="cp"><?php echo $this->__('Group Leader');?></label>
+			<div class="jqtransform pr border clearfix mt2">
+				<?php if (!empty($members)): ?>
+				 <select id="groupLeader" name="group_leader" class="w570 group_leader jqselect">
+					<?php foreach ($members as $member): ?>
+						<option value ="<?php echo $member->ID_PLAYER; ?>" <?php echo (isset($member->SnPlayerGroupRel) and $member->SnPlayerGroupRel[0]->isLeader) ? 'selected="selected"' : '';?>> <?php echo PlayerHelper::showName($member); ?></option>
+					<?php endforeach; ?>
+				</select>
+				<?php endif; ?>
+			</div>
+		</div>
+		
+		<div class="mt5 pr zi99">
+			<label for="groupType1" class="cp"><?php echo $this->__('Type 1');?></label>
+			<div class="jqtransform pr border clearfix mt2">
+				 <select id="groupType1" name="group_type1" class="w570 group_type1 jqselect">
+					 <?php foreach ($group_types as $type): ?>
+						<?php if($type->Subtype == 1):?>
+						<option value ="<?php echo $type->ID_GROUPTYPE; ?>" <?php echo $type->ID_GROUPTYPE == $group->ID_GROUPTYPE1 ? 'selected="selected"' : ''; ?> ><?php echo $type->GroupTypeName; ?></option>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</select>
+			</div>
+		</div>
+		
+		<div class="mt5 pr zi98">
+			<label for="groupType2" class="cp"><?php echo $this->__('Type 2');?></label>
+			<div class="jqtransform pr border clearfix mt2">
+				 <select id="groupType2" name="group_type2" class="w570 group_type2 jqselect">
+					<?php foreach ($group_types as $type): ?>
+						<?php if($type->Subtype == 2):?>
+						<option value ="<?php echo $type->ID_GROUPTYPE; ?>" <?php echo $type->ID_GROUPTYPE == $group->ID_GROUPTYPE2 ? 'selected="selected"' : ''; ?> ><?php echo $type->GroupTypeName; ?></option>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</select>
+			</div>
+		</div>
+		
+		<div class="mt5">
+			<label for="groupDescription" class="cp"><?php echo $this->__('Group Description');?></label>
+			<div class="border mt2">
+				<textarea name="group_description" rows="5"  class="news_border w576" id="groupDescription"><?php echo $group->GroupDesc; ?></textarea>
+			</div>
+		</div>
+
+        <div class="clear mt10">&nbsp;</div>
+        <a href="javascript:void(0)" class="link_green fr update_group_info"><span><span><?php echo $this->__('Save'); ?></span></span></a>
+    </form>
+</div>
+<script type="text/javascript">loadDropdowns();</script>

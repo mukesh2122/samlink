@@ -1,0 +1,15 @@
+nbproject/
+global/pub_img/
+global/min/
+_captcha/
+protected/cache/**/*
+protected/cache/
+*.avi
+.DS_Store
+protected/config/autoload/
+protected/config/master.conf.php
+protected/config/master.config.php
+OpenInviter/tmp/oi_plugins.php
+beta/
+_notes
+dwsync.xml

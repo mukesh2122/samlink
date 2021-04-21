@@ -1,0 +1,11 @@
+<?php $lang = strtoupper(Lang::getLang());?>
+
+<div class="info_box">
+
+	<a href="javascript:void(0)" class="closeInfoBox" rel="<?php echo $info->ID_INFO;?>">&times;</a>
+	<?php echo $info->InfoText;?>
+
+	<a href="javascript:void(0)" class="closeInfoBox" rel="<?php echo $info->ID_INFO;?>">&nbsp;</a>
+	<?php echo $info->{"InfoText{$lang}"};?>
+
+</div>

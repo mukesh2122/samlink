@@ -1,0 +1,66 @@
+/* 
+    Document   : selectbox.css
+    Created on : 23-05-2013, 11:32:05
+    Author     : ungamed
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.selectionbox {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    border: 1px solid white;
+    cursor: move;
+}
+
+.selectboxHandle {
+    border: 1px solid white;
+    background: #ccc;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+}
+
+.selectboxnw {
+    top: -5px;
+    left: -5px;
+    cursor: nw-resize;
+}
+.selectboxn {
+    top: -5px;
+    left: 49%;
+    cursor: n-resize;
+}
+.selectboxne {
+    top: -5px;
+    right: -5px;
+    cursor: ne-resize;
+}
+
+.selectboxw {
+    top: 50%;
+    left: -5px;
+    cursor: w-resize;
+}
+.selectboxe {
+    top: 49%;
+    right: -5px;
+    cursor: e-resize;
+}
+
+.selectboxsw {
+    bottom: -5px;
+    left: -5px;
+    cursor: sw-resize;
+}
+.selectboxs {
+    bottom: -5px;
+    left: 49%;
+    cursor: s-resize;
+}
+.selectboxse {
+    bottom: -5px;
+    right: -5px;
+    cursor: se-resize;
+}

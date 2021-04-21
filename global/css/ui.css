@@ -1,0 +1,2320 @@
+/*  == UI CSS =========================================================================
+
+	UI CSS contains all the UI elements.
+
+	=================================================================================== */
+
+
+
+
+/*  == info_box =======================================================================
+
+	A message container with the purpose of delivering messages to the user.
+
+	=================================================================================== */
+
+.info_box {
+	position: relative;
+	background-color: #D9EDF7;
+	border: 1px solid #9CDFED;
+	color: #3A87AD;
+	line-height: 18px;
+	text-shadow: 0px 1px 0px #F5F5F5;
+	filter: dropshadow(color=#FFFFFF, offx=0, offy=1);
+	padding: 8px 12px 28px 12px;
+	margin-bottom: 15px;
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.info_box_red {
+	background-color: #F7EDD9;
+	border: 1px solid #EDDF9C;
+	color: #AD873A;
+}
+
+.closeInfoBox {
+	text-decoration: none;
+	display: block;
+	position: absolute;
+	top: 8px;
+	right: 10px;
+	font-size: 20px;
+	color: #C5C5C5;
+}
+
+.closeInfoBox:hover {
+	text-decoration: none;
+	color: #999999;
+}
+
+
+/*  == .notification ==================================================================
+
+	A message container with the purpose of delivering messages to the user.
+
+	=================================================================================== */
+
+.notification {
+	padding: 2px 9px;
+
+	font-size: 11px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-shadow: 0 -1px 0 #333333;
+	white-space: nowrap;
+	vertical-align: baseline;
+	background-color: #999; /* Default background */
+
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	border-radius: 9px;
+}
+
+.notification_red {
+	background-color: #B94A48;
+}
+
+
+/*  == .counter =======================================================================
+
+	Similar to the .notification class, but slighty bigger and has some inset styles.
+
+	=================================================================================== */
+
+.counter {
+	padding: 4px 11px;
+
+	font-size: 11px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-shadow: 0 -1px 0 #000000;
+	white-space: nowrap;
+	vertical-align: baseline;
+	background-color: #606060; /* Default background */
+
+	-moz-box-shadow: 
+		inset 0px 1px 1px 0px rgba(0, 0, 0, 0.5),
+		0px 1px 0px 0px rgba(255, 255, 255, 0.5);
+	-webkit-box-shadow: 
+		inset 0px 1px 1px 0px rgba(0, 0, 0, 0.5),
+		0px 1px 0px 0px rgba(255, 255, 255, 0.5);
+	box-shadow: 
+		inset 0px 1px 1px 0px rgba(0, 0, 0, 0.5),
+		0px 1px 0px 0px rgba(255, 255, 255, 0.5);
+
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+
+/*  == .thumbnail =====================================================================
+
+	Adds a subtle border to images, with a nice hover effect.
+
+	=================================================================================== */
+
+.thumbnail img {
+	border: 1px solid #CCCCCC;
+	padding: 4px;
+
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.thumbnail img:hover {
+	border-color: #08C;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+/*  == .tooltipHelper =================================================================
+
+	Adds a subtle border to images, with a nice hover effect.
+
+	=================================================================================== */
+
+.tooltipHelperBox {
+	z-index: 100;
+	text-align: left;
+	position: relative;
+	display: none;
+	max-width: 250px;
+	background: rgb(0, 0, 0);
+	background: rgba(0, 0, 0, 0.8);
+	padding: 10px;
+	color: #FFFFFF;
+	font-size: 11px;
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.tooltipHelperBoxTop {
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 7px;
+	bottom: -7px;
+	margin-left: -10px;
+
+	background-image: url('img/tooltip_dark_down.png');
+	background-repeat: no-repeat;
+	background-position: bottom center;
+}
+
+
+
+/*  == c_column_search ================================================================
+
+	Minimalistic wide search box, with a button inside. The global button colors can
+	be used however you like.
+
+	=================================================================================== */
+
+.c_column_search {
+	position: relative;
+}
+
+.c_column_search_input {
+	width: 422px;
+	height: 31px;
+	padding: 0 168px 1px 8px;
+	margin: 0;
+	border: 1px solid #B8B8B8;
+	border-top-color: #B1B1B1;
+
+	font: 12px/12px Arial, "Helvetica Neue", Helvetica, sans-serif;
+	color: #757575;
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+
+	-webkit-box-shadow:
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.1);
+	-moz-box-shadow: 
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.1);
+	box-shadow: 
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.1);
+}
+
+.c_column_search_input:hover {
+	border: 1px solid #A5A5A5;
+}
+
+.c_column_search_input:focus {
+	border: 1px solid #959595;
+	color: #333333;
+
+	-webkit-box-shadow:
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.2);
+	-moz-box-shadow: 
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.2);
+	box-shadow: 
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.2);
+}
+
+.c_column_search_button {
+	font: 12px/12px Arial, "Helvetica Neue", Helvetica, sans-serif;
+	text-align: center;
+
+	position: absolute;
+	top: 5px;
+	right: 5px;
+
+	height: 24px;
+	padding: 0 20px 0 20px;
+	margin: 0;
+
+	-moz-border-radius-bottomleft: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+
+	-webkit-box-shadow:
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2),
+		0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow:
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2),
+		0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+	box-shadow:
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2),
+		0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+
+/*  == filter_bar =====================================================================
+
+	A tab par with the purpose of filtering list items.
+
+	=================================================================================== */
+
+.filter_bar {
+	font-size: 11px;
+	line-height: 11px;
+	border: 1px solid #C0C0C0;
+	border-top-color: #D3D3D3;
+	border-bottom-color: #AFAFAF;
+	padding: 10px 5px 11px 12px;
+	margin-bottom: 5px;
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+
+	background: rgb(240,240,240);
+	background: -moz-linear-gradient(top,  rgb(240,240,240) 0%, rgb(211,211,211) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(240,240,240)), color-stop(100%,rgb(211,211,211)));
+	background: -webkit-linear-gradient(top,  rgb(240,240,240) 0%,rgb(211,211,211) 100%);
+	background: -o-linear-gradient(top,  rgb(240,240,240) 0%,rgb(211,211,211) 100%);
+	background: -ms-linear-gradient(top,  rgb(240,240,240) 0%,rgb(211,211,211) 100%);
+	background: linear-gradient(top,  rgb(240,240,240) 0%,rgb(211,211,211) 100%);
+}
+
+.filter_bar_label {
+	float: left;
+	text-shadow: 0px 1px 0px #F9F9F9;
+	font-weight: bold;
+	color: #333333;
+}
+
+.filter_bar_options {
+	float: right;
+}
+
+.filter_bar_options a {
+	color: #666666;
+	text-decoration: none;
+	padding: 4px 9px 4px 9px;
+	margin-left: 10px;
+
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.filter_bar_options a:first-child {
+	margin-left: 0;
+}
+
+.filter_bar_options a:hover {
+	color: #333333;
+	text-decoration: none;
+}
+
+a.filter_bar_option_selected {
+	color: #505050;
+	background: #EEEEEE;
+	padding: 4px 8px 4px 8px;
+	border: 1px solid #C9C9C9;
+	border-top-color: #BCBCBC;
+	border-bottom-color: #E1E1E1;
+
+	-moz-box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+	box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+a.filter_dsc {
+	background: #EEEEEE url('img/n_icon_sprite.png') right -172px no-repeat;
+}
+
+a.filter_asc {
+	background: #EEEEEE url('img/n_icon_sprite.png') right -132px no-repeat;
+}
+
+.filter_dsc span,
+.filter_asc span {
+	padding-right: 11px;
+}
+
+a.filter_bar_option_selected:hover {
+	cursor: default;
+	color: #505050;
+}
+
+a.filter_bar_option_selected.filter_dsc:hover,
+a.filter_bar_option_selected.filter_asc:hover {
+	cursor: pointer;
+	color: #505050;
+}
+
+
+/*  == horizontal_tabs ================================================================
+
+	Simple and minimalistic horizontal tabs. There are two versions, the regular one,
+	and a smaller version. Just apply the .small class with the .horizontal_tabs class
+	if you want to use the small version.
+
+	=================================================================================== */
+
+.horizontal_tabs {
+	margin-bottom: 15px;
+	position: relative;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.horizontal_tabs li {
+	float: left;
+	border: 1px solid #CCCCCC;
+	border-bottom: none;
+	background-color: #F0F0F0;
+	margin-right: -1px;
+	height: 26px;
+
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-radius: 5px 5px 0px 0px;
+	border-radius: 5px 5px 0px 0px;
+}
+
+.horizontal_tabs li.active,
+.horizontal_tabs li.active:hover {
+	margin-bottom: -1px;
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #FFFFFF;
+}
+
+.horizontal_tabs li:hover {
+	background-color: #F7F7F7;
+}
+
+.horizontal_tabs a {
+	display: inline-block;
+	color: #666666;
+	font-size: 13px;
+	line-height: 27px;
+	padding: 0 8px;
+}
+
+.horizontal_tabs a:hover {
+	text-decoration: none;
+}
+
+/*
+ * Small version
+ */
+.horizontal_tabs.small {
+	margin-bottom: 10px;
+}
+
+.horizontal_tabs.small li {
+	margin-right: 2px;
+	height: 22px;
+}
+
+.horizontal_tabs.small a {
+	font-size: 12px;
+	line-height: 23px;
+}
+
+/* old code, clean up when done */
+ul.tab_navigation_big {
+    padding: 0;
+    margin: 10px 0 0 0;
+    border-bottom: 1px solid #cccccc;
+}
+
+ul.tab_navigation_big li{
+    display: block;
+    float: left;
+    margin-right: -1px;
+}
+
+ul.tab_navigation_big a{
+    position: relative;
+    top: 1px;
+    display: block;
+    background-position: 0px -2060px;
+    background-color: #f0f0f0;
+    color: #666666;
+	border-bottom: 1px solid #cccccc;
+}
+ul.tab_navigation_big a span{
+    display: block;
+    background-position: 0px -2706px; 
+    padding: 0px 0px 0px 9px;
+}
+ul.tab_navigation_big a span span{
+    display: block;
+    height: 18px;
+    background-position: right -2706px;
+    padding: 4px 9px 3px 20px;
+    font-size: 14px;
+    color: #666666;
+    font-family: tahoma;
+	position: relative;
+}
+
+ul.tab_navigation_big a:hover{
+    background-position: 0px -2060px;
+    background-color: #f7f7f7;
+    color: #666666;
+	text-decoration: none;
+}
+ul.tab_navigation_big a:hover span{
+    background-position: 0px -2732px; 
+}
+ul.tab_navigation_big a:hover span span{
+    height: 18px;
+    background-position: right -2732px;
+    color: #666666;
+}
+
+ul.tab_navigation_big a.active{
+    background-position: 0px -2060px;
+    background-color: #fff;
+	border-bottom: 0;
+}
+ul.tab_navigation_big a.active span{
+    background-position: 0px -2758px;
+}
+ul.tab_navigation_big a.active span span{
+    height: 19px;
+    background-position: right -2758px; 
+    color: #666666;
+}
+
+
+/*  == vertical_tabs ==================================================================
+
+	Simple and minimalistic vertical tabs.
+
+	=================================================================================== */
+
+.vertical_tabs {
+	list-style: none;
+	margin-top: 10px;
+}
+
+.vertical_tabs li {
+	margin-bottom: 8px;
+}
+
+.vertical_tabs a {
+	display: block;
+	background-color: #EFEFEF;
+	color: #606060;
+	padding: 7px 10px;
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.vertical_tabs a:hover,
+.vertical_tabs .selected {
+	color: #FFFFFF;
+	text-decoration: none;
+	background-color: #0084C7;
+}
+
+.vertical_tabs .selected:hover {
+	cursor: default;
+}
+
+span.vertical_tabs {
+	display: block;
+	background-color: #EFEFEF;
+	color: #606060;
+	padding: 7px 10px;
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+/*  == vertical_tabs_indent ===========================================================
+
+	Simple and minimalistic vertical tabs indented.
+
+	=================================================================================== */
+
+.vertical_tabs_indent {
+	list-style: none;
+	margin-top: 10px;
+}
+
+.vertical_tabs_indent li {
+	margin-bottom: 8px;
+	margin-left: 25px;
+}
+
+.vertical_tabs_indent a {
+	display: block;
+	background-color: #BABABA;
+	color: #606060;
+	padding: 7px 10px;
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.vertical_tabs_indent a:hover,
+.vertical_tabs_indent .selected {
+	color: #FFFFFF;
+	text-decoration: none;
+	background-color: #008400;
+}
+
+.vertical_tabs_indent .selected:hover {
+	cursor: default;
+}
+
+
+/*  == item_dropdown =============================================================
+
+	A simple dropdown menu that appears in the upper right corner.
+
+	=================================================================================== */
+
+.item_dropdown {
+	position: absolute;
+	top: 0;
+	right: 0;
+        z-index: 100;
+}
+
+.new_list_item .item_dropdown {
+        top: 40px;
+}
+
+.item_dropdown_trigger {
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 17px;
+	height: 17px;
+
+	text-align: right;
+	border: 1px solid #707070;
+	font: 0/0 a;
+	color: transparent;
+
+	background: url("img/n_icon_sprite.png") 4px -274px no-repeat;
+	background-color: #FFFFFF;
+
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.item_dropdown_trigger:hover {
+	border-color: #CCCCCC;
+
+	-moz-box-shadow: 0px 1px 1px 0px rgba(51, 51, 51, 0.1);
+	-webkit-box-shadow: 0px 1px 1px 0px rgba(51, 51, 51, 0.1);
+	box-shadow: 0px 1px 1px 0px rgba(51, 51, 51, 0.1);
+}
+
+.item_dropdown_trigger.open {
+	display: inline !important;
+	background: url("img/n_icon_sprite.png") 4px -314px no-repeat;
+	background-color: #CCCCCC;
+	border-color: #CCCCCC;
+}
+
+.item_dropdown_trigger.open:hover {
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.item_dropdown_options {
+	display: none;
+	position: absolute;
+	top: 19px;
+	right: 0;
+	z-index: 1000;
+	border: 1px solid #B5B5B5;
+	border-top-color: #C8C8C8;
+	border-bottom-color: #AAAAAA;
+	background-color: #FFFFFF;
+	min-width: 160px;
+	padding: 6px 0 6px 0;
+	margin-top: 4px;
+	list-style: none;
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding;
+	background-clip: padding-box;
+}
+
+.item_dropdown_options a {
+	display: block;
+	font-size: 12px;
+	line-height: 18px;
+	padding: 3px 10px;
+	color: #333;
+	white-space: nowrap;
+}
+
+.item_dropdown_options li > a:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+	background-color: #0084C7;
+}
+
+.item_dropdown_options .option_divider {
+	height: 1px;
+	margin: 6px 1px 5px 1px;
+	overflow: hidden;
+	background-color: #E5E5E5;
+	border-bottom: 1px solid #FFFFFF;
+}
+
+
+/*  == show_more_button ===============================================================
+
+	A show more button for ajax calls etc.
+
+	=================================================================================== */
+
+.show_more_button {
+	font-size: 12px;
+	line-height: 34px;
+	text-decoration: none;
+	text-align: center;
+	text-shadow: 0px 1px 0px #FFFFFF;
+	filter: dropshadow(color=#FFFFFF, offx=0, offy=1);
+	color: #757575;
+	display: block;
+	padding: 0;
+	margin-top: 5px;
+
+	border: 1px solid #DFDFDF;
+	border-top-color: #E1E1E1;
+	border-bottom-color: #D5D5D5;
+
+	background: rgb(245,245,245);
+	background: -moz-linear-gradient(top,  rgb(245,245,245) 0%, rgb(241,241,241) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(245,245,245)), color-stop(100%,rgb(241,241,241)));
+	background: -webkit-linear-gradient(top,  rgb(245,245,245) 0%,rgb(241,241,241) 100%);
+	background: -o-linear-gradient(top,  rgb(245,245,245) 0%,rgb(241,241,241) 100%);
+	background: -ms-linear-gradient(top,  rgb(245,245,245) 0%,rgb(241,241,241) 100%);
+	background: linear-gradient(top,  rgb(245,245,245) 0%,rgb(241,241,241) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#f1f1f1',GradientType=0 );
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.show_more_button:hover {
+	text-decoration: none;
+	color: #666666;
+
+	border: 1px solid #DADADA;
+	border-top-color: #DCDCDC;
+	border-bottom-color: #D0D0D0;
+
+	background: rgb(240,240,240);
+	background: -moz-linear-gradient(top,  rgb(240,240,240) 0%, rgb(236,236,236) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(240,240,240)), color-stop(100%,rgb(236,236,236)));
+	background: -webkit-linear-gradient(top,  rgb(240,240,240) 0%,rgb(236,236,236) 100%);
+	background: -o-linear-gradient(top,  rgb(240,240,240) 0%,rgb(236,236,236) 100%);
+	background: -ms-linear-gradient(top,  rgb(240,240,240) 0%,rgb(236,236,236) 100%);
+	background: linear-gradient(top,  rgb(240,240,240) 0%,rgb(236,236,236) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#ececec',GradientType=0 );
+}
+
+.show_more_button:active {
+	text-decoration: none;
+	color: #666666;
+}
+
+
+/*  == pagination =====================================================================
+
+	Simple and minimalistic pagination element.
+
+	=================================================================================== */
+
+.pagination {
+	width: auto;
+	position: relative;
+	margin-top: 5px;
+}
+
+.pagination ul {
+	margin: 0 auto;
+	list-style: none;
+	border: 1px solid #DDDDDD;
+	border-bottom-color: #D5D5D5;
+	width: auto;
+
+	background: rgb(255,255,255);
+	background: -moz-linear-gradient(top,  rgb(255,255,255) 0%, rgb(249,249,249) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(255,255,255)), color-stop(100%,rgb(249,249,249)));
+	background: -webkit-linear-gradient(top,  rgb(255,255,255) 0%,rgb(249,249,249) 100%);
+	background: -o-linear-gradient(top,  rgb(255,255,255) 0%,rgb(249,249,249) 100%);
+	background: -ms-linear-gradient(top,  rgb(255,255,255) 0%,rgb(249,249,249) 100%);
+	background: linear-gradient(top,  rgb(255,255,255) 0%,rgb(249,249,249) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f9f9f9',GradientType=0 );
+
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.pagination li {
+	text-align: center;
+	float: left;
+	border-right: 1px solid #DDDDDD;
+}
+
+.pagination a {
+	width: auto;
+	display: block;
+	font-size: 13px;
+	line-height: 34px;
+	padding: 0 14px;
+
+	text-shadow: 0px 1px 0px #FFFFFF;
+	filter: dropshadow(color=#FFFFFF, offx=0, offy=1);
+}
+
+.pagination li:first-child > a {
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.pagination a:hover {
+	text-decoration: none;
+	color: #005580;
+	
+	background: rgb(245,245,245);
+	background: -moz-linear-gradient(top,  rgb(245,245,245) 0%, rgb(241,241,241) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(245,245,245)), color-stop(100%,rgb(241,241,241)));
+	background: -webkit-linear-gradient(top,  rgb(245,245,245) 0%,rgb(241,241,241) 100%);
+	background: -o-linear-gradient(top,  rgb(245,245,245) 0%,rgb(241,241,241) 100%);
+	background: -ms-linear-gradient(top,  rgb(245,245,245) 0%,rgb(241,241,241) 100%);
+	background: linear-gradient(top,  rgb(245,245,245) 0%,rgb(241,241,241) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#f1f1f1',GradientType=0 );
+}
+
+.pagination .current {
+	cursor: default;
+	color: #999999;
+	
+	background: rgb(245,245,245);
+	background: -moz-linear-gradient(top,  rgb(245,245,245) 0%, rgb(241,241,241) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(245,245,245)), color-stop(100%,rgb(241,241,241)));
+	background: -webkit-linear-gradient(top,  rgb(245,245,245) 0%,rgb(241,241,241) 100%);
+	background: -o-linear-gradient(top,  rgb(245,245,245) 0%,rgb(241,241,241) 100%);
+	background: -ms-linear-gradient(top,  rgb(245,245,245) 0%,rgb(241,241,241) 100%);
+	background: linear-gradient(top,  rgb(245,245,245) 0%,rgb(241,241,241) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#f1f1f1',GradientType=0 );
+}
+
+
+.pagination .current,
+.pagination .current:hover {
+	color: #999999;
+}
+
+.pagination .prev {
+
+}
+
+.pagination .inactivePrev {
+
+}
+
+.pagination .next {
+    margin: 0px !important;
+    border: none !important;
+}
+
+.pagination .inactiveNext {
+
+}
+
+.pagination .inactiveNext,
+.pagination .inactivePrev,
+.pagination .inactiveNext:hover,
+.pagination .inactivePrev:hover {
+	cursor: default;
+	color: #999999;
+	background: none;
+}
+
+
+/*  == grey_box =======================================================================
+
+	A grey box for pulling out content.
+
+	=================================================================================== */
+
+.grey_box {
+	background-color: #F9F9F9;
+	border: solid 1px #E6E6E6;
+	padding: 10px;
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+
+/*  == yellow_box =====================================================================
+
+	A yellow box for pulling out content.
+
+	=================================================================================== */
+
+.yellow_box {
+	border: solid 1px #CCCCCC;
+	padding: 10px;
+	background-color: #FFFFF1;
+}
+
+/*  == info_box =======================================================================
+
+	Headers with dashed borders underlined, for use with yellow_box and grey_box
+
+	=================================================================================== */
+
+.box_header,
+.box_header_plus {
+	border-bottom: dashed 1px #CCCCCC;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
+
+.box_header_plus {
+	margin-top: 20px;
+}
+
+.box_header h3,
+.box_header_plus h3 {
+	font: 17px/17px Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+/*  == Form Lists =====================================================================
+
+	Form lists.
+
+	=================================================================================== */
+
+.standard_form {
+	margin: 0 auto;
+	max-width: 600px;
+	border: 1px solid #DEDEDE;
+
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.standard_form_header {
+	position: relative;
+	margin-bottom: 30px;
+	padding: 15px 30px 15px 30px;
+	border-bottom: 1px solid #DEDEDE;
+}
+
+.standard_form_header_info {
+	display: block;
+	margin-top: 5px;
+	color: #999999;
+}
+
+.standard_form_elements {
+	padding-bottom: 30px;
+	max-width: 540px;
+	margin: 0 auto;
+}
+
+.standard_form_elements .standard_form_info_header:first-child {
+	border: 0;
+	margin: 0 0 20px 0;
+	padding: 0 0 0 0;
+}
+
+.standard_form_elements .errors {
+	color: #ff0000;
+}
+
+.standard_form_seperator {
+	height: 0px;
+	width: 600px;
+	border-top: 1px solid #EAEAEA;
+	margin: 0 0 18px -30px;
+}
+
+.standard_form_info_header {
+	margin: 20px 0 18px -30px;
+	padding: 28px 30px 0 30px;
+	width: 540px;
+	border-top: 1px solid #DEDEDE;
+}
+
+.standard_form_info_header.no_sep {
+	border: 0;
+	margin: 20px 0 18px 0;
+	padding: 0 0 0 0;
+}
+
+.standard_form_info_header h2 {
+	margin-bottom: 2px;
+}
+
+.standard_form_info_header p {
+	font-size: 13px;
+	color: #757575;
+}
+
+.standard_form label {
+	float: left;
+	margin-top: 7px;
+	color: #333333;
+	cursor: pointer;
+}
+
+.standard_form .act_as_label {
+	float: left;
+	color: #333333;
+	margin-top: -9px;
+}
+
+.standard_form .act_as_input {
+	width: 378px;
+	float: right;
+	margin-top: -9px;
+	margin-bottom: 18px;
+}
+
+.standard_form .act_as_label_double {
+	float: left;
+	color: #333333;
+}
+
+.standard_form .act_as_input_double {
+	width: 378px;
+	float: right;
+	margin-bottom: 18px;
+}
+
+.standard_form .standalone_elm {
+	padding-bottom: 18px;
+}
+
+.standard_form input[type="text"],
+.standard_form input[type="password"],
+.standard_form select,
+.standard_form .dk_container {
+	float: right;
+	margin-bottom: 18px;
+}
+
+.standard_form_dob .dk_container {
+	margin-left: 12px;
+}
+
+.standard_form_tos {
+	width: 378px;
+	float: right;
+}
+
+.standard_form_checks label {
+	margin-top: 0;
+}
+
+.standard_form_checks_wrapper {
+	width: 378px;
+	float: right;
+	margin-bottom: 18px;
+}
+
+.standard_form_checks_wrapper .column-label {
+	margin-top: 7px;
+	float: left;
+}
+
+.standard_form_checks_wrapper .current {
+	color: #333333;
+	font-weight: bold;
+}
+
+.standard_form_photo {
+	width: 378px;
+	float: right;
+	margin-bottom: 18px;
+}
+
+.standard_form_photo_wrapper {
+	float: left;
+	background-color: #FFFFFF;
+	padding: 6px;
+	border: 1px solid #DEDEDE;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.standard_form_photo_wrapper img {
+	max-width: 100px;
+	max-height: 150px;
+}
+
+.standard_form_photo .standard_form_photo_action {
+	float: left;
+	margin-left: 15px;
+}
+
+.standard_form_photo_action p {
+	margin-top: 10px;
+	color: #757575;
+}
+
+.standard_form input.error {
+	background-image: none;
+	color: #ff0000;
+	border-color: #FF0000;
+}
+
+.standard_form .login_error {
+	color: #ff0000;
+	margin-bottom: 10px;
+}
+
+.standard_form label.error {
+	cursor: default;
+	float: left;
+	margin: -10px 0 10px 161px;
+	background: none;
+	display: block;
+	color: #ff0000;
+	font-size: 12px;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.standard_form_tos label.error {
+	margin: 10px 0 0 0;
+}
+
+.standard_form_footer {
+	background-color: #f4f4f4;
+	padding: 15px 30px 15px 30px;
+        
+	-webkit-border-radius: 0px 0px 10px 10px;
+	border-radius: 0px 0px 10px 10px;
+}
+
+.stand_form_footer_link {
+	color: #757575;
+	margin-top: 7px;
+}
+
+.stand_form_login {
+	background-color: #c5c5c5;
+}
+
+
+/*  == text_input =====================================================================
+
+	Simple text input element, with a subtle inset shadow.
+
+	=================================================================================== */
+
+.text_input {
+	font: 12px/18px Arial, "Helvetica Neue", Helvetica, sans-serif;
+	border: 1px solid #CCCCCC;
+	width: 364px;
+	height: 28px;
+	padding: 0 6px 0 6px;
+	color: #333333;
+
+	-webkit-box-shadow:
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.1);
+	-moz-box-shadow: 
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.1);
+	box-shadow: 
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.1);
+
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.text_input:hover {
+	border: 1px solid #B5B5B5;
+}
+
+.text_input:focus {
+	border: 1px solid #AAAAAA;
+
+	-webkit-box-shadow:
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.2);
+	-moz-box-shadow: 
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.2);
+	box-shadow: 
+		inset 0px 1px 2px 0px rgba(116, 116, 116, 0.2);
+}
+
+
+/*  == shareTip =======================================================================
+
+	The shareTip is to be used with the initializer in custom.js
+
+	=================================================================================== */
+
+/*
+ * Share function
+ */
+.shareTip {
+	display: none;
+	text-align: left;
+	background-color: #f5f5f5;
+	border: 1px solid #ababab;
+	border-bottom-color: #9E9E9E;
+	z-index: 9999;
+	min-width: 392px;
+
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+
+	-webkit-box-shadow: 
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 1),
+		0px 2px 5px 0px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 1),
+		0px 2px 5px 0px rgba(0, 0, 0, 0.2);
+	box-shadow: 
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 1),
+		0px 2px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* Default position */
+.shareTipArrow {
+	background: transparent url("img/share_tip_arrow_shadow.png") top center no-repeat;
+	width: 100%;
+	height: 11px;
+	position: absolute;
+	top: -10px;
+	margin: 0 auto;
+}
+
+.no-boxshadow .shareTipArrow {
+	background: transparent url("img/share_tip_arrow.png") top center no-repeat;
+}
+
+/* Top position */
+.top .shareTipArrow {
+	background: transparent url("img/share_tip_arrow_bottom.png") top center no-repeat;
+	width: 100%;
+	height: 11px;
+	position: absolute;
+	top: auto;
+	bottom: -10px;
+	margin: 0 auto;
+}
+
+/* Right position */
+.right .shareTipArrow {
+	background: transparent url("img/share_tip_arrow_left.png") top center no-repeat;
+	width: 11px;
+	height: 20px;
+	position: absolute;
+	top: 42%;
+	bottom: 58%;
+	left: -10px;
+	margin: 0;
+}
+
+/* Left position */
+.left .shareTipArrow {
+	background: transparent url("img/share_tip_arrow_right.png") top center no-repeat;
+	width: 11px;
+	height: 20px;
+	position: absolute;
+	top: 42%;
+	bottom: 58%;
+	right: -10px;
+	margin: 0;
+}
+
+.shareTipBody {
+	padding: 15px 15px 16px 15px;
+}
+
+.shareTipBody ul {
+	position: relative;
+	float: left;
+	padding: 0;
+	margin: 0 0 0 40px;
+}
+
+.shareTipBody ul:first-child {
+	margin: 0;
+}
+
+.shareTipBody ul li {
+	padding: 0;
+	margin: 18px 0 0 0;
+}
+
+.shareTipBody ul li:first-child {
+	margin: 0;
+}
+
+.shareTipBody ul li a {
+	font: 11px/11px Verdana, Arial, sans-serif;
+	color: #505050;
+	text-decoration: none;
+	padding: 1px 0 2px 26px;
+	margin: 0;
+
+	-webkit-transition: background-position 0.2s ease-in;
+	-moz-transition: background-position 0.2s ease-in;
+	-o-transition: background-position 0.2s ease-in;
+	-ms-transition: background-position 0.2s ease-in;
+	transition: background-position 0.2s ease-in;
+}
+
+.shareTipBody ul li a:hover {
+	text-decoration: underline;
+}
+
+.copy_link {
+	background-color: #EBEBEB;
+	padding: 0;
+	margin: 0;
+	border-top: 1px dashed #ABABAB;
+	cursor: pointer;
+
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomright: 11px;
+	-moz-border-radius-bottomleft: 11px;
+	-webkit-border-radius: 0px 0px 11px 11px;
+	border-radius: 0px 0px 11px 11px;
+}
+
+.copy_link input {
+	width: 360px;
+	font: 11px/14px Arial, Verdana, sans-serif;
+	color: #505050;
+	border: none;
+	margin: 0;
+	padding: 8px 15px 10px 15px;
+
+	background-color: #EBEBEB;
+	outline: none;
+	cursor: pointer;
+
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomright: 11px;
+	-moz-border-radius-bottomleft: 11px;
+	-webkit-border-radius: 0px 0px 11px 11px;
+	border-radius: 0px 0px 11px 11px;
+}
+
+.link_selected,
+.link_selected input {
+	cursor: default;
+}
+
+
+/*  == Buttons ========================================================================
+
+	Sizes available:
+		button_small (70px wide),
+		button_medium (120px wide),
+		button_large (200px wide,
+		button_fluid (Fits container)
+
+	Special sizes available:
+		button_178 (For 200px containers width 8px padding (left column))
+
+	Colors available:
+		orange, 
+		light_orange, 
+		green, 
+		light_green, 
+		grey,
+		light_grey,
+		light_blue,
+		baby_blue, 
+		mint,
+		red,
+		purple,
+
+	Specail button presets available:
+		button_icon
+		button_no_shadow
+
+	=================================================================================== */
+
+/*
+ * Button presets
+ */
+.button {
+	display: block;
+	font-size: 12px;
+	line-height: 12px;
+	text-decoration: none;
+	text-align: center;
+	cursor: pointer;
+
+	-webkit-box-shadow: 
+		0px 1px 1px 0px rgba(0, 0, 0, 0.2),
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2);
+	-moz-box-shadow: 
+		0px 1px 1px 0px rgba(0, 0, 0, 0.2),
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2);
+	box-shadow: 
+		0px 1px 1px 0px rgba(0, 0, 0, 0.2),
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2);
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.button:hover {
+	text-decoration: none;
+}
+
+.button:active {
+	text-decoration: none;
+}
+
+/*
+ * Button sizes, ordered by size
+ */ 
+.button_fluid {
+	width: 100%;
+	padding: 8px 0 8px 0;
+}
+
+.button_auto {
+	padding: 8px 14px;
+}
+
+.button_small {
+	width: 48px;
+	padding: 5px 10px 5px 10px;
+}
+
+.button_medium {
+	width: 118px;
+	height: 28px;
+	line-height: 28px;
+}
+
+.button_large {
+	width: 178px;
+	padding: 8px 10px 8px 10px;
+}
+
+/*
+ * Special sizes, ordered by size
+ */
+.button_182 {
+	width: 160px;
+	padding: 6px 10px 6px 10px;
+}
+
+/*
+ * Special button presets
+ */
+.button_icon {
+	padding: 3px 6px 3px 6px;
+}
+
+.button_icon .text {
+	display: block;
+	float: left;
+}
+
+.button_icon .icon {
+	display: block;
+	float: right;
+}
+
+.button_no_shadow {
+	-webkit-box-shadow:
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2);
+	-moz-box-shadow:
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2);
+	box-shadow:
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2);
+}
+
+/*
+ * Button: orange
+ */
+.orange {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #b24a19;
+	border: 1px solid #cd5015;
+	border-top-color: #f06423;
+
+	background: rgb(247,146,30);
+	background: -moz-linear-gradient(top,  rgb(247,146,30) 0%, rgb(242,101,34) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(247,146,30)), color-stop(100%,rgb(242,101,34)));
+	background: -webkit-linear-gradient(top,  rgb(247,146,30) 0%,rgb(242,101,34) 100%);
+	background: -o-linear-gradient(top,  rgb(247,146,30) 0%,rgb(242,101,34) 100%);
+	background: -ms-linear-gradient(top,  rgb(247,146,30) 0%,rgb(242,101,34) 100%);
+	background: linear-gradient(top,  rgb(247,146,30) 0%,rgb(242,101,34) 100%);
+}
+
+.no-cssgradients .orange {
+	background-color: #f26522;
+	border: solid 1px #b24a19;
+}
+
+.orange:hover {
+	color: #FFFFFF;
+	border: 1px solid #e45d1e;
+	border-top-color: #ff7737;
+
+	background: rgb(248,160,59);
+	background: -moz-linear-gradient(top,  rgb(248,160,59) 0%, rgb(239,115,56) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(248,160,59)), color-stop(100%,rgb(239,115,56)));
+	background: -webkit-linear-gradient(top,  rgb(248,160,59) 0%,rgb(239,115,56) 100%);
+	background: -o-linear-gradient(top,  rgb(248,160,59) 0%,rgb(239,115,56) 100%);
+	background: -ms-linear-gradient(top,  rgb(248,160,59) 0%,rgb(239,115,56) 100%);
+	background: linear-gradient(top,  rgb(248,160,59) 0%,rgb(239,115,56) 100%);
+}
+
+.no-cssgradients .orange:hover {
+	background-color: #ef7338;
+	border: 1px solid #e45d1e;
+}
+
+.orange:active {
+	color: #FFFFFF;
+	border: 1px solid #EF7338;
+	border-top-color: #9e3a0b;
+
+	background: #EF7338;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .orange:active {
+	background-color: #f26522;
+	border: 1px solid #9e3a0b;
+}
+
+/*
+ * Button: light orange
+ */
+.light_orange {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #c65723;
+	border: 1px solid #c07915;
+	border-top-color: #e29221;
+
+	background: rgb(254,198,6);
+	background: -moz-linear-gradient(top,  rgb(254,198,6) 0%, rgb(242,153,29) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(254,198,6)), color-stop(100%,rgb(242,153,29)));
+	background: -webkit-linear-gradient(top,  rgb(254,198,6) 0%,rgb(242,153,29) 100%);
+	background: -o-linear-gradient(top,  rgb(254,198,6) 0%,rgb(242,153,29) 100%);
+	background: -ms-linear-gradient(top,  rgb(254,198,6) 0%,rgb(242,153,29) 100%);
+	background: linear-gradient(top,  rgb(254,198,6) 0%,rgb(242,153,29) 100%);
+}
+
+.no-cssgradients .light_orange {
+	background-color: #f2991d;
+	border: 1px solid #c07915;
+}
+
+.light_orange:hover {
+	color: #FFFFFF;
+	border: 1px solid #d2871e;
+	border-top-color: #ea9a28;
+
+	background: rgb(249,205,54);
+	background: -moz-linear-gradient(top,  rgb(249,205,54) 0%, rgb(254,165,42) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(249,205,54)), color-stop(100%,rgb(254,165,42)));
+	background: -webkit-linear-gradient(top,  rgb(249,205,54) 0%,rgb(254,165,42) 100%);
+	background: -o-linear-gradient(top,  rgb(249,205,54) 0%,rgb(254,165,42) 100%);
+	background: -ms-linear-gradient(top,  rgb(249,205,54) 0%,rgb(254,165,42) 100%);
+	background: linear-gradient(top,  rgb(249,205,54) 0%,rgb(254,165,42) 100%);
+}
+
+.no-cssgradients .light_orange:hover {
+	background-color: #fea52a;
+	border: 1px solid #d2871e;
+}
+
+.light_orange:active {
+	color: #FFFFFF;
+	border: 1px solid #fea52a;
+	border-top-color: #7f4f0c;
+
+	background: #fea52a;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .light_orange:active {
+	background-color: #f2991d;
+	border: 1px solid #7f4f0c;
+}
+
+/*
+ * Button: green_flat
+ */
+.green_flat {
+	color: #FFFFFF;
+	border: 1px solid #06B852;
+
+	background-color: #06B852;
+
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.green_flat:hover {
+	color: #FFFFFF;
+	border: 1px solid #07C95A;
+
+	background-color: #07C95A;	
+}
+
+.green_flat:active {
+	color: #FFFFFF;
+	border: 1px solid #06a449;
+
+	background-color: #06a449;
+}
+
+/*
+ * Button: green
+ */
+.green {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #366235;
+	border: 1px solid #487a3c;
+	border-top-color: #679566;
+
+	background: rgb(127,176,126);
+	background: -moz-linear-gradient(top,  rgb(127,176,126) 0%, rgb(97,146,96) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(127,176,126)), color-stop(100%,rgb(97,146,96)));
+	background: -webkit-linear-gradient(top,  rgb(127,176,126) 0%,rgb(97,146,96) 100%);
+	background: -o-linear-gradient(top,  rgb(127,176,126) 0%,rgb(97,146,96) 100%);
+	background: -ms-linear-gradient(top,  rgb(127,176,126) 0%,rgb(97,146,96) 100%);
+	background: linear-gradient(top,  rgb(127,176,126) 0%,rgb(97,146,96) 100%);
+}
+
+.no-cssgradients .green {
+	background-color: #619260;
+	border: 1px solid #487a3c;
+}
+
+.green:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+	border: 1px solid #477848;
+	border-top-color: #699c64;
+
+	background: rgb(139,186,135);
+	background: -moz-linear-gradient(top,  rgb(139,186,135) 0%, rgb(102,153,104) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(139,186,135)), color-stop(100%,rgb(102,153,104)));
+	background: -webkit-linear-gradient(top,  rgb(139,186,135) 0%,rgb(102,153,104) 100%);
+	background: -o-linear-gradient(top,  rgb(139,186,135) 0%,rgb(102,153,104) 100%);
+	background: -ms-linear-gradient(top,  rgb(139,186,135) 0%,rgb(102,153,104) 100%);
+	background: linear-gradient(top,  rgb(139,186,135) 0%,rgb(102,153,104) 100%);
+}
+
+.no-cssgradients .green:hover {
+	background-color: #669968;
+	border: 1px solid #477848;
+}
+
+.green:active {
+	color: #FFFFFF;
+	text-decoration: none;
+	border: solid 1px #619260;
+	border-top-color: #1c421b;
+
+	background: #619260;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .green:active {
+	background-color: #619260;
+	border: 1px solid #1c421b;
+}
+
+/*
+ * Button: light green
+ */
+.light_green {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #287624;
+	border: 1px solid #32822e;
+	border-top-color: #429f3d;
+
+	background: rgb(91,201,86);
+	background: -moz-linear-gradient(top,  rgb(91,201,86) 0%, rgb(66,168,61) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(91,201,86)), color-stop(100%,rgb(66,168,61)));
+	background: -webkit-linear-gradient(top,  rgb(91,201,86) 0%,rgb(66,168,61) 100%);
+	background: -o-linear-gradient(top,  rgb(91,201,86) 0%,rgb(66,168,61) 100%);
+	background: -ms-linear-gradient(top,  rgb(91,201,86) 0%,rgb(66,168,61) 100%);
+	background: linear-gradient(top,  rgb(91,201,86) 0%,rgb(66,168,61) 100%);
+}
+
+.no-cssgradients .light_green {
+	background-color: #42a83d;
+	border: 1px solid #32822e;
+}
+
+.light_green:hover {
+	color: #FFFFFF;
+	border: solid 1px #3e973a;
+	border-top-color: #5baf48;
+
+	background: rgb(116,211,95);
+	background: -moz-linear-gradient(top,  rgb(116,211,95) 0%, rgb(86,178,67) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(116,211,95)), color-stop(100%,rgb(86,178,67)));
+	background: -webkit-linear-gradient(top,  rgb(116,211,95) 0%,rgb(86,178,67) 100%);
+	background: -o-linear-gradient(top,  rgb(116,211,95) 0%,rgb(86,178,67) 100%);
+	background: -ms-linear-gradient(top,  rgb(116,211,95) 0%,rgb(86,178,67) 100%);
+	background: linear-gradient(top,  rgb(116,211,95) 0%,rgb(86,178,67) 100%);
+}
+
+.no-cssgradients .light_green:hover {
+	background-color: #56b243;
+	border: solid 1px #3e973a;
+}
+
+.light_green:active {
+	color: #FFFFFF;
+	border: solid 1px #56b243;
+	border-top-color: #21601e;
+
+	background: #56b243;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .light_green:active {
+	background-color: #42a83d;
+	border: 1px solid #21601e;
+}
+
+/*
+ * Button: grey
+ */
+.grey {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #000000;
+	border: 1px solid #333333;
+	border-top-color: #505050;
+
+	background: rgb(111,111,111);
+	background: -moz-linear-gradient(top,  rgb(111,111,111) 0%, rgb(81,81,81) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(111,111,111)), color-stop(100%,rgb(81,81,81)));
+	background: -webkit-linear-gradient(top,  rgb(111,111,111) 0%,rgb(81,81,81) 100%);
+	background: -o-linear-gradient(top,  rgb(111,111,111) 0%,rgb(81,81,81) 100%);
+	background: -ms-linear-gradient(top,  rgb(111,111,111) 0%,rgb(81,81,81) 100%);
+	background: linear-gradient(top,  rgb(111,111,111) 0%,rgb(81,81,81) 100%);
+}
+
+.no-cssgradients .grey {
+	background-color: #515151;
+	border: 1px solid #333333;
+}
+
+.grey:hover {
+	color: #FFFFFF;
+	border: 1px solid #404040;
+	border-top-color: #555555;
+
+	background: rgb(119,119,119);
+	background: -moz-linear-gradient(top,  rgb(119,119,119) 0%, rgb(91,91,91) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(119,119,119)), color-stop(100%,rgb(91,91,91)));
+	background: -webkit-linear-gradient(top,  rgb(119,119,119) 0%,rgb(91,91,91) 100%);
+	background: -o-linear-gradient(top,  rgb(119,119,119) 0%,rgb(91,91,91) 100%);
+	background: -ms-linear-gradient(top,  rgb(119,119,119) 0%,rgb(91,91,91) 100%);
+	background: linear-gradient(top,  rgb(119,119,119) 0%,rgb(91,91,91) 100%);
+}
+
+.no-boxshadow .grey:hover {
+	background-color: #5b5b5b;
+	border: 1px solid #404040;
+}
+
+.grey:active {
+	color: #FFFFFF;
+	border: 1px solid #5b5b5b;
+	border-top-color: #151515;
+
+	background: #5b5b5b;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .grey:active {
+	background-color: #515151;
+	border: 1px solid #151515;
+}
+
+/*
+ * Button: light grey
+ */
+.light_grey {
+	color: #757575;
+	text-shadow: 0px 1px 0px #FFFFFF;
+	border: 1px solid #AAAAAA;
+	border-top-color: #C1C1C1;
+
+	background: rgb(252,252,252);
+	background: -moz-linear-gradient(top,  rgb(252,252,252) 0%, rgb(223,223,223) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(252,252,252)), color-stop(100%,rgb(223,223,223)));
+	background: -webkit-linear-gradient(top,  rgb(252,252,252) 0%,rgb(223,223,223) 100%);
+	background: -o-linear-gradient(top,  rgb(252,252,252) 0%,rgb(223,223,223) 100%);
+	background: -ms-linear-gradient(top,  rgb(252,252,252) 0%,rgb(223,223,223) 100%);
+	background: linear-gradient(top,  rgb(252,252,252) 0%,rgb(223,223,223) 100%);
+
+	-webkit-box-shadow: 
+		0px 1px 1px 0px rgba(0, 0, 0, 0.1),
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2);
+	-moz-box-shadow: 
+		0px 1px 1px 0px rgba(0, 0, 0, 0.1),
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2);
+	box-shadow: 
+		0px 1px 1px 0px rgba(0, 0, 0, 0.1),
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2);
+}
+
+.no-cssgradients .light_grey {
+	background-color: #DFDFDF;
+	border: 1px solid #AAAAAA;
+}
+
+.light_grey:hover {
+	color: #757575;
+	border: 1px solid #BABABA;
+	border-top-color: #CCCCCC;
+
+	background: rgb(255,255,255);
+	background: -moz-linear-gradient(top,  rgb(255,255,255) 0%, rgb(235,235,235) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(255,255,255)), color-stop(100%,rgb(235,235,235)));
+	background: -webkit-linear-gradient(top,  rgb(255,255,255) 0%,rgb(235,235,235) 100%);
+	background: -o-linear-gradient(top,  rgb(255,255,255) 0%,rgb(235,235,235) 100%);
+	background: -ms-linear-gradient(top,  rgb(255,255,255) 0%,rgb(235,235,235) 100%);
+	background: linear-gradient(top,  rgb(255,255,255) 0%,rgb(235,235,235) 100%);
+}
+
+.no-boxshadow .light_grey:hover {
+	background-color: #EBEBEB;
+	border: 1px solid #BABABA;
+}
+
+.light_grey:active {
+	color: #757575;
+	border: 1px solid #EBEBEB;
+	border-top-color: #757575;
+
+	background: #DFDFDF;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .light_grey:active {
+	background-color: #DFDFDF;
+	border: 1px solid #333333;
+}
+
+/*
+ * Button: light blue
+ */
+.light_blue {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #2b6191;
+	border: 1px solid #27669d;
+	border-top-color: #2f77b6;
+
+	background: rgb(90,158,218);
+	background: -moz-linear-gradient(top,  rgb(90,158,218) 0%, rgb(56,123,182) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(90,158,218)), color-stop(100%,rgb(56,123,182)));
+	background: -webkit-linear-gradient(top,  rgb(90,158,218) 0%,rgb(56,123,182) 100%);
+	background: -o-linear-gradient(top,  rgb(90,158,218) 0%,rgb(56,123,182) 100%);
+	background: -ms-linear-gradient(top,  rgb(90,158,218) 0%,rgb(56,123,182) 100%);
+	background: linear-gradient(top,  rgb(90,158,218) 0%,rgb(56,123,182) 100%);
+}
+
+.no-cssgradients .light_blue {
+	background-color: #387bb6;
+	border: 1px solid #27669d;
+}
+
+.light_blue:hover {
+	color: #FFFFFF;
+	border: 1px solid #2f699c;
+	border-top-color: #4e8cc2;
+
+	background: rgb(98,169,232);
+	background: -moz-linear-gradient(top,  rgb(98,169,232) 0%, rgb(63,134,197) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(98,169,232)), color-stop(100%,rgb(63,134,197)));
+	background: -webkit-linear-gradient(top,  rgb(98,169,232) 0%,rgb(63,134,197) 100%);
+	background: -o-linear-gradient(top,  rgb(98,169,232) 0%,rgb(63,134,197) 100%);
+	background: -ms-linear-gradient(top,  rgb(98,169,232) 0%,rgb(63,134,197) 100%);
+	background: linear-gradient(top,  rgb(98,169,232) 0%,rgb(63,134,197) 100%);
+}
+
+.no-cssgradients .light_blue:hover {
+	background-color: #3f86c5;
+	border: 1px solid #2f699c;
+}
+
+.light_blue:active {
+	color: #FFFFFF;
+	border: 1px solid #3f86c5;
+	border-top-color: #0e2c47;
+
+	background: #3f86c5;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .light_blue:active {
+	background-color: #387bb6;
+	border: 1px solid #0e2c47;
+}
+
+/*
+ * Button: baby blue
+ */
+.baby_blue {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #3d7e92;
+	border: 1px solid #3e8298;
+	border-top-color: #339fc3;
+
+	background: rgb(114,201,229);
+	background: -moz-linear-gradient(top,  rgb(114,201,229) 0%, rgb(83,166,194) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(114,201,229)), color-stop(100%,rgb(83,166,194)));
+	background: -webkit-linear-gradient(top,  rgb(114,201,229) 0%,rgb(83,166,194) 100%);
+	background: -o-linear-gradient(top,  rgb(114,201,229) 0%,rgb(83,166,194) 100%);
+	background: -ms-linear-gradient(top,  rgb(114,201,229) 0%,rgb(83,166,194) 100%);
+	background: linear-gradient(top,  rgb(114,201,229) 0%,rgb(83,166,194) 100%);
+}
+
+.no-cssgradients .baby_blue {
+	background-color: #53a6c2;
+	border: 1px solid #38aad0;
+}
+
+.baby_blue:hover {
+	color: #FFFFFF;
+	border: 1px solid #468ca3;
+	border-top-color: #39a8cd;
+
+	background: rgb(127,209,236);
+	background: -moz-linear-gradient(top,  rgb(127,209,236) 0%, rgb(96,180,209) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(127,209,236)), color-stop(100%,rgb(96,180,209)));
+	background: -webkit-linear-gradient(top,  rgb(127,209,236) 0%,rgb(96,180,209) 100%);
+	background: -o-linear-gradient(top,  rgb(127,209,236) 0%,rgb(96,180,209) 100%);
+	background: -ms-linear-gradient(top,  rgb(127,209,236) 0%,rgb(96,180,209) 100%);
+	background: linear-gradient(top,  rgb(127,209,236) 0%,rgb(96,180,209) 100%);
+}
+
+.no-cssgradients .baby_blue:hover {
+	background-color: #60b4d1;
+	border: 1px solid #3db1d8;
+}
+
+.baby_blue:active {
+	color: #FFFFFF;
+	border: 1px solid #60b4d1;
+	border-top-color: #165064;
+
+	background: #60b4d1;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .baby_blue:active {
+	background-color: #60b4d1;
+	border: 1px solid #165064;
+}
+
+/*
+ * Button: mint
+ */
+.mint {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #116160;
+	border: 1px solid #146f6e;
+	border-top-color: #198483;
+
+	background: rgb(41,170,169);
+	background: -moz-linear-gradient(top,  rgb(41,170,169) 0%, rgb(30,144,143) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(41,170,169)), color-stop(100%,rgb(30,144,143)));
+	background: -webkit-linear-gradient(top,  rgb(41,170,169) 0%,rgb(30,144,143) 100%);
+	background: -o-linear-gradient(top,  rgb(41,170,169) 0%,rgb(30,144,143) 100%);
+	background: -ms-linear-gradient(top,  rgb(41,170,169) 0%,rgb(30,144,143) 100%);
+	background: linear-gradient(top,  rgb(41,170,169) 0%,rgb(30,144,143) 100%);
+}
+
+.no-cssgradients .mint {
+	background-color: #1e908f;
+	border: 1px solid #146f6e;
+}
+
+.mint:hover {
+	color: #FFFFFF;
+	border: solid 1px #177f7e;
+	border-top-color: #1c908f;
+
+	background: rgb(42,177,176);
+	background: -moz-linear-gradient(top,  rgb(42,177,176) 0%, rgb(33,154,153) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(42,177,176)), color-stop(100%,rgb(33,154,153)));
+	background: -webkit-linear-gradient(top,  rgb(42,177,176) 0%,rgb(33,154,153) 100%);
+	background: -o-linear-gradient(top,  rgb(42,177,176) 0%,rgb(33,154,153) 100%);
+	background: -ms-linear-gradient(top,  rgb(42,177,176) 0%,rgb(33,154,153) 100%);
+	background: linear-gradient(top,  rgb(42,177,176) 0%,rgb(33,154,153) 100%);
+}
+
+.no-cssgradients .mint:hover {
+	background-color: #219a99;
+	border: 1px solid #177f7e;
+}
+
+.mint:active {
+	color: #FFFFFF;
+	border: 1px solid #249f9e;
+	border-top-color: #115554;
+
+	background: #249f9e;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .mint:active {
+	background-color: #1e908f;
+	border: 1px solid #115554;
+}
+
+/*
+ * Button: red
+ */
+.red {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #922526;
+	filter: dropshadow(color=#922526, offx=0, offy=-1);
+	border: 1px solid #B23337;
+	border-top-color: #D9454D;
+	border-bottom-color: #A73031;
+
+	background: rgb(255,126,126);
+	background: -moz-linear-gradient(top,  rgb(255,126,126) 0%, rgb(244,94,94) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(255,126,126)), color-stop(100%,rgb(244,94,94)));
+	background: -webkit-linear-gradient(top,  rgb(255,126,126) 0%,rgb(244,94,94) 100%);
+	background: -o-linear-gradient(top,  rgb(255,126,126) 0%,rgb(244,94,94) 100%);
+	background: -ms-linear-gradient(top,  rgb(255,126,126) 0%,rgb(244,94,94) 100%);
+	background: linear-gradient(top,  rgb(255,126,126) 0%,rgb(244,94,94) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7e7e', endColorstr='#f45e5e',GradientType=0 );
+}
+
+.no-cssgradients .red {
+	background-color: #f45e5e;
+	border: 1px solid #B23337;
+}
+
+.red:hover {
+	color: #FFFFFF;
+	border: 1px solid #BE3B3F;
+	border-top-color: #E14E56;
+	border-bottom-color: #B43A3b;
+
+	background: rgb(255,139,139);
+	background: -moz-linear-gradient(top,  rgb(255,139,139) 0%, rgb(253,101,101) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(255,139,139)), color-stop(100%,rgb(253,101,101)));
+	background: -webkit-linear-gradient(top,  rgb(255,139,139) 0%,rgb(253,101,101) 100%);
+	background: -o-linear-gradient(top,  rgb(255,139,139) 0%,rgb(253,101,101) 100%);
+	background: -ms-linear-gradient(top,  rgb(255,139,139) 0%,rgb(253,101,101) 100%);
+	background: linear-gradient(top,  rgb(255,139,139) 0%,rgb(253,101,101) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff8b8b', endColorstr='#fd6565',GradientType=0 );
+}
+
+.no-cssgradients .red:hover {
+	background-color: #fd6565;
+	border: 1px solid #BE3B3F;
+}
+
+.red:active {
+	color: #FFFFFF;
+	background: #f45e5e;
+	border: 1px solid #f45e5e;
+	border-top-color: #531313;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .red:active {
+	background-color: #ff7e7e;
+	border: 1px solid #531313;
+}
+
+/*
+ * Button: purple
+ */
+.purple {
+	color: #FFFFFF;
+	text-shadow: 0px -1px 0px #00586F;
+	filter: dropshadow(color=#00586F, offx=0, offy=-1);
+	border: 1px solid #005F78;
+	border-top-color: #007391;
+	border-bottom-color: #00586F;
+
+	background: rgb(0,164,192);
+	background: -moz-linear-gradient(top,  rgb(0,164,192) 0%, rgb(0,144,172) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(0,164,192)), color-stop(100%,rgb(0,144,172)));
+	background: -webkit-linear-gradient(top,  rgb(0,164,192) 0%,rgb(0,144,172) 100%);
+	background: -o-linear-gradient(top,  rgb(0,164,192) 0%,rgb(0,144,172) 100%);
+	background: -ms-linear-gradient(top,  rgb(0,164,192) 0%,rgb(0,144,172) 100%);
+	background: linear-gradient(top,  rgb(0,164,192) 0%,rgb(0,144,172) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00a4c0', endColorstr='#0090ac',GradientType=0 );
+}
+
+.no-cssgradients .purple {
+	background-color: #0090ac;
+	border: 1px solid #005F78;
+}
+
+.purple:hover {
+	color: #FFFFFF;
+	border: 1px solid #00647D;
+	border-top-color: #007896;
+	border-bottom-color: #005D74;
+
+	background: rgb(0,174,202);
+	background: -moz-linear-gradient(top,  rgb(0,174,202) 0%, rgb(0,149,177) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(0,174,202)), color-stop(100%,rgb(0,149,177)));
+	background: -webkit-linear-gradient(top,  rgb(0,174,202) 0%,rgb(0,149,177) 100%);
+	background: -o-linear-gradient(top,  rgb(0,174,202) 0%,rgb(0,149,177) 100%);
+	background: -ms-linear-gradient(top,  rgb(0,174,202) 0%,rgb(0,149,177) 100%);
+	background: linear-gradient(top,  rgb(0,174,202) 0%,rgb(0,149,177) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00aeca', endColorstr='#0095b1',GradientType=0 );
+}
+
+.no-cssgradients .purple:hover {
+	background-color: #0095b1;
+	border: 1px solid #00647D;
+}
+
+.purple:active {
+	color: #FFFFFF;
+	background: #0090AC;
+	border: 1px solid #0090AC;
+	border-top-color: #003340;
+
+	-webkit-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:
+		inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.no-boxshadow .purple:active {
+	background-color: #00a4c0;
+	border: 1px solid #003340;
+}
+
+/*  == Rounded Corners ================================================================
+
+	Sizes available: 
+	3px, 
+	4px, 
+	5px(top and bottom only included), 
+
+	=================================================================================== */
+
+.rounded_3 {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.rounded_5 {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.rounded_5_top {
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-radius: 5px 5px 0px 0px;
+	border-radius: 5px 5px 0px 0px;
+}
+
+.rounded_5_btm {
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-webkit-border-radius: 0px 0px 5px 5px;
+	border-radius: 0px 0px 5px 5px;
+}
+
+/*  == Gradients ======================================================================
+
+	Shades available:
+	subtle_grey,
+	subtle_purple
+
+	=================================================================================== */
+
+/*
+ * Subtle grey: #FFFFFF -> EAE9E9
+ * Fallback color: #EAE9E9
+ */
+.subtle_grey {
+	background: rgb(255,255,255);
+	background: -moz-linear-gradient(top,  rgb(255,255,255) 0%, rgb(234,233,233) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(255,255,255)), color-stop(100%,rgb(234,233,233)));
+	background: -webkit-linear-gradient(top,  rgb(255,255,255) 0%,rgb(234,233,233) 100%);
+	background: -o-linear-gradient(top,  rgb(255,255,255) 0%,rgb(234,233,233) 100%);
+	background: -ms-linear-gradient(top,  rgb(255,255,255) 0%,rgb(234,233,233) 100%);
+	background: linear-gradient(top,  rgb(255,255,255) 0%,rgb(234,233,233) 100%);
+}
+
+.no-cssgradients .subtle_grey {
+	background-color: #eae9e9;
+}
+
+/*
+ * Subtle grey: #77b5eb -> 5696cf
+ * Fallback color: #5696cf
+ */
+.subtle_purple {
+	background: rgb(119,181,235);
+	background: -moz-linear-gradient(top,  rgb(119,181,235) 0%, rgb(86,150,207) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(119,181,235)), color-stop(100%,rgb(86,150,207)));
+	background: -webkit-linear-gradient(top,  rgb(119,181,235) 0%,rgb(86,150,207) 100%);
+	background: -o-linear-gradient(top,  rgb(119,181,235) 0%,rgb(86,150,207) 100%);
+	background: -ms-linear-gradient(top,  rgb(119,181,235) 0%,rgb(86,150,207) 100%);
+	background: linear-gradient(top,  rgb(119,181,235) 0%,rgb(86,150,207) 100%);
+}
+
+.no-cssgradients .subtle_purple {
+	background-color: #5696cf;
+}
+
+/*  == Ajax loaders ======================================================================
+
+	Shades available:
+	grey,
+	small_grey,
+        small_red,
+        white
+
+	=================================================================================== */
+
+/*
+ * 
+ * 
+ */
+.loader_grey{
+    width:32px;
+    height:32px;
+    background: url('img/ajax-loader.gif');
+}
+.loader_grey_small{
+    width:16px;
+    height:16px;
+    background: url('img/ajax-loader-small.gif');
+    
+}
+.loader_red_small{
+    width:16px;
+    height:16px;
+    background: url('img/ajax-loader-small-red.gif');
+    
+}
+.loader_white{
+    width:32px;
+    height:32px;
+    background: url('img/ajax-loader-white.gif');    
+}

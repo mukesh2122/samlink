@@ -1,0 +1,114 @@
+/* == Site template ==================================================================
+
+This is the website's base structure. Caution!
+
+=================================================================================== */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    min-width: 1064px;
+}
+
+/*
+* Opera fix
+*/
+// FIXES WHAT ??  - DUPLICATE ENTRIES COMMENTED, REFER TO ID'S FURTHER DOWN
+/*body:before {
+    content: "";
+    height: 100%;
+    float: left;
+    width: 0;
+    margin-top: -32767px;
+}
+#container {
+    width: 1062px;
+    min-height: 100%;
+    margin: 0 auto;
+    padding: 0px 15px;
+    border-left: 1px solid;
+    border-right: 1px solid;
+}
+#the_one_column {
+    position: relative;
+    min-height: 100%;
+}*/
+
+.the_one_columns_child {
+    width: 1062px;
+    margin: 0 auto;
+}
+
+#game_template_wrapper {
+    min-height: 100%;
+}
+
+#center_column {
+    width: 600px;
+    border-left: 1px solid #DEDEDE;
+    border-right: 1px solid #DEDEDE;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#center_column_wide {
+    width: 831px;
+    border-right: 1px solid #DEDEDE;
+    padding-right: 15px;
+}
+
+#center_column_wide_left {
+    width: 831px;
+    border-left: 1px solid #DEDEDE;
+    padding-left: 15px;
+}
+
+#center_column_wide_left_admin {
+    width: 831px;
+    border-left: 1px solid #DEDEDE;
+    padding-left: 15px;
+}
+
+#left_column {
+    width: 200px;
+    padding-right: 15px;
+}
+
+#right_column {
+    width: 200px;
+    padding-left: 15px;
+}
+
+/*
+* Equal-height columns
+*/
+#container {
+    width: 1062px;
+    min-height: 100%;
+    margin: 0 auto;
+    padding: 0px 15px;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    overflow: hidden;
+}
+
+#the_one_column {
+    position: relative;
+    min-height: 100%;
+    overflow: hidden;
+}
+
+#container .column {
+    position: relative;
+    float: left;
+    padding-bottom: 120px;
+    // WHAT IS THIS BELOW ????   -IT IS MESSING UP CHROME PAGE HEIGHT LOGIC...
+    /*padding-bottom: 20000px;*/
+    /*margin-bottom: -19880px;*/
+}
+
+#container #news_center_column {
+	/*margin-bottom: -20000px;*/
+}

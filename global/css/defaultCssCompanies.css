@@ -1,0 +1,2088 @@
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Ubuntu'), url('../font/Ubuntu_googlefont.woff') format('woff'), url('../font/Ubuntu_googlefont.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Ubuntu Bold Italic'), local('Ubuntu-BoldItalic'), url('../font/Ubuntu-BoldItalic_googlefont.woff') format('woff'), url('../font/Ubuntu-BoldItalic_googlefont.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Ubuntu Bold'), local('Ubuntu-Bold'), url('../font/Ubuntu-Bold_googlefont.woff') format('woff'), url('../font/Ubuntu-Bold_googlefont.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Ubuntu Light'), local('Ubuntu-Light'), url('../font/Ubuntu-Light_googlefont.woff') format('woff'), url('../font/Ubuntu-Light_googlefont.ttf') format('truetype');
+}
+
+/************ LEFT COLUMN *****************/
+
+.profile_gamename {
+	text-align: center;
+	background-color: #515452;
+	width: 200px;
+	font-family: Verdana;
+	font-size: 18px;
+	color: #fff;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	text-shadow: 
+		-2px -2px 0 #000,
+		2px -2px 0 #000,
+		-2px 2px 0 #000,
+		2px 2px 0 #000;
+}
+
+ul#leftMenuUl{
+	margin: 10px;
+}
+.leftMenuLink :hover {
+	height: 35px;
+	width: 200px;
+	text-align: center;
+	color: #fff;
+	background: url('../img/buttonHover.png') repeat-x;
+	text-decoration: none;
+}
+
+a :hover .leftMenuLink {
+	text-decoration: none !important;
+}
+
+.leftMenuList {
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 16px;
+	padding-top: 10px;
+	margin: -5px;
+	margin-left: -10px;
+	height: 35px;
+	width: 200px;
+	text-align: center;
+	color: #fff;
+	background: url('../img/buttonNormal.png') repeat-x;
+}
+
+.leftMenuLink .active {
+	background: url('../img/buttonHover.png') repeat-x;
+}
+
+ul#subLikeUl{
+	margin: 10px;
+}
+
+.subLikeLink :hover {
+/*    height: 28px;
+	width: 192px;*/
+	padding-top: 5px;
+	padding-left: 5px;
+	color: #fff;
+	background: url('../img/buttonSubHover.png') no-repeat;
+	text-decoration: none;
+}
+
+.subLikeList {
+	font-size: 14px;
+	font-family: Arial;
+	padding-top: 5px;
+	padding-left: 5px;
+	margin-right: 1px;
+	margin-left: -5px;
+	height: 28px;
+	width: 192px;
+	color: #fff;
+	background: url('../img/buttonSubNormal.png') no-repeat;
+}
+
+#iconLike {
+	background: url('../img/iconLike.png') no-repeat;
+	margin-left: 163px;
+	margin-top: -13px;
+}
+
+#iconSubscribe {
+	background: url('../img/iconSubscribe.png') no-repeat;
+	margin-left: 162px;
+	margin-top: -11px;
+}
+
+.ratingBox {
+	background: none;
+	height: 30px;
+	margin-top: -3px;
+	padding: 0;
+	border-bottom: 1px #000 solid;
+	margin-bottom: 5px;
+	padding-bottom: 3px;
+}
+
+.ratingBox select #ratingDropdown {
+	border: #7c0b0b 1px solid;
+	color: #7c0b0b;
+}
+
+.yourrating .ratingKey {
+	color: #000;
+	padding: 0;
+	margin: 0;
+	height: 20px;
+	width: 100px;
+	float: left;
+	margin-top: 5px;
+	padding-top: 5px;
+}
+
+.yourrating .ratingValue {
+	margin-left: 35px;
+	margin-top: 10px;
+	margin-bottom: 2px;
+        color: #000 !important;
+}
+
+.yourrating {
+	border-bottom: 1px solid #000;
+	padding-bottom: 2px;
+}
+
+.overall {
+	border-bottom: 1px solid #000;
+	padding-top: 10px;
+	padding-bottom: 2px;
+}
+
+.overall .ratingKey {
+	color: #000;
+	padding: 0;
+	margin: 0;
+	height: 20px;
+	width: 80px;
+	float: left;
+}
+
+.overall .ratingValue {
+	margin-left: 40px;
+	margin-top: 10px;
+	margin-bottom: 2px;
+	color: #000;
+}
+
+#ratingSelect {
+	width:170px;
+	border-radius: 15px;
+        color: #000 !important;
+}
+
+#ratingSelect select {
+	margin-top: 5px;
+	width: 170px;
+	height: 25px;
+	background: url('../img/dropdown_arrow.png') no-repeat right center #cccccc;
+	border: 1px solid #cc0000;
+	padding: 0 2px;    
+	border-radius: 5px;
+	-webkit-appearance: none;  /*Removes default chrome and safari style*/
+	-moz-appearance: none;  /*Removes default style Firefox*/
+        color: #000 !important;
+}
+
+/****** RIGHT COLUMN **********/
+
+#profileImage {
+	float: left;
+	width: 42px;
+	height: 42px;
+	padding-top: 5px;
+	background: url('../img/noimage/no_player_40x40.png') no-repeat;
+}
+
+#profileText a:link #gotoprofile {
+	color: #C0C0C0 !important;
+	font-style: italic;
+}
+
+#profileText {
+	float: left;
+	height: 42px;
+	width: 120px;
+	padding-left: 5px;
+}
+
+.clearBoth {
+	clear: both;
+}
+
+.profile_menuList {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	margin: 5px;
+	background-color: #efefef;
+	border-radius: 7px;    
+	float: left;
+	width: 180px;
+}
+
+#numbersOfNotifications {
+	border-radius: 10px;
+	height: 15px;
+	width: 18px;
+	padding-right: 2px;
+	padding-left: 1px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	text-align: center;
+	background-color: #ba4848;
+	color: #fff;
+	float: left;
+	margin-right: 5px;
+}
+
+#CalendarVideoRanking {
+	margin-left: -5px;
+	margin-right: 5px;
+}
+
+.CVR {
+	width: 206px;
+	height: 21px;
+	padding-top: 5px;
+	padding-left: 5px;
+	background: url('../img/widgetBG.png') repeat-x;
+	color: #fff;
+	font-size: 14px;
+	clear: both;
+}
+
+.listItem {
+	float: left;
+	width: 60px;
+}
+
+.buttonWidget {
+	width: 35px;
+	height: 10px;
+	float: left;
+	background-color: #cecece;
+	margin-left: 111px;
+	margin-top: -4px;
+	margin-right: -4px;
+}
+
+.buttonWidget a :hover {
+	text-decoration: none;
+}
+
+.buttonMax {
+	background: url('../img/buttonMax.png') no-repeat;
+	float: left;
+	width: 18px;
+	height: 11px;
+}
+
+.buttonMin {
+	background: url('../img/buttonMin.png') no-repeat;
+	float: left;
+	width: 18px;
+	height: 11px;
+}
+
+.buttonClose {
+	background: url('../img/buttonClose.png') no-repeat;
+	margin-left: 1px;
+	width: 16px;
+	height: 11px;
+	float: left;
+}
+
+.bgList {
+	margin: 0;
+	padding: 0;
+	width: 211px;
+	height: 123px;
+	background: url('../img/videoBG.png') repeat;
+	margin-bottom: 10px;
+}
+
+/* 
+	Document   : css_companies
+	Created on : 10-12-2013, 07:54:41
+	Author     : Mads Pristed
+	Description:
+		Purpose of the stylesheet follows.
+*/
+
+/********* COMPANIES INFO ***********/
+.infoBox {
+	background: url('../img/InfoBoxBG.png') no-repeat #a1a2a2;
+	height: 400px;
+	width: 190px;
+	margin-left: 400px;
+	color: #000;
+	padding: 5px;
+}
+
+.global_info_block h1 {
+	font-family: 'Ubuntu', sans-serif !important;
+	font-size: 24px !important;
+	font-weight: bold !important;
+}
+
+.hr {
+	border-bottom: 1px solid #C0C0C0;
+	width: 200px;
+	height: 2px;
+	margin-top: 1px;
+	clear: both;
+	margin-left: -5px;
+}
+
+.table_gameInfo {
+	width: 200px;
+	float: left;
+	margin-top: 0;
+}
+
+.table_gameInfo p
+{
+	color: #fff;
+	margin: 0;
+	padding: 0;
+}
+
+.user_informations {
+	width: 200px;
+	margin-bottom: 2px;
+}
+
+.table_information {
+	background: none !important;
+	margin-bottom: 10px;
+	width: 200px;
+	float: left;
+}
+
+.title {
+	float: left;
+	height: 20px;
+	width: 200px;
+}
+
+.table_information h2 {
+	font-size: 16px;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+	height: 20px;
+}
+
+.table_information p {
+	margin: 1px 0 0 0;
+}
+
+.informationSubject {
+	margin-bottom: 1px;
+	height: 30px;
+}
+
+.table_information .leftIcon {
+	float: left;
+	height: 18px;
+	width: 18px;
+	margin-top: 5px;
+	margin-left: 2px;
+	margin-bottom: 8px;
+}
+
+.table_information .centerName {
+	float: left;
+	height: 18px;
+	width: 140px;
+	padding-left: 10px;
+	margin-top: 9px;
+	font-weight: bold;
+}
+
+.table_information .rightValue {
+	float: left;
+	height: 18px;
+	width: 18px;
+	margin-top: 9px;
+	font-weight: bold;
+}
+
+.table_gameInfo h3 {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+	height: 20px;
+}
+
+.user_name {
+	font-weight: bold;
+	display: block;
+}
+
+.user_value {
+	color: #fff;
+	margin-bottom: 1px;
+	display: block;
+	width: 190px;
+}
+.newsSearch_listHeader {
+	border: none;
+}
+
+#headerCoverInfo {
+	width: 630px;
+	margin-left: -15px;
+}
+
+#coverImg{
+	width: 630px;
+	height: 166px;
+	background: url(../img/playnatCover.jpg) no-repeat;
+}
+
+#headerInfo {
+	width: 630px;
+	height: 32px;
+	background: url(../img/HeadlineStribe.png) repeat-x;
+}
+
+#headerInfo h1 {
+	padding-left: 15px;
+	color: white;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 20px;
+	line-height: 32px;
+	font-weight: 700;
+}
+
+.eventHeader {
+	width: 630px;
+	height: 32px;
+	background: url(../img/HeadlineStribe.png) repeat-x !important;
+	margin-left: -15px;
+}
+
+.eventHeader h1 {
+	margin-top: 5px;
+	margin-left: 5px;
+	padding-top: 5px;
+	padding-left: 5px;
+	color: white;
+  /*-webkit-text-stroke: 0 0 0 transparent;*/
+	text-shadow: 
+		-2px -2px 0 #000,
+		2px -2px 0 #000,
+		-2px 2px 0 #000,
+		2px 2px 0 #000;
+	font-family: Verdana;
+	font-size: 20px;
+}
+
+/********* COMPANIES NEWS ***********/
+
+.newsContent {
+	height: 190px;
+	width: 590px;
+	border-bottom: 1px solid #a88484;
+	margin-bottom: 10px;
+	font-family: Arial;
+	clear: both;
+	padding-bottom: 10px;
+}
+
+.newsHeader {
+	background: url(../img/News_BG_Decoration.png) no-repeat; 
+	color: #fff;
+	height: 34px;
+	width: 590px;
+	padding-left: 10px;
+	padding-top: 2px;
+	clear: both;
+	z-index: 1;
+	position: absolute;
+}
+
+.newsTitle {
+	padding-left: 50px;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 700;
+}
+
+.newsTitle h2 {
+	display: inline;
+	color: #fff !important;
+}
+
+.newsBody {
+	height: 167px;
+	width: 590px;
+	float: left;
+	margin-left: 14px;
+	margin-bottom: 10px;
+	position:absolute;
+}
+
+.newsImg {
+	float: left;
+	width: 246px;
+	height: 167px;
+	margin-top: 10px;
+	background-color: #e2e2e2;
+	float: left;
+/*    position:absolute;
+	left:0px;
+	top:0px;
+	z-index:-1;*/
+}
+
+.newsDate {
+	position:absolute;
+	color: #000;
+	display: inline;
+	font-size: 10px;
+	height: 20px;
+	margin-left: 10px; 
+	margin-top: 45px;
+}
+
+.newsDescription {
+	position:absolute;
+	top: 60px;
+	left: 245px;
+	color: #000;
+	height: 90px;
+	width: 280px;
+	margin-left: 10px;
+	float: left;
+}
+
+.newsDescription p{
+	display: block;
+	font-size: 12px;
+}
+
+/*.newsComments {
+	width: 100px;
+	height: 20px;
+	float: left;
+	margin-left: 100px;
+}*/
+
+.newsSocial {
+	margin-left: 280px;
+	width: 40px;
+	height: 16px;
+	float: left;
+	position: absolute;
+	right: 25px;
+	top: 170px;
+}
+
+.search_inputField
+{
+	background: url(../img/searchBar.png);
+	width: 161px;
+	height: 23px;
+	color: #fff;
+	float: left;
+	padding-left: 10px;
+	font-family: Arial;
+	font-size: 12px;
+	border: none;
+}
+
+.search_buttonIcon
+{
+	background: url('../img/iconSearch.png') center no-repeat;
+	width: 16px;
+	height: 15px;
+	padding: 0;
+	margin-top: 4px;
+	margin-left: 4px;
+	border: none;
+}
+
+#search_button {
+	background: center no-repeat url('../img/buttonSearch.png');
+	height: 22px;
+	width: 24px;
+	float: left;
+	margin-top: 1px;
+	margin-left: -25px;
+}
+
+#searchField {
+	margin-left: 420px;
+	height: 23px;
+	margin-top: 10px;
+}
+
+.pagination .clearfix {
+	height: 20px;
+	border: none;
+	padding: 2px;
+	float: left;
+	margin-bottom: 20px;
+	padding-bottom: 10px;
+}
+
+.pagination .inactivePrev {
+	padding: 0 3px 0 3px;
+	color: #000;
+	background-color: #c6c6c6;
+	visibility: hidden;
+}
+
+.pagination .current {
+	padding: 0 3px 0 3px;
+	color: #000 !important;
+	background-color: #313131;
+}
+
+.pagination .paginate {
+	padding: 0 3px 0 3px;
+	color: #000;
+	background-color: #c6c6c6;
+}
+
+.pagination .next {
+	padding: 0 3px 0 3px;
+	color: #000;
+	background-color: #c6c6c6;
+	visibility: hidden;
+}
+
+/************* COMPANIES GAMES ****************/
+
+.gamesContent {
+	width: 589px;
+	height: 152px;
+	background: url('../img/gameBG.png') no-repeat #ebebeb;
+	margin-top: 10px; 
+}
+
+.gameTop {
+	width: 593px;
+	height: 15px;
+	background: url('../img/gameTop.png') no-repeat;
+	clear: both;
+}
+
+.gameBottom {
+	width: 593px;
+	height: 15px;
+	background: url('../img/gameBottom.png') no-repeat;
+	clear: both;
+}
+
+.gameImg {
+	width: 120px;
+	height: 120px;
+	float: left;
+	padding-left: 12px;  
+}
+
+.gameBody {
+	height: 110px;
+	width: 427px;
+	float: left;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 20px;
+}
+
+.gameHeader {
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 18px;
+	color: #7c0b0b;
+	height: 18px;
+	width: 372px;
+	font-weight: bold;
+}
+
+.gameText {
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 12px;
+	color: #000;
+	float: left;
+	width: 362px;
+	height: 80px;
+	
+	margin-top: 5px;
+}
+
+.gameText p {
+	margin: 0 0 -6px 0;
+	padding: 0;
+}
+
+.gameRating {
+	width: 60px;
+	height: 90px;
+	float: left;
+	margin-top: -20px;
+}
+
+/********** COMPANY MEDIA *******************/
+
+.mediaList_header {
+	border: none;
+}
+
+.mediaTab {
+	border: none;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 18px;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
+
+.mediaTab li {
+	float: left;
+	padding: 5px 5px 10px -5px;
+	margin: 0px;
+	background: url('../img/buttonMediaNormal.png') no-repeat center;
+}
+
+.mediaTab li a { 
+	width: 150px;
+	height: 40px;
+	display: inline;
+	color: #cecece;
+  margin-right: 6px;
+  margin-bottom: 5px;
+}
+
+.mediaTab li :hover {
+/*    background: url(../img/buttonMediaHover.png) no-repeat !important;*/
+	height: 40px;
+	width: 140px;
+	color: #7c0b0b;
+	display: inline;
+  margin-right: 0;
+}
+
+.mediaTab li a:hover {
+	color: #7c0b0b;
+	font-weight: bold;
+	width: 140px;
+  margin-right: 0;
+}
+
+.mediaBody {
+	margin-top: 10px;
+	padding-top: 10px;
+	width: 604px;
+	height: 750px;
+	background: url('../img/mediaWatermarkOp.png') no-repeat center #f6f6f6;
+}
+
+.mediaVideoImg img {
+	height: 165px;
+	width: 198px;
+}
+
+.mediaImage {
+	height: 170px;
+	width: 198px;
+	padding-bottom: 5px;
+	background-color: #e4e4e4;
+}
+
+#mediaImageText {
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 12px;
+	color: #484747;
+	width: 198px !important;
+	height: 10px;
+	padding-left: 2px;
+	margin-left: 2px;
+	text-align: left;
+}
+
+/********* COMPANIES FORUM ************/
+.wAuto{
+    width:auto;
+}
+
+.CATWRAP{
+    width: 630px;
+    margin-left: -15px;
+}
+
+.catwrap{
+    width: 630px;
+    margin-left: -15px;
+   
+}
+
+.w98procent{
+    width: 98%;
+}
+
+
+.forumBreadcrumb {
+	color: #000;
+	padding: 10px 0;
+}
+
+.forumBreadcrumb a {
+	color: #000;
+}
+
+.forumCategoryBar {
+	width: 661px;
+	height: 32px;
+	
+}
+
+.forumCategoryBar span {
+	display: block;
+}
+
+.forumCategoryBar .cName {
+	text-transform: uppercase;
+	/*padding-left: 15px; */
+	
+}
+
+.forumCategoryBar .bName {
+	color: #b77f10;
+	font-size: 14px;
+	/*padding-left: 50px;*/
+	line-height: 32px;
+}
+
+.forumCategoryBar .cNameL3 {
+	text-transform: uppercase;
+	padding-left: 15px; 
+	color: #fff;
+	margin-top: 2px;
+}
+
+.forumCategoryBar .bNameL3 {
+	color: #b77f10;
+	font-size: 14px;
+	padding-left: 15px;
+	margin-top: -20px;
+}
+
+.forumCategoryNameLeft {
+	background: url('../img/Forum_darkStripe.png') no-repeat !important;
+	height: 32px; 
+	width: 140px;
+	float: left;
+	position: relative;
+	z-index:1;
+}
+
+.forumCategoryName {
+	color: #fff;
+	font-size: 12px;
+	z-index: 1;
+	padding-left: 18px;
+	padding-top: 8px;
+}
+
+.forumL3CategoryName {
+	width: 250px;
+}
+
+
+.forumCategoryRight {
+	background: url('../img/Forum_redStripe.png') !important;
+	height: 32px;
+	width: 541px;
+	margin-top: 0px;
+	margin-left: -51px;
+	float: left;
+	position: relative;
+}
+
+.iconForum {
+	/*background: url('../img/iconPlayers.png') no-repeat;*/
+	height: 16px;
+	display: inline-block;
+	vertical-align: bottom;
+	float:left;
+}
+
+.iconsForum {
+	height: 40px;
+	width: 12px;
+	float: left;
+	margin-left: 5px;
+	position: relative;
+}
+
+.iconForum_follow {
+	/*background: url('../img/iconPlayers.png') no-repeat;*/
+	height: 16px;
+	display: inline-block;
+	vertical-align: bottom;
+	float:left;
+}
+
+/*.iconsForum .GoTo img:hover {
+	position: absolute;
+	z-index: 1;
+	height: 14px;
+	width: 16px;
+	visibility: hidden;
+}*/
+
+/*.iconsForum .GoTo:hover{
+	background: url('../img/iconGoToButtonDarkForum.png') no-repeat !important;
+	position: absolute;
+	height: 14px;
+	width: 16px;        
+	z-index: 2;
+}*/
+
+.subjectForum a {
+	font-family: Arial;
+	font-weight: normal;
+	font-size: 12px;
+	color: #cb0606;
+	width: 300px;
+	height: 12px;
+}
+
+.descriptionForum {
+	color: #656565;
+	font-size: 9px;
+	height: 14px;
+}
+
+.topicsForum {
+	color: #6d6d6d;
+	font-size: 10px;
+	font-family: Arial;
+	height: 14px;
+	width: 300px;
+}
+
+.threadPagination {
+	float: left;
+	height: 12px;
+	width: 70px;
+	margin-top: 3px;
+}
+
+.buttonNext {
+	margin-top: 5px;
+}
+
+.buttonNext a {
+	color: #000;
+}
+
+.forum_dividingStripe {
+	background: url('../img/Forum_dividingStripe.png') !important;
+	width: 598px;
+	height: 1px;
+	border: none !important;
+	clear: both;
+}
+
+.forumBg {
+	/*background: url('../img/Forum_BG.png') no-repeat;*/
+	background-color: #E0DEDE;
+	border-left: 2px solid #646464;
+	border-top: 2px solid #646464;
+	width: 588px;
+	height: auto;
+	margin-left: 10px;
+	margin-bottom: -15px;
+	padding-left: 10px;
+	padding-right: 10px;	
+	padding-top: 3px;
+	padding-bottom: 5px;
+	/*clear: both;*/
+
+}
+
+.boardBar {
+	margin-left: -8px;
+}
+
+.treadBGwrapper{
+	background-color: #E0DEDE;
+	border-left: 2px solid #646464;
+	border-right: 2px solid #646464;
+	border-top: 2px solid #646464; 
+	width: 594px;
+	height: auto;
+	clear: both;
+}
+
+.forumThreadBg {
+	background: url('../img/Forum_BG.png') no-repeat;
+	width: 614px;
+	height: 75px;
+	padding-top: 10px;
+	clear: both;
+}
+
+.threadBg {
+	background-color: #D9D9D9;
+	border-bottom: 1px solid #666;
+	padding: 10px 10px 10px 0;
+}
+
+.threadBg.unread {
+	background-color: #B0BFCF;
+}
+
+.forumLeft {
+	width: 275px;
+	float: left;
+	margin-left: 10px;
+}
+
+.forumLeft a {
+	color: #cb0606;
+}
+
+.forumLeft .forumPagination {
+	padding-top: 4px;
+}
+
+.forumCenter {
+	float: left;
+	color: #626262;
+	font-size: 10px;
+	margin-top: 10px;
+}
+
+.forumRight {
+	color: #626262;
+	float: right;
+	width: 175px;
+	font-size: 10px;
+	text-align: right;
+	padding-right: 10px;
+}
+
+.forumRight a {
+	color: #cb0606;
+}
+
+.forumThreadRight {
+	margin-right: 20px;
+	float: right;
+}
+
+.forumAvatar img {
+	float: left;
+	margin-top: 5px;
+	margin-left: 20px;
+	border-radius: 3px;
+	border: 3px solid #4e5f67;
+}
+
+.forumSubject {
+	margin-bottom: -5px;
+}
+
+.forumThread {
+	margin-top: 10px;
+}
+
+.forumFront {
+	margin-left: 100px;
+	padding-left: 100px;
+}
+
+.forumNewTopic {
+	margin-top: 5px;
+}
+
+.forumNewTopic a {
+	color: #000;
+	background-color: #B47E11;
+	padding: 2px 5px;
+}
+
+.forumNewTopic a:hover {
+	color: #fff;
+}
+
+.forumRead {
+	margin-top: 5px;
+	padding: 0 3px;
+	background-color: #000;
+}
+
+.forumRead img {
+	padding-bottom: 3px;
+}
+
+.forumRead a {
+	color: #939393;
+	font-size: 10px;
+}
+
+.ulOrderByBg {
+	background: url('../img/forumFilterMenuBg.png') no-repeat;
+	padding: 9px 10px 8px;
+	margin-left: 8px;
+}
+
+.ulOrderBy {
+	padding-top: 2px;
+}
+
+.ulOrderBy li {
+	display: inline;
+	margin-right: 4px;
+}
+
+.ulOrderBy a {
+	color: #000;
+	padding: 3px 6px;
+}
+
+.ulOrderBy a:hover,
+.ulOrderBy .current {
+	border: 1px solid #8B8B8B;
+	border-radius: 3px;
+	box-shadow: 0 0 2px #333 inset;
+	padding: 3px 5px;
+	text-decoration: none;
+}
+
+.forumUserOnline {
+   /* background: url('../img/forum_onlineUsersBG.png') no-repeat; */
+	background-color: #CCC; 
+	width: 610px;
+	min-height: 15px;
+	margin-left: -15px;
+	padding: 10px;
+	font-size: 12px;
+	color: #929292;
+	margin-top: -5px;
+}
+
+.forumUserOnline p {
+	margin-bottom: -5px;
+	padding-bottom: 0;
+}
+
+.forumUserOnline #account {
+	color: #cb0606;
+	font-size: 10px;
+}
+.forumUserOnline .other {
+	font-size: 10px; 
+	color: #5a1111;
+}
+
+/******* FORUM LEVEL 3: POSTS *********/
+.forumItems {
+	
+}
+
+.itemPost {
+	position: relative;
+	overflow: hidden;
+}
+
+.forumLevel3 {
+	width: 604px;
+	min-height: 235px;
+}
+
+.forumL3ThreadPost {
+	background: url('../img/forumInfoTopBG.png') no-repeat;
+	width: 594px;
+	height: 76px;
+	margin-left: -7px;
+	padding: 10px 10px 0;
+}
+
+.forumThreadPostLeft {
+	float: left;
+	width: 450px;
+}
+
+.subjectForum h2 {
+	font-size: 24px;
+	line-height: 24px;
+	color: #cd3b3b;
+	font-weight: normal;
+}
+
+.forumL3ThreadPost .forumPagination {
+	float: left;
+	margin-top: 5px;
+	margin-right: 5px;
+	font-size: 10px;
+}
+
+.forumPagination ul li {
+	float: left;
+	margin-left: 3px;
+}
+
+.forumPagination a {
+	background-color: #B47E11;
+	color: #000;
+	display: block;
+	padding: 0 4px;
+	font-size: 10px;
+}
+
+.forumPagination a.current {
+	background-color: #939393;
+}
+
+.forumL3Subbar {
+	margin-top: 15px;
+	padding: 2px 5px;
+	float: right;
+	text-align: right;
+}
+
+.forumL3Subbar .subscr-links a {
+	color: #404040;
+}
+
+.forumThreadPostRight {
+	background-color: #b47e11;
+	font-size: 12px;
+	margin-top: 7px;
+	padding: 2px 5px;
+	float: right;
+	color: #000;
+}
+
+.forumThreadPostRight:hover {
+	color: #fff;
+}
+
+.forumL3Username {
+	margin-top: 5px;
+	margin-left: 5px;
+	border-bottom: 2px solid #505050;
+}
+
+.forumL3Username a {
+	background-color: #404040;
+	color: #fff;
+	font-size: 20px;
+	display: inline-block;
+	padding: 5px 10px;
+	margin-left: 3px;
+}
+
+.forumL3Post {
+	min-height: 200px;
+	background-color: #DDD7D7;
+	width: 593px;
+	float: left;
+	border-bottom: 2px solid #545454;
+	border-left: 3px solid #858585;
+	border-right: 3px solid #858585;
+}
+
+.leftSection {
+	float: left;
+	width: 123px;
+	padding: 0 8px;
+}
+
+.forumL3Usertitle {
+	text-align: center;
+	margin: 5px 0;
+	color: #c90101;
+}
+
+.forumL3Userimg {
+	border: 3px solid #5c5c5c;
+	border-radius: 3px;
+	width: 100px;
+	min-height: 100px;
+	margin: 0 auto 8px;
+}
+
+.forumL3Userposts,
+.forumL3Userlocation {
+	color: #000;
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+.forumL3Userposts {
+	color: #858585;
+	font-size: 10px;
+}
+
+.forumVerticalLine {
+	background: url('../img/forumVerticalLine.png') repeat-y;
+	float: left;
+	width: 1px;
+	height: 200px;
+}
+
+.rightSection {
+	float: left;
+	padding-left: 10px;
+	color: #000;
+	height: 100%;
+	margin-bottom: 10px;
+	border-left: 1px solid #000;
+}
+
+.forumL3Details {
+	height: 20px;
+	width: 432px;
+	margin-top: 10px;
+}
+
+.timestampPost {
+	float: left;
+	font-size: 10px;
+	color: #626262;
+}
+
+.quoteReply {
+	float: right;
+}
+
+.quotePost {
+	background-color: #b47e11;
+	float: left;
+	padding: 2px 5px;
+}
+
+.quotePost a {
+	color: #000;
+	font-size: 12px;
+}
+
+.quotePost a:hover {
+	color: #fff;
+	font-size: 12px;
+}
+
+.BBblack3 {
+	border-bottom: 3px solid #000;
+	margin-top: 5px;
+	width: 630px;
+	margin-left: -15px;
+}
+
+.BBblack3 .quoteText p {
+	color: #999;
+}
+
+.forumBottom_bar{
+	width: 570px;
+	min-height: 25px;
+	margin-left: 7px;
+	background-color: #DDD7D7;
+	padding: 5px;
+	color: #000;
+	border-left: 2px solid #646464;
+	border-right: 2px solid #646464;
+	
+}
+.forumBottom_barLeft{
+	width: 200px;
+	float: left;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	display: inline-block;
+}
+.forumBottom_barCenter{
+	width: 75px;
+	float: left;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	display: inline-block;
+}
+.forumBottom_barRight{
+	float: right;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	display: inline-block;
+}
+
+.replyBar {
+	height: 20px;
+	line-height: 20px;
+	background-color: #701414;
+	padding: 5px 0 5px 15px;
+	color: #fff;
+	font-size: 16px;
+	margin-bottom: 10px;
+	margin-left: -10px;
+}
+
+
+.replyPost {
+	background-color: #b47e11;
+	float: left;
+	margin: 0 5px;
+	padding: 2px 5px;
+}
+
+.replyPost a {
+	color: #000;
+	font-size: 12px;
+}
+
+.replyPost a:hover {
+	color: #fff;
+}
+
+.forumL3PostText {
+	width: 430px;
+	margin-top: 8px;
+}
+
+.forumL3PostText blockquote {
+
+}
+
+.forumL3Signatur {
+	width: 400px;
+	height: 100%;
+	margin-top: 5px;
+	text-align: center;
+}
+
+.iconr_moreActions {
+	right: 5px;
+	margin: 0px 5px 0px 0px;
+}
+
+.itemMoreActionsBlock {
+	top: 24px;
+	right: 5px;
+}
+
+/******* EVENTS ***********/
+#comEventsTop {
+	background: url('../img/eventsTopBG.png');
+	width: 600px;
+	height: 50px;
+	position: absolute;
+	z-index: 1;
+}
+
+#comEventsTopMonth {
+	background: url('../img/eventsTopMonthBG.png') no-repeat;
+	width: 607px;
+	height: 28px;
+	margin-left: -4px;
+	margin-top: -2px;
+	padding-top: 5px;
+}
+
+/**** WEEK ****/
+#prevWeek {
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	padding-left: 75px;
+	float: left;
+	width: 25px;
+}
+
+#prevWeek a {
+	color: #fff !important;
+}
+
+#nextWeek {
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	padding-right: 75px;
+	float: left;
+	width: 25px;
+	background: none;
+}
+
+#nextWeek a {
+	color: #fff !important;
+}
+
+#thisWeekMonth {
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 18px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	text-align: center;
+	float: left;
+	width: 250px;
+	margin-left: 75px;
+	margin-right: 75px;
+}
+
+/***** MONTH *******/
+#prevMonth {
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	padding-left: 50px;
+	float: left;
+	width: 50px;
+}
+
+#prevMonth a {
+	color: #fff !important;
+}
+
+#nextMonth {
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	padding-right: 50px;
+	float: left;
+	width: 50px;
+	background: none;
+}
+
+#nextMonth a {
+	color: #fff !important;
+}
+
+#thisMonth {
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 18px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	text-align: center;
+	float: left;
+	width: 200px;
+	margin-left: 100px;
+	margin-right: 100px;
+}
+
+#dayWeek {
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	float: left;
+	width: 30px;
+	text-align: center;
+}
+
+#dayMonday{
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	float: left;
+	width: 80px;
+	text-align: center;
+}
+
+#dayTuesday{
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	float: left;
+	width: 80px;
+	text-align: center;
+}
+
+#dayWednesday{
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	float: left;
+	width: 80px;
+	text-align: center;
+}
+
+#dayThursday{
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	float: left;
+	width: 80px;
+	text-align: center;
+}
+
+#dayFriday{
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	float: left;
+	width: 80px;
+	text-align: center;
+}
+
+#daySaturday{
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	float: left;
+	width: 80px;
+	text-align: center;
+}
+
+#daySunday{
+	display: inline;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: 'Ubuntu', sans-serif;
+	color: #fff;
+	float: left;
+	width: 80px;
+	text-align: center;
+}
+
+.weekNumber {
+	margin: 0;
+	padding: 0;
+	width: 17px;
+	height: 41px;
+	border-bottom: 1px solid #3e3e3e;
+	margin-left: 10px;
+	padding-top: 20px;
+	padding-left: 2px;
+	padding-right: 1px;
+	float: left;
+	color: #b4b4b4;
+	font-size: 14px;
+}
+
+.weekNumberWeek {
+	margin: 0;
+	padding: 0;
+	width: 17px;
+	height: 75px;
+	border-bottom: 1px solid #3e3e3e;
+	margin-left: 10px;
+	padding-top: 81px;
+	padding-left: 2px;
+	padding-right: 1px;
+	float: left;
+	color: #b4b4b4;
+	font-size: 14px;
+}
+
+.weekNumberLastWeek {
+	margin: 0;
+	padding: 0;
+	width: 17px;
+	height: 41px;
+	margin-left: 10px;
+	padding-left: 2px;
+	padding-right: 1px;
+	padding-top: 20px;
+	float: left;
+	color: #b4b4b4;
+	font-size: 14px;
+}
+
+.comEventsMonthDaysLastWeek
+{
+	width: 73px;
+	height: 54px;
+	border-left: 1px solid #3e3e3e;
+	float: left;
+	color: #fff;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 14px;
+	text-align: right;
+	padding:4px;
+}
+
+.comEventsWeekDays {
+	width: 73px;
+	height: 148px;
+	border-left: 1px solid #3e3e3e;
+	border-bottom: 1px solid #3e3e3e;
+	float: left;
+	color: #fff;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 14px;
+	text-align: right;
+	padding:4px;
+}
+
+.comEventsMonthDays
+{
+	width: 73px;
+	height: 53px;
+	border-left: 1px solid #3e3e3e;
+	border-bottom: 1px solid #3e3e3e;
+	float: left;
+	color: #fff;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 14px;
+	text-align: right;
+	padding:4px;
+}
+
+.notMonth {
+	color: #b4b4b4;
+}
+
+.comEventsIcon {
+	text-align: center;
+	margin-top: -10px;
+	padding-left: 15px;
+}
+
+#comEventsWeekMonth {
+	width: 76px;
+	height: 30px;
+	float: right;
+	margin-bottom: 10px;
+	margin-top: -5px;
+/*    border-radius: 5px;*/
+	background: url('../img/eventsCalendarSwitchBG.png') no-repeat;
+}
+
+.comEventsSelectedClick {
+	background: url('../img/eventsCalendarSwitch.png') no-repeat;
+	width: 38px;
+	height: 27px;
+	float: left;
+	padding-top: 1px;
+	padding-left: 3px;
+	margin-left: 2px;
+	margin-right: -3px;
+}
+
+/* IN WEEK VIEW MODE */
+#comEventsWeekView1 {
+	background: url('../img/eventsWeekClick.png') no-repeat;
+	width: 26px;
+	height: 20px;
+	float: left;
+	margin: 2px;
+}
+a:hover #comEventsWeekView1 {
+	text-decoration: none;
+}
+
+#comEventsMonthView1 {
+	background: url('../img/eventsMonthClick.png') no-repeat;
+	width: 26px;
+	height: 20px;
+	float: left;
+	margin: 2px;
+	margin-left: 4px;
+	margin-top: 3px;
+}
+a:hover #comEventsMonthView1 {
+	text-decoration: none;
+}
+
+/* IN MONTH VIEW MODE */
+#comEventsWeekView2 {
+	background: url('../img/eventsWeekClick.png') no-repeat;
+	width: 26px;
+	height: 20px;
+	float: left;
+	margin: 2px;
+	margin-left: 4px;
+	margin-top: 3px;
+}
+a:hover #comEventsWeekView2 {
+	text-decoration: none;
+}
+
+#comEventsMonthView2 {
+	background: url('../img/eventsMonthClick.png') no-repeat;
+	width: 26px;
+	height: 20px;
+	float: left;
+	margin: 2px;
+}
+a:hover #comEventsMonthView2 {
+	text-decoration: none;
+}
+
+#comEvents {
+	clear: both;
+	margin-top: -8px;
+	margin-left: -10px;
+	padding-left: 10px;
+}
+
+#comEventsWeek {
+	width: 605px;
+	height: 158px;
+	margin-top: 50px;
+	margin-left: -8px;
+	padding-top: 50px;
+	background: url('../img/eventsWeekBG.png') no-repeat;
+	border-right: 1px solid #3e3e3e;
+	position: relative;
+}
+
+#comEventsMonth {
+	width: 605px;
+	height: 373px;
+	margin-top: -40px;
+	margin-left: -8px;
+	padding-top: 50px;
+	background: url('../img/eventsMonthBG.png') no-repeat;
+	border-right: 1px solid #3e3e3e;
+	position: relative;
+}
+
+/***** EVENTS LIST *******/
+#comEventsListTop {
+	background: url('../img/eventsListFilterBG.png') no-repeat;
+	width: 615px;
+	height: 50px;
+	font-family: 'Ubuntu', sans-serif;
+	margin-top: 10px;
+	padding: 10px;
+	color: #fff;
+	margin-left: -14px;
+}
+
+
+#comEventsListText {
+	width: 100px;
+	height: 22px;
+	float: left;
+	font-size: 14px;
+}
+
+.comEventsListFilter {
+	float: right;
+	width: 234px;
+	height: 22px;
+}
+
+.comEventsListFilterSelector {
+	background: url('../img/eventsListFilterSelector.png') no-repeat;
+	width: 107px;
+	height: 22px;
+	float: left;
+}
+
+.comEventsListFilterSelector a{
+	color: #000 !important;
+}
+
+.comEventsListFilterSelector a:hover{
+	color: #fff !important;
+}
+
+#comEventsListAll {
+	width: 107px;
+	height: 22px;
+	padding-left: 10px;
+	padding-top: 3px;
+	float: left;
+	font-size: 13px;
+	color: #000;
+}
+
+#comEventsListUpcoming {
+	width: 107px;
+	height: 22px;
+	float: left;
+	font-size: 13px;
+	padding-left: 10px;
+	padding-top: 3px;
+	color: #000;
+}
+
+#comEventsAllEventsList {
+	clear: both;
+	border-bottom: #cc0000 solid 1px;
+	height: 220px;
+	width: 580px;
+}
+
+#comEventsListAll a {
+	color: #fff;
+}
+
+#comEventsListAll a:hover {
+	color: #000;
+}
+
+#comEventsListUpcoming a {
+	color: #fff;
+}
+
+#comEventsListUpcoming a:hover {
+	color: #000;
+}
+
+.comEventTitle {
+	width: 572px;
+	height: 30px;
+	background: url('../img/eventTitleBg.png') no-repeat;
+	color: #fff;
+	font-family: 'Ubuntu', sans-serif;
+	padding-left: 20px;
+	padding-top: 1px;
+	position: absolute;
+	z-index: 1;
+}
+
+.eventDate {
+	float: left;
+	width: 150px;
+	height: 12px;
+	font-size: 12px;
+}
+
+.eventName {
+	float: left;
+	width: 200px;
+	margin-left: 90px;
+	margin-top: 7px;
+	height: 27px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.eventLeft {
+	float: left;
+	width: 220px;
+	height: 200px;
+	position: relative;
+	margin-top: 18px;
+	margin-left: 15px;
+	color: #fff;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+.eventImg {
+	width: 230px;
+	height: 140px;
+	float: left;
+	padding-left: 10px;
+	padding-top: 10px;
+	background-color: #000;
+}
+
+.eventParticipate {
+	float: left;
+	background: url('../img/eventsParticipateBTN.png') no-repeat;
+	width: 90px;
+	height: 21px;
+	margin-top: 10px;
+	padding-top: 5px;
+	padding-left: 5px;
+}
+
+a .eventParticipate {
+	color: #fff;
+}
+
+a:hover .eventParticipate {
+	color: #fff;
+	text-decoration: none;
+}
+
+.eventParticipate:hover {
+	background: url('../img/eventsParticipateBTNclicked.png') no-repeat;
+	width: 90px;
+	height: 21px;
+	margin-top: 10px;
+	padding-top: 5px;
+	padding-left: 5px;
+}
+
+.eventAddToCalendar {
+	float: left;
+	background: url('../img/eventsAddToCalendarBTN.png') no-repeat;
+	width: 129px;
+	height: 21px;
+	padding-top: 5px;
+	padding-left: 5px;
+	margin-left: 100px;
+	margin-top: -26px;
+}
+
+a .eventAddToCalendar {
+	color: #fff;
+}
+
+a:hover .eventAddToCalendar {
+	color: #fff;
+	text-decoration: none;
+}
+
+.eventAddToCalendar:hover {
+	background: url('../img/eventsAddToCalendarBTNclicked.png') no-repeat;
+	width: 129px;
+	height: 21px;
+	padding-top: 5px;
+	padding-left: 5px;
+	margin-left: 100px;
+	margin-top: -26px;
+}
+
+.eventDescription {
+	float: left;
+	margin-top: 38px;
+	margin-left: 30px;
+	position: relative;
+	color: #000;
+	height: 130px;
+	width: 270px;
+}
+
+
